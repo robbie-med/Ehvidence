@@ -1,0 +1,188 @@
+{
+  "slug": "statins-primary-prevention",
+  "name": "Statins for primary prevention",
+  "condition": "Cardiovascular disease (primary prevention)",
+  "intervention": "Statin therapy",
+  "comparator": "Placebo or usual care",
+  "category": "Cardiovascular",
+  "evidenceClass": "efficacy",
+  "summary": "In people without established cardiovascular disease, statins reduce major cardiovascular events, myocardial infarction, stroke, and modestly reduce all-cause mortality. Because baseline risk is lower than in secondary prevention, the relative reductions translate into large numbers-needed-to-treat over a few years.",
+  "description": "Primary prevention means treating people who have not yet had a cardiovascular event. Multiple large placebo-controlled randomized trials (WOSCOPS, AFCAPS/TexCAPS, ASCOT-LLA, JUPITER, MEGA, HOPE-3) and pooled analyses (USPSTF 2022, Cochrane) have evaluated statins in this setting. The effects below are computed from the trials' reported event counts; published hazard ratios for the same outcomes are very similar.",
+  "interpretation": "These are randomized controlled trials, so the evidence quality is high and a number-needed-to-treat is meaningful — but read the NNTs alongside their time horizon (roughly 2–6 years of treatment) and remember this is primary prevention: baseline risk is low, so even a solid relative reduction means treating many people to prevent one event. See the glossary for primary vs secondary prevention.\nThe relative reductions are larger for cardiovascular events (MACE, MI, stroke) than for all-cause mortality, where the effect is real but modest (about 8% lower).\nThe \"major cardiovascular event\" composite is defined slightly differently in each trial (some include revascularization or unstable angina), so heterogeneity for that outcome is expected; the individual MI and stroke outcomes are cleaner.\nThe pooled USPSTF 2022 meta-analytic estimate is shown on each outcome for reference but excluded from our own pooling to avoid double-counting the trials it contains.\nImportant: the trials entered here are a selection of landmark studies, so these pooled estimates run somewhat stronger than the comprehensive USPSTF meta-analysis shown alongside each outcome (for example all-cause mortality is ~17% here versus USPSTF's ~8%). Treat the USPSTF figures as the more reliable summary; the trial pool is shown to make the underlying evidence visible."
+,
+  "methodologyNotes": "Risk ratios and confidence intervals are computed from each trial's reported event counts (2×2 tables); the trials' published hazard ratios are very close to these risk ratios. The USPSTF 2022 pooled estimates are entered as reported effects and excluded from pooling (they summarize the same trials). AFCAPS/TexCAPS counts were taken from a secondary summary and should be cross-checked against the original JAMA table. MEGA was an open-label (PROBE) trial. WOSCOPS and several trials reported all-cause mortality only as rates or percent reductions, so only outcomes with retrievable per-arm counts are encoded here. NNTs reflect the pooled trial follow-up (~2–6 years), not one year. A separate Cochrane 2013 analysis reported all-cause mortality as an odds ratio 0.86 (0.79–0.94) and fatal+nonfatal CVD RR 0.75 (0.70–0.81), consistent with these results.",
+  "primaryOutcomeId": "mace",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    { "id": "mace", "label": "Major cardiovascular events", "direction": "lowerIsBetter", "description": "Each trial's primary composite cardiovascular endpoint (definitions vary)." },
+    { "id": "mi", "label": "Myocardial infarction", "direction": "lowerIsBetter", "description": "Fatal or nonfatal myocardial infarction." },
+    { "id": "stroke", "label": "Stroke", "direction": "lowerIsBetter", "description": "Fatal or nonfatal stroke." },
+    { "id": "all-cause-mortality", "label": "All-cause mortality", "direction": "lowerIsBetter", "description": "Death from any cause." }
+  ],
+  "studies": [
+    {
+      "id": "jupiter-mace",
+      "author": "JUPITER (Ridker)", "year": 2008,
+      "citation": "Ridker PM, et al. Rosuvastatin to prevent vascular events in men and women with elevated C-reactive protein (JUPITER). N Engl J Med. 2008;359:2195-2207.",
+      "doi": "10.1056/NEJMoa0807646",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Rosuvastatin 20 mg", "population": "Elevated hs-CRP, normal LDL; median 1.9 yr",
+      "data": { "kind": "2x2", "txEvents": 142, "txTotal": 8901, "ctrlEvents": 251, "ctrlTotal": 8901 },
+      "notes": "Primary composite (nonfatal MI/stroke, revascularization, unstable-angina hospitalization, CV death). Stopped early. Published HR 0.56 (0.46-0.69)."
+    },
+    {
+      "id": "woscops-mace",
+      "author": "WOSCOPS (Shepherd)", "year": 1995,
+      "citation": "Shepherd J, et al. Prevention of coronary heart disease with pravastatin in men with hypercholesterolemia (WOSCOPS). N Engl J Med. 1995;333:1301-1307.",
+      "doi": "10.1056/NEJM199511163332001",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Hypercholesterolemic men; ~5 yr",
+      "data": { "kind": "2x2", "txEvents": 174, "txTotal": 3302, "ctrlEvents": 248, "ctrlTotal": 3293 },
+      "notes": "Primary endpoint: definite nonfatal MI or CHD death."
+    },
+    {
+      "id": "afcaps-mace",
+      "author": "AFCAPS/TexCAPS (Downs)", "year": 1998,
+      "citation": "Downs JR, et al. Primary prevention of acute coronary events with lovastatin (AFCAPS/TexCAPS). JAMA. 1998;279:1615-1622.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9613910/",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Lovastatin 20-40 mg", "population": "Average cholesterol, low HDL; ~5.2 yr",
+      "data": { "kind": "2x2", "txEvents": 224, "txTotal": 3304, "ctrlEvents": 359, "ctrlTotal": 3301 },
+      "notes": "First acute major coronary event. Counts from a secondary summary — verify against the original JAMA table."
+    },
+    {
+      "id": "ascot-mace",
+      "author": "ASCOT-LLA (Sever)", "year": 2003,
+      "citation": "Sever PS, et al. Prevention of coronary and stroke events with atorvastatin in hypertensive patients (ASCOT-LLA). Lancet. 2003;361:1149-1158.",
+      "doi": "10.1016/S0140-6736(03)12948-0",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Atorvastatin 10 mg", "population": "Hypertensive, ≥3 risk factors; median 3.3 yr",
+      "data": { "kind": "2x2", "txEvents": 100, "txTotal": 5168, "ctrlEvents": 154, "ctrlTotal": 5137 },
+      "notes": "Primary endpoint: nonfatal MI + fatal CHD. Stopped early. Published HR 0.64 (0.50-0.83)."
+    },
+    {
+      "id": "hope3-mace",
+      "author": "HOPE-3 (Yusuf)", "year": 2016,
+      "citation": "Yusuf S, et al. Cholesterol lowering in intermediate-risk persons without cardiovascular disease (HOPE-3). N Engl J Med. 2016;374:2021-2031.",
+      "doi": "10.1056/NEJMoa1600176",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Rosuvastatin 10 mg", "population": "Intermediate risk, no CVD; median 5.6 yr",
+      "data": { "kind": "2x2", "txEvents": 235, "txTotal": 6361, "ctrlEvents": 304, "ctrlTotal": 6344 },
+      "notes": "First co-primary composite (CV death, nonfatal MI, nonfatal stroke). Published HR 0.76 (0.64-0.91)."
+    },
+    {
+      "id": "mega-mace",
+      "author": "MEGA (Nakamura)", "year": 2006,
+      "citation": "Nakamura H, et al. Primary prevention of cardiovascular disease with pravastatin in Japan (MEGA). Lancet. 2006;368:1155-1163.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17011942/",
+      "design": "RCT", "outcomeId": "mace",
+      "doseRegimen": "Pravastatin 10-20 mg + diet", "population": "Japanese, mild hypercholesterolemia; ~5.3 yr",
+      "data": { "kind": "2x2", "txEvents": 66, "txTotal": 3866, "ctrlEvents": 101, "ctrlTotal": 3966 },
+      "notes": "CHD primary endpoint. Open-label (PROBE) design. Published HR 0.67 (0.49-0.91)."
+    },
+    {
+      "id": "usptf-mace",
+      "author": "USPSTF 2022 (pooled)", "year": 2022,
+      "citation": "Chou R, et al. Statin Use for the Primary Prevention of Cardiovascular Disease in Adults: Updated Evidence Report and Systematic Review for the USPSTF. JAMA. 2022;328(8):754-771.",
+      "doi": "10.1001/jama.2022.12138",
+      "design": "review", "outcomeId": "mace",
+      "doseRegimen": "Statins (various)", "population": "Primary-prevention RCTs (15 trials, 74,390)",
+      "excludeFromPooled": true,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.72, "ciLow": 0.64, "ciHigh": 0.81, "ctrlRisk": 0.046 },
+      "notes": "Pooled composite CV outcome; shown for reference and excluded from pooling to avoid double-counting. USPSTF NNT ≈ 78."
+    },
+    {
+      "id": "jupiter-mi",
+      "author": "JUPITER (Ridker)", "year": 2008,
+      "citation": "Ridker PM, et al. Rosuvastatin to prevent vascular events in men and women with elevated C-reactive protein (JUPITER). N Engl J Med. 2008;359:2195-2207.",
+      "doi": "10.1056/NEJMoa0807646",
+      "design": "DB-RCT", "outcomeId": "mi",
+      "doseRegimen": "Rosuvastatin 20 mg", "population": "Elevated hs-CRP; median 1.9 yr",
+      "data": { "kind": "2x2", "txEvents": 31, "txTotal": 8901, "ctrlEvents": 68, "ctrlTotal": 8901 },
+      "notes": "Any MI. Published HR 0.46 (0.30-0.70)."
+    },
+    {
+      "id": "afcaps-mi",
+      "author": "AFCAPS/TexCAPS (Downs)", "year": 1998,
+      "citation": "Downs JR, et al. Primary prevention of acute coronary events with lovastatin (AFCAPS/TexCAPS). JAMA. 1998;279:1615-1622.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9613910/",
+      "design": "DB-RCT", "outcomeId": "mi",
+      "doseRegimen": "Lovastatin 20-40 mg", "population": "Average cholesterol, low HDL; ~5.2 yr",
+      "data": { "kind": "2x2", "txEvents": 109, "txTotal": 3304, "ctrlEvents": 185, "ctrlTotal": 3301 },
+      "notes": "Fatal + nonfatal MI. Counts from a secondary summary — verify."
+    },
+    {
+      "id": "usptf-mi",
+      "author": "USPSTF 2022 (pooled)", "year": 2022,
+      "citation": "Chou R, et al. Statin Use for the Primary Prevention of Cardiovascular Disease in Adults: Updated Evidence Report and Systematic Review for the USPSTF. JAMA. 2022;328(8):754-771.",
+      "doi": "10.1001/jama.2022.12138",
+      "design": "review", "outcomeId": "mi",
+      "doseRegimen": "Statins (various)", "population": "Primary-prevention RCTs (12 trials, 75,401)",
+      "excludeFromPooled": true,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.67, "ciLow": 0.60, "ciHigh": 0.75, "ctrlRisk": 0.026 },
+      "notes": "Pooled MI; shown for reference, excluded from pooling. USPSTF NNT ≈ 118."
+    },
+    {
+      "id": "jupiter-stroke",
+      "author": "JUPITER (Ridker)", "year": 2008,
+      "citation": "Ridker PM, et al. Rosuvastatin to prevent vascular events in men and women with elevated C-reactive protein (JUPITER). N Engl J Med. 2008;359:2195-2207.",
+      "doi": "10.1056/NEJMoa0807646",
+      "design": "DB-RCT", "outcomeId": "stroke",
+      "doseRegimen": "Rosuvastatin 20 mg", "population": "Elevated hs-CRP; median 1.9 yr",
+      "data": { "kind": "2x2", "txEvents": 33, "txTotal": 8901, "ctrlEvents": 64, "ctrlTotal": 8901 },
+      "notes": "Any stroke. Published HR 0.52 (0.34-0.79)."
+    },
+    {
+      "id": "ascot-stroke",
+      "author": "ASCOT-LLA (Sever)", "year": 2003,
+      "citation": "Sever PS, et al. Prevention of coronary and stroke events with atorvastatin in hypertensive patients (ASCOT-LLA). Lancet. 2003;361:1149-1158.",
+      "doi": "10.1016/S0140-6736(03)12948-0",
+      "design": "DB-RCT", "outcomeId": "stroke",
+      "doseRegimen": "Atorvastatin 10 mg", "population": "Hypertensive, ≥3 risk factors; median 3.3 yr",
+      "data": { "kind": "2x2", "txEvents": 89, "txTotal": 5168, "ctrlEvents": 121, "ctrlTotal": 5137 },
+      "notes": "Fatal + nonfatal stroke. Published HR 0.73 (0.56-0.96)."
+    },
+    {
+      "id": "usptf-stroke",
+      "author": "USPSTF 2022 (pooled)", "year": 2022,
+      "citation": "Chou R, et al. Statin Use for the Primary Prevention of Cardiovascular Disease in Adults: Updated Evidence Report and Systematic Review for the USPSTF. JAMA. 2022;328(8):754-771.",
+      "doi": "10.1001/jama.2022.12138",
+      "design": "review", "outcomeId": "stroke",
+      "doseRegimen": "Statins (various)", "population": "Primary-prevention RCTs (15 trials, 76,610)",
+      "excludeFromPooled": true,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.78, "ciLow": 0.68, "ciHigh": 0.90, "ctrlRisk": 0.018 },
+      "notes": "Pooled stroke; shown for reference, excluded from pooling. USPSTF NNT ≈ 256."
+    },
+    {
+      "id": "jupiter-death",
+      "author": "JUPITER (Ridker)", "year": 2008,
+      "citation": "Ridker PM, et al. Rosuvastatin to prevent vascular events in men and women with elevated C-reactive protein (JUPITER). N Engl J Med. 2008;359:2195-2207.",
+      "doi": "10.1056/NEJMoa0807646",
+      "design": "DB-RCT", "outcomeId": "all-cause-mortality",
+      "doseRegimen": "Rosuvastatin 20 mg", "population": "Elevated hs-CRP; median 1.9 yr",
+      "data": { "kind": "2x2", "txEvents": 198, "txTotal": 8901, "ctrlEvents": 247, "ctrlTotal": 8901 },
+      "notes": "Death from any cause. Published HR 0.80 (0.67-0.97)."
+    },
+    {
+      "id": "ascot-death",
+      "author": "ASCOT-LLA (Sever)", "year": 2003,
+      "citation": "Sever PS, et al. Prevention of coronary and stroke events with atorvastatin in hypertensive patients (ASCOT-LLA). Lancet. 2003;361:1149-1158.",
+      "doi": "10.1016/S0140-6736(03)12948-0",
+      "design": "DB-RCT", "outcomeId": "all-cause-mortality",
+      "doseRegimen": "Atorvastatin 10 mg", "population": "Hypertensive, ≥3 risk factors; median 3.3 yr",
+      "data": { "kind": "2x2", "txEvents": 185, "txTotal": 5168, "ctrlEvents": 212, "ctrlTotal": 5137 },
+      "notes": "Death from any cause. Published HR 0.87 (0.71-1.06), not significant."
+    },
+    {
+      "id": "usptf-death",
+      "author": "USPSTF 2022 (pooled)", "year": 2022,
+      "citation": "Chou R, et al. Statin Use for the Primary Prevention of Cardiovascular Disease in Adults: Updated Evidence Report and Systematic Review for the USPSTF. JAMA. 2022;328(8):754-771.",
+      "doi": "10.1001/jama.2022.12138",
+      "design": "review", "outcomeId": "all-cause-mortality",
+      "doseRegimen": "Statins (various)", "population": "Primary-prevention RCTs (18 trials, 85,186)",
+      "excludeFromPooled": true,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.92, "ciLow": 0.87, "ciHigh": 0.98, "ctrlRisk": 0.044 },
+      "notes": "Pooled all-cause mortality; shown for reference, excluded from pooling. USPSTF NNT ≈ 286."
+    }
+  ]
+}
