@@ -1,12 +1,12 @@
 import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 
-// For a GitHub project page the site is served from /<repo>/.
-// If you later attach a custom domain or use a <user>.github.io repo,
-// set `base: '/'` and update `site` accordingly.
+// Served from the custom domain ehvidence.robbiemed.org at the site root.
+// (For a project page without a custom domain you'd instead set
+// site to https://<user>.github.io and base to '/<repo>'.)
 export default defineConfig({
-  site: 'https://robbie-med.github.io',
-  base: '/ehvidence',
+  site: 'https://ehvidence.robbiemed.org',
+  base: '/',
   trailingSlash: 'ignore',
   integrations: [preact()],
 });
