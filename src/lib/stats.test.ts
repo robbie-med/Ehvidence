@@ -141,6 +141,18 @@ describe('poolRandomEffects — DerSimonian–Laird', () => {
   it('returns null when there is nothing to pool', () => {
     expect(poolRandomEffects([])).toBeNull();
   });
+
+  it('derives a pooled NNT from reported control risks when no 2x2 exists', () => {
+    // Two precomputed effects with control risks but no contingency tables.
+    const a: PrecomputedEffect = { kind: 'effect', measure: 'RR', point: 0.2, ciLow: 0.1, ciHigh: 0.4, ctrlRisk: 0.1 };
+    const b: PrecomputedEffect = { kind: 'effect', measure: 'RR', point: 0.3, ciLow: 0.15, ciHigh: 0.6, ctrlRisk: 0.2 };
+    const out = poolRandomEffects([a, b])!;
+    expect(out.pooled.totalEvents).toBe(0);
+    expect(out.pooled.nnt).not.toBeNull();
+    // Mean control risk 0.15, pooled RR ~0.24 => ARR ~0.114 => NNT ~9.
+    expect(out.pooled.nnt!).toBeGreaterThan(5);
+    expect(out.pooled.nnt!).toBeLessThan(15);
+  });
 });
 
 describe('deriveStatus', () => {
@@ -174,6 +186,11 @@ describe('deriveStatus', () => {
     expect(deriveStatus(pooled(0.4, 0.25, 0.65, 2, 100), 'lowerIsBetter')).toBe('limited');
     expect(deriveStatus(pooled(0.4, 0.25, 0.65, 5, 10), 'lowerIsBetter')).toBe('limited');
     expect(deriveStatus(null, 'lowerIsBetter')).toBe('limited');
+  });
+
+  it('does not penalize precomputed-effect topics that report zero raw events', () => {
+    // 0 events but enough studies and a significant effect => favorable.
+    expect(deriveStatus(pooled(0.4, 0.25, 0.65, 4, 0), 'lowerIsBetter')).toBe('favorable');
   });
 
   it('inverts orientation for higher-is-better outcomes', () => {

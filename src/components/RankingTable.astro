@@ -48,7 +48,7 @@ for (const [, arr] of categories) {
               <td class="num">{p ? fmtPct(p.improvementPct) : '—'}</td>
               <td class="num">{p ? fmtNN(p.nnt) : '—'}</td>
               <td class="num">{t.studyCount}</td>
-              <td class="num">{fmtInt(t.totalPatients)}</td>
+              <td class="num">{t.totalPatients > 0 ? fmtInt(t.totalPatients) : '—'}</td>
               <td><span class={`badge ${t.status}`}>{statusLabel(t.status)}</span></td>
             </tr>
           );

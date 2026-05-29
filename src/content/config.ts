@@ -44,6 +44,9 @@ const study = z.object({
   outcomeId: z.string(),
   doseRegimen: z.string().optional(),
   population: z.string().optional(),
+  // Total participants analyzed — derived automatically for 2x2 tables; set
+  // explicitly for precomputed effects where the sample size is known.
+  n: z.number().int().positive().optional(),
   excludeFromPooled: z.boolean().optional(),
   notes: z.string().optional(),
   data: z.discriminatedUnion('kind', [twoByTwo, precomputedEffect]),

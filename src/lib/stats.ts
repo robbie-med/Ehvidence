@@ -246,8 +246,8 @@ export function poolRandomEffects(items: StudyData[]): {
   });
   for (const w of weighted) w.weightPct = vi > 0 ? w.weight / vi : 0;
 
-  // Pooled NNT from a sample-size-weighted pooled control risk (2x2 studies only).
-  const { pooledCtrlRisk, totalPatients, totalEvents } = aggregate2x2(items);
+  // Pooled NNT from a pooled control risk (2x2 events, else mean of reported control risks).
+  const { pooledCtrlRisk, totalPatients, totalEvents } = aggregateControlRisk(items);
   let nnt: number | null = null;
   if (pooledCtrlRisk !== null) {
     const arr = pooledCtrlRisk * (1 - rr);
@@ -272,8 +272,13 @@ export function poolRandomEffects(items: StudyData[]): {
   };
 }
 
-/** Pooled control risk and patient/event totals across any 2x2 studies. */
-function aggregate2x2(items: StudyData[]): {
+/**
+ * Pooled control risk and patient/event totals. Prefers a sample-size-weighted
+ * control risk pooled from any 2x2 tables; if there are none, falls back to the
+ * mean of control risks reported on precomputed effects (so an NNT can still be
+ * shown for rare-outcome topics built entirely from reported effect sizes).
+ */
+function aggregateControlRisk(items: StudyData[]): {
   pooledCtrlRisk: number | null;
   totalPatients: number;
   totalEvents: number;
@@ -282,21 +287,26 @@ function aggregate2x2(items: StudyData[]): {
   let ctrlTotal = 0;
   let totalPatients = 0;
   let totalEvents = 0;
-  let any = false;
+  let any2x2 = false;
+  const reportedRisks: number[] = [];
   for (const d of items) {
     if (isTwoByTwo(d)) {
-      any = true;
+      any2x2 = true;
       ctrlEvents += d.ctrlEvents;
       ctrlTotal += d.ctrlTotal;
       totalPatients += d.txTotal + d.ctrlTotal;
       totalEvents += d.txEvents + d.ctrlEvents;
+    } else if (typeof d.ctrlRisk === 'number') {
+      reportedRisks.push(d.ctrlRisk);
     }
   }
-  return {
-    pooledCtrlRisk: any && ctrlTotal > 0 ? ctrlEvents / ctrlTotal : null,
-    totalPatients,
-    totalEvents,
-  };
+  let pooledCtrlRisk: number | null = null;
+  if (any2x2 && ctrlTotal > 0) {
+    pooledCtrlRisk = ctrlEvents / ctrlTotal;
+  } else if (reportedRisks.length > 0) {
+    pooledCtrlRisk = reportedRisks.reduce((a, b) => a + b, 0) / reportedRisks.length;
+  }
+  return { pooledCtrlRisk, totalPatients, totalEvents };
 }
 
 function sum(xs: number[]): number {
@@ -317,7 +327,10 @@ export function deriveStatus(
   minEvents = 25,
 ): EvidenceStatus {
   if (!pooled) return 'limited';
-  if (pooled.k < minStudies || pooled.totalEvents < minEvents) return 'limited';
+  if (pooled.k < minStudies) return 'limited';
+  // Only apply the event-count floor when we actually have event counts (2x2
+  // data); precomputed-effect topics legitimately report zero raw events.
+  if (pooled.totalEvents > 0 && pooled.totalEvents < minEvents) return 'limited';
 
   // Significant if the CI excludes RR = 1.
   const significantBenefit = pooled.ciHigh < 1;

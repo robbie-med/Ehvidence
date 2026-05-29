@@ -5,105 +5,111 @@
   "intervention": "Vitamin K at birth (intramuscular preferred)",
   "comparator": "No prophylaxis, placebo, or oral regimen",
   "category": "Neonatal",
-  "summary": "Routine vitamin K at birth is associated with a large reduction in vitamin K deficiency bleeding, including the severe late form, with no consistent evidence of harm.",
-  "description": "Vitamin K deficiency bleeding (VKDB), historically called hemorrhagic disease of the newborn, results from the physiologically low vitamin K stores of neonates. It is classified as early (first 24 hours), classic (days 1–7), and late (weeks 2–12). Late VKDB carries a high risk of intracranial hemorrhage and death. A single dose of vitamin K at birth, particularly by the intramuscular route, raises vitamin K–dependent clotting factor activity and is used worldwide as prophylaxis.",
-  "methodologyNotes": "The numeric event counts in this topic are ILLUSTRATIVE placeholders used to demonstrate the analysis pipeline and have not been verified against the source publications. Study identities (authors, years, citations) are real, but the 2×2 counts must be replaced with verified extractions before any clinical interpretation. Classic and late VKDB are rare events, so several historical data points derive from surveillance registries rather than randomized trials; these are entered as precomputed effects and some are excluded from pooling.",
-  "primaryOutcomeId": "vkdb-any",
+  "summary": "Vitamin K at birth markedly reduces vitamin K deficiency bleeding. Two 1960s randomized trials show large reductions in early clinical bleeding, and surveillance data show that intramuscular prophylaxis nearly eliminates the severe late form, which oral regimens and no prophylaxis do not.",
+  "description": "Vitamin K deficiency bleeding (VKDB), formerly hemorrhagic disease of the newborn, arises from the physiologically low vitamin K stores of neonates. It is classified as early (first 24 h), classic (days 1–7), and late (weeks 2–12); late VKDB frequently presents as intracranial hemorrhage and carries high mortality and disability. A single dose of vitamin K at birth — intramuscular by preference — raises vitamin K–dependent clotting factor activity and is recommended universally. Because clinical VKDB is rare, randomized trials have only measured early bleeding and biochemical surrogates; the evidence on late VKDB is observational/surveillance.",
+  "methodologyNotes": "Evidence quality varies by outcome. EARLY CLINICAL BLEEDING rests on the only two randomized trials (Vietti 1960, post-circumcision bleeding; Sutherland 1967, classic HDN) — both report pooled risk ratios but their per-arm 2×2 counts are not reproduced in any accessible source, so they are entered as reported effects (RR + 95% CI) rather than contingency tables; the control risks shown are consistent with the published numbers needed to treat (Vietti NNT ≈ 9, Sutherland moderate–severe NNT ≈ 74). LATE VKDB has never been studied in an RCT; the estimates here are observational, taken from Sankar 2016's pooled surveillance analysis and expressed as intramuscular vs. oral prophylaxis (inverted from the published oral-vs-IM risk ratios). Reported late-VKDB control risks use surveillance incidence (single oral ≈ 1.4 per 100,000; repeated oral ≈ 0.72 per 100,000), so the resulting NNTs are very large — reflecting how rare the outcome is. Intramuscular vs. NO prophylaxis is larger still (pooled RR ≈ 0.02), but its published confidence interval lower bound rounds to zero and cannot be plotted on a log scale, so it is described here rather than pooled. The topic-level 'favorable' status is set explicitly given the consistent direction across randomized and surveillance evidence and universal guideline endorsement, even though individual outcomes have few poolable estimates.",
+  "status": "favorable",
+  "primaryOutcomeId": "classic-vkdb",
   "lastUpdated": "2026-05-29",
   "outcomes": [
     {
-      "id": "vkdb-any",
-      "label": "Any VKDB / clinical bleeding",
+      "id": "classic-vkdb",
+      "label": "Early clinical bleeding",
       "direction": "lowerIsBetter",
-      "description": "Any clinically significant vitamin K deficiency bleeding event."
+      "description": "Early/classic clinical bleeding in the first week (randomized trials)."
     },
     {
       "id": "late-vkdb",
-      "label": "Late VKDB",
+      "label": "Late VKDB (IM vs oral)",
       "direction": "lowerIsBetter",
-      "description": "VKDB occurring after the first week of life, often intracranial."
+      "description": "Late vitamin K deficiency bleeding, intramuscular vs. oral prophylaxis (surveillance)."
     },
     {
       "id": "biochemical",
       "label": "Biochemical deficiency",
       "direction": "lowerIsBetter",
-      "description": "Abnormal coagulation indices (e.g. elevated PIVKA-II, prolonged PT)."
+      "description": "Subclinical deficiency markers (PIVKA-II positivity) in randomized trials."
     }
   ],
   "studies": [
     {
-      "id": "sutherland-1967",
-      "author": "Sutherland",
-      "year": 1967,
-      "citation": "Sutherland JM, Glueck HI, Gleser G. Hemorrhagic disease of the newborn: breast feeding as a necessary factor in the pathogenesis. Am J Dis Child. 1967.",
-      "design": "RCT",
-      "outcomeId": "vkdb-any",
-      "doseRegimen": "1 mg IM single dose",
-      "population": "Term newborns",
-      "data": { "kind": "2x2", "txEvents": 1, "txTotal": 470, "ctrlEvents": 8, "ctrlTotal": 480 },
-      "notes": "Illustrative figures for template demonstration — verify against source before use."
-    },
-    {
       "id": "vietti-1960",
       "author": "Vietti",
       "year": 1960,
-      "citation": "Vietti TJ, Stephens JC, Bennett KR. Vitamin K1 prophylaxis in the newborn. JAMA. 1960.",
+      "citation": "Vietti TJ, Stephens JC, Bennett KR. Vitamin K1 prophylaxis in the newborn. JAMA. 1960. (Effect as pooled in Sankar 2016 / Cochrane 2000.)",
       "design": "RCT",
-      "outcomeId": "vkdb-any",
-      "doseRegimen": "1 mg IM single dose",
-      "population": "Newborns",
-      "data": { "kind": "2x2", "txEvents": 2, "txTotal": 320, "ctrlEvents": 11, "ctrlTotal": 310 },
-      "notes": "Illustrative figures for template demonstration — verify against source before use."
+      "outcomeId": "classic-vkdb",
+      "doseRegimen": "Vitamin K1 IM at birth",
+      "population": "Newborn males (post-circumcision bleeding)",
+      "n": 470,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.18, "ciLow": 0.08, "ciHigh": 0.42, "ctrlRisk": 0.14 },
+      "notes": "Per-arm counts not available in accessible sources; entered as the reported RR. Control risk set to reproduce the published NNT ≈ 9. Source: Sankar 2016 (PMC4862383)."
     },
     {
-      "id": "lane-1985",
-      "author": "Lane",
-      "year": 1985,
-      "citation": "Lane PA, Hathaway WE. Vitamin K in infancy. J Pediatr. 1985.",
+      "id": "sutherland-1967",
+      "author": "Sutherland",
+      "year": 1967,
+      "citation": "Sutherland JM, Glueck HI, Gleser G. Hemorrhagic disease of the newborn: breast feeding as a necessary factor in the pathogenesis. Am J Dis Child. 1967;113(5):524-533. (Moderate-to-severe bleeding, as pooled in Sankar 2016.)",
+      "design": "RCT",
+      "outcomeId": "classic-vkdb",
+      "doseRegimen": "Vitamin K vs placebo at birth",
+      "population": "3,338 term infants",
+      "n": 3338,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.19, "ciLow": 0.08, "ciHigh": 0.46, "ctrlRisk": 0.0167 },
+      "notes": "Moderate-to-severe bleeding. Per-arm counts not available; entered as the reported RR. Control risk set to reproduce the published NNT ≈ 74. Any-bleeding RR was 0.73 (0.56-0.96). Source: Sankar 2016 (PMC4862383)."
+    },
+    {
+      "id": "sankar-2016-im-vs-single-oral",
+      "author": "Sankar (IM vs single oral)",
+      "year": 2016,
+      "citation": "Sankar MJ, et al. Vitamin K prophylaxis for prevention of vitamin K deficiency bleeding: a systematic review. J Perinatol. 2016;36(Suppl 1):S29-S35.",
+      "doi": "10.1038/jp.2016.30",
+      "design": "cohort",
+      "outcomeId": "late-vkdb",
+      "doseRegimen": "Single IM dose vs single oral dose",
+      "population": "Surveillance cohorts",
+      "data": { "kind": "effect", "measure": "RR", "point": 0.041, "ciLow": 0.012, "ciHigh": 0.135, "ctrlRisk": 0.000014 },
+      "notes": "Inverted from the published single-oral-vs-IM RR 24.5 (7.4-81.0). Observational. Control (single oral) late-VKDB risk ≈ 1.4 per 100,000. Source: Sankar 2016 (PMC4862383)."
+    },
+    {
+      "id": "sankar-2016-im-vs-multi-oral",
+      "author": "Sankar (IM vs repeated oral)",
+      "year": 2016,
+      "citation": "Sankar MJ, et al. Vitamin K prophylaxis for prevention of vitamin K deficiency bleeding: a systematic review. J Perinatol. 2016;36(Suppl 1):S29-S35.",
+      "doi": "10.1038/jp.2016.30",
+      "design": "cohort",
+      "outcomeId": "late-vkdb",
+      "doseRegimen": "Single IM dose vs repeated oral doses",
+      "population": "Surveillance cohorts",
+      "data": { "kind": "effect", "measure": "RR", "point": 0.275, "ciLow": 0.061, "ciHigh": 1.22, "ctrlRisk": 0.0000072 },
+      "notes": "Inverted from the published repeated-oral-vs-IM RR 3.64 (0.82-16.3); not statistically significant. Observational. Control (repeated oral) late-VKDB risk ≈ 0.72 per 100,000 (von Kries 2003). Source: Sankar 2016 (PMC4862383)."
+    },
+    {
+      "id": "cochrane-2000-pivka-im",
+      "author": "Sharma / Ulusahin (Cochrane)",
+      "year": 2000,
+      "citation": "Puckett RM, Offringa M. Prophylactic vitamin K for vitamin K deficiency bleeding in neonates. Cochrane Database Syst Rev. 2000;(4):CD002776. (PIVKA-II, IM vs control: Sharma 1995, Ulusahin 1996.)",
+      "doi": "10.1002/14651858.CD002776",
       "design": "RCT",
       "outcomeId": "biochemical",
-      "doseRegimen": "1 mg IM single dose",
-      "population": "Newborns",
-      "data": { "kind": "2x2", "txEvents": 6, "txTotal": 200, "ctrlEvents": 42, "ctrlTotal": 198 },
-      "notes": "Illustrative figures for template demonstration — verify against source before use."
+      "doseRegimen": "IM vitamin K vs control",
+      "population": "Neonates, days 1-7",
+      "data": { "kind": "effect", "measure": "RR", "point": 0.43, "ciLow": 0.26, "ciHigh": 0.71 },
+      "notes": "Pooled PIVKA-II positivity from two randomized trials in the Cochrane review. Per-arm counts not exposed in the accessible HTML."
     },
     {
-      "id": "cornelissen-1997",
-      "author": "Cornelissen",
-      "year": 1997,
-      "citation": "Cornelissen M, von Kries R, Loughnan P, Schubiger G. Prevention of vitamin K deficiency bleeding: efficacy of different multiple oral dose schedules of vitamin K. Eur J Pediatr. 1997.",
-      "design": "cohort",
-      "outcomeId": "late-vkdb",
-      "doseRegimen": "Oral multiple-dose vs IM",
-      "population": "Breastfed infants",
-      "data": { "kind": "2x2", "txEvents": 3, "txTotal": 50000, "ctrlEvents": 25, "ctrlTotal": 50000 },
-      "notes": "Illustrative surveillance figures for template demonstration — verify against source before use."
-    },
-    {
-      "id": "vonkries-1999",
-      "author": "von Kries",
-      "year": 1999,
-      "citation": "von Kries R, Hachmeister A, Göbel U. Repeated oral vitamin K prophylaxis in Germany: acceptance and efficacy. Pediatrics. 1999.",
-      "design": "cohort",
-      "outcomeId": "late-vkdb",
-      "doseRegimen": "1 mg IM vs oral schedule",
-      "population": "Surveillance cohort",
-      "data": { "kind": "effect", "measure": "RR", "point": 0.19, "ciLow": 0.08, "ciHigh": 0.44, "ctrlRisk": 0.0007 },
-      "notes": "Illustrative precomputed effect for template demonstration — verify against source before use."
-    },
-    {
-      "id": "puckett-2000",
-      "author": "Puckett & Offringa",
+      "id": "cochrane-2000-pivka-oral",
+      "author": "Cochrane (oral PIVKA-II)",
       "year": 2000,
-      "citation": "Puckett RM, Offringa M. Prophylactic vitamin K for vitamin K deficiency bleeding in neonates. Cochrane Database Syst Rev. 2000.",
+      "citation": "Puckett RM, Offringa M. Prophylactic vitamin K for vitamin K deficiency bleeding in neonates. Cochrane Database Syst Rev. 2000;(4):CD002776. (PIVKA-II at 3 days, oral vs control, 3 trials, n=118.)",
       "doi": "10.1002/14651858.CD002776",
-      "design": "review",
-      "outcomeId": "vkdb-any",
-      "doseRegimen": "1 mg IM single dose",
-      "population": "Neonates",
-      "excludeFromPooled": true,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.27, "ciLow": 0.15, "ciHigh": 0.49 },
-      "notes": "Systematic review, excluded from pooling to avoid double-counting its constituent trials. Illustrative summary effect."
+      "design": "RCT",
+      "outcomeId": "biochemical",
+      "doseRegimen": "Oral vitamin K vs control",
+      "population": "Neonates at 3 days",
+      "n": 118,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.40, "ciLow": 0.26, "ciHigh": 0.61 },
+      "notes": "Pooled PIVKA-II positivity at 3 days, oral vs control, from the Cochrane review (3 trials, n=118)."
     }
   ]
 }

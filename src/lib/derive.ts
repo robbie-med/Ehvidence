@@ -25,9 +25,16 @@ export interface RawStudy {
   outcomeId: string;
   doseRegimen?: string;
   population?: string;
+  n?: number;
   excludeFromPooled?: boolean;
   notes?: string;
   data: StudyData;
+}
+
+/** Participants analyzed in a study: from its 2x2 table, else its explicit n. */
+export function studyPatients(s: RawStudy): number {
+  if (s.data.kind === '2x2') return s.data.txTotal + s.data.ctrlTotal;
+  return s.n ?? 0;
 }
 
 export interface RawOutcome {
@@ -65,6 +72,8 @@ export interface ComputedOutcome {
   studies: ComputedStudy[];
   pooled: PooledResult | null;
   status: EvidenceStatus;
+  /** Participants analyzed across this outcome's studies. */
+  totalPatients: number;
 }
 
 export interface ComputedTopic {
@@ -90,10 +99,7 @@ export function deriveTopic(raw: RawTopic): ComputedTopic {
 
   const status = raw.status ?? primary.status;
 
-  const totalPatients = raw.studies.reduce((sum, s) => {
-    if (s.data.kind === '2x2') return sum + s.data.txTotal + s.data.ctrlTotal;
-    return sum;
-  }, 0);
+  const totalPatients = raw.studies.reduce((sum, s) => sum + studyPatients(s), 0);
 
   return {
     raw,
@@ -133,8 +139,9 @@ function computeOutcome(raw: RawTopic, outcome: RawOutcome): ComputedOutcome {
   studies.sort((a, b) => b.year - a.year);
 
   const status = deriveStatus(pooled, outcome.direction);
+  const totalPatients = forOutcome.reduce((sum, s) => sum + studyPatients(s), 0);
 
-  return { outcome, studies, pooled, status };
+  return { outcome, studies, pooled, status, totalPatients };
 }
 
 /** Flatten a topic's studies into recent-publication entries, newest first. */
