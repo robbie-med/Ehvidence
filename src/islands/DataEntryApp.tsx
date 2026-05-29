@@ -54,6 +54,7 @@ interface TopicForm {
   intervention: string;
   comparator: string;
   category: string;
+  evidenceClass: 'efficacy' | 'implementation' | 'observational';
   summary: string;
   description: string;
   interpretation: string;
@@ -100,7 +101,7 @@ function initialTopic(): TopicForm {
   const oid = uid('outcome');
   return {
     slug: '', name: '', condition: '', intervention: '', comparator: '',
-    category: '', summary: '', description: '', interpretation: '', methodologyNotes: '',
+    category: '', evidenceClass: 'efficacy', summary: '', description: '', interpretation: '', methodologyNotes: '',
     primaryOutcomeId: oid, lastUpdated: today(),
     outcomes: [{ id: oid, label: 'Primary outcome', direction: 'lowerIsBetter' }],
     studies: [],
@@ -172,6 +173,7 @@ function buildExport(t: TopicForm): unknown {
     intervention: t.intervention,
     comparator: t.comparator,
     category: t.category,
+    evidenceClass: t.evidenceClass,
     summary: t.summary,
   };
   if (t.description.trim()) out.description = t.description.trim();
@@ -215,7 +217,7 @@ function fromImport(raw: any): TopicForm {
   return {
     slug: raw.slug ?? '', name: raw.name ?? '', condition: raw.condition ?? '',
     intervention: raw.intervention ?? '', comparator: raw.comparator ?? '',
-    category: raw.category ?? '', summary: raw.summary ?? '',
+    category: raw.category ?? '', evidenceClass: raw.evidenceClass ?? 'efficacy', summary: raw.summary ?? '',
     description: raw.description ?? '', interpretation: raw.interpretation ?? '',
     methodologyNotes: raw.methodologyNotes ?? '',
     primaryOutcomeId: raw.primaryOutcomeId ?? (raw.outcomes?.[0]?.id ?? ''),
@@ -333,6 +335,13 @@ export default function DataEntryApp() {
           <Field label="Slug (url id)"><input value={topic.slug} onInput={(e) => setField('slug', val(e))} placeholder="vitamin-k-vkdb" /></Field>
           <Field label="Name"><input value={topic.name} onInput={(e) => setField('name', val(e))} /></Field>
           <Field label="Category"><input value={topic.category} onInput={(e) => setField('category', val(e))} placeholder="Neonatal" /></Field>
+          <Field label="Evidence type">
+            <select value={topic.evidenceClass} onChange={(e) => setField('evidenceClass', val(e) as TopicForm['evidenceClass'])}>
+              <option value="efficacy">Efficacy (RCT)</option>
+              <option value="implementation">Implementation / QI</option>
+              <option value="observational">Observational</option>
+            </select>
+          </Field>
           <Field label="Condition"><input value={topic.condition} onInput={(e) => setField('condition', val(e))} /></Field>
           <Field label="Intervention"><input value={topic.intervention} onInput={(e) => setField('intervention', val(e))} /></Field>
           <Field label="Comparator"><input value={topic.comparator} onInput={(e) => setField('comparator', val(e))} /></Field>

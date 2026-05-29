@@ -121,6 +121,24 @@ small, .small { font-size: .8rem; color: var(--ink-soft); }
   text-transform: uppercase;
   letter-spacing: .03em;
 }
+/* evidence-class chips (a separate dimension from status) */
+.eclass {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 600;
+  padding: .12rem .55rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink-soft);
+  margin-left: .35rem;
+}
+.eclass.efficacy { border-color: #bcd6c6; background: #eef7f1; color: #1a7f37; }
+.eclass.implementation { border-color: #c4d6ec; background: #eef4fb; color: #0b5cad; }
+.eclass.observational { border-color: #e6d3b3; background: #fbf4e6; color: #8a6d1a; }
+.cat-head .eclass { margin-left: 0; }
+.eclass-note { margin: .25rem 0 1rem; color: var(--ink-soft); }
+
 .badge.favorable { color: var(--favor); background: var(--favor-bg); }
 .badge.harmful { color: var(--against); background: var(--against-bg); }
 .badge.limited { color: var(--limited); background: var(--limited-bg); }

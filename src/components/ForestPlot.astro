@@ -4,8 +4,10 @@ import { fmtRR, fmtCI } from '../lib/format';
 
 interface Props {
   outcome: ComputedOutcome;
+  favorLabel?: string;
+  againstLabel?: string;
 }
-const { outcome } = Astro.props;
+const { outcome, favorLabel = 'favors treatment', againstLabel = 'favors control' } = Astro.props;
 const dir = outcome.outcome.direction;
 
 // ---- geometry ----
@@ -120,8 +122,8 @@ const pooledCls = pooled ? favorClass(pooled.ciLow, pooled.ciHigh) : 'neutral';
             <text class="ticklabel" x={x(t)} y={ay + 15} text-anchor="middle">{t}</text>
           </g>
         ))}
-        <text class="endlabel" x={plotX0} y={ay + 28} text-anchor="start">← favors treatment</text>
-        <text class="endlabel" x={plotX1} y={ay + 28} text-anchor="end">favors control →</text>
+        <text class="endlabel" x={plotX0} y={ay + 28} text-anchor="start">← {favorLabel}</text>
+        <text class="endlabel" x={plotX1} y={ay + 28} text-anchor="end">{againstLabel} →</text>
       </g>
     );
   })()}

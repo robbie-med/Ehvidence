@@ -5,8 +5,9 @@ import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, riskWord } from '../lib/format';
 interface Props {
   outcome: ComputedOutcome;
   status: string;
+  showNnt?: boolean;
 }
-const { outcome, status } = Astro.props;
+const { outcome, status, showNnt = true } = Astro.props;
 const p = outcome.pooled;
 const word = p ? riskWord(p.improvementPct) : 'lower';
 const mag = p ? Math.abs(p.improvementPct) : 0;
@@ -29,7 +30,9 @@ const mag = p ? Math.abs(p.improvementPct) : 0;
         {outcome.totalPatients > 0 && (
           <div class="metric"><div class="v">{fmtInt(outcome.totalPatients)}</div><div class="k">Patients</div></div>
         )}
-        <div class="metric"><div class="v">{fmtNN(p.nnt)}</div><div class="k">NNT</div></div>
+        {showNnt && (
+          <div class="metric"><div class="v">{fmtNN(p.nnt)}</div><div class="k">NNT</div></div>
+        )}
       </div>
     </>
   ) : (

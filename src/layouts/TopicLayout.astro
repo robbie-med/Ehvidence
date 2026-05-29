@@ -4,6 +4,7 @@ import OutcomeTabs from '../components/OutcomeTabs.astro';
 import RecentStudies from '../components/RecentStudies.astro';
 import { recentStudies, type ComputedTopic } from '../lib/derive';
 import { statusLabel } from '../lib/format';
+import { evidenceMeta } from '../lib/evidence';
 
 interface Props {
   topic: ComputedTopic;
@@ -11,10 +12,13 @@ interface Props {
 const { topic } = Astro.props;
 const raw = topic.raw;
 const recent = recentStudies(raw, 6);
+const meta = evidenceMeta(raw.evidenceClass);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title={`${raw.name} — Ehvidence`} description={raw.summary}>
   <div style="margin-top:1rem">
     <span class={`badge ${topic.status}`}>{statusLabel(topic.status)}</span>
+    <span class={`eclass ${meta.key}`} title={meta.blurb}>{meta.label}</span>
   </div>
   <h1>{raw.name}</h1>
   <p class="muted">
@@ -23,6 +27,8 @@ const recent = recentStudies(raw, 6);
   </p>
 
   <p>{raw.summary}</p>
+
+  <p class="small eclass-note"><strong>{meta.label}:</strong> {meta.blurb} <a href={`${base}/glossary`}>Glossary →</a></p>
 
   {raw.interpretation && (
     <div class="callout">

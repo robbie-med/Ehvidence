@@ -4,8 +4,9 @@ import { fmtRR, fmtCI, fmtPct, fmtNN } from '../lib/format';
 
 interface Props {
   outcome: ComputedOutcome;
+  showNnt?: boolean;
 }
-const { outcome } = Astro.props;
+const { outcome, showNnt = true } = Astro.props;
 const dir = outcome.outcome.direction;
 const noted = outcome.studies.filter((s) => s.notes && s.notes.trim());
 
@@ -31,7 +32,7 @@ function arm(s: typeof outcome.studies[number], which: 'tx' | 'ctrl'): string {
       <th class="num">Control</th>
       <th class="num">RR [95% CI]</th>
       <th class="num">Improvement</th>
-      <th class="num">NNT</th>
+      {showNnt && <th class="num">NNT</th>}
       <th class="num">Weight</th>
     </tr>
   </thead>
@@ -58,7 +59,9 @@ function arm(s: typeof outcome.studies[number], which: 'tx' | 'ctrl'): string {
           {s.effect.approximate && <span class="tag" title={`Reported as ${s.effect.measure}`}>~</span>}
         </td>
         <td class="num">{fmtPct(s.effect.improvementPct)}</td>
-        <td class="num">{s.effect.nnt !== null ? fmtNN(s.effect.nnt) : s.effect.nnh !== null ? `NNH ${s.effect.nnh}` : '—'}</td>
+        {showNnt && (
+          <td class="num">{s.effect.nnt !== null ? fmtNN(s.effect.nnt) : s.effect.nnh !== null ? `NNH ${s.effect.nnh}` : '—'}</td>
+        )}
         <td class="num">{s.weightPct > 0 ? fmtPct(s.weightPct * 100) : '—'}</td>
       </tr>
     ))}

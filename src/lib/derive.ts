@@ -51,6 +51,7 @@ export interface RawTopic {
   intervention: string;
   comparator: string;
   category: string;
+  evidenceClass?: 'efficacy' | 'implementation' | 'observational';
   summary: string;
   description?: string;
   interpretation?: string;

@@ -1,6 +1,7 @@
 ---
 import type { ComputedTopic } from '../lib/derive';
 import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, statusLabel } from '../lib/format';
+import { evidenceMeta, EVIDENCE_ORDER } from '../lib/evidence';
 
 interface Props {
   topics: ComputedTopic[];
@@ -8,17 +9,16 @@ interface Props {
 const { topics } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// Group by category, then sort topics within each group by pooled improvement (desc).
-const byCategory = new Map<string, ComputedTopic[]>();
-for (const t of topics) {
-  const arr = byCategory.get(t.raw.category) ?? [];
-  arr.push(t);
-  byCategory.set(t.raw.category, arr);
-}
-const categories = [...byCategory.entries()].sort((a, b) => a[0].localeCompare(b[0]));
-for (const [, arr] of categories) {
-  arr.sort((a, b) => (b.primary.pooled?.improvementPct ?? -Infinity) - (a.primary.pooled?.improvementPct ?? -Infinity));
-}
+// Group by evidence class so efficacy, implementation/QI, and observational
+// topics sit in their own sections; sort within each group by improvement.
+const groups = EVIDENCE_ORDER
+  .map((key) => ({
+    meta: evidenceMeta(key),
+    items: topics
+      .filter((t) => evidenceMeta(t.raw.evidenceClass).key === key)
+      .sort((a, b) => (b.primary.pooled?.improvementPct ?? -Infinity) - (a.primary.pooled?.improvementPct ?? -Infinity)),
+  }))
+  .filter((g) => g.items.length > 0);
 ---
 <div class="table-scroll">
 <table>
@@ -35,18 +35,22 @@ for (const [, arr] of categories) {
     </tr>
   </thead>
   <tbody>
-    {categories.map(([cat, arr]) => (
+    {groups.map((g) => (
       <>
-        <tr><td colspan="8" class="cat-head">{cat}</td></tr>
-        {arr.map((t) => {
+        <tr><td colspan="8" class="cat-head"><span class={`eclass ${g.meta.key}`}>{g.meta.label}</span></td></tr>
+        {g.items.map((t) => {
           const p = t.primary.pooled;
+          const showNnt = g.meta.showNnt;
           return (
             <tr class={t.status === 'limited' ? 'limited' : ''}>
-              <td><a href={`${base}/topics/${t.raw.slug}`}>{t.raw.name}</a></td>
+              <td>
+                <a href={`${base}/topics/${t.raw.slug}`}>{t.raw.name}</a>
+                <span class="tag">{t.raw.category}</span>
+              </td>
               <td>{t.primary.outcome.label}</td>
               <td class="num">{p ? `${fmtRR(p.rr)} [${fmtCI(p.ciLow, p.ciHigh)}]` : '—'}</td>
               <td class="num">{p ? fmtPct(p.improvementPct) : '—'}</td>
-              <td class="num">{p ? fmtNN(p.nnt) : '—'}</td>
+              <td class="num">{showNnt && p ? fmtNN(p.nnt) : '—'}</td>
               <td class="num">{t.studyCount}</td>
               <td class="num">{t.totalPatients > 0 ? fmtInt(t.totalPatients) : '—'}</td>
               <td><span class={`badge ${t.status}`}>{statusLabel(t.status)}</span></td>

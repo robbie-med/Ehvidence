@@ -69,6 +69,7 @@ const topics = defineCollection({
     intervention: z.string(),
     comparator: z.string(),
     category: z.string(),
+    evidenceClass: z.enum(['efficacy', 'implementation', 'observational']).optional(),
     summary: z.string(),
     description: z.string().optional(),
     interpretation: z.string().optional(),
