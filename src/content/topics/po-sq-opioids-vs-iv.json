@@ -1,0 +1,141 @@
+{
+  "slug": "po-sq-opioids-vs-iv",
+  "name": "Oral / subcutaneous vs intravenous opioids",
+  "condition": "Inpatient pain requiring opioids",
+  "intervention": "Opioid standard favoring oral and subcutaneous routes",
+  "comparator": "Usual care (intravenous-preferred)",
+  "category": "Opioid stewardship",
+  "summary": "Inpatient stewardship programs that prioritize oral and subcutaneous opioids over intravenous routes cut IV opioid exposure by roughly 70–85% without worsening pain, and observational data link intravenous administration to substantially more adverse events and downstream opioid use.",
+  "description": "Intravenous opioids act faster and carry greater euphoric potential than oral or subcutaneous routes, and observational studies associate inpatient IV exposure with more acute adverse events and higher subsequent opioid use. Several hospitals have implemented opioid standards that prioritize oral administration, with subcutaneous preferred when a parenteral route is needed. The evidence here is a mix of pre-post quality-improvement projects (measuring how much IV opioid is used) and observational cohorts (comparing harms by route).",
+  "interpretation": "Read these as exposure and risk comparisons, not classic trial outcomes. The intervention studies (Ackerman, Amell, Dalal 2021) are pre-post quality-improvement projects: they show large reductions in IV opioid use after adopting an oral/subcutaneous-first standard, with pain scores unchanged or improved as a balancing measure.\nNNT/NNH mostly does not apply here. Most outcomes are exposure rates (doses or morphine-milligram-equivalents per patient-day) or adjusted odds, not binary clinical events from randomized arms — so a number-needed-to-treat is shown only where a genuine proportion exists (the share of patients given any IV opioid).\nThe adverse-event and downstream-opioid comparisons are observational and adjusted; they are expressed here as oral/subcutaneous vs IV (inverted from the published IV-referenced estimates), so a risk ratio below 1 favors the oral/subcutaneous route. Subcutaneous is intermediate — better than IV, worse than oral — for acute adverse events.\nImportant limitation: no randomized trial shows that an IV-avoidance stewardship strategy improves hard clinical outcomes. The case rests on consistent observational harm signals from IV exposure plus QI evidence that exposure can be reduced safely.",
+  "methodologyNotes": "Effect sizes are derived as follows. Ackerman 2018 reported the primary IV-dose reduction as point estimates with p-values but no confidence interval; the rate ratio CI here is computed by treating IV doses as Poisson counts over patient-days. Amell 2026 rate ratios are computed from the reported arm means and their 95% CIs (delta method on the log scale). Ackerman's total-MME CI is approximated from the reported means and SDs (using patient counts), and does not model patient-day clustering, so it is narrower than a clustered analysis would give. The Daoust 2015 and Dalal 2020 odds ratios are adjusted estimates inverted from the published IV-vs-oral / IV-vs-no-IV values to express the oral/subcutaneous-favoring direction. Dalal 2021 provides a true 2×2 (proportion of patients receiving any IV opioid) but measures a different exposure metric than the dose-rate studies, so it is shown for context and excluded from the pooled IV-exposure estimate. Pre-post and observational designs limit causal inference; pooled estimates mix single-center programs and should be read as directional.",
+  "status": "favorable",
+  "primaryOutcomeId": "iv-exposure",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    {
+      "id": "iv-exposure",
+      "label": "IV opioid exposure",
+      "direction": "lowerIsBetter",
+      "description": "Intravenous opioid administration (doses per patient-day) after a route-stewardship intervention."
+    },
+    {
+      "id": "total-mme",
+      "label": "Total opioid exposure (MME)",
+      "direction": "lowerIsBetter",
+      "description": "Total opioid exposure in morphine-milligram-equivalents per patient-day."
+    },
+    {
+      "id": "adverse-events",
+      "label": "Opioid adverse events (oral/SC vs IV)",
+      "direction": "lowerIsBetter",
+      "description": "Acute opioid-related adverse events by route of administration."
+    },
+    {
+      "id": "future-opioid",
+      "label": "Downstream opioid exposure",
+      "direction": "lowerIsBetter",
+      "description": "Subsequent/post-discharge opioid exposure associated with inpatient IV opioids."
+    }
+  ],
+  "studies": [
+    {
+      "id": "ackerman-2018-iv",
+      "author": "Ackerman",
+      "year": 2018,
+      "citation": "Ackerman AL, O'Connor PG, Doyle DL, et al. Association of an Opioid Standard of Practice Intervention With Intravenous Opioid Exposure in Hospitalized Patients. JAMA Intern Med. 2018;178(5):759-763.",
+      "doi": "10.1001/jamainternmed.2018.0278",
+      "design": "pre-post",
+      "outcomeId": "iv-exposure",
+      "doseRegimen": "Oral/SC-first opioid standard",
+      "population": "Urban academic medical unit (287 vs 127 patients)",
+      "n": 414,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.154, "ciLow": 0.130, "ciHigh": 0.182 },
+      "notes": "Original urban study. IV opioid doses 0.39 → 0.06 per patient-day (84% reduction, p<0.001). No CI was published; rate-ratio CI computed by treating doses as Poisson counts over patient-days (4,500 pre, 2,459 post). Pain did not worsen and improved by day 4-5."
+    },
+    {
+      "id": "amell-2026-iv",
+      "author": "Amell",
+      "year": 2026,
+      "citation": "Amell F, Sikora R, Beaudry JR, et al. Better opioid responsibility: implementing novel guidance as an opioid standard of care in academic and rural settings. Reg Anesth Pain Med. 2026.",
+      "doi": "10.1136/rapm-2025-106699",
+      "design": "pre-post",
+      "outcomeId": "iv-exposure",
+      "doseRegimen": "Oral/SC-first opioid standard",
+      "population": "Two rural hospitals (347 vs 263 patients; 15,749 patient-days)",
+      "n": 610,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.272, "ciLow": 0.209, "ciHigh": 0.355 },
+      "notes": "Rural replication of the Ackerman standard. IV opioid doses 0.158 → 0.043 per patient-day (73% reduction, p<0.001). Rate-ratio CI from the reported arm means and their 95% CIs. Pain scores did not increase (balancing measure)."
+    },
+    {
+      "id": "dalal-2021-iv",
+      "author": "Dalal",
+      "year": 2021,
+      "citation": "Dalal RS, et al. A Multimodal Intervention Using Nonopioid Analgesics Is Associated With Reduced Intravenous Opioid Exposure Among Hospitalized Patients With Inflammatory Bowel Diseases. Clin Gastroenterol Hepatol. 2021.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32796178/",
+      "design": "pre-post",
+      "outcomeId": "iv-exposure",
+      "doseRegimen": "Multimodal nonopioid analgesia",
+      "population": "Hospitalized IBD patients",
+      "excludeFromPooled": true,
+      "data": { "kind": "2x2", "txEvents": 32, "txTotal": 104, "ctrlEvents": 105, "ctrlTotal": 241 },
+      "notes": "Proportion of patients receiving ANY IV opioid: 43.6% → 30.8% (p=0.03). A different exposure metric than the dose-rate studies, so shown for context and excluded from the pooled IV-exposure estimate. Pain unchanged (3.9 → 3.7); LOS and 30-day readmission also fell."
+    },
+    {
+      "id": "amell-2026-mme",
+      "author": "Amell",
+      "year": 2026,
+      "citation": "Amell F, Sikora R, Beaudry JR, et al. Better opioid responsibility: implementing novel guidance as an opioid standard of care in academic and rural settings. Reg Anesth Pain Med. 2026.",
+      "doi": "10.1136/rapm-2025-106699",
+      "design": "pre-post",
+      "outcomeId": "total-mme",
+      "doseRegimen": "Oral/SC-first opioid standard",
+      "population": "Two rural hospitals",
+      "n": 610,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.529, "ciLow": 0.479, "ciHigh": 0.585 },
+      "notes": "Total opioid MME 14.46 → 7.65 per patient-day (47% reduction, p<0.001). Rate-ratio CI from the reported arm means and their 95% CIs."
+    },
+    {
+      "id": "ackerman-2018-mme",
+      "author": "Ackerman",
+      "year": 2018,
+      "citation": "Ackerman AL, O'Connor PG, Doyle DL, et al. Association of an Opioid Standard of Practice Intervention With Intravenous Opioid Exposure in Hospitalized Patients. JAMA Intern Med. 2018;178(5):759-763.",
+      "doi": "10.1001/jamainternmed.2018.0278",
+      "design": "pre-post",
+      "outcomeId": "total-mme",
+      "doseRegimen": "Oral/SC-first opioid standard",
+      "population": "Urban academic medical unit",
+      "n": 414,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.692, "ciLow": 0.597, "ciHigh": 0.801 },
+      "notes": "Overall opioid MME 9.11 → 6.30 per patient-day (31% reduction). CI approximated from the reported means and SDs (n=patients); patient-day clustering not modeled, so the true interval is wider."
+    },
+    {
+      "id": "daoust-2015-ae",
+      "author": "Daoust",
+      "year": 2015,
+      "citation": "Daoust R, Paquet J, Lavigne G, et al. Impact of age, sex and route of administration on adverse events after opioid treatment in the emergency department: a retrospective study. Pain Res Manag. 2015;20(1):23-28.",
+      "doi": "10.1155/2015/316275",
+      "design": "retrospective",
+      "outcomeId": "adverse-events",
+      "doseRegimen": "Oral vs IV route",
+      "population": "31,742 emergency-department patients on opioids",
+      "n": 31742,
+      "data": { "kind": "effect", "measure": "OR", "point": 0.193, "ciLow": 0.154, "ciHigh": 0.242 },
+      "notes": "Global adverse events, oral vs IV (inverted from the published adjusted IV-vs-oral OR 5.18, 4.13-6.49). Major adverse events oral vs IV ≈ 0.16 (inverted from 6.10). Subcutaneous is intermediate (SC-vs-oral OR 2.23)."
+    },
+    {
+      "id": "dalal-2020-future",
+      "author": "Dalal",
+      "year": 2020,
+      "citation": "Dalal RS, Palchaudhuri S, Snider CK, et al. Exposure to Intravenous Opioids Is Associated With Future Exposure to Opioids in Hospitalized Patients With Inflammatory Bowel Diseases. Clin Gastroenterol Hepatol. 2020;18(10):2269-2278.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31887450/",
+      "design": "retrospective",
+      "outcomeId": "future-opioid",
+      "doseRegimen": "Avoiding IV vs IV exposure",
+      "population": "862 hospitalized IBD patients",
+      "n": 862,
+      "data": { "kind": "effect", "measure": "OR", "point": 0.303, "ciLow": 0.156, "ciHigh": 0.588 },
+      "notes": "Post-discharge opioid prescription, no-IV vs IV (inverted from the published adjusted IV-vs-no-IV OR 3.3, 1.7-6.4). In the IBD-flare subgroup the association was stronger (inverted OR ≈ 0.19)."
+    }
+  ]
+}

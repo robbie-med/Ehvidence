@@ -100,7 +100,16 @@ export function deriveTopic(raw: RawTopic): ComputedTopic {
 
   const status = raw.status ?? primary.status;
 
-  const totalPatients = raw.studies.reduce((sum, s) => sum + studyPatients(s), 0);
+  // A single study may report several outcomes and so appear as multiple
+  // records (one per outcome). Dedupe by citation for topic-level counts so a
+  // multi-outcome study is counted once, using its largest reported sample.
+  const byStudy = new Map<string, number>();
+  for (const s of raw.studies) {
+    const key = s.citation || s.id;
+    byStudy.set(key, Math.max(byStudy.get(key) ?? 0, studyPatients(s)));
+  }
+  const studyCount = byStudy.size;
+  const totalPatients = [...byStudy.values()].reduce((sum, n) => sum + n, 0);
 
   return {
     raw,
@@ -108,7 +117,7 @@ export function deriveTopic(raw: RawTopic): ComputedTopic {
     primary,
     status,
     totalPatients,
-    studyCount: raw.studies.length,
+    studyCount,
   };
 }
 

@@ -11,7 +11,7 @@ import { fmtRR, fmtCI, fmtPct, fmtNN } from '../lib/format';
 /* ---------- form state types (strings for editable numbers) ---------- */
 type Direction = 'lowerIsBetter' | 'higherIsBetter';
 type Design =
-  | 'DB-RCT' | 'RCT' | 'prospective' | 'retrospective'
+  | 'DB-RCT' | 'RCT' | 'pre-post' | 'prospective' | 'retrospective'
   | 'case-control' | 'cohort' | 'ecological' | 'review';
 
 interface OutcomeForm {
@@ -66,7 +66,7 @@ interface TopicForm {
 
 const STORAGE_KEY = 'ehvidence-draft-v1';
 const WEBMASTER = 'ehvidence@robbiemed.org';
-const DESIGNS: Design[] = ['DB-RCT', 'RCT', 'prospective', 'retrospective', 'case-control', 'cohort', 'ecological', 'review'];
+const DESIGNS: Design[] = ['DB-RCT', 'RCT', 'pre-post', 'prospective', 'retrospective', 'case-control', 'cohort', 'ecological', 'review'];
 
 function today(): string {
   return new Date().toISOString().slice(0, 10);

@@ -34,6 +34,7 @@ const study = z.object({
   design: z.enum([
     'DB-RCT',
     'RCT',
+    'pre-post',
     'prospective',
     'retrospective',
     'case-control',
