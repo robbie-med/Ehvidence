@@ -56,6 +56,7 @@ interface TopicForm {
   category: string;
   summary: string;
   description: string;
+  interpretation: string;
   methodologyNotes: string;
   primaryOutcomeId: string;
   lastUpdated: string;
@@ -99,7 +100,7 @@ function initialTopic(): TopicForm {
   const oid = uid('outcome');
   return {
     slug: '', name: '', condition: '', intervention: '', comparator: '',
-    category: '', summary: '', description: '', methodologyNotes: '',
+    category: '', summary: '', description: '', interpretation: '', methodologyNotes: '',
     primaryOutcomeId: oid, lastUpdated: today(),
     outcomes: [{ id: oid, label: 'Primary outcome', direction: 'lowerIsBetter' }],
     studies: [],
@@ -174,6 +175,7 @@ function buildExport(t: TopicForm): unknown {
     summary: t.summary,
   };
   if (t.description.trim()) out.description = t.description.trim();
+  if (t.interpretation.trim()) out.interpretation = t.interpretation.trim();
   if (t.methodologyNotes.trim()) out.methodologyNotes = t.methodologyNotes.trim();
   out.primaryOutcomeId = t.primaryOutcomeId;
   out.lastUpdated = t.lastUpdated;
@@ -214,7 +216,8 @@ function fromImport(raw: any): TopicForm {
     slug: raw.slug ?? '', name: raw.name ?? '', condition: raw.condition ?? '',
     intervention: raw.intervention ?? '', comparator: raw.comparator ?? '',
     category: raw.category ?? '', summary: raw.summary ?? '',
-    description: raw.description ?? '', methodologyNotes: raw.methodologyNotes ?? '',
+    description: raw.description ?? '', interpretation: raw.interpretation ?? '',
+    methodologyNotes: raw.methodologyNotes ?? '',
     primaryOutcomeId: raw.primaryOutcomeId ?? (raw.outcomes?.[0]?.id ?? ''),
     lastUpdated: raw.lastUpdated ?? today(),
     outcomes: (raw.outcomes ?? []).map((o: any) => ({ id: o.id, label: o.label, direction: o.direction ?? 'lowerIsBetter' })),
@@ -342,6 +345,12 @@ export default function DataEntryApp() {
           <Field label="Background (optional)"><textarea rows={2} value={topic.description} onInput={(e) => setField('description', val(e))} /></Field>
         </div>
         <div style="margin-top:.6rem">
+          <Field label="Interpretation & tips (optional) — shown prominently; define terms, flag caveats, tell the reader how to read the data. One paragraph per line.">
+            <textarea rows={3} value={topic.interpretation} onInput={(e) => setField('interpretation', val(e))}
+              placeholder="e.g. Late VKDB is bleeding after the first week, often intracranial. No RCT has measured it, so those estimates are surveillance-based." />
+          </Field>
+        </div>
+        <div style="margin-top:.6rem">
           <Field label="Methodology notes / caveats (optional)"><textarea rows={2} value={topic.methodologyNotes} onInput={(e) => setField('methodologyNotes', val(e))} /></Field>
         </div>
       </div>
@@ -428,6 +437,13 @@ export default function DataEntryApp() {
               <input type="checkbox" checked={s.excludeFromPooled} onChange={(e) => updateStudy(s.id, { excludeFromPooled: (e.target as HTMLInputElement).checked })} />
               Exclude from pooling (e.g. systematic review)
             </label>
+
+            <div style="margin-top:.6rem">
+              <Field label="Notes / interpretation (optional) — shown as a footnote under the study table">
+                <textarea rows={2} value={s.notes} onInput={(e) => updateStudy(s.id, { notes: val(e) })}
+                  placeholder="e.g. Per-arm counts not reported in the source; entered as the published RR." />
+              </Field>
+            </div>
 
             {eff ? (
               <div class="computed">

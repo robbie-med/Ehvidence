@@ -70,6 +70,7 @@ const topics = defineCollection({
     category: z.string(),
     summary: z.string(),
     description: z.string().optional(),
+    interpretation: z.string().optional(),
     methodologyNotes: z.string().optional(),
     status: z.enum(['favorable', 'harmful', 'limited', 'neutral']).optional(),
     primaryOutcomeId: z.string(),

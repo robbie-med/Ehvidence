@@ -53,6 +53,7 @@ export interface RawTopic {
   category: string;
   summary: string;
   description?: string;
+  interpretation?: string;
   methodologyNotes?: string;
   status?: EvidenceStatus;
   primaryOutcomeId: string;

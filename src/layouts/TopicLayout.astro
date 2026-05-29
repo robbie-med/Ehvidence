@@ -24,6 +24,13 @@ const recent = recentStudies(raw, 6);
 
   <p>{raw.summary}</p>
 
+  {raw.interpretation && (
+    <div class="callout">
+      <div class="callout-title">Interpretation &amp; tips</div>
+      {raw.interpretation.split('\n').filter((line) => line.trim()).map((line) => <p>{line}</p>)}
+    </div>
+  )}
+
   <OutcomeTabs topic={topic} />
 
   {raw.description && (

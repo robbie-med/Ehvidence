@@ -81,6 +81,26 @@ small, .small { font-size: .8rem; color: var(--ink-soft); }
   color: var(--ink-soft);
 }
 .site-footer .wrap { padding-top: 1.5rem; padding-bottom: 2rem; }
+.callout {
+  border: 1px solid #cfe0f0;
+  border-left: 5px solid var(--link);
+  background: #f2f7fc;
+  border-radius: 6px;
+  padding: .75rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+}
+.callout .callout-title {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--link);
+  margin-bottom: .25rem;
+}
+.callout p { margin: .35rem 0; }
+.callout p:first-of-type { margin-top: 0; }
+.callout p:last-child { margin-bottom: 0; }
+
 .disclaimer {
   background: var(--neutral-bg);
   border: 1px solid #f0e3b8;

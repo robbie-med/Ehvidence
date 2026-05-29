@@ -7,6 +7,7 @@ interface Props {
 }
 const { outcome } = Astro.props;
 const dir = outcome.outcome.direction;
+const noted = outcome.studies.filter((s) => s.notes && s.notes.trim());
 
 function rowClass(low: number, high: number): string {
   // Gray out studies whose CI crosses 1 (limited/inconclusive individually).
@@ -46,6 +47,7 @@ function arm(s: typeof outcome.studies[number], which: 'tx' | 'ctrl'): string {
             <span>{s.author} {s.year}</span>
           )}
           {s.excludeFromPooled && <span class="tag" title="Excluded from pooling"> excl</span>}
+          {s.notes && s.notes.trim() && <span class="tag note-flag" title={s.notes}> note</span>}
         </td>
         <td><span class="tag">{s.design}</span></td>
         <td>{s.doseRegimen ?? '—'}</td>
@@ -69,3 +71,22 @@ function arm(s: typeof outcome.studies[number], which: 'tx' | 'ctrl'): string {
   as RR-approximations. “excl” = excluded from pooling (e.g. reviews).
   {dir === 'higherIsBetter' && ' For this outcome higher is better, so RR > 1 favors treatment.'}
 </p>
+
+{noted.length > 0 && (
+  <div class="study-notes">
+    <h4>Notes &amp; interpretation</h4>
+    <ul>
+      {noted.map((s) => (
+        <li><strong>{s.author} {s.year}</strong> — {s.notes}</li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .study-notes { margin: .75rem 0 1rem; }
+  .study-notes h4 { margin: .5rem 0 .25rem; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--ink-soft); }
+  .study-notes ul { margin: 0; padding-left: 1.1rem; }
+  .study-notes li { font-size: .82rem; color: var(--ink-soft); margin: .2rem 0; }
+  .note-flag { color: var(--link); border-color: var(--link); }
+</style>
