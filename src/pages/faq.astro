@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="FAQ — Ehvidence" description="How to read risk ratios, NNT, and forest plots.">
+  <h1>Frequently asked questions</h1>
+
+  <h3>What is a risk ratio (RR)?</h3>
+  <p>
+    The risk of an outcome in the treatment group divided by the risk in the control group. RR = 0.30
+    means the outcome occurred 30% as often with treatment — a 70% lower risk. RR = 1 means no
+    difference; RR &gt; 1 means treatment was associated with more of the outcome.
+  </p>
+
+  <h3>What is NNT / NNH?</h3>
+  <p>
+    Number Needed to Treat: how many patients must receive the treatment to prevent one additional
+    bad outcome. Lower is better. Number Needed to Harm is the analogous figure for an adverse effect.
+  </p>
+
+  <h3>How do I read the forest plot?</h3>
+  <p>
+    Each row is one study. The square marks its risk ratio (larger squares carry more weight), and the
+    horizontal line is the 95% confidence interval. The vertical line at 1 is “no effect”: markers and
+    intervals entirely to its left favor treatment (green), entirely to its right favor control (red),
+    and intervals crossing it are individually inconclusive (gray). The diamond at the bottom is the
+    pooled random-effects estimate.
+  </p>
+
+  <h3>Why are some study numbers placeholders?</h3>
+  <p>
+    New topics may be seeded with illustrative counts to demonstrate the analysis before verified
+    extractions are entered. Topic-specific caveats are noted on each topic page.
+  </p>
+
+  <h3>How do I add a topic or study?</h3>
+  <p>
+    Use the <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/contribute`}>data-entry tool</a>:
+    enter a study's 2×2 table (or a reported effect), review the live-computed RR, CI, and NNT, then
+    export a JSON file that drops straight into the site.
+  </p>
+</BaseLayout>

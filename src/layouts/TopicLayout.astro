@@ -1,0 +1,45 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import OutcomeTabs from '../components/OutcomeTabs.astro';
+import RecentStudies from '../components/RecentStudies.astro';
+import { recentStudies, type ComputedTopic } from '../lib/derive';
+import { statusLabel } from '../lib/format';
+
+interface Props {
+  topic: ComputedTopic;
+}
+const { topic } = Astro.props;
+const raw = topic.raw;
+const recent = recentStudies(raw, 6);
+---
+<BaseLayout title={`${raw.name} — Ehvidence`} description={raw.summary}>
+  <div style="margin-top:1rem">
+    <span class={`badge ${topic.status}`}>{statusLabel(topic.status)}</span>
+  </div>
+  <h1>{raw.name}</h1>
+  <p class="muted">
+    {raw.intervention} vs. {raw.comparator} · for {raw.condition} ·
+    real-time analysis of {topic.studyCount} studies · updated {raw.lastUpdated}
+  </p>
+
+  <p>{raw.summary}</p>
+
+  <OutcomeTabs topic={topic} />
+
+  {raw.description && (
+    <>
+      <h2>Background</h2>
+      <p>{raw.description}</p>
+    </>
+  )}
+
+  {raw.methodologyNotes && (
+    <>
+      <h2>Topic methodology &amp; caveats</h2>
+      <div class="disclaimer">{raw.methodologyNotes}</div>
+    </>
+  )}
+
+  <h2>Studies</h2>
+  <RecentStudies studies={recent} />
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import type { ComputedTopic } from '../lib/derive';
+import SummaryBlock from './SummaryBlock.astro';
+import ForestPlot from './ForestPlot.astro';
+import StudyTable from './StudyTable.astro';
+
+interface Props {
+  topic: ComputedTopic;
+}
+const { topic } = Astro.props;
+const outcomes = topic.outcomes;
+const primaryId = topic.primary.outcome.id;
+---
+{outcomes.length > 1 && (
+  <div class="tabs" role="tablist">
+    {outcomes.map((o) => (
+      <button
+        class={o.outcome.id === primaryId ? 'active' : ''}
+        data-tab={o.outcome.id}
+        role="tab"
+      >
+        {o.outcome.label} ({o.studies.length})
+      </button>
+    ))}
+  </div>
+)}
+
+{outcomes.map((o) => (
+  <section class="outcome-panel" data-panel={o.outcome.id} hidden={o.outcome.id !== primaryId}>
+    <SummaryBlock outcome={o} status={o.status} />
+    <h3>Forest plot — {o.outcome.label}</h3>
+    <ForestPlot outcome={o} />
+    <h3>Study results — {o.outcome.label}</h3>
+    <StudyTable outcome={o} />
+  </section>
+))}
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.tabs button[data-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('.outcome-panel[data-panel]');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.tab;
+      tabs.forEach((t) => t.classList.toggle('active', t === tab));
+      panels.forEach((p) => {
+        p.hidden = p.dataset.panel !== id;
+      });
+    });
+  });
+</script>

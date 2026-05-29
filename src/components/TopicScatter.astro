@@ -1,0 +1,70 @@
+---
+import type { ComputedTopic } from '../lib/derive';
+
+interface Props {
+  topics: ComputedTopic[];
+}
+const { topics } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Only plot topics with a pooled primary effect and at least one patient count.
+const pts = topics
+  .map((t) => ({ t, p: t.primary.pooled }))
+  .filter((d) => d.p && d.t.totalPatients > 0) as { t: ComputedTopic; p: NonNullable<ComputedTopic['primary']['pooled']> }[];
+
+// ---- geometry ----
+const W = 720;
+const H = 360;
+const M = { top: 20, right: 24, bottom: 44, left: 56 };
+const innerW = W - M.left - M.right;
+const innerH = H - M.top - M.bottom;
+
+// x = evidence volume (log10 patients), y = improvement %
+const xs = pts.map((d) => Math.log10(Math.max(10, d.t.totalPatients)));
+const xMin = Math.min(2, ...xs); // at least 100 patients axis floor
+const xMax = Math.max(5, ...xs); // at least 100k ceiling
+const yMin = Math.min(-20, ...pts.map((d) => d.p.improvementPct));
+const yMax = Math.max(100, ...pts.map((d) => d.p.improvementPct));
+
+const xScale = (v: number) => M.left + ((v - xMin) / (xMax - xMin || 1)) * innerW;
+const yScale = (v: number) => M.top + (1 - (v - yMin) / (yMax - yMin || 1)) * innerH;
+
+const xTicks = [2, 3, 4, 5].filter((t) => t >= xMin && t <= xMax);
+const xTickLabel: Record<number, string> = { 2: '100', 3: '1k', 4: '10k', 5: '100k' };
+const yTicks = [0, 25, 50, 75, 100].filter((t) => t >= yMin && t <= yMax);
+const zeroY = yScale(0);
+---
+{pts.length > 0 && (
+  <div class="table-scroll">
+  <svg class="scatter" viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img"
+       aria-label="Efficacy vs. evidence volume across topics">
+    <!-- gridlines -->
+    {yTicks.map((t) => (
+      <g>
+        <line class="grid" x1={M.left} y1={yScale(t)} x2={W - M.right} y2={yScale(t)} />
+        <text class="axislabel" x={M.left - 8} y={yScale(t) + 3} text-anchor="end">{t}%</text>
+      </g>
+    ))}
+    <!-- zero-effect line -->
+    <line class="axis" x1={M.left} y1={zeroY} x2={W - M.right} y2={zeroY} />
+
+    {xTicks.map((t) => (
+      <text class="axislabel" x={xScale(t)} y={H - M.bottom + 16} text-anchor="middle">{xTickLabel[t]}</text>
+    ))}
+    <text class="axislabel" x={M.left + innerW / 2} y={H - 6} text-anchor="middle">Patients (log scale)</text>
+    <text class="axislabel" transform={`translate(14 ${M.top + innerH / 2}) rotate(-90)`} text-anchor="middle">Improvement %</text>
+
+    {pts.map((d) => {
+      const cx = xScale(Math.log10(Math.max(10, d.t.totalPatients)));
+      const cy = yScale(d.p.improvementPct);
+      const r = 5 + Math.min(8, d.t.studyCount);
+      return (
+        <a href={`${base}/topics/${d.t.raw.slug}`}>
+          <circle class={`dot ${d.t.status}`} cx={cx} cy={cy} r={r} opacity="0.78" />
+          <text class="lbl" x={cx + r + 3} y={cy + 3}>{d.t.raw.name}</text>
+        </a>
+      );
+    })}
+  </svg>
+  </div>
+)}

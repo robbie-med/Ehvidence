@@ -1,0 +1,126 @@
+---
+import type { ComputedOutcome } from '../lib/derive';
+import { fmtRR, fmtCI } from '../lib/format';
+
+interface Props {
+  outcome: ComputedOutcome;
+}
+const { outcome } = Astro.props;
+const dir = outcome.outcome.direction;
+
+// ---- geometry ----
+const LABEL_W = 170;
+const PLOT_W = 320;
+const STAT_W = 150;
+const ROW_H = 22;
+const PAD_TOP = 28;
+const AXIS_H = 34;
+const W = LABEL_W + PLOT_W + STAT_W;
+
+const rows = outcome.studies;
+const plotted = rows.length + (outcome.pooled ? 1 : 0);
+const H = PAD_TOP + plotted * ROW_H + AXIS_H;
+
+// ---- log-RR axis domain (clamped, with fixed ticks) ----
+const DOMAIN_LO = 0.05;
+const DOMAIN_HI = 4;
+const ticks = [0.1, 0.25, 0.5, 1, 2, 4].filter((t) => t >= DOMAIN_LO && t <= DOMAIN_HI);
+const logLo = Math.log(DOMAIN_LO);
+const logHi = Math.log(DOMAIN_HI);
+const plotX0 = LABEL_W;
+const plotX1 = LABEL_W + PLOT_W;
+
+function x(rr: number): number {
+  const clamped = Math.min(Math.max(rr, DOMAIN_LO), DOMAIN_HI);
+  const t = (Math.log(clamped) - logLo) / (logHi - logLo);
+  return plotX0 + t * PLOT_W;
+}
+
+function favorClass(low: number, high: number): 'favor' | 'against' | 'neutral' {
+  const benefit = high < 1; // RR significantly < 1
+  const harm = low > 1;
+  if (dir === 'lowerIsBetter') {
+    if (benefit) return 'favor';
+    if (harm) return 'against';
+  } else {
+    if (harm) return 'favor';
+    if (benefit) return 'against';
+  }
+  return 'neutral';
+}
+
+// Marker side length scaled by sqrt(weight); min size so tiny weights stay visible.
+function markerSize(weightPct: number): number {
+  const max = 12;
+  const min = 4;
+  return min + Math.sqrt(Math.max(0, weightPct)) * (max - min);
+}
+
+const refX = x(1);
+const pooled = outcome.pooled;
+const pooledCls = pooled ? favorClass(pooled.ciLow, pooled.ciHigh) : 'neutral';
+---
+<div class="table-scroll">
+<svg class="forest" viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img"
+     aria-label={`Forest plot for ${outcome.outcome.label}`}>
+  <!-- reference line at RR = 1 -->
+  <line class="refline" x1={refX} y1={PAD_TOP - 6} x2={refX} y2={PAD_TOP + plotted * ROW_H + 4} />
+
+  <!-- study rows -->
+  {rows.map((s, i) => {
+    const cy = PAD_TOP + i * ROW_H + ROW_H / 2;
+    const cls = favorClass(s.effect.ciLow, s.effect.ciHigh);
+    const cx = x(s.effect.rr);
+    const sz = markerSize(s.weightPct);
+    const x0 = x(s.effect.ciLow);
+    const x1 = x(s.effect.ciHigh);
+    return (
+      <g>
+        <text class="study-label" x={6} y={cy + 3}>{`${s.author} ${s.year}`}</text>
+        <line class="whisker" x1={x0} y1={cy} x2={x1} y2={cy} />
+        <rect class={`study-marker ${cls}`} x={cx - sz / 2} y={cy - sz / 2} width={sz} height={sz} />
+        <text class="study-stat" x={plotX1 + 8} y={cy + 3}>
+          {`${fmtRR(s.effect.rr)} [${fmtCI(s.effect.ciLow, s.effect.ciHigh)}]`}
+        </text>
+      </g>
+    );
+  })}
+
+  <!-- pooled diamond -->
+  {pooled && (() => {
+    const cy = PAD_TOP + rows.length * ROW_H + ROW_H / 2;
+    const cxL = x(pooled.ciLow);
+    const cxR = x(pooled.ciHigh);
+    const cxC = x(pooled.rr);
+    const hh = 6;
+    return (
+      <g>
+        <text class="study-label" x={6} y={cy + 3} style="font-weight:700">Pooled (RE)</text>
+        <polygon class={`diamond ${pooledCls}`}
+          points={`${cxL},${cy} ${cxC},${cy - hh} ${cxR},${cy} ${cxC},${cy + hh}`} />
+        <text class="study-stat" x={plotX1 + 8} y={cy + 3} style="font-weight:700">
+          {`${fmtRR(pooled.rr)} [${fmtCI(pooled.ciLow, pooled.ciHigh)}]`}
+        </text>
+      </g>
+    );
+  })()}
+
+  <!-- axis -->
+  {(() => {
+    const ay = PAD_TOP + plotted * ROW_H + 8;
+    return (
+      <g>
+        <line class="axis" x1={plotX0} y1={ay} x2={plotX1} y2={ay} />
+        {ticks.map((t) => (
+          <g>
+            <line class="tick" x1={x(t)} y1={ay} x2={x(t)} y2={ay + 4} />
+            <text class="ticklabel" x={x(t)} y={ay + 15} text-anchor="middle">{t}</text>
+          </g>
+        ))}
+        <text class="endlabel" x={plotX0} y={ay + 28} text-anchor="start">← favors treatment</text>
+        <text class="endlabel" x={plotX1} y={ay + 28} text-anchor="end">favors control →</text>
+      </g>
+    );
+  })()}
+</svg>
+</div>

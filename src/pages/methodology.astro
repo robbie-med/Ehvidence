@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Methodology — Ehvidence" description="How Ehvidence computes RR, CI, NNT/NNH and pooled effects.">
+  <h1>Methodology</h1>
+  <p>
+    Every statistic on this site is recomputed from the underlying study data at build time, so
+    the numbers are auditable and consistent across pages and the data-entry tool. Where possible
+    we store the raw 2×2 contingency table (events and totals in the treatment and control arms)
+    rather than only a reported effect size.
+  </p>
+
+  <h2>Effect size</h2>
+  <p>
+    For a 2×2 table with treatment risk <em>p₁ = a/n₁</em> and control risk <em>p₂ = c/n₂</em>,
+    the risk ratio is <strong>RR = p₁ / p₂</strong> and the percent improvement is
+    <strong>(1 − RR) × 100</strong>. The 95% confidence interval uses the Katz log-RR variance
+    <em>Var(ln RR) = 1/a − 1/n₁ + 1/c − 1/n₂</em>, with limits
+    <em>exp(ln RR ± 1.96·SE)</em>. When any cell is zero, a Haldane–Anscombe continuity correction
+    (adding 0.5 to each cell) is applied for the variance.
+  </p>
+  <p>
+    Studies that report only an adjusted RR, odds ratio, or hazard ratio with a confidence interval
+    are entered as a precomputed effect; the standard error is recovered from the CI width on the
+    log scale. OR/HR values are treated as RR-approximations and flagged with a “~”.
+  </p>
+
+  <h2>Number needed to treat / harm</h2>
+  <p>
+    The absolute risk reduction is <strong>ARR = p₂ − p₁</strong>. When treatment reduces risk,
+    <strong>NNT = ⌈1/ARR⌉</strong>; when it increases risk, <strong>NNH = ⌈1/ARI⌉</strong> where
+    ARI = p₁ − p₂. For precomputed effects, NNT is only shown when a baseline (control) risk is
+    reported, via ARR = control risk × (1 − RR).
+  </p>
+
+  <h2>Pooling</h2>
+  <p>
+    Studies for a given outcome are combined with a <strong>DerSimonian–Laird random-effects</strong>
+    model on the log scale. We report the pooled RR with its 95% CI, the heterogeneity statistics
+    (Cochran's Q, between-study variance τ², and I²), and each study's weight. Reviews and other
+    sources flagged as <em>excluded from pooling</em> are displayed but not combined, to avoid
+    double-counting their constituent trials.
+  </p>
+
+  <h2>Evidence status</h2>
+  <p>
+    A topic is labeled <span class="badge favorable">favorable</span> when the pooled CI excludes
+    1 in the beneficial direction, <span class="badge harmful">harmful</span> when it excludes 1 in
+    the adverse direction, <span class="badge limited">limited data</span> when there are fewer than
+    3 studies or too few events, and <span class="badge neutral">inconclusive</span> otherwise.
+  </p>
+
+  <h2>Limitations</h2>
+  <p>
+    Pooled estimates are only as good as the extracted data and the comparability of the included
+    studies. Observational data are subject to confounding; rare outcomes produce wide intervals.
+    This site does not provide medical advice — see the disclaimer in the footer.
+  </p>
+</BaseLayout>

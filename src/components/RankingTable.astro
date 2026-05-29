@@ -1,0 +1,60 @@
+---
+import type { ComputedTopic } from '../lib/derive';
+import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, statusLabel } from '../lib/format';
+
+interface Props {
+  topics: ComputedTopic[];
+}
+const { topics } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Group by category, then sort topics within each group by pooled improvement (desc).
+const byCategory = new Map<string, ComputedTopic[]>();
+for (const t of topics) {
+  const arr = byCategory.get(t.raw.category) ?? [];
+  arr.push(t);
+  byCategory.set(t.raw.category, arr);
+}
+const categories = [...byCategory.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+for (const [, arr] of categories) {
+  arr.sort((a, b) => (b.primary.pooled?.improvementPct ?? -Infinity) - (a.primary.pooled?.improvementPct ?? -Infinity));
+}
+---
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Primary outcome</th>
+      <th class="num">RR [95% CI]</th>
+      <th class="num">Improvement</th>
+      <th class="num">NNT</th>
+      <th class="num">Studies</th>
+      <th class="num">Patients</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {categories.map(([cat, arr]) => (
+      <>
+        <tr><td colspan="8" class="cat-head">{cat}</td></tr>
+        {arr.map((t) => {
+          const p = t.primary.pooled;
+          return (
+            <tr class={t.status === 'limited' ? 'limited' : ''}>
+              <td><a href={`${base}/topics/${t.raw.slug}`}>{t.raw.name}</a></td>
+              <td>{t.primary.outcome.label}</td>
+              <td class="num">{p ? `${fmtRR(p.rr)} [${fmtCI(p.ciLow, p.ciHigh)}]` : '—'}</td>
+              <td class="num">{p ? fmtPct(p.improvementPct) : '—'}</td>
+              <td class="num">{p ? fmtNN(p.nnt) : '—'}</td>
+              <td class="num">{t.studyCount}</td>
+              <td class="num">{fmtInt(t.totalPatients)}</td>
+              <td><span class={`badge ${t.status}`}>{statusLabel(t.status)}</span></td>
+            </tr>
+          );
+        })}
+      </>
+    ))}
+  </tbody>
+</table>
+</div>

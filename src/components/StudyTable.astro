@@ -1,0 +1,71 @@
+---
+import type { ComputedOutcome } from '../lib/derive';
+import { fmtRR, fmtCI, fmtPct, fmtNN } from '../lib/format';
+
+interface Props {
+  outcome: ComputedOutcome;
+}
+const { outcome } = Astro.props;
+const dir = outcome.outcome.direction;
+
+function rowClass(low: number, high: number): string {
+  // Gray out studies whose CI crosses 1 (limited/inconclusive individually).
+  return low < 1 && high > 1 ? 'limited' : '';
+}
+function arm(s: typeof outcome.studies[number], which: 'tx' | 'ctrl'): string {
+  if (s.data.kind !== '2x2') return '—';
+  return which === 'tx'
+    ? `${s.data.txEvents}/${s.data.txTotal}`
+    : `${s.data.ctrlEvents}/${s.data.ctrlTotal}`;
+}
+---
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>Study</th>
+      <th>Design</th>
+      <th>Dose / regimen</th>
+      <th class="num">Treatment</th>
+      <th class="num">Control</th>
+      <th class="num">RR [95% CI]</th>
+      <th class="num">Improvement</th>
+      <th class="num">NNT</th>
+      <th class="num">Weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    {outcome.studies.map((s) => (
+      <tr class={rowClass(s.effect.ciLow, s.effect.ciHigh)}>
+        <td>
+          {s.url || s.doi ? (
+            <a href={s.url ?? `https://doi.org/${s.doi}`} target="_blank" rel="noopener">
+              {s.author} {s.year}
+            </a>
+          ) : (
+            <span>{s.author} {s.year}</span>
+          )}
+          {s.excludeFromPooled && <span class="tag" title="Excluded from pooling"> excl</span>}
+        </td>
+        <td><span class="tag">{s.design}</span></td>
+        <td>{s.doseRegimen ?? '—'}</td>
+        <td class="num">{arm(s, 'tx')}</td>
+        <td class="num">{arm(s, 'ctrl')}</td>
+        <td class="num">
+          {fmtRR(s.effect.rr)} [{fmtCI(s.effect.ciLow, s.effect.ciHigh)}]
+          {s.effect.approximate && <span class="tag" title={`Reported as ${s.effect.measure}`}>~</span>}
+        </td>
+        <td class="num">{fmtPct(s.effect.improvementPct)}</td>
+        <td class="num">{s.effect.nnt !== null ? fmtNN(s.effect.nnt) : s.effect.nnh !== null ? `NNH ${s.effect.nnh}` : '—'}</td>
+        <td class="num">{s.weightPct > 0 ? fmtPct(s.weightPct * 100) : '—'}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+<p class="small">
+  RR &lt; 1 favors treatment for outcomes where lower is better. Rows in gray have a confidence
+  interval crossing 1 (individually inconclusive). “~” marks effects reported as OR/HR and treated
+  as RR-approximations. “excl” = excluded from pooling (e.g. reviews).
+  {dir === 'higherIsBetter' && ' For this outcome higher is better, so RR > 1 favors treatment.'}
+</p>

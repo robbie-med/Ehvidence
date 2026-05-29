@@ -1,0 +1,22 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="disclaimer">
+      <strong>Not medical advice.</strong> Ehvidence organizes and analyzes published
+      data for educational purposes. No treatment is universally effective or risk-free.
+      Consult a qualified clinician for personalized risk/benefit analysis before any
+      treatment decision. Pooled estimates depend on correct study extraction; see the
+      <a href={`${base}/methodology`}>methodology</a> for limitations.
+    </div>
+    <p>
+      <a href={`${base}/`}>Topics</a> ·
+      <a href={`${base}/methodology`}>Methodology</a> ·
+      <a href={`${base}/faq`}>FAQ</a> ·
+      <a href={`${base}/contribute`}>Add data</a>
+    </p>
+    <p class="small">© {year} Ehvidence · Data and analysis released under CC0 1.0 (public domain).</p>
+  </div>
+</footer>

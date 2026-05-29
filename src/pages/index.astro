@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RankingTable from '../components/RankingTable.astro';
+import TopicScatter from '../components/TopicScatter.astro';
+import RecentStudies from '../components/RecentStudies.astro';
+import { deriveTopic, type RawTopic, type RawStudy } from '../lib/derive';
+import { fmtInt } from '../lib/format';
+
+const entries = await getCollection('topics');
+const topics = entries.map((e) => deriveTopic(e.data as RawTopic));
+
+const topicCount = topics.length;
+const studyCount = topics.reduce((s, t) => s + t.studyCount, 0);
+const patientCount = topics.reduce((s, t) => s + t.totalPatients, 0);
+
+// Recent studies across all topics, newest first.
+const allStudies: RawStudy[] = topics.flatMap((t) => t.raw.studies);
+const recent = [...allStudies].sort((a, b) => b.year - a.year).slice(0, 8);
+---
+<BaseLayout
+  title="Ehvidence — real-time analysis of medical evidence"
+  description="Number needed to treat, number needed to harm, and pooled effects across clinical topics."
+>
+  <section class="hero">
+    <h1>Real-time analysis of medical evidence</h1>
+    <p class="tagline">
+      Pooled effects, number needed to treat, and number needed to harm across clinical topics —
+      every metric recomputed from the underlying study data.
+    </p>
+    <div class="counts">
+      <div class="c"><div class="n">{fmtInt(topicCount)}</div><div class="l">Topics</div></div>
+      <div class="c"><div class="n">{fmtInt(studyCount)}</div><div class="l">Studies</div></div>
+      <div class="c"><div class="n">{fmtInt(patientCount)}</div><div class="l">Patients</div></div>
+    </div>
+  </section>
+
+  <h2>Efficacy across topics</h2>
+  <p class="small">
+    Each point is a topic, positioned by pooled improvement on its primary outcome (y) and total
+    patients analyzed (x). Color reflects evidence status. Click a point to open the topic.
+  </p>
+  <TopicScatter topics={topics} />
+
+  <h2>All topics</h2>
+  <RankingTable topics={topics} />
+
+  <h2>Recent studies</h2>
+  <RecentStudies studies={recent} />
+</BaseLayout>
