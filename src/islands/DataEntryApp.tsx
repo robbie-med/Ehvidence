@@ -64,6 +64,7 @@ interface TopicForm {
 }
 
 const STORAGE_KEY = 'ehvidence-draft-v1';
+const WEBMASTER = 'ehvidence@robbiemed.org';
 const DESIGNS: Design[] = ['DB-RCT', 'RCT', 'prospective', 'retrospective', 'case-control', 'cohort', 'ecological', 'review'];
 
 function today(): string {
@@ -71,6 +72,16 @@ function today(): string {
 }
 function uid(prefix: string): string {
   return `${prefix}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
+/** Trigger a client-side download of a JSON string. */
+function triggerDownload(slug: string, json: string): void {
+  const a = document.createElement('a');
+  a.href = `data:application/json;charset=utf-8,${encodeURIComponent(json)}`;
+  a.download = `${slug}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
 function emptyStudy(outcomeId: string): StudyForm {
@@ -273,6 +284,25 @@ export default function DataEntryApp() {
     const text = exported || JSON.stringify(buildExport(topic), null, 2);
     try { await navigator.clipboard.writeText(text); setCopied(true); } catch { /* ignore */ }
   };
+  const doEmail = () => {
+    const json = JSON.stringify(buildExport(topic), null, 2);
+    setExported(json);
+    setCopied(false);
+    const slug = topic.slug || 'topic';
+    // Download the file too, so the sender can attach it if their mail client
+    // truncates a long mailto body.
+    triggerDownload(slug, json);
+    const subject = `Ehvidence topic submission: ${slug}`;
+    const intro =
+      `Please add this topic to Ehvidence.\n\n` +
+      `Topic: ${topic.name || '(unnamed)'}\n` +
+      `Slug: ${slug}\n\n` +
+      `The JSON for src/content/topics/${slug}.json is below. If it looks ` +
+      `truncated, the file "${slug}.json" was also downloaded — please attach ` +
+      `that instead.\n\n----- BEGIN JSON -----\n`;
+    const body = `${intro}${json}\n----- END JSON -----\n`;
+    window.location.href = `mailto:${WEBMASTER}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
   const doImport = (text: string) => {
     try {
       const parsed = JSON.parse(text);
@@ -441,9 +471,10 @@ export default function DataEntryApp() {
 
       {/* ---------------- import / export ---------------- */}
       <div class="card">
-        <h3>Export &amp; import</h3>
+        <h3>Submit &amp; export</h3>
         <div class="row">
-          <button class="action" onClick={doExport}>Generate JSON</button>
+          <button class="action" onClick={doEmail}>✉ Email to webmaster</button>
+          <button class="secondary" onClick={doExport}>Generate JSON</button>
           <button class="secondary" onClick={doCopy}>{copied ? 'Copied ✓' : 'Copy to clipboard'}</button>
           {exported && (
             <a class="secondary" style="text-decoration:none"
@@ -457,8 +488,14 @@ export default function DataEntryApp() {
         </div>
         {exported && <pre class="export">{exported}</pre>}
         <p class="small">
-          Save the exported file as <code>src/content/topics/{topic.slug || '&lt;slug&gt;'}.json</code> and
-          commit it. The build validates it against the schema and generates the topic page automatically.
+          <strong>Not a developer?</strong> Click <em>Email to webmaster</em> — it opens your mail
+          app addressed to {WEBMASTER} with the JSON included (and downloads the file in case you
+          need to attach it), and we'll add it to the site.
+        </p>
+        <p class="small">
+          <strong>Contributing directly?</strong> Save the exported file as
+          {' '}<code>src/content/topics/{topic.slug || '&lt;slug&gt;'}.json</code> and commit it. The
+          build validates it against the schema and generates the topic page automatically.
         </p>
       </div>
     </div>
