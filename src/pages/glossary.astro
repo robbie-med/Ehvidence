@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Glossary — Ehvidence" description="Plain-language definitions of the study-design, statistical, and prevention terms used across Ehvidence.">
+  <h1>Glossary</h1>
+  <p class="muted">Plain-language definitions of the terms used across the site. Effect measures here are computed as described in the <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/methodology`}>methodology</a>.</p>
+
+  <h2>Prevention &amp; outcomes</h2>
+  <dl class="glossary">
+    <dt>Primary prevention</dt>
+    <dd>Treating people who do <em>not</em> yet have the disease (e.g. statins in someone with no known cardiovascular disease) to stop a first event. Baseline risk is lower, so the absolute benefit per person is usually smaller and the number-needed-to-treat larger.</dd>
+
+    <dt>Secondary prevention</dt>
+    <dd>Treating people who <em>already</em> have the disease or have had an event (e.g. statins after a heart attack) to prevent recurrence. Baseline risk is higher, so the same relative effect yields a larger absolute benefit and a smaller number-needed-to-treat.</dd>
+
+    <dt>Composite outcome (e.g. MACE)</dt>
+    <dd>A single endpoint combining several events — "major adverse cardiovascular events" might pool cardiovascular death, heart attack, and stroke. Composites increase event counts and power but can be driven by the least severe component.</dd>
+
+    <dt>Surrogate outcome</dt>
+    <dd>A stand-in marker (e.g. LDL cholesterol, a lab value) used instead of a clinical event. Useful but not always predictive of how patients actually fare.</dd>
+
+    <dt>Balancing measure</dt>
+    <dd>In quality-improvement work, an outcome tracked to make sure an intervention isn't causing unintended harm (e.g. checking that pain scores don't rise when IV opioids are reduced).</dd>
+  </dl>
+
+  <h2>Study design</h2>
+  <dl class="glossary">
+    <dt>Randomized controlled trial (RCT)</dt>
+    <dd>Participants are randomly assigned to treatment or control, which balances known and unknown confounders. The strongest design for establishing that a treatment <em>causes</em> a benefit.</dd>
+
+    <dt>Double-blind</dt>
+    <dd>Neither participants nor investigators know who received the treatment, reducing bias in how outcomes are reported and assessed.</dd>
+
+    <dt>Intention-to-treat (ITT)</dt>
+    <dd>Analyzing everyone in the group they were randomized to, regardless of whether they actually took the treatment or dropped out. Preserves randomization and gives a conservative, real-world estimate of effect.</dd>
+
+    <dt>Per-protocol</dt>
+    <dd>Analyzing only participants who completed the treatment as assigned. Can exaggerate efficacy because it discards non-adherent patients who may differ systematically.</dd>
+
+    <dt>Observational study (cohort, case-control)</dt>
+    <dd>Compares groups that were not randomized — following exposed vs unexposed people (cohort) or working backward from those with vs without an outcome (case-control). Subject to confounding; reported effects are usually statistically "adjusted."</dd>
+
+    <dt>Pre-post / quality improvement (QI)</dt>
+    <dd>Measures an outcome before and after an intervention in the same setting, without a randomized control group. Useful for implementation work but vulnerable to secular trends, so it cannot firmly establish causation.</dd>
+
+    <dt>Meta-analysis</dt>
+    <dd>Statistically combining results from multiple studies of the same question to produce a single pooled estimate with greater precision.</dd>
+  </dl>
+
+  <h2>Effect measures</h2>
+  <dl class="glossary">
+    <dt>Absolute risk reduction (ARR)</dt>
+    <dd>The plain difference in event rates: control risk minus treatment risk. If 4% of controls and 3% of treated patients have an event, ARR = 1 percentage point.</dd>
+
+    <dt>Relative risk / risk ratio (RR)</dt>
+    <dd>Treatment risk divided by control risk. RR = 0.75 means a 25% lower risk with treatment; RR = 1 means no difference; RR &gt; 1 means higher risk.</dd>
+
+    <dt>Relative risk reduction (RRR)</dt>
+    <dd>The percent change in risk, (1 − RR) × 100. A relative reduction can sound large even when the absolute benefit is small, which is why we show both.</dd>
+
+    <dt>Odds ratio (OR)</dt>
+    <dd>The ratio of the odds of an event between groups. For uncommon outcomes it approximates the risk ratio; for common outcomes it overstates the effect.</dd>
+
+    <dt>Hazard ratio (HR)</dt>
+    <dd>A risk ratio that accounts for <em>when</em> events happen over follow-up — the relative rate of an event at any given moment.</dd>
+
+    <dt>Rate ratio</dt>
+    <dd>The ratio of event rates per unit of exposure time (e.g. doses per patient-day after vs before an intervention). Used for exposure/count outcomes.</dd>
+
+    <dt>Number needed to treat (NNT)</dt>
+    <dd>How many people must be treated to prevent one additional bad outcome, = 1 ÷ ARR. Lower is better. A large NNT can still be worthwhile if the outcome prevented is severe.</dd>
+
+    <dt>Number needed to harm (NNH)</dt>
+    <dd>How many people must be treated for one additional person to be harmed. The mirror image of NNT.</dd>
+  </dl>
+
+  <h2>Statistical concepts</h2>
+  <dl class="glossary">
+    <dt>Confidence interval (95% CI)</dt>
+    <dd>The range of values compatible with the data; loosely, where the true effect plausibly lies. If a risk-ratio CI crosses 1, the result is not statistically significant.</dd>
+
+    <dt>P-value</dt>
+    <dd>The probability of seeing a result this extreme if there were truly no effect. Conventionally p &lt; 0.05 is called "significant," but it says nothing about the <em>size</em> or importance of an effect.</dd>
+
+    <dt>Random-effects model</dt>
+    <dd>A pooling method that assumes the true effect varies between studies and accounts for that variation. We use the DerSimonian–Laird random-effects model.</dd>
+
+    <dt>Heterogeneity (I²)</dt>
+    <dd>How much study results differ beyond chance. I² near 0% means studies broadly agree; high I² (say &gt; 75%) means they disagree, and a single pooled number should be read cautiously.</dd>
+
+    <dt>Forest plot</dt>
+    <dd>The chart showing each study's effect (a square, sized by its weight) with its confidence interval (a horizontal line), a vertical "no-effect" line at 1, and a diamond for the pooled estimate.</dd>
+
+    <dt>Continuity correction</dt>
+    <dd>A small adjustment (adding 0.5 to each cell) applied when a study has zero events in a group, so a risk ratio and its variance can still be computed.</dd>
+  </dl>
+</BaseLayout>
+
+<style>
+  dl.glossary { margin: .5rem 0 1.5rem; }
+  dl.glossary dt { font-weight: 700; margin-top: 1rem; }
+  dl.glossary dd { margin: .2rem 0 0; color: var(--ink); }
+</style>
