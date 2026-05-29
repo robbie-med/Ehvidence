@@ -14,7 +14,10 @@ const PLOT_W = 320;
 const STAT_W = 150;
 const ROW_H = 22;
 const PAD_TOP = 28;
-const AXIS_H = 34;
+// Bottom band: axis line (+8), ticks (+4), tick labels (~+15), then the
+// "favors" labels (+28 baseline). Needs enough height so the label text
+// isn't clipped at the SVG's bottom edge.
+const AXIS_H = 46;
 const W = LABEL_W + PLOT_W + STAT_W;
 
 const rows = outcome.studies;
