@@ -1,0 +1,185 @@
+{
+  "slug": "statins-secondary-prevention",
+  "name": "Statins for secondary prevention",
+  "condition": "Established cardiovascular disease",
+  "intervention": "Statin therapy",
+  "comparator": "Placebo",
+  "category": "Cardiovascular",
+  "evidenceClass": "efficacy",
+  "summary": "In people who already have cardiovascular disease, statins reduce major cardiovascular events, coronary death, stroke, and all-cause mortality. The relative reductions are similar to primary prevention, but because baseline risk is much higher the absolute benefit is larger and the number-needed-to-treat far smaller.",
+  "description": "Secondary prevention means treating people with established cardiovascular disease — prior myocardial infarction, established coronary heart disease, or prior cerebrovascular disease. The landmark placebo-controlled trials (4S, CARE, LIPID, and the high-risk Heart Protection Study) established that statins reduce recurrent events and death in this population, and the Cholesterol Treatment Trialists' (CTT) meta-analyses confirmed the benefit is proportional to the LDL reduction achieved.",
+  "interpretation": "The headline contrast with primary prevention is about absolute, not relative, benefit. The relative risk reductions here (roughly 20–35%) are similar to those in primary prevention, but the people treated start at much higher baseline risk, so the same relative effect prevents many more events — the numbers-needed-to-treat fall to roughly 12–35 over about five years, versus the many dozens to hundreds seen in primary prevention. See the glossary for primary vs secondary prevention.\n4S (1994) was the trial that first showed a statin reduces all-cause mortality, not just cholesterol or coronary events.\nThe Heart Protection Study is included for its size, but it enrolled a mixed high-risk population (about two-thirds had prior coronary disease; the rest had other arterial disease or diabetes), so it is not pure secondary prevention — read its rows with that caveat.\nThe Cholesterol Treatment Trialists' meta-analyses (90,000 and 170,000 participants) are the authoritative pooled reference; they report effects per 1.0 mmol/L of LDL reduction (a different scale than the raw trial risk ratios shown here), and found the relative benefit is similar in people with and without pre-existing coronary disease."
+,
+  "methodologyNotes": "Risk ratios and confidence intervals are computed from exact reported event counts (2×2 tables) for 4S (all-cause death 182/2221 vs 256/2223; coronary death 111 vs 189; major coronary events 431 vs 622), CARE (all-cause 180/2081 vs 196/2078; coronary death 96 vs 119; nonfatal MI 135 vs 173), and HPS (all-cause 1328/10269 vs 1507/10267; major vascular events 2033 vs 2585). Where exact per-arm counts were not available in open sources (LIPID throughout, several composite and stroke outcomes), the effect is entered as the reported risk ratio with a confidence interval derived from the published relative-risk-reduction range, and an NNT is computed from the reported control-arm risk. Some stroke figures (4S, CARE) are post hoc or approximate. HPS is a mixed high-risk population, not pure secondary prevention. The CTT pooled estimates are expressed per 1.0 mmol/L LDL reduction — a normalized scale, not a raw trial risk ratio — so they are described in the interpretation rather than pooled into the forest plots here. NNTs reflect the trials' ~5–6 year follow-up.",
+  "primaryOutcomeId": "major-cv",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    { "id": "major-cv", "label": "Major cardiovascular events", "direction": "lowerIsBetter", "description": "Each trial's major coronary or vascular composite endpoint (definitions vary)." },
+    { "id": "all-cause-mortality", "label": "All-cause mortality", "direction": "lowerIsBetter", "description": "Death from any cause." },
+    { "id": "chd-death", "label": "Coronary death", "direction": "lowerIsBetter", "description": "Death from coronary heart disease." },
+    { "id": "stroke", "label": "Stroke", "direction": "lowerIsBetter", "description": "Fatal or nonfatal stroke." }
+  ],
+  "studies": [
+    {
+      "id": "4s-majorcoronary",
+      "author": "4S", "year": 1994,
+      "citation": "Scandinavian Simvastatin Survival Study Group. Randomised trial of cholesterol lowering in 4444 patients with coronary heart disease (4S). Lancet. 1994;344:1383-1389.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7905843/",
+      "design": "DB-RCT", "outcomeId": "major-cv",
+      "doseRegimen": "Simvastatin 20-40 mg", "population": "Prior MI or angina; median 5.4 yr",
+      "data": { "kind": "2x2", "txEvents": 431, "txTotal": 2221, "ctrlEvents": 622, "ctrlTotal": 2223 },
+      "notes": "Major coronary events. The trial that first showed a statin reduces all-cause mortality."
+    },
+    {
+      "id": "hps-majorvascular",
+      "author": "HPS", "year": 2002,
+      "citation": "Heart Protection Study Collaborative Group. MRC/BHF Heart Protection Study of cholesterol lowering with simvastatin in 20,536 high-risk individuals. Lancet. 2002;360:7-22.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12114036/",
+      "design": "DB-RCT", "outcomeId": "major-cv",
+      "doseRegimen": "Simvastatin 40 mg", "population": "High-risk (~65% prior CHD); ~5 yr",
+      "data": { "kind": "2x2", "txEvents": 2033, "txTotal": 10269, "ctrlEvents": 2585, "ctrlTotal": 10267 },
+      "notes": "Major vascular events. Mixed high-risk population, not pure secondary prevention."
+    },
+    {
+      "id": "care-primary",
+      "author": "CARE", "year": 1996,
+      "citation": "Sacks FM, et al. The effect of pravastatin on coronary events after myocardial infarction in patients with average cholesterol levels (CARE). N Engl J Med. 1996;335:1001-1009.",
+      "doi": "10.1056/NEJM199610033351401",
+      "design": "DB-RCT", "outcomeId": "major-cv",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI, average cholesterol; ~5 yr",
+      "n": 4159,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.76, "ciLow": 0.64, "ciHigh": 0.91, "ctrlRisk": 0.132 },
+      "notes": "CHD death or nonfatal MI; RR from reported RRR 24% (95% CI 9-36%)."
+    },
+    {
+      "id": "lipid-primary",
+      "author": "LIPID", "year": 1998,
+      "citation": "LIPID Study Group. Prevention of cardiovascular events and death with pravastatin in patients with coronary heart disease and a broad range of initial cholesterol levels (LIPID). N Engl J Med. 1998;339:1349-1357.",
+      "doi": "10.1056/NEJM199811053391902",
+      "design": "DB-RCT", "outcomeId": "major-cv",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI or unstable angina; mean 6.1 yr",
+      "n": 9014,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.76, "ciLow": 0.68, "ciHigh": 0.85, "ctrlRisk": 0.159 },
+      "notes": "CHD death or nonfatal MI; RR from reported RRR 24% (95% CI 15-32%)."
+    },
+
+    {
+      "id": "4s-death",
+      "author": "4S", "year": 1994,
+      "citation": "Scandinavian Simvastatin Survival Study Group. Randomised trial of cholesterol lowering in 4444 patients with coronary heart disease (4S). Lancet. 1994;344:1383-1389.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7905843/",
+      "design": "DB-RCT", "outcomeId": "all-cause-mortality",
+      "doseRegimen": "Simvastatin 20-40 mg", "population": "Prior MI or angina; median 5.4 yr",
+      "data": { "kind": "2x2", "txEvents": 182, "txTotal": 2221, "ctrlEvents": 256, "ctrlTotal": 2223 },
+      "notes": "Death from any cause."
+    },
+    {
+      "id": "care-death",
+      "author": "CARE", "year": 1996,
+      "citation": "Sacks FM, et al. The effect of pravastatin on coronary events after myocardial infarction in patients with average cholesterol levels (CARE). N Engl J Med. 1996;335:1001-1009.",
+      "doi": "10.1056/NEJM199610033351401",
+      "design": "DB-RCT", "outcomeId": "all-cause-mortality",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI; ~5 yr",
+      "data": { "kind": "2x2", "txEvents": 180, "txTotal": 2081, "ctrlEvents": 196, "ctrlTotal": 2078 },
+      "notes": "Death from any cause; not statistically significant in this trial."
+    },
+    {
+      "id": "lipid-death",
+      "author": "LIPID", "year": 1998,
+      "citation": "LIPID Study Group. Prevention of cardiovascular events and death with pravastatin in patients with coronary heart disease and a broad range of initial cholesterol levels (LIPID). N Engl J Med. 1998;339:1349-1357.",
+      "doi": "10.1056/NEJM199811053391902",
+      "design": "DB-RCT", "outcomeId": "all-cause-mortality",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI or unstable angina; mean 6.1 yr",
+      "n": 9014,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.78, "ciLow": 0.69, "ciHigh": 0.87, "ctrlRisk": 0.141 },
+      "notes": "Death from any cause; RR from reported RRR 22% (95% CI 13-31%)."
+    },
+    {
+      "id": "hps-death",
+      "author": "HPS", "year": 2002,
+      "citation": "Heart Protection Study Collaborative Group. MRC/BHF Heart Protection Study of cholesterol lowering with simvastatin in 20,536 high-risk individuals. Lancet. 2002;360:7-22.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12114036/",
+      "design": "DB-RCT", "outcomeId": "all-cause-mortality",
+      "doseRegimen": "Simvastatin 40 mg", "population": "High-risk (~65% prior CHD); ~5 yr",
+      "data": { "kind": "2x2", "txEvents": 1328, "txTotal": 10269, "ctrlEvents": 1507, "ctrlTotal": 10267 },
+      "notes": "Death from any cause. Mixed high-risk population, not pure secondary prevention."
+    },
+
+    {
+      "id": "4s-chddeath",
+      "author": "4S", "year": 1994,
+      "citation": "Scandinavian Simvastatin Survival Study Group. Randomised trial of cholesterol lowering in 4444 patients with coronary heart disease (4S). Lancet. 1994;344:1383-1389.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7905843/",
+      "design": "DB-RCT", "outcomeId": "chd-death",
+      "doseRegimen": "Simvastatin 20-40 mg", "population": "Prior MI or angina; median 5.4 yr",
+      "data": { "kind": "2x2", "txEvents": 111, "txTotal": 2221, "ctrlEvents": 189, "ctrlTotal": 2223 },
+      "notes": "Coronary heart disease death."
+    },
+    {
+      "id": "care-chddeath",
+      "author": "CARE", "year": 1996,
+      "citation": "Sacks FM, et al. The effect of pravastatin on coronary events after myocardial infarction in patients with average cholesterol levels (CARE). N Engl J Med. 1996;335:1001-1009.",
+      "doi": "10.1056/NEJM199610033351401",
+      "design": "DB-RCT", "outcomeId": "chd-death",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI; ~5 yr",
+      "data": { "kind": "2x2", "txEvents": 96, "txTotal": 2081, "ctrlEvents": 119, "ctrlTotal": 2078 },
+      "notes": "Coronary heart disease death."
+    },
+    {
+      "id": "lipid-chddeath",
+      "author": "LIPID", "year": 1998,
+      "citation": "LIPID Study Group. Prevention of cardiovascular events and death with pravastatin in patients with coronary heart disease and a broad range of initial cholesterol levels (LIPID). N Engl J Med. 1998;339:1349-1357.",
+      "doi": "10.1056/NEJM199811053391902",
+      "design": "DB-RCT", "outcomeId": "chd-death",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI or unstable angina; mean 6.1 yr",
+      "n": 9014,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.76, "ciLow": 0.65, "ciHigh": 0.88, "ctrlRisk": 0.083 },
+      "notes": "Coronary death (primary endpoint); RR from reported RRR 24% (95% CI 12-35%)."
+    },
+
+    {
+      "id": "4s-stroke",
+      "author": "4S", "year": 1994,
+      "citation": "Scandinavian Simvastatin Survival Study Group. Randomised trial of cholesterol lowering in 4444 patients with coronary heart disease (4S). Lancet. 1994;344:1383-1389.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7905843/",
+      "design": "DB-RCT", "outcomeId": "stroke",
+      "doseRegimen": "Simvastatin 20-40 mg", "population": "Prior MI or angina; median 5.4 yr",
+      "n": 4444,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.70, "ciLow": 0.52, "ciHigh": 0.96, "ctrlRisk": 0.043 },
+      "notes": "Cerebrovascular events (post hoc)."
+    },
+    {
+      "id": "care-stroke",
+      "author": "CARE", "year": 1996,
+      "citation": "Sacks FM, et al. The effect of pravastatin on coronary events after myocardial infarction in patients with average cholesterol levels (CARE). N Engl J Med. 1996;335:1001-1009.",
+      "doi": "10.1056/NEJM199610033351401",
+      "design": "DB-RCT", "outcomeId": "stroke",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI; ~5 yr",
+      "n": 4159,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.69, "ciLow": 0.48, "ciHigh": 0.97, "ctrlRisk": 0.045 },
+      "notes": "Stroke; RR from reported RRR 31% (95% CI 3-52%)."
+    },
+    {
+      "id": "hps-stroke",
+      "author": "HPS", "year": 2002,
+      "citation": "Heart Protection Study Collaborative Group. MRC/BHF Heart Protection Study of cholesterol lowering with simvastatin in 20,536 high-risk individuals. Lancet. 2002;360:7-22.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12114036/",
+      "design": "DB-RCT", "outcomeId": "stroke",
+      "doseRegimen": "Simvastatin 40 mg", "population": "High-risk (~65% prior CHD); ~5 yr",
+      "n": 20536,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.75, "ciLow": 0.66, "ciHigh": 0.85, "ctrlRisk": 0.057 },
+      "notes": "Stroke. Mixed high-risk population, not pure secondary prevention."
+    },
+    {
+      "id": "lipid-stroke",
+      "author": "LIPID", "year": 1998,
+      "citation": "LIPID Study Group. Prevention of cardiovascular events and death with pravastatin in patients with coronary heart disease and a broad range of initial cholesterol levels (LIPID). N Engl J Med. 1998;339:1349-1357.",
+      "doi": "10.1056/NEJM199811053391902",
+      "design": "DB-RCT", "outcomeId": "stroke",
+      "doseRegimen": "Pravastatin 40 mg", "population": "Prior MI or unstable angina; mean 6.1 yr",
+      "n": 9014,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.81, "ciLow": 0.66, "ciHigh": 0.99, "ctrlRisk": 0.045 },
+      "notes": "Stroke; RR from reported RRR 19% (borderline, P=0.048)."
+    }
+  ]
+}
