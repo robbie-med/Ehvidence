@@ -16,11 +16,11 @@ const byProblem = PROBLEMS.map((p) => ({
   items: comparisons.filter((c) => c.outcome.problemId === p.id),
 })).filter((g) => g.items.length > 0);
 ---
-<BaseLayout title="Compare interventions — Ehvidence" description="Compare different interventions for the same precisely-defined outcome.">
+<BaseLayout title="Compare interventions—Ehvidence" description="Compare different interventions for the same precisely-defined outcome.">
   <h1>Compare interventions</h1>
   <p class="tagline muted">
     Each comparison fixes one precisely-defined outcome and lines up every intervention measured
-    against it — varied treatments for the same problem, on one axis. Interventions are not pooled
+    against it—varied treatments for the same problem, on one axis. Interventions are not pooled
     together; populations differ, so relative effects are comparable but absolute benefit is not.
   </p>
 

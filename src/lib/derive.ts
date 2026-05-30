@@ -1,5 +1,5 @@
 /**
- * derive.ts — turns a raw, schema-validated topic into a render-ready view
+ * derive.ts—turns a raw, schema-validated topic into a render-ready view
  * model: per-outcome pooled estimates, per-study computed effects (with plot
  * weights), and an overall evidence status. Used by both the topic pages and
  * the home-page ranking/scatter.

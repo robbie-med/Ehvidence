@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 /**
  * The "topics" collection: one JSON file per clinical topic in
  * src/content/topics/. Each file is validated against this schema at build
- * time — invalid data fails the build, which is the data-quality gate.
+ * time—invalid data fails the build, which is the data-quality gate.
  */
 
 const twoByTwo = z.object({
@@ -22,7 +22,7 @@ const precomputedEffect = z.object({
   ciLow: z.number().positive(),
   ciHigh: z.number().positive(),
   // Baseline control risk (probability) or, for count/rate outcomes, the
-  // control event rate per person — used to derive an NNT. May exceed 1 for
+  // control event rate per person—used to derive an NNT. May exceed 1 for
   // rate outcomes (e.g. mean lesions per person).
   ctrlRisk: z.number().min(0).optional(),
 });
@@ -50,7 +50,7 @@ const study = z.object({
   population: z.string().optional(),
   // Verbatim endpoint definition as stated in the study (for comparability).
   endpointDefinition: z.string().optional(),
-  // Total participants analyzed — derived automatically for 2x2 tables; set
+  // Total participants analyzed—derived automatically for 2x2 tables; set
   // explicitly for precomputed effects where the sample size is known.
   n: z.number().int().positive().optional(),
   excludeFromPooled: z.boolean().optional(),

@@ -1,5 +1,5 @@
 /**
- * evidence.ts — presentation rules for the "evidence class" of a topic.
+ * evidence.ts—presentation rules for the "evidence class" of a topic.
  * Distinguishes classic efficacy meta-analysis (RCTs, NNT applies) from
  * implementation/QI work (exposure rates, NNT usually doesn't apply) and
  * observational comparisons, so each genre is read with the right lens.

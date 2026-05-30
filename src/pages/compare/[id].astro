@@ -22,7 +22,7 @@ const o = comparison.outcome;
 const prob = problem(o.problemId);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<BaseLayout title={`${o.label} — intervention comparison — Ehvidence`} description={o.definition}>
+<BaseLayout title={`${o.label}—intervention comparison—Ehvidence`} description={o.definition}>
   <p class="small"><a href={`${base}/compare`}>← All comparisons</a>{prob && ` · ${prob.label}`}</p>
   <h1>Which interventions reduce {o.label.toLowerCase()}?</h1>
   <p><strong>Outcome definition:</strong> {o.definition}</p>

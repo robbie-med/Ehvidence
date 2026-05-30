@@ -130,13 +130,13 @@ function studyWarnings(s: StudyForm): string[] {
     const a = Number(s.txEvents), n1 = Number(s.txTotal), c = Number(s.ctrlEvents), n2 = Number(s.ctrlTotal);
     if (s.txTotal && a > n1) w.push('Treatment events exceed treatment total.');
     if (s.ctrlTotal && c > n2) w.push('Control events exceed control total.');
-    if (s.txTotal && s.ctrlTotal && (a === 0 || c === 0)) w.push('Zero cell present — a continuity correction is applied for the CI.');
+    if (s.txTotal && s.ctrlTotal && (a === 0 || c === 0)) w.push('Zero cell present—a continuity correction is applied for the CI.');
   } else {
     const lo = Number(s.ciLow), hi = Number(s.ciHigh), p = Number(s.point);
     if (lo && hi && lo > hi) w.push('CI lower bound is above the upper bound.');
     if (p && lo && hi && (p < lo || p > hi)) w.push('Point estimate is outside its CI.');
     if (s.measure !== 'RR') w.push('OR/HR is treated as an RR-approximation.');
-    if (s.ctrlRisk.trim() === '') w.push('No control risk given — NNT will be omitted for this study.');
+    if (s.ctrlRisk.trim() === '') w.push('No control risk given—NNT will be omitted for this study.');
   }
   return w;
 }
@@ -313,7 +313,7 @@ export default function DataEntryApp() {
       `Topic: ${topic.name || '(unnamed)'}\n` +
       `Slug: ${slug}\n\n` +
       `The JSON for src/content/topics/${slug}.json is below. If it looks ` +
-      `truncated, the file "${slug}.json" was also downloaded — please attach ` +
+      `truncated, the file "${slug}.json" was also downloaded—please attach ` +
       `that instead.\n\n----- BEGIN JSON -----\n`;
     const body = `${intro}${json}\n----- END JSON -----\n`;
     window.location.href = `mailto:${WEBMASTER}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -364,7 +364,7 @@ export default function DataEntryApp() {
           <Field label="Background (optional)"><textarea rows={2} value={topic.description} onInput={(e) => setField('description', val(e))} /></Field>
         </div>
         <div style="margin-top:.6rem">
-          <Field label="Interpretation & tips (optional) — shown prominently; define terms, flag caveats, tell the reader how to read the data. One paragraph per line.">
+          <Field label="Interpretation & tips (optional)—shown prominently; define terms, flag caveats, tell the reader how to read the data. One paragraph per line.">
             <textarea rows={3} value={topic.interpretation} onInput={(e) => setField('interpretation', val(e))}
               placeholder="e.g. Late VKDB is bleeding after the first week, often intracranial. No RCT has measured it, so those estimates are surveillance-based." />
           </Field>
@@ -379,7 +379,7 @@ export default function DataEntryApp() {
         <h3>Outcomes</h3>
         <p class="small muted">The <strong>standard outcome</strong> links this outcome to a shared, comparable definition so it appears in cross-intervention comparisons. Pick an existing one if it fits; only invent a new id if nothing matches (a maintainer then adds it to the registry).</p>
         <datalist id="std-outcomes">
-          {STANDARD_OUTCOMES.map((s) => <option value={s.id}>{s.label} — {s.definition}</option>)}
+          {STANDARD_OUTCOMES.map((s) => <option value={s.id}>{s.label}—{s.definition}</option>)}
         </datalist>
         {topic.outcomes.map((o) => (
           <div class="row" key={o.id} style="margin-bottom:.5rem">
@@ -467,7 +467,7 @@ export default function DataEntryApp() {
             </label>
 
             <div style="margin-top:.6rem">
-              <Field label="Notes / interpretation (optional) — shown as a footnote under the study table">
+              <Field label="Notes / interpretation (optional)—shown as a footnote under the study table">
                 <textarea rows={2} value={s.notes} onInput={(e) => updateStudy(s.id, { notes: val(e) })}
                   placeholder="e.g. Per-arm counts not reported in the source; entered as the published RR." />
               </Field>
@@ -497,7 +497,7 @@ export default function DataEntryApp() {
 
       {/* ---------------- live pooled preview ---------------- */}
       <div class="card" style="margin-top:1.5rem">
-        <h3>Live preview — primary outcome (random-effects pool)</h3>
+        <h3>Live preview—primary outcome (random-effects pool)</h3>
         {preview ? (
           <div class="computed">
             <span><span class="k">Pooled RR</span> <span class="v">{fmtRR(preview.pooled.rr)}</span></span>
@@ -532,7 +532,7 @@ export default function DataEntryApp() {
         </div>
         {exported && <pre class="export">{exported}</pre>}
         <p class="small">
-          <strong>Not a developer?</strong> Click <em>Email to webmaster</em> — it opens your mail
+          <strong>Not a developer?</strong> Click <em>Email to webmaster</em>—it opens your mail
           app addressed to {WEBMASTER} with the JSON included (and downloads the file in case you
           need to attach it), and we'll add it to the site.
         </p>

@@ -15,7 +15,7 @@ const recent = recentStudies(raw, 6);
 const meta = evidenceMeta(raw.evidenceClass);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<BaseLayout title={`${raw.name} — Ehvidence`} description={raw.summary}>
+<BaseLayout title={`${raw.name}—Ehvidence`} description={raw.summary}>
   <div style="margin-top:1rem">
     <span class={`badge ${topic.status}`}>{statusLabel(topic.status)}</span>
     <span class={`eclass ${meta.key}`} title={meta.blurb}>{meta.label}</span>

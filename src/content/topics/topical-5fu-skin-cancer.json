@@ -8,7 +8,7 @@
   "evidenceClass": "efficacy",
   "summary": "A single field course of topical 5-fluorouracil to the face and ears sharply reduced squamous-cell carcinoma requiring surgery in the first year, with no significant effect on basal-cell carcinoma.",
   "description": "The VAKCC trial randomized 932 veterans at high risk of keratinocyte carcinoma to a single 2-4 week course of 5-fluorouracil 5% cream versus vehicle, with a median 2.8 years of follow-up.",
-  "interpretation": "Large but time-limited: squamous-cell carcinomas needing surgery fell ~75% in the first year, then the difference faded — field therapy clears existing damage rather than giving lasting protection. Basal-cell was not significantly reduced.",
+  "interpretation": "Large but time-limited: squamous-cell carcinomas needing surgery fell ~75% in the first year, then the difference faded—field therapy clears existing damage rather than giving lasting protection. Basal-cell was not significantly reduced.",
   "methodologyNotes": "Risk ratios from first-year event counts (2×2). The squamous-cell effect was concentrated in year 1; NNT reflects that window.",
   "status": "favorable",
   "primaryOutcomeId": "scc",

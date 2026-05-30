@@ -7,7 +7,7 @@
   "category": "Neonatal",
   "evidenceClass": "efficacy",
   "summary": "Vitamin K at birth markedly reduces vitamin K deficiency bleeding. Two 1960s randomized trials show large reductions in early clinical bleeding, and surveillance data show that intramuscular prophylaxis nearly eliminates the severe late form, which oral regimens and no prophylaxis do not.",
-  "description": "VKDB (hemorrhagic disease of the newborn) is bleeding from the low vitamin K stores of newborns: early (≤24 h), classic (days 1–7), and late (weeks 2–12, often intracranial). A single dose at birth — intramuscular preferred — is standard prophylaxis. Clinical VKDB is rare, so most quantitative evidence is observational rather than randomized.",
+  "description": "VKDB (hemorrhagic disease of the newborn) is bleeding from the low vitamin K stores of newborns: early (≤24 h), classic (days 1–7), and late (weeks 2–12, often intracranial). A single dose at birth—intramuscular preferred—is standard prophylaxis. Clinical VKDB is rare, so most quantitative evidence is observational rather than randomized.",
   "interpretation": "Late VKDB has never been tested in an RCT, so those estimates are observational. The large NNT reflects how rare the outcome is, not a weak treatment. Where a study shows a reported risk ratio instead of a 2×2 table, the original per-arm counts are not published.",
   "methodologyNotes": "Early-bleeding figures come from the only two RCTs (Vietti, Sutherland), entered as reported risk ratios because per-arm counts are unpublished; control risks reproduce the published NNTs. Late-VKDB figures are observational (Sankar 2016), expressed as IM vs oral. Status set to favorable given consistent evidence and universal guidelines.",
   "status": "favorable",

@@ -8,7 +8,7 @@
   "evidenceClass": "efficacy",
   "summary": "In people without established cardiovascular disease, statins reduce major cardiovascular events, myocardial infarction, stroke, and modestly reduce all-cause mortality. Because baseline risk is lower than in secondary prevention, the relative reductions translate into large numbers-needed-to-treat over a few years.",
   "description": "Primary prevention treats people without established cardiovascular disease. Placebo-controlled trials (WOSCOPS, AFCAPS, ASCOT-LLA, JUPITER, MEGA, HOPE-3) and pooled analyses (USPSTF, Cochrane) evaluated statins here. Effects are computed from each trial's event counts; published hazard ratios are very close.",
-  "interpretation": "These are RCTs, so NNTs are meaningful — but large, because baseline risk is low; read them with their ~2–6 year horizon. Relative reductions are bigger for events (MI, stroke) than for all-cause mortality. The trials shown are a selection of landmark studies and run somewhat stronger than the comprehensive USPSTF meta-analysis (mortality ~17% here vs ~8%); treat USPSTF as the more reliable summary."
+  "interpretation": "These are RCTs, so NNTs are meaningful—but large, because baseline risk is low; read them with their ~2–6 year horizon. Relative reductions are bigger for events (MI, stroke) than for all-cause mortality. The trials shown are a selection of landmark studies and run somewhat stronger than the comprehensive USPSTF meta-analysis (mortality ~17% here vs ~8%); treat USPSTF as the more reliable summary."
 ,
   "methodologyNotes": "Risk ratios are computed from each trial's event counts (2×2); published hazard ratios are very close. The USPSTF 2022 pooled estimate is shown per outcome for reference and excluded from pooling. AFCAPS counts are from a secondary summary; MEGA was open-label.",
   "primaryOutcomeId": "mace",
@@ -48,7 +48,7 @@
       "design": "DB-RCT", "outcomeId": "mace",
       "doseRegimen": "Lovastatin 20-40 mg", "population": "Average cholesterol, low HDL; ~5.2 yr",
       "data": { "kind": "2x2", "txEvents": 224, "txTotal": 3304, "ctrlEvents": 359, "ctrlTotal": 3301 },
-      "notes": "First acute major coronary event. Counts from a secondary summary — verify against the original JAMA table."
+      "notes": "First acute major coronary event. Counts from a secondary summary—verify against the original JAMA table."
     },
     {
       "id": "ascot-mace",
@@ -109,7 +109,7 @@
       "design": "DB-RCT", "outcomeId": "mi",
       "doseRegimen": "Lovastatin 20-40 mg", "population": "Average cholesterol, low HDL; ~5.2 yr",
       "data": { "kind": "2x2", "txEvents": 109, "txTotal": 3304, "ctrlEvents": 185, "ctrlTotal": 3301 },
-      "notes": "Fatal + nonfatal MI. Counts from a secondary summary — verify."
+      "notes": "Fatal + nonfatal MI. Counts from a secondary summary—verify."
     },
     {
       "id": "usptf-mi",

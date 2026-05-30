@@ -8,7 +8,7 @@
   "evidenceClass": "efficacy",
   "summary": "Whether fish oil prevents cardiovascular events depends heavily on the preparation and population. High-dose EPA-only trials (REDUCE-IT, JELIS) and the new hemodialysis trial (PISCES) show clear benefit, while low-dose or EPA+DHA combination trials (VITAL, ASCEND, STRENGTH) are essentially null. A pooled average therefore hides more than it reveals.",
   "description": "Large randomized trials of marine omega-3 fatty acids for cardiovascular prevention have produced famously divergent results, differing in formulation (EPA vs EPA+DHA), dose (~1 vs 4 g/day), comparator oil, and population. PISCES (2026) tested 4 g/day fish oil in hemodialysis patients.",
-  "interpretation": "Don't read the pooled diamond as the answer — the heterogeneity is the point. Benefit tracks high-dose EPA-only formulations (REDUCE-IT, JELIS) and the hemodialysis PISCES trial; ~1 g/day or EPA+DHA trials (VITAL, ASCEND, STRENGTH) were null. Comparator oils, open-label designs, and differing endpoints further confound. PISCES's headline was a recurrent-events analysis, not first-event."
+  "interpretation": "Don't read the pooled diamond as the answer—the heterogeneity is the point. Benefit tracks high-dose EPA-only formulations (REDUCE-IT, JELIS) and the hemodialysis PISCES trial; ~1 g/day or EPA+DHA trials (VITAL, ASCEND, STRENGTH) were null. Comparator oils, open-label designs, and differing endpoints further confound. PISCES's headline was a recurrent-events analysis, not first-event."
 ,
   "methodologyNotes": "Risk ratios from each trial's participant-level primary-event counts (2×2) where available, else the reported hazard or relative-risk ratio. Pooling is shown for completeness only; formulation, dose, population, and comparator differences make it of little interpretive value.",
   "primaryOutcomeId": "mace",
@@ -87,7 +87,7 @@
       "design": "DB-RCT", "outcomeId": "mace",
       "doseRegimen": "Omega-3 carboxylic acid (EPA+DHA) 4 g/day", "population": "High-risk + dyslipidemia, statin; 42 mo",
       "data": { "kind": "2x2", "txEvents": 785, "txTotal": 6539, "ctrlEvents": 795, "ctrlTotal": 6539 },
-      "notes": "Null (HR 0.99, 0.90-1.09). Same 4 g/day dose as REDUCE-IT but EPA+DHA — the key contrast."
+      "notes": "Null (HR 0.99, 0.90-1.09). Same 4 g/day dose as REDUCE-IT but EPA+DHA—the key contrast."
     }
   ]
 }

@@ -1,12 +1,12 @@
 :root {
   /* c19early-like palette */
-  --favor: #1a7f37;        /* green — favors treatment */
+  --favor: #1a7f37;        /* green—favors treatment */
   --favor-bg: #e6f4ea;
-  --against: #c1121f;      /* red — favors control / harm */
+  --against: #c1121f;      /* red—favors control / harm */
   --against-bg: #fbe9e7;
-  --limited: #8a8a8a;      /* gray — limited data */
+  --limited: #8a8a8a;      /* gray—limited data */
   --limited-bg: #f0f0f0;
-  --neutral: #b88600;      /* amber — inconclusive */
+  --neutral: #b88600;      /* amber—inconclusive */
   --neutral-bg: #fdf6e3;
 
   --ink: #1a1a1a;

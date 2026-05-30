@@ -7,7 +7,7 @@ import {
   type PrecomputedEffect,
 } from './stats';
 
-describe('computeEffect — 2x2 risk ratio', () => {
+describe('computeEffect—2x2 risk ratio', () => {
   it('computes RR, CI, % improvement and NNT for a standard table', () => {
     // a=5/250, c=12/248 => RR = 0.02 / 0.04839 = 0.4133
     const d: TwoByTwo = {
@@ -65,7 +65,7 @@ describe('computeEffect — 2x2 risk ratio', () => {
   });
 });
 
-describe('computeEffect — precomputed effect', () => {
+describe('computeEffect—precomputed effect', () => {
   it('recovers SE from a reported CI and computes NNT from control risk', () => {
     const d: PrecomputedEffect = {
       kind: 'effect',
@@ -97,7 +97,7 @@ describe('computeEffect — precomputed effect', () => {
   });
 });
 
-describe('poolRandomEffects — DerSimonian–Laird', () => {
+describe('poolRandomEffects—DerSimonian–Laird', () => {
   it('pools homogeneous studies near their common effect with tau²≈0', () => {
     // Two identical studies should pool to the same RR with tau² = 0.
     const study: TwoByTwo = {

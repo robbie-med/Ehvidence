@@ -14,14 +14,14 @@ random-effects pooled estimate.
   and the data-entry GUI, so the numbers always agree. Unit tests in `src/lib/stats.test.ts`.
 - **Pages** are static Astro routes; `src/pages/topics/[slug].astro` generates one page per topic.
 - **Data-entry GUI** (`src/islands/DataEntryApp.tsx`, served at `/contribute`) turns a study's 2×2
-  table — or a reported RR/OR/HR with its CI — into a validated data block, with live-computed
+  table—or a reported RR/OR/HR with its CI—into a validated data block, with live-computed
   metrics, and exports the topic JSON.
 
 ## Adding a topic
 
 1. Open `/contribute`, fill in the topic + outcomes, add a card per study, review the live preview.
 2. **Export JSON** and save it as `src/content/topics/<slug>.json`.
-3. Commit. The build validates and generates the topic page automatically — no code changes needed.
+3. Commit. The build validates and generates the topic page automatically—no code changes needed.
 
 (You can also hand-author the JSON following the schema; see `vitamin-k-vkdb.json` for an example.)
 

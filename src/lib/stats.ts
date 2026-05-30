@@ -1,5 +1,5 @@
 /**
- * stats.ts — the statistical engine shared by the build-time page renderer
+ * stats.ts—the statistical engine shared by the build-time page renderer
  * and the client-side data-entry GUI. Pure functions, no framework imports,
  * so the numbers shown in the GUI are guaranteed identical to the rendered pages.
  *
@@ -8,7 +8,7 @@
  * where RR < 1 favors treatment for a "lower is better" outcome.
  */
 
-/** 97.5th percentile of the standard normal — the z multiplier for a 95% CI. */
+/** 97.5th percentile of the standard normal—the z multiplier for a 95% CI. */
 export const Z_95 = 1.959964;
 
 export type EffectMeasure = 'RR' | 'OR' | 'HR';
@@ -29,7 +29,7 @@ export interface PrecomputedEffect {
   point: number;
   ciLow: number;
   ciHigh: number;
-  /** Baseline (control) risk, if reported — enables an NNT back-calculation. */
+  /** Baseline (control) risk, if reported—enables an NNT back-calculation. */
   ctrlRisk?: number;
 }
 
@@ -43,9 +43,9 @@ export interface EffectResult {
   rr: number;
   ciLow: number;
   ciHigh: number;
-  /** Natural log of the point estimate — used for pooling. */
+  /** Natural log of the point estimate—used for pooling. */
   logEffect: number;
-  /** Standard error of the log effect — used for pooling weights. */
+  /** Standard error of the log effect—used for pooling weights. */
   seLog: number;
   /** % improvement = (1 - RR) * 100. Positive means lower risk than control. */
   improvementPct: number;

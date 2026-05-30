@@ -8,7 +8,7 @@
   "evidenceClass": "efficacy",
   "summary": "In the randomized Nambour trial, regular daily sunscreen reduced squamous-cell carcinoma and, on long-term follow-up, invasive melanoma, but did not significantly reduce basal-cell carcinoma. Benefits are in a general-population setting, so the absolute reductions are modest.",
   "description": "The Nambour Skin Cancer Prevention Trial randomized 1,621 general-population adults in Queensland, Australia to daily application of SPF 15+ sunscreen versus discretionary use (factorially crossed with beta-carotene). Outcomes were tracked over the 4.5-year trial and in long-term follow-up.",
-  "interpretation": "The clearest randomized benefit is for squamous-cell carcinoma; basal-cell was null. Long-term follow-up found fewer melanomas (significant for invasive). This was a general-population trial, so absolute benefit is modest (large NNT) — unlike chemoprevention in high-risk patients."
+  "interpretation": "The clearest randomized benefit is for squamous-cell carcinoma; basal-cell was null. Long-term follow-up found fewer melanomas (significant for invasive). This was a general-population trial, so absolute benefit is modest (large NNT)—unlike chemoprevention in high-risk patients."
 ,
   "methodologyNotes": "Published tumor rate ratios and hazard ratios with 95% CIs. The 8-year squamous-cell follow-up (same cohort) is shown for context and excluded from pooling. No control risk is encoded, so NNT is not shown.",
   "status": "favorable",

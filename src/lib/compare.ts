@@ -1,8 +1,8 @@
 /**
- * compare.ts — assembles outcome-centric comparisons. For each standard
+ * compare.ts—assembles outcome-centric comparisons. For each standard
  * outcome, it collects one row per intervention (topic) that measured that
  * exact outcome, using that topic's own pooled estimate. Interventions are
- * NOT pooled together — comparing varied treatments is the goal; pooling them
+ * NOT pooled together—comparing varied treatments is the goal; pooling them
  * would be meaningless.
  */
 import type { ComputedTopic } from './derive';

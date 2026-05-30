@@ -1,5 +1,5 @@
 /**
- * standardOutcomes.ts — the controlled vocabulary of "standard outcomes" that
+ * standardOutcomes.ts—the controlled vocabulary of "standard outcomes" that
  * makes cross-intervention comparison honest. A comparison only ever lines up
  * interventions that measured the SAME standard outcome.
  *
@@ -31,13 +31,13 @@ export const PROBLEMS: Problem[] = [
     id: 'skin-cancer-prevention',
     label: 'Skin cancer prevention',
     description:
-      'Preventing new skin cancers. Compare interventions on a specific cancer type — relative effects are broadly comparable, but baseline risk (general vs high-risk populations) differs, so absolute benefit/NNT is not.',
+      'Preventing new skin cancers. Compare interventions on a specific cancer type—relative effects are broadly comparable, but baseline risk (general vs high-risk populations) differs, so absolute benefit/NNT is not.',
   },
   {
     id: 'cv-event-prevention',
     label: 'Cardiovascular event prevention',
     description:
-      'Preventing cardiovascular events. All-cause mortality and the individual components are cleanly matchable; the "major cardiovascular events" composite is not — its definition varies by trial.',
+      'Preventing cardiovascular events. All-cause mortality and the individual components are cleanly matchable; the "major cardiovascular events" composite is not—its definition varies by trial.',
   },
 ];
 
@@ -101,7 +101,7 @@ export const STANDARD_OUTCOMES: StandardOutcome[] = [
     problemId: 'cv-event-prevention',
     direction: 'lowerIsBetter',
     caveat:
-      'The composite components differ across trials and interventions (some include revascularization or unstable angina, others only MI/stroke/CV death). Relative effects on this row are NOT strictly like-for-like — read each intervention with its endpoint definition.',
+      'The composite components differ across trials and interventions (some include revascularization or unstable angina, others only MI/stroke/CV death). Relative effects on this row are NOT strictly like-for-like—read each intervention with its endpoint definition.',
   },
 ];
 
