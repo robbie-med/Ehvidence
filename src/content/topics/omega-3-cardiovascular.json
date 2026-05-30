@@ -14,7 +14,7 @@
   "primaryOutcomeId": "mace",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "mace", "label": "Major cardiovascular events", "direction": "lowerIsBetter", "description": "Each trial's primary cardiovascular composite endpoint (definitions vary)." }
+    { "id": "mace", "label": "Major cardiovascular events", "direction": "lowerIsBetter", "description": "Each trial's primary cardiovascular composite endpoint (definitions vary).", "standardOutcomeId": "mace" }
   ],
   "studies": [
     {

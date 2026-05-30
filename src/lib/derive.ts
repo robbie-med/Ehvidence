@@ -25,6 +25,7 @@ export interface RawStudy {
   outcomeId: string;
   doseRegimen?: string;
   population?: string;
+  endpointDefinition?: string;
   n?: number;
   excludeFromPooled?: boolean;
   notes?: string;
@@ -42,6 +43,7 @@ export interface RawOutcome {
   label: string;
   direction: 'lowerIsBetter' | 'higherIsBetter';
   description?: string;
+  standardOutcomeId?: string;
 }
 
 export interface RawTopic {

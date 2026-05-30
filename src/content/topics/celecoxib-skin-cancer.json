@@ -14,9 +14,9 @@
   "primaryOutcomeId": "nmsc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter" },
-    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter" },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter" }
+    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter", "standardOutcomeId": "nmsc-incidence" },
+    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "scc-incidence" },
+    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "bcc-incidence" }
   ],
   "studies": [
     {

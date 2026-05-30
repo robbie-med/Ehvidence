@@ -14,7 +14,7 @@
   "primaryOutcomeId": "nmsc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter" }
+    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter", "standardOutcomeId": "nmsc-incidence" }
   ],
   "studies": [
     {

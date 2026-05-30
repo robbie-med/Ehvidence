@@ -15,9 +15,9 @@
   "primaryOutcomeId": "nmsc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "nmsc", "label": "New nonmelanoma skin cancers", "direction": "lowerIsBetter", "description": "New basal-cell plus squamous-cell carcinomas (primary endpoint)." },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "description": "New basal-cell carcinomas." },
-    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "description": "New squamous-cell carcinomas." }
+    { "id": "nmsc", "label": "New nonmelanoma skin cancers", "direction": "lowerIsBetter", "description": "New basal-cell plus squamous-cell carcinomas (primary endpoint).", "standardOutcomeId": "nmsc-incidence" },
+    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "description": "New basal-cell carcinomas.", "standardOutcomeId": "bcc-incidence" },
+    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "description": "New squamous-cell carcinomas.", "standardOutcomeId": "scc-incidence" }
   ],
   "studies": [
     {

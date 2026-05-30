@@ -48,6 +48,8 @@ const study = z.object({
   outcomeId: z.string(),
   doseRegimen: z.string().optional(),
   population: z.string().optional(),
+  // Verbatim endpoint definition as stated in the study (for comparability).
+  endpointDefinition: z.string().optional(),
   // Total participants analyzed — derived automatically for 2x2 tables; set
   // explicitly for precomputed effects where the sample size is known.
   n: z.number().int().positive().optional(),
@@ -61,6 +63,9 @@ const outcome = z.object({
   label: z.string(),
   direction: z.enum(['lowerIsBetter', 'higherIsBetter']),
   description: z.string().optional(),
+  // Links this outcome to a controlled standard outcome so it can be compared
+  // across interventions. See src/lib/standardOutcomes.ts.
+  standardOutcomeId: z.string().optional(),
 });
 
 const topics = defineCollection({

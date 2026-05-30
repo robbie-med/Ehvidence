@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CompareForest from '../../components/CompareForest.astro';
+import { deriveTopic, type RawTopic } from '../../lib/derive';
+import { buildComparisons } from '../../lib/compare';
+import { problem } from '../../lib/standardOutcomes';
+import { fmtRR, fmtCI, fmtPct, fmtNN, fmtInt, statusLabel } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('topics');
+  const topics = entries.map((e) => deriveTopic(e.data as RawTopic));
+  const comparisons = buildComparisons(topics, 2);
+  return comparisons.map((c) => ({
+    params: { id: c.outcome.id },
+    props: { comparison: c },
+  }));
+}
+
+const { comparison } = Astro.props;
+const o = comparison.outcome;
+const prob = problem(o.problemId);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<BaseLayout title={`${o.label} — intervention comparison — Ehvidence`} description={o.definition}>
+  <p class="small"><a href={`${base}/compare`}>← All comparisons</a>{prob && ` · ${prob.label}`}</p>
+  <h1>Which interventions reduce {o.label.toLowerCase()}?</h1>
+  <p><strong>Outcome definition:</strong> {o.definition}</p>
+
+  {o.caveat && <div class="disclaimer">{o.caveat}</div>}
+
+  <div class="callout">
+    <div class="callout-title">How to read this comparison</div>
+    <p>
+      Every intervention below was measured against the <em>same</em> outcome, so their effects are
+      lined up on one axis. They are <strong>not</strong> pooled together. Relative effects (risk
+      ratios) are broadly comparable, but the interventions were studied in <em>different
+      populations</em> (see the Population column), so absolute benefit and NNT are not directly
+      comparable across rows.
+    </p>
+  </div>
+
+  <h2>Effect on {o.label.toLowerCase()}</h2>
+  <CompareForest comparison={comparison} />
+
+  <h2>Interventions</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Intervention</th>
+          <th>Population</th>
+          <th class="num">RR [95% CI]</th>
+          <th class="num">Improvement</th>
+          <th class="num">NNT</th>
+          <th class="num">Studies</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {comparison.rows.map((r) => (
+          <tr class={r.status === 'limited' ? 'limited' : ''}>
+            <td><a href={`${base}/topics/${r.topicSlug}`}>{r.topicName}</a></td>
+            <td>{r.population}</td>
+            <td class="num">{fmtRR(r.pooled.rr)} [{fmtCI(r.pooled.ciLow, r.pooled.ciHigh)}]</td>
+            <td class="num">{fmtPct(r.pooled.improvementPct)}</td>
+            <td class="num">{fmtNN(r.pooled.nnt)}</td>
+            <td class="num">{r.studyCount}</td>
+            <td><span class={`badge ${r.status}`}>{statusLabel(r.status)}</span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small">
+    NNT is shown where a baseline risk was available; it reflects each intervention's own study
+    population and follow-up, so NNTs are not comparable between rows with different baseline risk.
+  </p>
+</BaseLayout>

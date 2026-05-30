@@ -7,6 +7,7 @@ import {
   type EffectMeasure,
 } from '../lib/stats';
 import { fmtRR, fmtCI, fmtPct, fmtNN } from '../lib/format';
+import { STANDARD_OUTCOMES } from '../lib/standardOutcomes';
 
 /* ---------- form state types (strings for editable numbers) ---------- */
 type Direction = 'lowerIsBetter' | 'higherIsBetter';
@@ -18,6 +19,7 @@ interface OutcomeForm {
   id: string;
   label: string;
   direction: Direction;
+  standardOutcomeId: string;
 }
 
 interface StudyForm {
@@ -31,6 +33,7 @@ interface StudyForm {
   outcomeId: string;
   doseRegimen: string;
   population: string;
+  endpointDefinition: string;
   excludeFromPooled: boolean;
   notes: string;
   mode: '2x2' | 'effect';
@@ -90,7 +93,7 @@ function emptyStudy(outcomeId: string): StudyForm {
   return {
     id: uid('study'),
     author: '', year: '', citation: '', doi: '', url: '',
-    design: 'RCT', outcomeId, doseRegimen: '', population: '',
+    design: 'RCT', outcomeId, doseRegimen: '', population: '', endpointDefinition: '',
     excludeFromPooled: false, notes: '', mode: '2x2',
     txEvents: '', txTotal: '', ctrlEvents: '', ctrlTotal: '',
     measure: 'RR', point: '', ciLow: '', ciHigh: '', ctrlRisk: '',
@@ -103,7 +106,7 @@ function initialTopic(): TopicForm {
     slug: '', name: '', condition: '', intervention: '', comparator: '',
     category: '', evidenceClass: 'efficacy', summary: '', description: '', interpretation: '', methodologyNotes: '',
     primaryOutcomeId: oid, lastUpdated: today(),
-    outcomes: [{ id: oid, label: 'Primary outcome', direction: 'lowerIsBetter' }],
+    outcomes: [{ id: oid, label: 'Primary outcome', direction: 'lowerIsBetter', standardOutcomeId: '' }],
     studies: [],
   };
 }
@@ -153,6 +156,7 @@ function buildExport(t: TopicForm): unknown {
     base.outcomeId = s.outcomeId;
     if (s.doseRegimen.trim()) base.doseRegimen = s.doseRegimen.trim();
     if (s.population.trim()) base.population = s.population.trim();
+    if (s.endpointDefinition.trim()) base.endpointDefinition = s.endpointDefinition.trim();
     if (s.excludeFromPooled) base.excludeFromPooled = true;
     if (s.notes.trim()) base.notes = s.notes.trim();
     base.data =
@@ -181,7 +185,12 @@ function buildExport(t: TopicForm): unknown {
   if (t.methodologyNotes.trim()) out.methodologyNotes = t.methodologyNotes.trim();
   out.primaryOutcomeId = t.primaryOutcomeId;
   out.lastUpdated = t.lastUpdated;
-  out.outcomes = t.outcomes.map((o) => ({ id: o.id, label: o.label, direction: o.direction }));
+  out.outcomes = t.outcomes.map((o) => ({
+    id: o.id,
+    label: o.label,
+    direction: o.direction,
+    ...(o.standardOutcomeId.trim() ? { standardOutcomeId: o.standardOutcomeId.trim() } : {}),
+  }));
   out.studies = studies;
   return out;
 }
@@ -196,6 +205,7 @@ function fromImport(raw: any): TopicForm {
       citation: s.citation ?? '', doi: s.doi ?? '', url: s.url ?? '',
       design: s.design ?? 'RCT', outcomeId: s.outcomeId ?? '',
       doseRegimen: s.doseRegimen ?? '', population: s.population ?? '',
+      endpointDefinition: s.endpointDefinition ?? '',
       excludeFromPooled: !!s.excludeFromPooled, notes: s.notes ?? '',
     });
     if (s.data?.kind === 'effect') {
@@ -222,7 +232,7 @@ function fromImport(raw: any): TopicForm {
     methodologyNotes: raw.methodologyNotes ?? '',
     primaryOutcomeId: raw.primaryOutcomeId ?? (raw.outcomes?.[0]?.id ?? ''),
     lastUpdated: raw.lastUpdated ?? today(),
-    outcomes: (raw.outcomes ?? []).map((o: any) => ({ id: o.id, label: o.label, direction: o.direction ?? 'lowerIsBetter' })),
+    outcomes: (raw.outcomes ?? []).map((o: any) => ({ id: o.id, label: o.label, direction: o.direction ?? 'lowerIsBetter', standardOutcomeId: o.standardOutcomeId ?? '' })),
     studies,
   };
 }
@@ -264,7 +274,7 @@ export default function DataEntryApp() {
 
   const addOutcome = () =>
     setTopic((t) => {
-      const o = { id: uid('outcome'), label: 'New outcome', direction: 'lowerIsBetter' as Direction };
+      const o = { id: uid('outcome'), label: 'New outcome', direction: 'lowerIsBetter' as Direction, standardOutcomeId: '' };
       return { ...t, outcomes: [...t.outcomes, o] };
     });
   const updateOutcome = (id: string, patch: Partial<OutcomeForm>) =>
@@ -367,14 +377,22 @@ export default function DataEntryApp() {
       {/* ---------------- outcomes ---------------- */}
       <div class="card">
         <h3>Outcomes</h3>
+        <p class="small muted">The <strong>standard outcome</strong> links this outcome to a shared, comparable definition so it appears in cross-intervention comparisons. Pick an existing one if it fits; only invent a new id if nothing matches (a maintainer then adds it to the registry).</p>
+        <datalist id="std-outcomes">
+          {STANDARD_OUTCOMES.map((s) => <option value={s.id}>{s.label} — {s.definition}</option>)}
+        </datalist>
         {topic.outcomes.map((o) => (
           <div class="row" key={o.id} style="margin-bottom:.5rem">
-            <div style="flex:1 1 180px"><Field label="Label"><input value={o.label} onInput={(e) => updateOutcome(o.id, { label: val(e) })} /></Field></div>
-            <div style="flex:0 0 160px"><Field label="Direction">
+            <div style="flex:1 1 160px"><Field label="Label"><input value={o.label} onInput={(e) => updateOutcome(o.id, { label: val(e) })} /></Field></div>
+            <div style="flex:0 0 150px"><Field label="Direction">
               <select value={o.direction} onChange={(e) => updateOutcome(o.id, { direction: val(e) as Direction })}>
                 <option value="lowerIsBetter">lower is better</option>
                 <option value="higherIsBetter">higher is better</option>
               </select>
+            </Field></div>
+            <div style="flex:1 1 180px"><Field label="Standard outcome (for comparison)">
+              <input list="std-outcomes" value={o.standardOutcomeId} placeholder="e.g. scc-incidence"
+                onInput={(e) => updateOutcome(o.id, { standardOutcomeId: val(e) })} />
             </Field></div>
             <div style="flex:0 0 140px"><Field label="Primary?">
               <input type="radio" name="primary" checked={topic.primaryOutcomeId === o.id} onChange={() => setField('primaryOutcomeId', o.id)} />
@@ -410,6 +428,7 @@ export default function DataEntryApp() {
               <Field label="Population"><input value={s.population} onInput={(e) => updateStudy(s.id, { population: val(e) })} /></Field>
             </div>
             <div style="margin-top:.6rem"><Field label="Citation"><input value={s.citation} onInput={(e) => updateStudy(s.id, { citation: val(e) })} /></Field></div>
+            <div style="margin-top:.6rem"><Field label="Endpoint definition (verbatim, for comparability)"><input value={s.endpointDefinition} onInput={(e) => updateStudy(s.id, { endpointDefinition: val(e) })} placeholder="e.g. first nonfatal MI, nonfatal stroke, or CV death" /></Field></div>
             <div class="grid" style="margin-top:.6rem">
               <Field label="DOI"><input value={s.doi} onInput={(e) => updateStudy(s.id, { doi: val(e) })} placeholder="10.xxxx/..." /></Field>
               <Field label="URL"><input value={s.url} onInput={(e) => updateStudy(s.id, { url: val(e) })} /></Field>

@@ -14,10 +14,10 @@
   "primaryOutcomeId": "major-cv",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "major-cv", "label": "Major cardiovascular events", "direction": "lowerIsBetter", "description": "Each trial's major coronary or vascular composite endpoint (definitions vary)." },
-    { "id": "all-cause-mortality", "label": "All-cause mortality", "direction": "lowerIsBetter", "description": "Death from any cause." },
+    { "id": "major-cv", "label": "Major cardiovascular events", "direction": "lowerIsBetter", "description": "Each trial's major coronary or vascular composite endpoint (definitions vary).", "standardOutcomeId": "mace" },
+    { "id": "all-cause-mortality", "label": "All-cause mortality", "direction": "lowerIsBetter", "description": "Death from any cause.", "standardOutcomeId": "all-cause-mortality" },
     { "id": "chd-death", "label": "Coronary death", "direction": "lowerIsBetter", "description": "Death from coronary heart disease." },
-    { "id": "stroke", "label": "Stroke", "direction": "lowerIsBetter", "description": "Fatal or nonfatal stroke." }
+    { "id": "stroke", "label": "Stroke", "direction": "lowerIsBetter", "description": "Fatal or nonfatal stroke.", "standardOutcomeId": "stroke" }
   ],
   "studies": [
     {

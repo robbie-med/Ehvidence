@@ -14,8 +14,8 @@
   "primaryOutcomeId": "scc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter" },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter" }
+    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "scc-incidence" },
+    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "bcc-incidence" }
   ],
   "studies": [
     {
