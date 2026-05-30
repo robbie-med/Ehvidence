@@ -1,0 +1,53 @@
+{
+  "slug": "celecoxib-skin-cancer",
+  "name": "Celecoxib for skin cancer prevention",
+  "condition": "Nonmelanoma skin cancer (high-risk, actinic damage)",
+  "intervention": "Celecoxib 200 mg twice daily",
+  "comparator": "Placebo",
+  "category": "Skin cancer prevention",
+  "evidenceClass": "efficacy",
+  "summary": "In a small trial of patients with extensive actinic keratoses, the COX-2 inhibitor celecoxib roughly halved new nonmelanoma skin cancers, including both squamous- and basal-cell carcinomas — but cardiovascular safety concerns limit its use as a preventive.",
+  "description": "A randomized, double-blind, placebo-controlled trial of 240 patients with actinic keratoses treated celecoxib 200 mg twice daily for 9 months, with skin cancers counted at 11 months.",
+  "interpretation": "Celecoxib reduced all three endpoints (nonmelanoma skin cancer overall, squamous- and basal-cell carcinoma) by roughly half in a high-risk population, so the NNTs are low. The major caveat is not efficacy but safety: COX-2 inhibitors carry cardiovascular risk, and this was a small, short trial — so celecoxib is not used routinely for skin cancer prevention. See the glossary for rate ratio and NNT.",
+  "methodologyNotes": "Effects are the published tumor rate ratios with 95% CIs; the control-arm lesion rates (0.35 nonmelanoma, 0.19 squamous-cell, 0.16 basal-cell tumors per patient) are used as the baseline so NNT reflects high-risk patients treated per cancer prevented over the ~11-month trial. Single, small trial (n=240).",
+  "status": "favorable",
+  "primaryOutcomeId": "nmsc",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter" },
+    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter" },
+    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter" }
+  ],
+  "studies": [
+    {
+      "id": "elmets-nmsc",
+      "author": "Elmets", "year": 2010,
+      "citation": "Elmets CA, Viner JL, Pentland AP, et al. Chemoprevention of nonmelanoma skin cancer with celecoxib: a randomized, double-blind, placebo-controlled trial. J Natl Cancer Inst. 2010;102:1835-1844.",
+      "doi": "10.1093/jnci/djq442",
+      "design": "DB-RCT", "outcomeId": "nmsc", "doseRegimen": "Celecoxib 200 mg BID", "population": "High-risk (actinic keratoses); 11 mo",
+      "n": 240,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.43, "ciLow": 0.24, "ciHigh": 0.75, "ctrlRisk": 0.35 },
+      "notes": "Nonmelanoma skin cancer rate ratio (P=0.003)."
+    },
+    {
+      "id": "elmets-scc",
+      "author": "Elmets", "year": 2010,
+      "citation": "Elmets CA, Viner JL, Pentland AP, et al. Chemoprevention of nonmelanoma skin cancer with celecoxib: a randomized, double-blind, placebo-controlled trial. J Natl Cancer Inst. 2010;102:1835-1844.",
+      "doi": "10.1093/jnci/djq442",
+      "design": "DB-RCT", "outcomeId": "scc", "doseRegimen": "Celecoxib 200 mg BID", "population": "High-risk; 11 mo",
+      "n": 240,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.42, "ciLow": 0.19, "ciHigh": 0.92, "ctrlRisk": 0.19 },
+      "notes": "Squamous-cell carcinoma (P=0.03)."
+    },
+    {
+      "id": "elmets-bcc",
+      "author": "Elmets", "year": 2010,
+      "citation": "Elmets CA, Viner JL, Pentland AP, et al. Chemoprevention of nonmelanoma skin cancer with celecoxib: a randomized, double-blind, placebo-controlled trial. J Natl Cancer Inst. 2010;102:1835-1844.",
+      "doi": "10.1093/jnci/djq442",
+      "design": "DB-RCT", "outcomeId": "bcc", "doseRegimen": "Celecoxib 200 mg BID", "population": "High-risk; 11 mo",
+      "n": 240,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.44, "ciLow": 0.19, "ciHigh": 0.99, "ctrlRisk": 0.16 },
+      "notes": "Basal-cell carcinoma (P=0.049)."
+    }
+  ]
+}

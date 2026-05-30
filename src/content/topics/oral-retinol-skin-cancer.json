@@ -1,0 +1,42 @@
+{
+  "slug": "oral-retinol-skin-cancer",
+  "name": "Oral retinol for skin cancer prevention",
+  "condition": "Skin cancer (moderate-risk)",
+  "intervention": "Oral retinol (vitamin A) 25,000 IU daily",
+  "comparator": "Placebo",
+  "category": "Skin cancer prevention",
+  "evidenceClass": "efficacy",
+  "summary": "In moderate-risk people with extensive actinic damage, high-dose oral retinol modestly reduced squamous-cell carcinoma but had no effect on basal-cell carcinoma.",
+  "description": "The SKICAP-AK trial randomized 2,297 people with a history of many actinic keratoses (and ≤2 prior skin cancers) to retinol 25,000 IU daily or placebo, with a median 3.8 years of follow-up.",
+  "interpretation": "Retinol's benefit was specific to squamous-cell carcinoma and was modest (about a quarter lower risk); basal-cell carcinoma was unaffected. High-dose vitamin A carries toxicity concerns (hepatic, teratogenic) that limit routine use. This split effect — helping squamous but not basal-cell cancers — recurs across several agents on this site. See the glossary for hazard ratio and primary prevention.",
+  "methodologyNotes": "Effects are the published hazard ratios with 95% CIs (squamous-cell HR 0.74, 0.56-0.99, P=0.04; basal-cell HR 1.06, 0.86-1.32, P=0.36). A control absolute risk was not encoded, so NNT is not shown. Single trial.",
+  "status": "favorable",
+  "primaryOutcomeId": "scc",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter" },
+    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter" }
+  ],
+  "studies": [
+    {
+      "id": "skicap-scc",
+      "author": "SKICAP-AK (Moon)", "year": 1997,
+      "citation": "Moon TE, Levine N, Cartmel B, et al. Effect of retinol in preventing squamous cell skin cancer in moderate-risk subjects (SKICAP-AK). Cancer Epidemiol Biomarkers Prev. 1997;6:949-956.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9367069/",
+      "design": "RCT", "outcomeId": "scc", "doseRegimen": "Retinol 25,000 IU/day", "population": "Moderate-risk (many AKs); 3.8 yr",
+      "n": 2297,
+      "data": { "kind": "effect", "measure": "HR", "point": 0.74, "ciLow": 0.56, "ciHigh": 0.99 },
+      "notes": "First new squamous-cell carcinoma."
+    },
+    {
+      "id": "skicap-bcc",
+      "author": "SKICAP-AK (Moon)", "year": 1997,
+      "citation": "Moon TE, Levine N, Cartmel B, et al. Effect of retinol in preventing squamous cell skin cancer in moderate-risk subjects (SKICAP-AK). Cancer Epidemiol Biomarkers Prev. 1997;6:949-956.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9367069/",
+      "design": "RCT", "outcomeId": "bcc", "doseRegimen": "Retinol 25,000 IU/day", "population": "Moderate-risk (many AKs); 3.8 yr",
+      "n": 2297,
+      "data": { "kind": "effect", "measure": "HR", "point": 1.06, "ciLow": 0.86, "ciHigh": 1.32 },
+      "notes": "First new basal-cell carcinoma; no effect."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "beta-carotene-skin-cancer",
+  "name": "Beta-carotene for skin cancer prevention",
+  "condition": "Nonmelanoma skin cancer",
+  "intervention": "Beta-carotene 50 mg daily",
+  "comparator": "Placebo",
+  "category": "Skin cancer prevention",
+  "evidenceClass": "efficacy",
+  "summary": "Beta-carotene supplementation does not prevent nonmelanoma skin cancer — a well-powered randomized trial found no effect, as did the Nambour trial.",
+  "description": "The Skin Cancer Prevention Study randomized 1,805 patients with a recent nonmelanoma skin cancer to beta-carotene 50 mg daily or placebo, with 5 years of follow-up. The Nambour trial similarly found no protective effect from beta-carotene.",
+  "interpretation": "This is an informative negative result: despite a biologically plausible antioxidant rationale, beta-carotene had no effect on new skin cancers (and in other settings high-dose beta-carotene increased lung cancer in smokers). It is included as a comparator to show that not every supplement works — a useful contrast with nicotinamide, which did. See the glossary for confidence interval (the interval here straddles 1, indicating no effect).",
+  "methodologyNotes": "Effect is the published relative rate with 95% CI for a first new nonmelanoma skin cancer. The topic status is set to inconclusive/neutral to reflect a definitive null from a single large trial (rather than 'limited data').",
+  "status": "neutral",
+  "primaryOutcomeId": "nmsc",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter" }
+  ],
+  "studies": [
+    {
+      "id": "greenberg-nmsc",
+      "author": "Greenberg", "year": 1990,
+      "citation": "Greenberg ER, Baron JA, Stukel TA, et al. A clinical trial of beta carotene to prevent basal-cell and squamous-cell cancers of the skin (Skin Cancer Prevention Study). N Engl J Med. 1990;323:789-795.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/2202901/",
+      "design": "DB-RCT", "outcomeId": "nmsc", "doseRegimen": "Beta-carotene 50 mg/day", "population": "Prior NMSC; 5 yr",
+      "n": 1805,
+      "data": { "kind": "effect", "measure": "RR", "point": 1.05, "ciLow": 0.91, "ciHigh": 1.22 },
+      "notes": "First new nonmelanoma skin cancer; no effect."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "slug": "omega-3-cardiovascular",
+  "name": "Omega-3 (fish oil) for cardiovascular events",
+  "condition": "Cardiovascular disease",
+  "intervention": "Omega-3 fatty acids (fish oil / EPA)",
+  "comparator": "Placebo (oil capsule)",
+  "category": "Cardiovascular",
+  "evidenceClass": "efficacy",
+  "summary": "Whether fish oil prevents cardiovascular events depends heavily on the preparation and population. High-dose EPA-only trials (REDUCE-IT, JELIS) and the new hemodialysis trial (PISCES) show clear benefit, while low-dose or EPA+DHA combination trials (VITAL, ASCEND, STRENGTH) are essentially null. A pooled average therefore hides more than it reveals.",
+  "description": "Several large randomized trials have tested marine omega-3 fatty acids for prevention of major cardiovascular events, with famously divergent results. The trials differ in formulation (purified EPA vs EPA+DHA), dose (about 1 g/day vs 4 g/day), comparator oil (mineral, corn, olive), and population (primary prevention vs high-risk vs hemodialysis). PISCES (2026) is the newest and tested 4 g/day fish oil specifically in patients receiving hemodialysis.",
+  "interpretation": "Do not read the pooled diamond as the answer — the heterogeneity here is the point, and it is very high. The trials split by formulation and dose more than by \"fish oil yes/no\": the positive trials used high-dose EPA-only preparations (REDUCE-IT 4 g/day icosapent ethyl; JELIS 1.8 g/day purified EPA), whereas trials using ~1 g/day (VITAL, ASCEND) or high-dose EPA+DHA (STRENGTH) were null. STRENGTH is the sharpest contrast: same 4 g/day dose as REDUCE-IT but EPA+DHA, and flatly null.\nThree honest confounders: comparator oil differed (REDUCE-IT used mineral oil, which raised LDL/CRP in the control arm and may have inflated the apparent benefit; STRENGTH used corn oil; ASCEND olive oil); JELIS was open-label in a high-fish-intake Japanese population; and the endpoint definitions are not identical across trials.\nPISCES is the only trial here in hemodialysis patients, and its headline was a recurrent-events analysis (HR 0.57); the value shown is the participant-level risk ratio (≥1 serious cardiovascular event), which is more comparable to the other trials' first-event endpoints but still not strictly like-for-like. See the glossary for hazard ratio, heterogeneity, and composite outcomes."
+,
+  "methodologyNotes": "Risk ratios are computed from each trial's reported participant-level primary-event counts (2x2) for REDUCE-IT (705/4089 vs 901/4090), STRENGTH (785/6539 vs 795/6539), ASCEND (689/7740 vs 712/7740), JELIS (262/9326 vs 324/9319), and PISCES (127/610 vs 208/618). VITAL is entered as its reported hazard ratio 0.92 (0.80-1.06) with a control risk for NNT; GISSI-Prevenzione as a risk ratio 0.90 (0.82-0.99) from its reported relative risk reduction (per-arm counts not confirmed). Computed risk ratios are very close to the published hazard ratios. Pooling is shown for completeness but is of limited interpretive value given the formulation/dose/population/comparator differences and the resulting high heterogeneity (I²); the comparison is best read trial by trial, especially high-dose EPA vs the rest. PISCES's headline endpoint was recurrent events (HR 0.57); the participant-level risk ratio is used here for comparability.",
+  "primaryOutcomeId": "mace",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    { "id": "mace", "label": "Major cardiovascular events", "direction": "lowerIsBetter", "description": "Each trial's primary cardiovascular composite endpoint (definitions vary)." }
+  ],
+  "studies": [
+    {
+      "id": "pisces-mace",
+      "author": "PISCES (Lok)", "year": 2026,
+      "citation": "Lok CE, Farkouh ME, Hemmelgarn BR, et al. Fish-Oil Supplementation and Cardiovascular Events in Patients Receiving Hemodialysis (PISCES). N Engl J Med. 2026;394:128-137.",
+      "doi": "10.1056/NEJMoa2513032",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Fish oil 4 g/day (1.6 g EPA + 0.8 g DHA)", "population": "Hemodialysis; 3.5 yr",
+      "data": { "kind": "2x2", "txEvents": 127, "txTotal": 610, "ctrlEvents": 208, "ctrlTotal": 618 },
+      "notes": "Participants with ≥1 serious cardiovascular event. Headline primary (recurrent events) was HR 0.57 (0.47-0.70). Only dialysis trial here; serious bleeding was lower with fish oil (4.8% vs 7.6%)."
+    },
+    {
+      "id": "reduceit-mace",
+      "author": "REDUCE-IT (Bhatt)", "year": 2019,
+      "citation": "Bhatt DL, Steg PG, Miller M, et al. Cardiovascular Risk Reduction with Icosapent Ethyl for Hypertriglyceridemia (REDUCE-IT). N Engl J Med. 2019;380:11-22.",
+      "doi": "10.1056/NEJMoa1812792",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Icosapent ethyl (EPA) 4 g/day", "population": "High-risk + high TG, statin; 4.9 yr",
+      "data": { "kind": "2x2", "txEvents": 705, "txTotal": 4089, "ctrlEvents": 901, "ctrlTotal": 4090 },
+      "notes": "Positive. Published HR 0.75 (0.68-0.83). Mineral-oil comparator raised LDL/CRP in controls (debated)."
+    },
+    {
+      "id": "jelis-mace",
+      "author": "JELIS (Yokoyama)", "year": 2007,
+      "citation": "Yokoyama M, Origasa H, Matsuzaki M, et al. Effects of eicosapentaenoic acid on major coronary events in hypercholesterolaemic patients (JELIS). Lancet. 2007;369:1090-1098.",
+      "doi": "10.1016/S0140-6736(07)60527-3",
+      "design": "RCT", "outcomeId": "mace",
+      "doseRegimen": "Purified EPA 1.8 g/day + statin", "population": "Japan, hypercholesterolemia; 4.6 yr",
+      "data": { "kind": "2x2", "txEvents": 262, "txTotal": 9326, "ctrlEvents": 324, "ctrlTotal": 9319 },
+      "notes": "Positive. Published HR 0.81 (0.69-0.95). Open-label (PROBE) design; high-fish-intake population."
+    },
+    {
+      "id": "gissi-mace",
+      "author": "GISSI-Prevenzione", "year": 1999,
+      "citation": "GISSI-Prevenzione Investigators. Dietary supplementation with n-3 polyunsaturated fatty acids and vitamin E after myocardial infarction (GISSI-Prevenzione). Lancet. 1999;354:447-455.",
+      "doi": "10.1016/S0140-6736(99)07072-5",
+      "design": "RCT", "outcomeId": "mace",
+      "doseRegimen": "n-3 PUFA ~1 g/day", "population": "Post-MI (≤3 mo); 3.5 yr",
+      "n": 11324,
+      "data": { "kind": "effect", "measure": "RR", "point": 0.90, "ciLow": 0.82, "ciHigh": 0.99 },
+      "notes": "Modestly positive. RR from reported relative risk reduction ~10% (two-way analysis); per-arm counts not confirmed. Open-label."
+    },
+    {
+      "id": "vital-mace",
+      "author": "VITAL (Manson)", "year": 2019,
+      "citation": "Manson JE, Cook NR, Lee IM, et al. Marine n-3 Fatty Acids and Prevention of Cardiovascular Disease and Cancer (VITAL). N Engl J Med. 2019;380:23-32.",
+      "doi": "10.1056/NEJMoa1811403",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Marine n-3 (EPA+DHA) 1 g/day", "population": "Primary prevention, US adults; 5.3 yr",
+      "n": 25871,
+      "data": { "kind": "effect", "measure": "HR", "point": 0.92, "ciLow": 0.80, "ciHigh": 1.06, "ctrlRisk": 0.0324 },
+      "notes": "Null for the primary composite (MI/stroke/CV death); MI alone was lower (HR 0.72, 0.59-0.90)."
+    },
+    {
+      "id": "ascend-mace",
+      "author": "ASCEND", "year": 2018,
+      "citation": "ASCEND Study Collaborative Group. Effects of n-3 Fatty Acid Supplements in Diabetes Mellitus (ASCEND). N Engl J Med. 2018;379:1540-1550.",
+      "doi": "10.1056/NEJMoa1804989",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "n-3 (EPA+DHA) 1 g/day", "population": "Diabetes, no CVD; 7.4 yr",
+      "data": { "kind": "2x2", "txEvents": 689, "txTotal": 7740, "ctrlEvents": 712, "ctrlTotal": 7740 },
+      "notes": "Null. Published rate ratio 0.97 (0.87-1.08)."
+    },
+    {
+      "id": "strength-mace",
+      "author": "STRENGTH (Nicholls)", "year": 2020,
+      "citation": "Nicholls SJ, Lincoff AM, Garcia M, et al. Effect of High-Dose Omega-3 Fatty Acids vs Corn Oil on Major Adverse Cardiovascular Events (STRENGTH). JAMA. 2020;324:2268-2280.",
+      "doi": "10.1001/jama.2020.22258",
+      "design": "DB-RCT", "outcomeId": "mace",
+      "doseRegimen": "Omega-3 carboxylic acid (EPA+DHA) 4 g/day", "population": "High-risk + dyslipidemia, statin; 42 mo",
+      "data": { "kind": "2x2", "txEvents": 785, "txTotal": 6539, "ctrlEvents": 795, "ctrlTotal": 6539 },
+      "notes": "Null (HR 0.99, 0.90-1.09). Same 4 g/day dose as REDUCE-IT but EPA+DHA — the key contrast."
+    }
+  ]
+}

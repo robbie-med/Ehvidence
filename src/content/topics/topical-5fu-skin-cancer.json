@@ -1,0 +1,40 @@
+{
+  "slug": "topical-5fu-skin-cancer",
+  "name": "Topical 5-fluorouracil for skin cancer prevention",
+  "condition": "Keratinocyte carcinoma (high-risk)",
+  "intervention": "Topical 5-fluorouracil 5% (single 2-4 week course)",
+  "comparator": "Vehicle cream",
+  "category": "Skin cancer prevention",
+  "evidenceClass": "efficacy",
+  "summary": "A single field course of topical 5-fluorouracil to the face and ears sharply reduced squamous-cell carcinoma requiring surgery in the first year, with no significant effect on basal-cell carcinoma.",
+  "description": "The VAKCC trial randomized 932 veterans at high risk of keratinocyte carcinoma to a single 2-4 week course of 5-fluorouracil 5% cream versus vehicle, with a median 2.8 years of follow-up.",
+  "interpretation": "The benefit was large but time-limited: squamous-cell carcinomas requiring surgery fell about 75% in the first year (5/468 vs 20/464), after which the difference faded — implying field therapy clears existing precancerous damage rather than providing lasting protection. Basal-cell carcinoma was not significantly reduced. This squamous-favoring, time-limited pattern is a recurring theme among skin-cancer preventives. See the glossary for risk ratio and NNT.",
+  "methodologyNotes": "Risk ratios are computed from the reported first-year event counts (2x2): squamous-cell carcinoma requiring surgery 5/468 vs 20/464; basal-cell carcinoma 45/468 vs 50/464. The squamous-cell effect was concentrated in the first year and was no longer significant over the full follow-up. NNT reflects the first year.",
+  "status": "favorable",
+  "primaryOutcomeId": "scc",
+  "lastUpdated": "2026-05-29",
+  "outcomes": [
+    { "id": "scc", "label": "Squamous-cell carcinoma (needing surgery)", "direction": "lowerIsBetter" },
+    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter" }
+  ],
+  "studies": [
+    {
+      "id": "vakcc-scc",
+      "author": "VAKCC (Weinstock)", "year": 2018,
+      "citation": "Weinstock MA, Thwin SS, Siegel JA, et al. Chemoprevention of basal and squamous cell carcinoma with a single course of fluorouracil, 5%, cream (VAKCC). JAMA Dermatol. 2018;154:167-174.",
+      "doi": "10.1001/jamadermatol.2017.3631",
+      "design": "DB-RCT", "outcomeId": "scc", "doseRegimen": "5-FU 5% single course", "population": "High-risk veterans; 1-yr window",
+      "data": { "kind": "2x2", "txEvents": 5, "txTotal": 468, "ctrlEvents": 20, "ctrlTotal": 464 },
+      "notes": "Squamous-cell carcinoma requiring surgery, first year (~75% reduction). Effect faded after year 1."
+    },
+    {
+      "id": "vakcc-bcc",
+      "author": "VAKCC (Weinstock)", "year": 2018,
+      "citation": "Weinstock MA, Thwin SS, Siegel JA, et al. Chemoprevention of basal and squamous cell carcinoma with a single course of fluorouracil, 5%, cream (VAKCC). JAMA Dermatol. 2018;154:167-174.",
+      "doi": "10.1001/jamadermatol.2017.3631",
+      "design": "DB-RCT", "outcomeId": "bcc", "doseRegimen": "5-FU 5% single course", "population": "High-risk veterans; first year",
+      "data": { "kind": "2x2", "txEvents": 45, "txTotal": 468, "ctrlEvents": 50, "ctrlTotal": 464 },
+      "notes": "Basal-cell carcinoma, first year; not significant."
+    }
+  ]
+}
