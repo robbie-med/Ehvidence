@@ -21,7 +21,10 @@ const precomputedEffect = z.object({
   point: z.number().positive(),
   ciLow: z.number().positive(),
   ciHigh: z.number().positive(),
-  ctrlRisk: z.number().min(0).max(1).optional(),
+  // Baseline control risk (probability) or, for count/rate outcomes, the
+  // control event rate per person — used to derive an NNT. May exceed 1 for
+  // rate outcomes (e.g. mean lesions per person).
+  ctrlRisk: z.number().min(0).optional(),
 });
 
 const study = z.object({

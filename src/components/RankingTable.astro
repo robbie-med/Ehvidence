@@ -16,7 +16,11 @@ const groups = EVIDENCE_ORDER
     meta: evidenceMeta(key),
     items: topics
       .filter((t) => evidenceMeta(t.raw.evidenceClass).key === key)
-      .sort((a, b) => (b.primary.pooled?.improvementPct ?? -Infinity) - (a.primary.pooled?.improvementPct ?? -Infinity)),
+      // Cluster by category (so e.g. all skin-cancer-prevention topics sit
+      // together), then by pooled improvement within a category.
+      .sort((a, b) =>
+        a.raw.category.localeCompare(b.raw.category) ||
+        (b.primary.pooled?.improvementPct ?? -Infinity) - (a.primary.pooled?.improvementPct ?? -Infinity)),
   }))
   .filter((g) => g.items.length > 0);
 ---
