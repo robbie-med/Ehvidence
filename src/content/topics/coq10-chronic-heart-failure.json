@@ -1,0 +1,67 @@
+{
+  "slug": "coq10-chronic-heart-failure",
+  "name": "CoQ10 in Chronic Heart Failure (Q-SYMBIO)",
+  "condition": "Chronic heart failure (HF)",
+  "intervention": "Coenzyme Q10 (CoQ10) 100 mg TID",
+  "comparator": "placebo",
+  "category": "Cardiology",
+  "evidenceClass": "efficacy",
+  "summary": "Long-term CoQ10 treatment of patients with moderate to severe chronic HF significantly reduced major adverse cardiovascular events, cardiovascular mortality, and all-cause mortality compared to placebo, with an improved safety profile.",
+  "description": "CoQ10 is an essential cofactor for mitochondrial energy production and a lipid-soluble antioxidant. Myocardial CoQ10 levels correlate inversely with HF severity. Prior RCTs were underpowered to detect mortality differences.",
+  "interpretation": "The primary long-term endpoint (MACE) was reached by 15% of CoQ10 patients vs. 26% of placebo patients (HR 0.50, 95% CI 0.32–0.80, p=0.003). All-cause mortality was 10% vs. 18% (p=0.018). No significant short-term differences were seen at 16 weeks. Benefits were additive to standard therapy including ACE inhibitors and beta-blockers.",
+  "methodologyNotes": "Trial was stopped early (420 of planned 550 patients) due to low recruitment. Partial funding from Pharma Nord and Kaneka Corp (CoQ10 manufacturers). No significant EF improvement was found despite mortality benefit.",
+  "primaryOutcomeId": "outcome-oru1t",
+  "lastUpdated": "2026-05-30",
+  "outcomes": [
+    {
+      "id": "outcome-oru1t",
+      "label": "Major Adverse Cardiovascular Events (MACE)",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "mace"
+    },
+    {
+      "id": "outcome-ywf3x",
+      "label": "Cardiovascular Mortality",
+      "direction": "lowerIsBetter"
+    },
+    {
+      "id": "outcome-j3e9h",
+      "label": "All-Cause Mortality",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "all-cause-mortality"
+    },
+    {
+      "id": "outcome-i9s70",
+      "label": "HF Hospitalization",
+      "direction": "lowerIsBetter"
+    },
+    {
+      "id": "outcome-5ungj",
+      "label": "NYHA Class Improvement at 2 Years",
+      "direction": "higherIsBetter"
+    }
+  ],
+  "studies": [
+    {
+      "id": "study-id346",
+      "author": "Mortensen SA et al.",
+      "year": 2014,
+      "citation": "Mortensen SA, Rosenfeldt F, Kumar A, et al. The effect of coenzyme Q10 on morbidity and mortality in chronic heart failure: results from Q-SYMBIO. JACC Heart Fail. 2014;2(6):641-649.",
+      "doi": "10.1016/j.jchf.2014.06.008",
+      "url": "https://www.jacc.org/doi/10.1016/j.jchf.2014.06.008",
+      "design": "RCT",
+      "outcomeId": "outcome-oru1t",
+      "doseRegimen": "CoQ10 100 mg three times daily (TID) for 106 weeks",
+      "population": "Adults with moderate to severe chronic HF (NYHA class III-IV), mean EF ~31%, on stable standard therapy",
+      "endpointDefinition": "Time to first MACE: unplanned HF hospitalization, cardiovascular death, mechanical circulatory support, or urgent transplantation.",
+      "notes": "From Table 2 of the paper. Computed RR from the 2x2 is ~0.57; the paper's time-to-event HR was 0.50 (95% CI 0.32-0.80, p=0.003); NNT roughly 9.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 30,
+        "txTotal": 202,
+        "ctrlEvents": 57,
+        "ctrlTotal": 218
+      }
+    }
+  ]
+}
