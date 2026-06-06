@@ -27,6 +27,25 @@ const precomputedEffect = z.object({
   ctrlRisk: z.number().min(0).optional(),
 });
 
+const continuous = z.object({
+  kind: z.literal('continuous'),
+  txMean: z.number(),
+  txSd: z.number().nonnegative(),
+  txN: z.number().int().positive(),
+  ctrlMean: z.number(),
+  ctrlSd: z.number().nonnegative(),
+  ctrlN: z.number().int().positive(),
+});
+
+const continuousEffect = z.object({
+  kind: z.literal('continuousEffect'),
+  measure: z.enum(['MD', 'SMD']),
+  point: z.number(),
+  ciLow: z.number(),
+  ciHigh: z.number(),
+  n: z.number().int().positive().optional(),
+});
+
 const study = z.object({
   id: z.string(),
   author: z.string(),
@@ -55,7 +74,7 @@ const study = z.object({
   n: z.number().int().positive().optional(),
   excludeFromPooled: z.boolean().optional(),
   notes: z.string().optional(),
-  data: z.discriminatedUnion('kind', [twoByTwo, precomputedEffect]),
+  data: z.discriminatedUnion('kind', [twoByTwo, precomputedEffect, continuous, continuousEffect]),
 });
 
 const outcome = z.object({
@@ -63,6 +82,10 @@ const outcome = z.object({
   label: z.string(),
   direction: z.enum(['lowerIsBetter', 'higherIsBetter']),
   description: z.string().optional(),
+  // 'binary' (event/ratio, the default) or 'continuous' (mean difference).
+  kind: z.enum(['binary', 'continuous']).optional(),
+  // For continuous outcomes: mean difference (same units) or standardized.
+  measure: z.enum(['MD', 'SMD']).optional(),
   // Links this outcome to a controlled standard outcome so it can be compared
   // across interventions. See src/lib/standardOutcomes.ts.
   standardOutcomeId: z.string().optional(),

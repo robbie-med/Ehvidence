@@ -1,6 +1,6 @@
 ---
 import type { ComputedTopic } from '../lib/derive';
-import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, statusLabel, dispImprovement, dispNnt } from '../lib/format';
+import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, fmtNum, statusLabel, dispImprovement, dispNnt } from '../lib/format';
 import { evidenceMeta, EVIDENCE_ORDER } from '../lib/evidence';
 
 interface Props {
@@ -44,6 +44,7 @@ const groups = EVIDENCE_ORDER
         <tr><td colspan="8" class="cat-head"><span class={`eclass ${g.meta.key}`}>{g.meta.label}</span></td></tr>
         {g.items.map((t) => {
           const p = t.primary.pooled;
+          const cp = t.primary.contPooled;
           const showNnt = g.meta.showNnt;
           const dir = t.primary.outcome.direction;
           return (
@@ -53,7 +54,7 @@ const groups = EVIDENCE_ORDER
                 <span class="tag">{t.raw.category}</span>
               </td>
               <td>{t.primary.outcome.label}</td>
-              <td class="num">{p ? `${fmtRR(p.rr)} [${fmtCI(p.ciLow, p.ciHigh)}]` : '—'}</td>
+              <td class="num">{p ? `${fmtRR(p.rr)} [${fmtCI(p.ciLow, p.ciHigh)}]` : cp ? `${t.primary.measure} ${fmtNum(cp.estimate)}` : '—'}</td>
               <td class="num">{p ? fmtPct(dispImprovement(p.improvementPct, dir)) : '—'}</td>
               <td class="num">{showNnt && p ? fmtNN(dispNnt(p.nnt, p.nnh, dir)) : '—'}</td>
               <td class="num">{t.studyCount}</td>

@@ -28,6 +28,20 @@ export function fmtNN(n: number | null): string {
   return n === null ? '—' : String(n);
 }
 
+/** Format a plain number for continuous estimates (2 decimals, 1 if large). */
+export function fmtNum(x: number): string {
+  if (!Number.isFinite(x)) return '—';
+  return Math.abs(x) >= 10 ? x.toFixed(1) : x.toFixed(2);
+}
+
+/** Cohen/Hedges effect-size descriptor for a standardized mean difference. */
+export function smdMagnitude(absEstimate: number): string {
+  if (absEstimate < 0.2) return 'negligible';
+  if (absEstimate < 0.5) return 'small';
+  if (absEstimate < 0.8) return 'moderate';
+  return 'large';
+}
+
 /** Group thousands, e.g. 12300 -> "12,300". */
 export function fmtInt(n: number): string {
   return n.toLocaleString('en-US');

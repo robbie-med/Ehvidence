@@ -1,0 +1,46 @@
+---
+import type { ComputedOutcome } from '../lib/derive';
+import { fmtNum, fmtInt, fmtPct, smdMagnitude } from '../lib/format';
+
+interface Props {
+  outcome: ComputedOutcome;
+  status: string;
+}
+const { outcome, status } = Astro.props;
+const p = outcome.contPooled;
+const dir = outcome.outcome.direction;
+const m = outcome.measure;
+const label = outcome.outcome.label.toLowerCase();
+
+const sig = p ? p.ciHigh < 0 || p.ciLow > 0 : false;
+const reduces = p ? p.estimate < 0 : false;
+const mag = p && m === 'SMD' ? smdMagnitude(Math.abs(p.estimate)) : null;
+const measureName = m === 'SMD' ? 'Standardized mean difference' : 'Mean difference';
+---
+<div class={`summary-block ${status}`}>
+  {p ? (
+    <>
+      <div class="headline">
+        {sig ? (
+          <><span class="pct">{mag ? `${mag} ` : ''}{reduces ? 'reduction' : 'increase'}</span> in {label}</>
+        ) : (
+          <>No significant change in {label}</>
+        )}
+      </div>
+      <div class="detail">
+        {measureName} {fmtNum(p.estimate)} (95% CI {fmtNum(p.ciLow)} to {fmtNum(p.ciHigh)}) across {p.k}
+        {' '}studies{p.totalPatients > 0 ? `, ${fmtInt(p.totalPatients)} patients` : ''} (random-effects, I² {fmtPct(p.i2)}).
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="v">{fmtNum(p.estimate)}</div><div class="k">{m}</div></div>
+        <div class="metric"><div class="v">{fmtNum(p.ciLow)} to {fmtNum(p.ciHigh)}</div><div class="k">95% CI</div></div>
+        <div class="metric"><div class="v">{p.k}</div><div class="k">Studies</div></div>
+        {p.totalPatients > 0 && (
+          <div class="metric"><div class="v">{fmtInt(p.totalPatients)}</div><div class="k">Patients</div></div>
+        )}
+      </div>
+    </>
+  ) : (
+    <div class="detail">No poolable studies for this outcome yet.</div>
+  )}
+</div>

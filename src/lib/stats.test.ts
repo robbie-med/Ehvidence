@@ -3,8 +3,12 @@ import {
   computeEffect,
   poolRandomEffects,
   deriveStatus,
+  computeContinuous,
+  poolContinuous,
+  deriveStatusContinuous,
   type TwoByTwo,
   type PrecomputedEffect,
+  type ContinuousData,
 } from './stats';
 
 describe('computeEffect—2x2 risk ratio', () => {
@@ -152,6 +156,61 @@ describe('poolRandomEffects—DerSimonian–Laird', () => {
     // Mean control risk 0.15, pooled RR ~0.24 => ARR ~0.114 => NNT ~9.
     expect(out.pooled.nnt!).toBeGreaterThan(5);
     expect(out.pooled.nnt!).toBeLessThan(15);
+  });
+});
+
+describe('computeContinuous', () => {
+  const d: ContinuousData = {
+    kind: 'continuous',
+    txMean: 5, txSd: 2, txN: 50,
+    ctrlMean: 7, ctrlSd: 2, ctrlN: 50,
+  };
+
+  it('computes a mean difference with its CI', () => {
+    const r = computeContinuous(d, 'MD');
+    expect(r.estimate).toBeCloseTo(-2, 5);
+    // SE = sqrt(4/50 + 4/50) = 0.4
+    expect(r.se).toBeCloseTo(0.4, 5);
+    expect(r.ciLow).toBeCloseTo(-2.784, 2);
+    expect(r.ciHigh).toBeCloseTo(-1.216, 2);
+  });
+
+  it('computes a standardized mean difference (Hedges g)', () => {
+    const r = computeContinuous(d, 'SMD');
+    // pooled SD = 2, d = -1, J ~ 0.9923, g ~ -0.992
+    expect(r.estimate).toBeCloseTo(-0.992, 2);
+    expect(r.se).toBeCloseTo(0.2105, 3);
+  });
+});
+
+describe('poolContinuous', () => {
+  it('pools homogeneous studies and excludes 0 in the CI', () => {
+    const a: ContinuousData = { kind: 'continuous', txMean: 2.8, txSd: 0.63, txN: 55, ctrlMean: 4.5, ctrlSd: 0.75, ctrlN: 55 };
+    const out = poolContinuous([a, { ...a }], 'MD');
+    expect(out).not.toBeNull();
+    expect(out!.pooled.estimate).toBeCloseTo(-1.7, 2);
+    expect(out!.pooled.tau2).toBeCloseTo(0, 5);
+    expect(out!.pooled.ciHigh).toBeLessThan(0);
+    expect(out!.pooled.totalPatients).toBe(220);
+  });
+
+  it('returns null when empty', () => {
+    expect(poolContinuous([], 'SMD')).toBeNull();
+  });
+});
+
+describe('deriveStatusContinuous', () => {
+  const p = (est: number, lo: number, hi: number, k = 4) => ({
+    k, measure: 'SMD' as const, estimate: est, ciLow: lo, ciHigh: hi, se: 0.2, q: 0, tau2: 0, i2: 0, totalPatients: 400,
+  });
+  it('is favorable when a reduction is significant (lower is better)', () => {
+    expect(deriveStatusContinuous(p(-1.6, -2.1, -1.2), 'lowerIsBetter')).toBe('favorable');
+  });
+  it('is neutral when the CI crosses 0', () => {
+    expect(deriveStatusContinuous(p(-0.2, -0.6, 0.2), 'lowerIsBetter')).toBe('neutral');
+  });
+  it('is limited with too few studies', () => {
+    expect(deriveStatusContinuous(p(-1.6, -2.1, -1.2, 2), 'lowerIsBetter')).toBe('limited');
   });
 });
 

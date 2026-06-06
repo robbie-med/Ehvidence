@@ -4,6 +4,9 @@ import { evidenceMeta } from '../lib/evidence';
 import SummaryBlock from './SummaryBlock.astro';
 import ForestPlot from './ForestPlot.astro';
 import StudyTable from './StudyTable.astro';
+import ContinuousSummary from './ContinuousSummary.astro';
+import ContinuousForest from './ContinuousForest.astro';
+import ContinuousTable from './ContinuousTable.astro';
 
 interface Props {
   topic: ComputedTopic;
@@ -35,11 +38,23 @@ const meta = evidenceMeta(topic.raw.evidenceClass);
   const againstLabel = higher ? meta.favorLabel : meta.againstLabel;
   return (
   <section class="outcome-panel" data-panel={o.outcome.id} hidden={o.outcome.id !== primaryId}>
-    <SummaryBlock outcome={o} status={o.status} showNnt={meta.showNnt} />
-    <h3>Forest plot—{o.outcome.label}</h3>
-    <ForestPlot outcome={o} favorLabel={favorLabel} againstLabel={againstLabel} />
-    <h3>Study results—{o.outcome.label}</h3>
-    <StudyTable outcome={o} showNnt={meta.showNnt} />
+    {o.kind === 'continuous' ? (
+      <>
+        <ContinuousSummary outcome={o} status={o.status} />
+        <h3>Forest plot—{o.outcome.label}</h3>
+        <ContinuousForest outcome={o} favorLabel={favorLabel} againstLabel={againstLabel} />
+        <h3>Study results—{o.outcome.label}</h3>
+        <ContinuousTable outcome={o} />
+      </>
+    ) : (
+      <>
+        <SummaryBlock outcome={o} status={o.status} showNnt={meta.showNnt} />
+        <h3>Forest plot—{o.outcome.label}</h3>
+        <ForestPlot outcome={o} favorLabel={favorLabel} againstLabel={againstLabel} />
+        <h3>Study results—{o.outcome.label}</h3>
+        <StudyTable outcome={o} showNnt={meta.showNnt} />
+      </>
+    )}
   </section>
   );
 })}

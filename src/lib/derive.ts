@@ -8,9 +8,16 @@ import {
   computeEffect,
   poolRandomEffects,
   deriveStatus,
+  computeContinuous,
+  poolContinuous,
+  deriveStatusContinuous,
   type StudyData,
+  type ContinuousStudyData,
   type EffectResult,
+  type ContinuousResult,
+  type ContinuousMeasure,
   type PooledResult,
+  type PooledContinuous,
   type EvidenceStatus,
 } from './stats';
 
@@ -29,12 +36,13 @@ export interface RawStudy {
   n?: number;
   excludeFromPooled?: boolean;
   notes?: string;
-  data: StudyData;
+  data: StudyData | ContinuousStudyData;
 }
 
-/** Participants analyzed in a study: from its 2x2 table, else its explicit n. */
+/** Participants analyzed in a study: from its arm totals, else its explicit n. */
 export function studyPatients(s: RawStudy): number {
   if (s.data.kind === '2x2') return s.data.txTotal + s.data.ctrlTotal;
+  if (s.data.kind === 'continuous') return s.data.txN + s.data.ctrlN;
   return s.n ?? 0;
 }
 
@@ -44,6 +52,8 @@ export interface RawOutcome {
   direction: 'lowerIsBetter' | 'higherIsBetter';
   description?: string;
   standardOutcomeId?: string;
+  kind?: 'binary' | 'continuous';
+  measure?: ContinuousMeasure;
 }
 
 export interface RawTopic {
@@ -66,15 +76,24 @@ export interface RawTopic {
 }
 
 export interface ComputedStudy extends RawStudy {
-  effect: EffectResult;
+  /** Ratio effect (binary outcomes). */
+  effect?: EffectResult;
+  /** Continuous effect (mean-difference outcomes). */
+  cont?: ContinuousResult;
   /** Normalized random-effects weight within its outcome (0–1), 0 if excluded. */
   weightPct: number;
 }
 
 export interface ComputedOutcome {
   outcome: RawOutcome;
+  kind: 'binary' | 'continuous';
+  /** Continuous measure (only meaningful when kind === 'continuous'). */
+  measure: ContinuousMeasure;
   studies: ComputedStudy[];
+  /** Pooled ratio estimate (binary outcomes). */
   pooled: PooledResult | null;
+  /** Pooled continuous estimate (continuous outcomes). */
+  contPooled: PooledContinuous | null;
   status: EvidenceStatus;
   /** Participants analyzed across this outcome's studies. */
   totalPatients: number;
@@ -127,34 +146,49 @@ export function deriveTopic(raw: RawTopic): ComputedTopic {
 function computeOutcome(raw: RawTopic, outcome: RawOutcome): ComputedOutcome {
   const forOutcome = raw.studies.filter((s) => s.outcomeId === outcome.id);
   const poolable = forOutcome.filter((s) => !s.excludeFromPooled);
-
-  const pooledResult = poolRandomEffects(poolable.map((s) => s.data));
-  const pooled = pooledResult?.pooled ?? null;
+  const isContinuous = outcome.kind === 'continuous';
+  const measure: ContinuousMeasure = outcome.measure ?? 'SMD';
+  const totalPatients = forOutcome.reduce((sum, s) => sum + studyPatients(s), 0);
 
   // Map pooled plot weights back onto poolable studies by index.
   const weightByIndex = new Map<number, number>();
-  if (pooledResult) {
-    poolable.forEach((s, i) => {
-      weightByIndex.set(
-        forOutcome.indexOf(s),
-        pooledResult.weighted[i]?.weightPct ?? 0,
+
+  if (isContinuous) {
+    const pooledResult = poolContinuous(
+      poolable.map((s) => s.data as ContinuousStudyData),
+      measure,
+    );
+    if (pooledResult) {
+      poolable.forEach((s, i) =>
+        weightByIndex.set(forOutcome.indexOf(s), pooledResult.weighted[i]?.weightPct ?? 0),
       );
-    });
+    }
+    const studies: ComputedStudy[] = forOutcome.map((s, i) => ({
+      ...s,
+      cont: computeContinuous(s.data as ContinuousStudyData, measure),
+      weightPct: weightByIndex.get(i) ?? 0,
+    }));
+    studies.sort((a, b) => b.year - a.year);
+    const contPooled = pooledResult?.pooled ?? null;
+    const status = deriveStatusContinuous(contPooled, outcome.direction);
+    return { outcome, kind: 'continuous', measure, studies, pooled: null, contPooled, status, totalPatients };
   }
 
+  const pooledResult = poolRandomEffects(poolable.map((s) => s.data as StudyData));
+  const pooled = pooledResult?.pooled ?? null;
+  if (pooledResult) {
+    poolable.forEach((s, i) =>
+      weightByIndex.set(forOutcome.indexOf(s), pooledResult.weighted[i]?.weightPct ?? 0),
+    );
+  }
   const studies: ComputedStudy[] = forOutcome.map((s, i) => ({
     ...s,
-    effect: computeEffect(s.data),
+    effect: computeEffect(s.data as StudyData),
     weightPct: weightByIndex.get(i) ?? 0,
   }));
-
-  // Sort newest first for display.
   studies.sort((a, b) => b.year - a.year);
-
   const status = deriveStatus(pooled, outcome.direction);
-  const totalPatients = forOutcome.reduce((sum, s) => sum + studyPatients(s), 0);
-
-  return { outcome, studies, pooled, status, totalPatients };
+  return { outcome, kind: 'binary', measure, studies, pooled, contPooled: null, status, totalPatients };
 }
 
 /** Flatten a topic's studies into recent-publication entries, newest first. */

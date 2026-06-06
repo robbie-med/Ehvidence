@@ -1,0 +1,68 @@
+---
+import type { ComputedOutcome } from '../lib/derive';
+import { fmtNum, fmtPct } from '../lib/format';
+
+interface Props {
+  outcome: ComputedOutcome;
+}
+const { outcome } = Astro.props;
+const noted = outcome.studies.filter((s) => s.notes && s.notes.trim());
+
+function arm(s: typeof outcome.studies[number], which: 'tx' | 'ctrl'): string {
+  if (s.data.kind !== 'continuous') return '—';
+  return which === 'tx'
+    ? `${s.data.txMean} ± ${s.data.txSd} (n=${s.data.txN})`
+    : `${s.data.ctrlMean} ± ${s.data.ctrlSd} (n=${s.data.ctrlN})`;
+}
+---
+<div class="table-scroll">
+<table>
+  <thead>
+    <tr>
+      <th>Study</th>
+      <th>Design</th>
+      <th class="num">Treatment (mean ± SD)</th>
+      <th class="num">Control (mean ± SD)</th>
+      <th class="num">{outcome.measure} [95% CI]</th>
+      <th class="num">Weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    {outcome.studies.map((s) => (
+      <tr class={s.cont && s.cont.ciLow < 0 && s.cont.ciHigh > 0 ? 'limited' : ''}>
+        <td>
+          {s.url || s.doi ? (
+            <a href={s.url ?? `https://doi.org/${s.doi}`} target="_blank" rel="noopener">{s.author} {s.year}</a>
+          ) : (
+            <span>{s.author} {s.year}</span>
+          )}
+          {s.notes && s.notes.trim() && <span class="tag note-flag" title={s.notes}> note</span>}
+        </td>
+        <td><span class="tag">{s.design}</span></td>
+        <td class="num">{arm(s, 'tx')}</td>
+        <td class="num">{arm(s, 'ctrl')}</td>
+        <td class="num">{s.cont ? `${fmtNum(s.cont.estimate)} [${fmtNum(s.cont.ciLow)}, ${fmtNum(s.cont.ciHigh)}]` : '—'}</td>
+        <td class="num">{s.weightPct > 0 ? fmtPct(s.weightPct * 100) : '—'}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+<p class="small">
+  The effect is a {outcome.measure === 'SMD' ? 'standardized mean difference (unitless)' : 'mean difference (same units as the outcome)'};
+  a value below 0 favors {outcome.outcome.direction === 'lowerIsBetter' ? 'treatment' : 'the control'}. Rows in gray have a CI crossing 0.
+</p>
+
+{noted.length > 0 && (
+  <div class="study-notes">
+    <h4>Notes &amp; interpretation</h4>
+    <ul>{noted.map((s) => <li><strong>{s.author} {s.year}</strong> — {s.notes}</li>)}</ul>
+  </div>
+)}
+<style>
+  .study-notes { margin: .75rem 0 1rem; }
+  .study-notes h4 { margin: .5rem 0 .25rem; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--ink-soft); }
+  .study-notes ul { margin: 0; padding-left: 1.1rem; }
+  .study-notes li { font-size: .82rem; color: var(--ink-soft); margin: .2rem 0; }
+  .note-flag { color: var(--link); border-color: var(--link); }
+</style>

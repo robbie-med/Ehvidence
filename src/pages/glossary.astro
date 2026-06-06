@@ -67,6 +67,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <dt>Rate ratio</dt>
     <dd>The ratio of event rates per unit of exposure time (e.g. doses per patient-day after vs before an intervention). Used for exposure/count outcomes.</dd>
 
+    <dt>Mean difference (MD) / standardized mean difference (SMD)</dt>
+    <dd>For outcomes measured as a quantity rather than an event (days of diarrhea, a symptom score, a lab value): the mean difference is the plain difference in averages between groups, in the original units; the standardized mean difference (Cohen's d / Hedges' g) divides by the spread so results measured on different scales can be combined. The no-effect value is 0, and an SMD of roughly 0.2/0.5/0.8 is small/moderate/large.</dd>
+
     <dt>Number needed to treat (NNT)</dt>
     <dd>How many people must be treated to prevent one additional bad outcome, = 1 ÷ ARR. Lower is better. A large NNT can still be worthwhile if the outcome prevented is severe.</dd>
 

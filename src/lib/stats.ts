@@ -322,6 +322,184 @@ function sum(xs: number[]): number {
   return xs.reduce((acc, x) => acc + x, 0);
 }
 
+/* ====================================================================== */
+/* Continuous outcomes (mean differences) — a parallel track on the linear */
+/* scale, for outcomes measured as a quantity rather than an event.        */
+/* ====================================================================== */
+
+export type ContinuousMeasure = 'MD' | 'SMD';
+
+/** Per-arm summary statistics for a continuous outcome. */
+export interface ContinuousData {
+  kind: 'continuous';
+  txMean: number;
+  txSd: number;
+  txN: number;
+  ctrlMean: number;
+  ctrlSd: number;
+  ctrlN: number;
+}
+
+/** A precomputed continuous effect (reported MD/SMD with its CI). */
+export interface ContinuousEffectData {
+  kind: 'continuousEffect';
+  measure: ContinuousMeasure;
+  point: number;
+  ciLow: number;
+  ciHigh: number;
+  /** Total participants analyzed, if known. */
+  n?: number;
+}
+
+export type ContinuousStudyData = ContinuousData | ContinuousEffectData;
+
+export interface ContinuousResult {
+  measure: ContinuousMeasure;
+  /** Point estimate (mean difference or standardized mean difference). */
+  estimate: number;
+  ciLow: number;
+  ciHigh: number;
+  /** Standard error of the estimate, for pooling. */
+  se: number;
+}
+
+export interface PooledContinuous {
+  k: number;
+  measure: ContinuousMeasure;
+  estimate: number;
+  ciLow: number;
+  ciHigh: number;
+  se: number;
+  q: number;
+  tau2: number;
+  i2: number;
+  totalPatients: number;
+}
+
+export interface WeightedContinuous {
+  result: ContinuousResult;
+  weight: number;
+  weightPct: number;
+}
+
+/**
+ * Compute a continuous effect for one study. Per-arm data yields a mean
+ * difference (same units) or a standardized mean difference (Hedges' g) per the
+ * requested `measure`; precomputed data is passed through.
+ */
+export function computeContinuous(
+  data: ContinuousStudyData,
+  measure: ContinuousMeasure,
+): ContinuousResult {
+  if (data.kind === 'continuousEffect') {
+    const se = (data.ciHigh - data.ciLow) / (2 * Z_95);
+    return {
+      measure: data.measure,
+      estimate: data.point,
+      ciLow: data.ciLow,
+      ciHigh: data.ciHigh,
+      se,
+    };
+  }
+  const { txMean, txSd, txN, ctrlMean, ctrlSd, ctrlN } = data;
+  if (measure === 'MD') {
+    const md = txMean - ctrlMean;
+    const se = Math.sqrt((txSd * txSd) / txN + (ctrlSd * ctrlSd) / ctrlN);
+    return { measure: 'MD', estimate: md, ciLow: md - Z_95 * se, ciHigh: md + Z_95 * se, se };
+  }
+  // Standardized mean difference (Hedges' g, with small-sample correction).
+  const sp = Math.sqrt(
+    ((txN - 1) * txSd * txSd + (ctrlN - 1) * ctrlSd * ctrlSd) / (txN + ctrlN - 2),
+  );
+  const d = (txMean - ctrlMean) / sp;
+  const N = txN + ctrlN;
+  const J = 1 - 3 / (4 * N - 9);
+  const g = J * d;
+  const varD = N / (txN * ctrlN) + (d * d) / (2 * N);
+  const se = Math.sqrt(J * J * varD);
+  return { measure: 'SMD', estimate: g, ciLow: g - Z_95 * se, ciHigh: g + Z_95 * se, se };
+}
+
+/** Pool continuous studies with inverse-variance DerSimonian–Laird (linear scale). */
+export function poolContinuous(
+  items: ContinuousStudyData[],
+  measure: ContinuousMeasure,
+): { pooled: PooledContinuous; weighted: WeightedContinuous[] } | null {
+  if (items.length === 0) return null;
+  const results = items.map((d) => computeContinuous(d, measure));
+  const valid = results.filter((r) => Number.isFinite(r.estimate) && Number.isFinite(r.se) && r.se > 0);
+  if (valid.length === 0) return null;
+
+  const ys = valid.map((r) => r.estimate);
+  const vs = valid.map((r) => r.se * r.se);
+  const wFixed = vs.map((v) => 1 / v);
+  const sumW = sum(wFixed);
+  const yFixed = sum(ys.map((y, i) => wFixed[i] * y)) / sumW;
+  const q = sum(ys.map((y, i) => wFixed[i] * (y - yFixed) ** 2));
+  const df = valid.length - 1;
+  const sumW2 = sum(wFixed.map((w) => w * w));
+  const c = sumW - sumW2 / sumW;
+  const tau2 = c > 0 ? Math.max(0, (q - df) / c) : 0;
+  const i2 = q > 0 ? Math.max(0, ((q - df) / q) * 100) : 0;
+
+  const wRandom = vs.map((v) => 1 / (v + tau2));
+  const sumWr = sum(wRandom);
+  const estimate = sum(ys.map((y, i) => wRandom[i] * y)) / sumWr;
+  const seRE = Math.sqrt(1 / sumWr);
+
+  let vi = 0;
+  const weighted: WeightedContinuous[] = results.map((r) => {
+    const v = r.se * r.se;
+    const usable = Number.isFinite(r.estimate) && Number.isFinite(v) && v > 0;
+    const weight = usable ? 1 / (v + tau2) : 0;
+    if (usable) vi += weight;
+    return { result: r, weight, weightPct: 0 };
+  });
+  for (const w of weighted) w.weightPct = vi > 0 ? w.weight / vi : 0;
+
+  let totalPatients = 0;
+  for (const d of items) {
+    if (d.kind === 'continuous') totalPatients += d.txN + d.ctrlN;
+    else if (typeof d.n === 'number') totalPatients += d.n;
+  }
+
+  return {
+    pooled: {
+      k: valid.length,
+      measure,
+      estimate,
+      ciLow: estimate - Z_95 * seRE,
+      ciHigh: estimate + Z_95 * seRE,
+      se: seRE,
+      q,
+      tau2,
+      i2,
+      totalPatients,
+    },
+    weighted,
+  };
+}
+
+/** Status for a continuous outcome: significant if the CI excludes 0. */
+export function deriveStatusContinuous(
+  pooled: PooledContinuous | null,
+  direction: 'lowerIsBetter' | 'higherIsBetter',
+  minStudies = 3,
+): EvidenceStatus {
+  if (!pooled) return 'limited';
+  if (pooled.k < minStudies) return 'limited';
+  const reduces = pooled.ciHigh < 0; // estimate significantly below 0
+  const increases = pooled.ciLow > 0;
+  if (direction === 'lowerIsBetter') {
+    if (reduces) return 'favorable';
+    if (increases) return 'harmful';
+  } else {
+    if (increases) return 'favorable';
+    if (reduces) return 'harmful';
+  }
+  return 'neutral';
+}
+
 export type EvidenceStatus = 'favorable' | 'harmful' | 'limited' | 'neutral';
 
 /**
