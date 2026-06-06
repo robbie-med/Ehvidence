@@ -325,9 +325,8 @@ function sum(xs: number[]): number {
 export type EvidenceStatus = 'favorable' | 'harmful' | 'limited' | 'neutral';
 
 /**
- * Derive an evidence status from a pooled result, mirroring c19early's
- * green/red/gray convention. `direction` flips the orientation for outcomes
- * where higher is better.
+ * Derive an evidence status from a pooled result, using a simple green/red/gray
+ * convention. `direction` flips the orientation for outcomes where higher is better.
  */
 export function deriveStatus(
   pooled: PooledResult | null,

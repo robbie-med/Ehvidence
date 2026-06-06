@@ -2,13 +2,16 @@
   "name": "ehvidence",
   "type": "module",
   "version": "0.1.0",
-  "description": "Real-time analysis of medical evidence, c19early.org-style, for arbitrary clinical topics.",
+  "description": "Real-time analysis of medical evidence for arbitrary clinical topics.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate-readme": "node scripts/generate-readme.js",
+    "prebuild": "npm run generate-readme",
+    "predev": "npm run generate-readme"
   },
   "dependencies": {
     "@astrojs/preact": "^4.0.1",

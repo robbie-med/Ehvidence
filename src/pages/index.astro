@@ -33,6 +33,17 @@ const recent = [...allStudies].sort((a, b) => b.year - a.year).slice(0, 8);
       <div class="c"><div class="n">{fmtInt(studyCount)}</div><div class="l">Studies</div></div>
       <div class="c"><div class="n">{fmtInt(patientCount)}</div><div class="l">Patients</div></div>
     </div>
+
+    <div class="topic-preview">
+      <p class="small">
+        Current coverage: {fmtInt(topicCount)} clinical topics with real-time evidence analysis. Click a topic below to explore the underlying studies and computed pooled effects.
+      </p>
+      <ul class="topic-tags">
+        {topics.map((t) => (
+          <li><a href={`/topics/${t.raw.slug}`}>{t.raw.name}</a></li>
+        ))}
+      </ul>
+    </div>
   </section>
 
   <h2>Efficacy across topics</h2>

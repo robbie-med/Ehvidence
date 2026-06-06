@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="228" height="164" viewBox="0 0 228 164" role="img" aria-label="Article contributions over time">
+<style>
+  .label { font: 600 10px system-ui, sans-serif; fill: currentColor; }
+  .month { font: 600 10px system-ui, sans-serif; fill: currentColor; }
+  .cell { rx: 3; ry: 3; }
+</style>
+<rect width="100%" height="100%" fill="transparent"/>
+  <text x="58" y="18" class="month" text-anchor="middle">May</text>
+  <rect x="52" y="28" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="52" y="44" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="52" y="60" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="52" y="76" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="52" y="92" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="52" y="108" width="12" height="12" fill="rgba(47, 128, 26, 0.92)" class="cell"/>
+  <rect x="52" y="124" width="12" height="12" fill="rgba(198, 228, 139, 0.65)" class="cell"/>
+  <rect x="68" y="28" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="68" y="44" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="68" y="60" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="68" y="76" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="68" y="92" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="68" y="108" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="68" y="124" width="12" height="12" fill="rgba(198, 228, 139, 0.65)" class="cell"/>
+  <text x="20" y="53" class="label" text-anchor="start">Mon</text>
+  <text x="20" y="85" class="label" text-anchor="start">Wed</text>
+  <text x="20" y="117" class="label" text-anchor="start">Fri</text>
+</svg>
