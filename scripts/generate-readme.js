@@ -73,9 +73,9 @@ async function writeCoverageSvg(topics) {
   const svgLines = [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Article totals by topic category">`,
     `<style>`,
-    `  .title { font: 700 16px system-ui, sans-serif; fill: #111; }`,
-    `  .label { font: 600 12px system-ui, sans-serif; fill: #222; }`,
-    `  .value { font: 600 12px system-ui, sans-serif; fill: #111; }`,
+    `  .title { font: 700 16px system-ui, sans-serif; fill: #6b7280; }`,
+    `  .label { font: 600 12px system-ui, sans-serif; fill: #6b7280; }`,
+    `  .value { font: 600 12px system-ui, sans-serif; fill: #6b7280; }`,
     `  .bar { fill: #1a7f37; }`,
     `  .axis { stroke: #d8d8d8; stroke-width: 1; }`,
     `</style>`,
@@ -122,8 +122,8 @@ async function writeHeatmapSvg(topics) {
   const svgLines = [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Article contributions over time">`,
     `<style>`,
-    `  .label { font: 600 10px system-ui, sans-serif; fill: currentColor; }`,
-    `  .month { font: 600 10px system-ui, sans-serif; fill: currentColor; }`,
+    `  .label { font: 600 10px system-ui, sans-serif; fill: #6b7280; }`,
+    `  .month { font: 600 10px system-ui, sans-serif; fill: #6b7280; }`,
     `  .cell { rx: 3; ry: 3; }`,
     `</style>`,
     `<rect width="100%" height="100%" fill="transparent"/>`,

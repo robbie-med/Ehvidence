@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-label="Article totals by topic category">
 <style>
-  .title { font: 700 16px system-ui, sans-serif; fill: #111; }
-  .label { font: 600 12px system-ui, sans-serif; fill: #222; }
-  .value { font: 600 12px system-ui, sans-serif; fill: #111; }
+  .title { font: 700 16px system-ui, sans-serif; fill: #6b7280; }
+  .label { font: 600 12px system-ui, sans-serif; fill: #6b7280; }
+  .value { font: 600 12px system-ui, sans-serif; fill: #6b7280; }
   .bar { fill: #1a7f37; }
   .axis { stroke: #d8d8d8; stroke-width: 1; }
 </style>
