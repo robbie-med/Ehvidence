@@ -1,6 +1,6 @@
 ---
 import type { ComputedOutcome } from '../lib/derive';
-import { fmtRR, fmtCI, fmtPct, fmtNN } from '../lib/format';
+import { fmtRR, fmtCI, fmtPct, fmtNN, dispImprovement } from '../lib/format';
 
 interface Props {
   outcome: ComputedOutcome;
@@ -58,9 +58,11 @@ function arm(s: typeof outcome.studies[number], which: 'tx' | 'ctrl'): string {
           {fmtRR(s.effect.rr)} [{fmtCI(s.effect.ciLow, s.effect.ciHigh)}]
           {s.effect.approximate && <span class="tag" title={`Reported as ${s.effect.measure}`}>~</span>}
         </td>
-        <td class="num">{fmtPct(s.effect.improvementPct)}</td>
+        <td class="num">{fmtPct(dispImprovement(s.effect.improvementPct, dir))}</td>
         {showNnt && (
-          <td class="num">{s.effect.nnt !== null ? fmtNN(s.effect.nnt) : s.effect.nnh !== null ? `NNH ${s.effect.nnh}` : '—'}</td>
+          <td class="num">{dir === 'higherIsBetter'
+            ? (s.effect.nnh !== null ? fmtNN(s.effect.nnh) : '—')
+            : (s.effect.nnt !== null ? fmtNN(s.effect.nnt) : s.effect.nnh !== null ? `NNH ${s.effect.nnh}` : '—')}</td>
         )}
         <td class="num">{s.weightPct > 0 ? fmtPct(s.weightPct * 100) : '—'}</td>
       </tr>

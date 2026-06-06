@@ -1,6 +1,6 @@
 ---
 import type { ComputedOutcome } from '../lib/derive';
-import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, riskWord } from '../lib/format';
+import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, dirWord, dirNoun, dispNnt } from '../lib/format';
 
 interface Props {
   outcome: ComputedOutcome;
@@ -8,15 +8,18 @@ interface Props {
   showNnt?: boolean;
 }
 const { outcome, status, showNnt = true } = Astro.props;
+const dir = outcome.outcome.direction;
 const p = outcome.pooled;
-const word = p ? riskWord(p.improvementPct) : 'lower';
+const word = p ? dirWord(p.improvementPct, dir) : 'lower';
+const noun = dirNoun(dir);
 const mag = p ? Math.abs(p.improvementPct) : 0;
+const nntVal = p ? dispNnt(p.nnt, p.nnh, dir) : null;
 ---
 <div class={`summary-block ${status}`}>
   {p ? (
     <>
       <div class="headline">
-        <span class="pct">{fmtPct(mag)}</span> {word} risk of {outcome.outcome.label.toLowerCase()}
+        <span class="pct">{fmtPct(mag)}</span> {word} {noun} {outcome.outcome.label.toLowerCase()}
       </div>
       <div class="detail">
         Pooled RR {fmtRR(p.rr)} (95% CI {fmtCI(p.ciLow, p.ciHigh)}) across {p.k} studies{
@@ -31,7 +34,7 @@ const mag = p ? Math.abs(p.improvementPct) : 0;
           <div class="metric"><div class="v">{fmtInt(outcome.totalPatients)}</div><div class="k">Patients</div></div>
         )}
         {showNnt && (
-          <div class="metric"><div class="v">{fmtNN(p.nnt)}</div><div class="k">NNT</div></div>
+          <div class="metric"><div class="v">{fmtNN(nntVal)}</div><div class="k">NNT</div></div>
         )}
       </div>
     </>

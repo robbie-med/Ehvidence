@@ -166,6 +166,7 @@ describe('deriveStatus', () => {
     tau2: 0,
     i2: 0,
     nnt: null,
+    nnh: null,
     totalPatients: 1000,
     totalEvents: events,
   });

@@ -33,6 +33,37 @@ export function fmtInt(n: number): string {
   return n.toLocaleString('en-US');
 }
 
+/**
+ * Direction-aware display helpers. The stats engine treats the recorded event
+ * as the "risk" (lower is better). For a "higher is better" outcome (e.g. cure,
+ * effectiveness) the sign of the improvement and the NNT/NNH label must flip.
+ */
+
+/** Percent improvement signed so positive always means "beneficial". */
+export function dispImprovement(improvementPct: number, direction: string): number {
+  return direction === 'higherIsBetter' ? -improvementPct : improvementPct;
+}
+
+/** The number-needed-to-treat appropriate to the outcome's direction. */
+export function dispNnt(
+  nnt: number | null,
+  nnh: number | null,
+  direction: string,
+): number | null {
+  return direction === 'higherIsBetter' ? nnh : nnt;
+}
+
+/** Headline verb framed beneficially ("lower risk" vs "higher rate"). */
+export function dirWord(improvementPct: number, direction: string): 'higher' | 'lower' {
+  if (direction === 'higherIsBetter') return improvementPct <= 0 ? 'higher' : 'lower';
+  return improvementPct >= 0 ? 'lower' : 'higher';
+}
+
+/** "risk of" for adverse outcomes, "rate of" for beneficial ones. */
+export function dirNoun(direction: string): string {
+  return direction === 'higherIsBetter' ? 'rate of' : 'risk of';
+}
+
 /** Human label for the evidence status badge. */
 export function statusLabel(status: string): string {
   switch (status) {

@@ -1,6 +1,6 @@
 ---
 import type { ComputedTopic } from '../lib/derive';
-import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, statusLabel } from '../lib/format';
+import { fmtRR, fmtCI, fmtPct, fmtInt, fmtNN, statusLabel, dispImprovement, dispNnt } from '../lib/format';
 import { evidenceMeta, EVIDENCE_ORDER } from '../lib/evidence';
 
 interface Props {
@@ -45,6 +45,7 @@ const groups = EVIDENCE_ORDER
         {g.items.map((t) => {
           const p = t.primary.pooled;
           const showNnt = g.meta.showNnt;
+          const dir = t.primary.outcome.direction;
           return (
             <tr class={t.status === 'limited' ? 'limited' : ''}>
               <td>
@@ -53,8 +54,8 @@ const groups = EVIDENCE_ORDER
               </td>
               <td>{t.primary.outcome.label}</td>
               <td class="num">{p ? `${fmtRR(p.rr)} [${fmtCI(p.ciLow, p.ciHigh)}]` : '—'}</td>
-              <td class="num">{p ? fmtPct(p.improvementPct) : '—'}</td>
-              <td class="num">{showNnt && p ? fmtNN(p.nnt) : '—'}</td>
+              <td class="num">{p ? fmtPct(dispImprovement(p.improvementPct, dir)) : '—'}</td>
+              <td class="num">{showNnt && p ? fmtNN(dispNnt(p.nnt, p.nnh, dir)) : '—'}</td>
               <td class="num">{t.studyCount}</td>
               <td class="num">{t.totalPatients > 0 ? fmtInt(t.totalPatients) : '—'}</td>
               <td><span class={`badge ${t.status}`}>{statusLabel(t.status)}</span></td>

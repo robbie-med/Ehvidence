@@ -27,15 +27,22 @@ const meta = evidenceMeta(topic.raw.evidenceClass);
   </div>
 )}
 
-{outcomes.map((o) => (
+{outcomes.map((o) => {
+  // The forest x-axis runs low→high RR. For a "higher is better" outcome the
+  // treatment-favoring side is the right (RR > 1), so swap the end labels.
+  const higher = o.outcome.direction === 'higherIsBetter';
+  const favorLabel = higher ? meta.againstLabel : meta.favorLabel;
+  const againstLabel = higher ? meta.favorLabel : meta.againstLabel;
+  return (
   <section class="outcome-panel" data-panel={o.outcome.id} hidden={o.outcome.id !== primaryId}>
     <SummaryBlock outcome={o} status={o.status} showNnt={meta.showNnt} />
     <h3>Forest plot—{o.outcome.label}</h3>
-    <ForestPlot outcome={o} favorLabel={meta.favorLabel} againstLabel={meta.againstLabel} />
+    <ForestPlot outcome={o} favorLabel={favorLabel} againstLabel={againstLabel} />
     <h3>Study results—{o.outcome.label}</h3>
     <StudyTable outcome={o} showNnt={meta.showNnt} />
   </section>
-))}
+  );
+})}
 
 <script>
   const tabs = document.querySelectorAll<HTMLButtonElement>('.tabs button[data-tab]');

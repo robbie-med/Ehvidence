@@ -76,6 +76,8 @@ export interface PooledResult {
   i2: number;
   /** Pooled NNT from the weighted pooled control risk, if computable. */
   nnt: number | null;
+  /** Pooled NNH (also the NNT for a "higher is better" outcome). */
+  nnh: number | null;
   /** Total patients across pooled studies (sum of both arms). */
   totalPatients: number;
   /** Total events across pooled studies (both arms). */
@@ -246,12 +248,18 @@ export function poolRandomEffects(items: StudyData[]): {
   });
   for (const w of weighted) w.weightPct = vi > 0 ? w.weight / vi : 0;
 
-  // Pooled NNT from a pooled control risk (2x2 events, else mean of reported control risks).
+  // Pooled NNT/NNH from a pooled control risk (2x2 events, else mean of
+  // reported control risks). For a "higher is better" outcome the engine is
+  // run with the good event as the "event", so ARR is negative and the
+  // meaningful number-needed-to-treat surfaces as nnh (the display layer
+  // relabels it based on the outcome direction).
   const { pooledCtrlRisk, totalPatients, totalEvents } = aggregateControlRisk(items);
   let nnt: number | null = null;
+  let nnh: number | null = null;
   if (pooledCtrlRisk !== null) {
     const arr = pooledCtrlRisk * (1 - rr);
     if (arr > 0) nnt = Math.ceil(1 / arr);
+    else if (arr < 0) nnh = Math.ceil(1 / -arr);
   }
 
   return {
@@ -265,6 +273,7 @@ export function poolRandomEffects(items: StudyData[]): {
       tau2,
       i2,
       nnt,
+      nnh,
       totalPatients,
       totalEvents,
     },
