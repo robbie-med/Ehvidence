@@ -53,8 +53,8 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 <!-- TOPICS-COVERAGE:START -->
 
 **Topics covered:** 13
-**Articles covered:** 48
-**Total patients analyzed:** 244,393
+**Articles covered:** 47
+**Total patients analyzed:** 243,706
 
 | Topic | Articles | Patients | Category |
 | --- | ---: | ---: | --- |
@@ -65,7 +65,7 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 | Omega-3 (fish oil) for cardiovascular events | 7 | 93,805 | Cardiovascular |
 | Oral / subcutaneous vs intravenous opioids | 5 | 33,973 | Opioid stewardship |
 | Oral retinol for skin cancer prevention | 1 | 2,297 | Skin cancer prevention |
-| S. boulardii for pediatric acute diarrhea (China) | 11 | 1,749 | Pediatric gastroenterology |
+| S. boulardii for pediatric acute diarrhea (China) | 10 | 1,062 | Pediatric gastroenterology |
 | Statins for primary prevention | 7 | 61,844 | Cardiovascular |
 | Statins for secondary prevention | 4 | 38,153 | Cardiovascular |
 | Sunscreen for skin cancer prevention | 3 | 4,863 | Skin cancer prevention |

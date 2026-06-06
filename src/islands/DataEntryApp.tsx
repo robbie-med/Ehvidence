@@ -3,10 +3,14 @@ import { useState, useEffect, useMemo } from 'preact/hooks';
 import {
   computeEffect,
   poolRandomEffects,
+  computeContinuous,
+  poolContinuous,
   type StudyData,
+  type ContinuousStudyData,
+  type ContinuousMeasure,
   type EffectMeasure,
 } from '../lib/stats';
-import { fmtRR, fmtCI, fmtPct, fmtNN } from '../lib/format';
+import { fmtRR, fmtCI, fmtPct, fmtNN, fmtNum } from '../lib/format';
 import { STANDARD_OUTCOMES } from '../lib/standardOutcomes';
 
 /* ---------- form state types (strings for editable numbers) ---------- */
@@ -20,6 +24,8 @@ interface OutcomeForm {
   label: string;
   direction: Direction;
   standardOutcomeId: string;
+  kind: 'binary' | 'continuous';
+  measure: ContinuousMeasure;
 }
 
 interface StudyForm {
@@ -48,6 +54,18 @@ interface StudyForm {
   ciLow: string;
   ciHigh: string;
   ctrlRisk: string;
+  // continuous (when the outcome is continuous)
+  contMode: 'arm' | 'effect';
+  txMean: string;
+  txSd: string;
+  txN: string;
+  ctrlMean: string;
+  ctrlSd: string;
+  ctrlN: string;
+  contPoint: string;
+  contCiLow: string;
+  contCiHigh: string;
+  contN: string;
 }
 
 interface TopicForm {
@@ -97,6 +115,8 @@ function emptyStudy(outcomeId: string): StudyForm {
     excludeFromPooled: false, notes: '', mode: '2x2',
     txEvents: '', txTotal: '', ctrlEvents: '', ctrlTotal: '',
     measure: 'RR', point: '', ciLow: '', ciHigh: '', ctrlRisk: '',
+    contMode: 'arm', txMean: '', txSd: '', txN: '', ctrlMean: '', ctrlSd: '', ctrlN: '',
+    contPoint: '', contCiLow: '', contCiHigh: '', contN: '',
   };
 }
 
@@ -106,7 +126,7 @@ function initialTopic(): TopicForm {
     slug: '', name: '', condition: '', intervention: '', comparator: '',
     category: '', evidenceClass: 'efficacy', summary: '', description: '', interpretation: '', methodologyNotes: '',
     primaryOutcomeId: oid, lastUpdated: today(),
-    outcomes: [{ id: oid, label: 'Primary outcome', direction: 'lowerIsBetter', standardOutcomeId: '' }],
+    outcomes: [{ id: oid, label: 'Primary outcome', direction: 'lowerIsBetter', standardOutcomeId: '', kind: 'binary', measure: 'SMD' }],
     studies: [],
   };
 }
@@ -124,6 +144,20 @@ function toStudyData(s: StudyForm): StudyData | null {
   return { kind: 'effect', measure: s.measure, point, ciLow: lo, ciHigh: hi, ctrlRisk };
 }
 
+/** Convert a study form to continuous data (per-arm mean+SD, or reported MD/SMD). */
+function toContData(s: StudyForm, measure: ContinuousMeasure): ContinuousStudyData | null {
+  if (s.contMode === 'arm') {
+    const tm = Number(s.txMean), ts = Number(s.txSd), tn = Number(s.txN);
+    const cm = Number(s.ctrlMean), cs = Number(s.ctrlSd), cn = Number(s.ctrlN);
+    if (![tm, ts, tn, cm, cs, cn].every(Number.isFinite) || tn <= 0 || cn <= 0 || ts < 0 || cs < 0) return null;
+    return { kind: 'continuous', txMean: tm, txSd: ts, txN: tn, ctrlMean: cm, ctrlSd: cs, ctrlN: cn };
+  }
+  const point = Number(s.contPoint), lo = Number(s.contCiLow), hi = Number(s.contCiHigh);
+  if (![point, lo, hi].every(Number.isFinite)) return null;
+  const n = s.contN.trim() === '' ? undefined : Number(s.contN);
+  return { kind: 'continuousEffect', measure, point, ciLow: lo, ciHigh: hi, n };
+}
+
 function studyWarnings(s: StudyForm): string[] {
   const w: string[] = [];
   if (s.mode === '2x2') {
@@ -137,6 +171,19 @@ function studyWarnings(s: StudyForm): string[] {
     if (p && lo && hi && (p < lo || p > hi)) w.push('Point estimate is outside its CI.');
     if (s.measure !== 'RR') w.push('OR/HR is treated as an RR-approximation.');
     if (s.ctrlRisk.trim() === '') w.push('No control risk given—NNT will be omitted for this study.');
+  }
+  return w;
+}
+
+function contWarnings(s: StudyForm): string[] {
+  const w: string[] = [];
+  if (s.contMode === 'arm') {
+    if (s.txSd && Number(s.txSd) < 0) w.push('Treatment SD is negative.');
+    if (s.ctrlSd && Number(s.ctrlSd) < 0) w.push('Control SD is negative.');
+  } else {
+    const lo = Number(s.contCiLow), hi = Number(s.contCiHigh), p = Number(s.contPoint);
+    if (s.contCiLow && s.contCiHigh && lo > hi) w.push('CI lower bound is above the upper bound.');
+    if (s.contPoint && s.contCiLow && s.contCiHigh && (p < lo || p > hi)) w.push('Point estimate is outside its CI.');
   }
   return w;
 }
@@ -159,14 +206,22 @@ function buildExport(t: TopicForm): unknown {
     if (s.endpointDefinition.trim()) base.endpointDefinition = s.endpointDefinition.trim();
     if (s.excludeFromPooled) base.excludeFromPooled = true;
     if (s.notes.trim()) base.notes = s.notes.trim();
-    base.data =
-      s.mode === '2x2'
-        ? { kind: '2x2', txEvents: Number(s.txEvents), txTotal: Number(s.txTotal), ctrlEvents: Number(s.ctrlEvents), ctrlTotal: Number(s.ctrlTotal) }
-        : {
-            kind: 'effect', measure: s.measure, point: Number(s.point),
-            ciLow: Number(s.ciLow), ciHigh: Number(s.ciHigh),
-            ...(s.ctrlRisk.trim() ? { ctrlRisk: Number(s.ctrlRisk) } : {}),
-          };
+    const outcome = t.outcomes.find((o) => o.id === s.outcomeId);
+    if (outcome?.kind === 'continuous') {
+      base.data =
+        s.contMode === 'arm'
+          ? { kind: 'continuous', txMean: Number(s.txMean), txSd: Number(s.txSd), txN: Number(s.txN), ctrlMean: Number(s.ctrlMean), ctrlSd: Number(s.ctrlSd), ctrlN: Number(s.ctrlN) }
+          : { kind: 'continuousEffect', measure: outcome.measure, point: Number(s.contPoint), ciLow: Number(s.contCiLow), ciHigh: Number(s.contCiHigh), ...(s.contN.trim() ? { n: Number(s.contN) } : {}) };
+    } else {
+      base.data =
+        s.mode === '2x2'
+          ? { kind: '2x2', txEvents: Number(s.txEvents), txTotal: Number(s.txTotal), ctrlEvents: Number(s.ctrlEvents), ctrlTotal: Number(s.ctrlTotal) }
+          : {
+              kind: 'effect', measure: s.measure, point: Number(s.point),
+              ciLow: Number(s.ciLow), ciHigh: Number(s.ciHigh),
+              ...(s.ctrlRisk.trim() ? { ctrlRisk: Number(s.ctrlRisk) } : {}),
+            };
+    }
     return base;
   });
 
@@ -190,6 +245,7 @@ function buildExport(t: TopicForm): unknown {
     label: o.label,
     direction: o.direction,
     ...(o.standardOutcomeId.trim() ? { standardOutcomeId: o.standardOutcomeId.trim() } : {}),
+    ...(o.kind === 'continuous' ? { kind: 'continuous', measure: o.measure } : {}),
   }));
   out.studies = studies;
   return out;
@@ -221,6 +277,20 @@ function fromImport(raw: any): TopicForm {
       base.txTotal = String(s.data.txTotal ?? '');
       base.ctrlEvents = String(s.data.ctrlEvents ?? '');
       base.ctrlTotal = String(s.data.ctrlTotal ?? '');
+    } else if (s.data?.kind === 'continuous') {
+      base.contMode = 'arm';
+      base.txMean = String(s.data.txMean ?? '');
+      base.txSd = String(s.data.txSd ?? '');
+      base.txN = String(s.data.txN ?? '');
+      base.ctrlMean = String(s.data.ctrlMean ?? '');
+      base.ctrlSd = String(s.data.ctrlSd ?? '');
+      base.ctrlN = String(s.data.ctrlN ?? '');
+    } else if (s.data?.kind === 'continuousEffect') {
+      base.contMode = 'effect';
+      base.contPoint = String(s.data.point ?? '');
+      base.contCiLow = String(s.data.ciLow ?? '');
+      base.contCiHigh = String(s.data.ciHigh ?? '');
+      base.contN = s.data.n != null ? String(s.data.n) : '';
     }
     return base;
   });
@@ -232,7 +302,7 @@ function fromImport(raw: any): TopicForm {
     methodologyNotes: raw.methodologyNotes ?? '',
     primaryOutcomeId: raw.primaryOutcomeId ?? (raw.outcomes?.[0]?.id ?? ''),
     lastUpdated: raw.lastUpdated ?? today(),
-    outcomes: (raw.outcomes ?? []).map((o: any) => ({ id: o.id, label: o.label, direction: o.direction ?? 'lowerIsBetter', standardOutcomeId: o.standardOutcomeId ?? '' })),
+    outcomes: (raw.outcomes ?? []).map((o: any) => ({ id: o.id, label: o.label, direction: o.direction ?? 'lowerIsBetter', standardOutcomeId: o.standardOutcomeId ?? '', kind: o.kind === 'continuous' ? 'continuous' : 'binary', measure: o.measure ?? 'SMD' })),
     studies,
   };
 }
@@ -274,7 +344,7 @@ export default function DataEntryApp() {
 
   const addOutcome = () =>
     setTopic((t) => {
-      const o = { id: uid('outcome'), label: 'New outcome', direction: 'lowerIsBetter' as Direction, standardOutcomeId: '' };
+      const o: OutcomeForm = { id: uid('outcome'), label: 'New outcome', direction: 'lowerIsBetter', standardOutcomeId: '', kind: 'binary', measure: 'SMD' };
       return { ...t, outcomes: [...t.outcomes, o] };
     });
   const updateOutcome = (id: string, patch: Partial<OutcomeForm>) =>
@@ -284,11 +354,16 @@ export default function DataEntryApp() {
 
   // live pooled preview for the primary outcome
   const preview = useMemo(() => {
-    const items = topic.studies
-      .filter((s) => s.outcomeId === topic.primaryOutcomeId && !s.excludeFromPooled)
-      .map(toStudyData)
-      .filter((d): d is StudyData => d !== null);
-    return poolRandomEffects(items);
+    const prim = topic.outcomes.find((o) => o.id === topic.primaryOutcomeId);
+    const studies = topic.studies.filter((s) => s.outcomeId === topic.primaryOutcomeId && !s.excludeFromPooled);
+    if (prim?.kind === 'continuous') {
+      const items = studies.map((s) => toContData(s, prim.measure)).filter((d): d is ContinuousStudyData => d !== null);
+      const out = poolContinuous(items, prim.measure);
+      return out ? { cont: out.pooled } : null;
+    }
+    const items = studies.map(toStudyData).filter((d): d is StudyData => d !== null);
+    const out = poolRandomEffects(items);
+    return out ? { pooled: out.pooled } : null;
   }, [topic]);
 
   const doExport = () => {
@@ -384,13 +459,27 @@ export default function DataEntryApp() {
         {topic.outcomes.map((o) => (
           <div class="row" key={o.id} style="margin-bottom:.5rem">
             <div style="flex:1 1 160px"><Field label="Label"><input value={o.label} onInput={(e) => updateOutcome(o.id, { label: val(e) })} /></Field></div>
-            <div style="flex:0 0 150px"><Field label="Direction">
+            <div style="flex:0 0 130px"><Field label="Direction">
               <select value={o.direction} onChange={(e) => updateOutcome(o.id, { direction: val(e) as Direction })}>
                 <option value="lowerIsBetter">lower is better</option>
                 <option value="higherIsBetter">higher is better</option>
               </select>
             </Field></div>
-            <div style="flex:1 1 180px"><Field label="Standard outcome (for comparison)">
+            <div style="flex:0 0 130px"><Field label="Type">
+              <select value={o.kind} onChange={(e) => updateOutcome(o.id, { kind: val(e) as OutcomeForm['kind'] })}>
+                <option value="binary">event / ratio</option>
+                <option value="continuous">continuous</option>
+              </select>
+            </Field></div>
+            {o.kind === 'continuous' && (
+              <div style="flex:0 0 110px"><Field label="Measure">
+                <select value={o.measure} onChange={(e) => updateOutcome(o.id, { measure: val(e) as ContinuousMeasure })}>
+                  <option value="SMD">SMD</option>
+                  <option value="MD">MD</option>
+                </select>
+              </Field></div>
+            )}
+            <div style="flex:1 1 170px"><Field label="Standard outcome (for comparison)">
               <input list="std-outcomes" value={o.standardOutcomeId} placeholder="e.g. scc-incidence"
                 onInput={(e) => updateOutcome(o.id, { standardOutcomeId: val(e) })} />
             </Field></div>
@@ -406,9 +495,14 @@ export default function DataEntryApp() {
       {/* ---------------- studies ---------------- */}
       <h3>Studies ({topic.studies.length})</h3>
       {topic.studies.map((s) => {
-        const data = toStudyData(s);
+        const outcome = topic.outcomes.find((o) => o.id === s.outcomeId);
+        const isCont = outcome?.kind === 'continuous';
+        const cmeasure = outcome?.measure ?? 'SMD';
+        const data = isCont ? null : toStudyData(s);
         const eff = data ? computeEffect(data) : null;
-        const warns = studyWarnings(s);
+        const cdata = isCont ? toContData(s, cmeasure) : null;
+        const cont = cdata ? computeContinuous(cdata, cmeasure) : null;
+        const warns = isCont ? contWarnings(s) : studyWarnings(s);
         return (
           <div class="card" key={s.id}>
             <div class="grid">
@@ -434,31 +528,59 @@ export default function DataEntryApp() {
               <Field label="URL"><input value={s.url} onInput={(e) => updateStudy(s.id, { url: val(e) })} /></Field>
             </div>
 
-            <div class="row" style="margin-top:.8rem">
-              <strong>Effect data:</strong>
-              <label class="row" style="text-transform:none"><input type="radio" checked={s.mode === '2x2'} onChange={() => updateStudy(s.id, { mode: '2x2' })} /> 2×2 table</label>
-              <label class="row" style="text-transform:none"><input type="radio" checked={s.mode === 'effect'} onChange={() => updateStudy(s.id, { mode: 'effect' })} /> reported effect</label>
-            </div>
-
-            {s.mode === '2x2' ? (
-              <div class="grid" style="margin-top:.4rem">
-                <Field label="Treatment events"><input type="number" value={s.txEvents} onInput={(e) => updateStudy(s.id, { txEvents: val(e) })} /></Field>
-                <Field label="Treatment total"><input type="number" value={s.txTotal} onInput={(e) => updateStudy(s.id, { txTotal: val(e) })} /></Field>
-                <Field label="Control events"><input type="number" value={s.ctrlEvents} onInput={(e) => updateStudy(s.id, { ctrlEvents: val(e) })} /></Field>
-                <Field label="Control total"><input type="number" value={s.ctrlTotal} onInput={(e) => updateStudy(s.id, { ctrlTotal: val(e) })} /></Field>
-              </div>
+            {isCont ? (
+              <>
+                <div class="row" style="margin-top:.8rem">
+                  <strong>Continuous data ({cmeasure}):</strong>
+                  <label class="row" style="text-transform:none"><input type="radio" checked={s.contMode === 'arm'} onChange={() => updateStudy(s.id, { contMode: 'arm' })} /> per-arm mean ± SD</label>
+                  <label class="row" style="text-transform:none"><input type="radio" checked={s.contMode === 'effect'} onChange={() => updateStudy(s.id, { contMode: 'effect' })} /> reported {cmeasure}</label>
+                </div>
+                {s.contMode === 'arm' ? (
+                  <div class="grid" style="margin-top:.4rem">
+                    <Field label="Treatment mean"><input type="number" step="any" value={s.txMean} onInput={(e) => updateStudy(s.id, { txMean: val(e) })} /></Field>
+                    <Field label="Treatment SD"><input type="number" step="any" value={s.txSd} onInput={(e) => updateStudy(s.id, { txSd: val(e) })} /></Field>
+                    <Field label="Treatment n"><input type="number" value={s.txN} onInput={(e) => updateStudy(s.id, { txN: val(e) })} /></Field>
+                    <Field label="Control mean"><input type="number" step="any" value={s.ctrlMean} onInput={(e) => updateStudy(s.id, { ctrlMean: val(e) })} /></Field>
+                    <Field label="Control SD"><input type="number" step="any" value={s.ctrlSd} onInput={(e) => updateStudy(s.id, { ctrlSd: val(e) })} /></Field>
+                    <Field label="Control n"><input type="number" value={s.ctrlN} onInput={(e) => updateStudy(s.id, { ctrlN: val(e) })} /></Field>
+                  </div>
+                ) : (
+                  <div class="grid" style="margin-top:.4rem">
+                    <Field label={`${cmeasure} point estimate`}><input type="number" step="any" value={s.contPoint} onInput={(e) => updateStudy(s.id, { contPoint: val(e) })} /></Field>
+                    <Field label="CI low"><input type="number" step="any" value={s.contCiLow} onInput={(e) => updateStudy(s.id, { contCiLow: val(e) })} /></Field>
+                    <Field label="CI high"><input type="number" step="any" value={s.contCiHigh} onInput={(e) => updateStudy(s.id, { contCiHigh: val(e) })} /></Field>
+                    <Field label="Participants (n, optional)"><input type="number" value={s.contN} onInput={(e) => updateStudy(s.id, { contN: val(e) })} /></Field>
+                  </div>
+                )}
+              </>
             ) : (
-              <div class="grid" style="margin-top:.4rem">
-                <Field label="Measure">
-                  <select value={s.measure} onChange={(e) => updateStudy(s.id, { measure: val(e) as EffectMeasure })}>
-                    <option value="RR">RR</option><option value="OR">OR</option><option value="HR">HR</option>
-                  </select>
-                </Field>
-                <Field label="Point estimate"><input type="number" step="any" value={s.point} onInput={(e) => updateStudy(s.id, { point: val(e) })} /></Field>
-                <Field label="CI low"><input type="number" step="any" value={s.ciLow} onInput={(e) => updateStudy(s.id, { ciLow: val(e) })} /></Field>
-                <Field label="CI high"><input type="number" step="any" value={s.ciHigh} onInput={(e) => updateStudy(s.id, { ciHigh: val(e) })} /></Field>
-                <Field label="Control risk (for NNT)"><input type="number" step="any" value={s.ctrlRisk} onInput={(e) => updateStudy(s.id, { ctrlRisk: val(e) })} placeholder="0.05" /></Field>
-              </div>
+              <>
+                <div class="row" style="margin-top:.8rem">
+                  <strong>Effect data:</strong>
+                  <label class="row" style="text-transform:none"><input type="radio" checked={s.mode === '2x2'} onChange={() => updateStudy(s.id, { mode: '2x2' })} /> 2×2 table</label>
+                  <label class="row" style="text-transform:none"><input type="radio" checked={s.mode === 'effect'} onChange={() => updateStudy(s.id, { mode: 'effect' })} /> reported effect</label>
+                </div>
+                {s.mode === '2x2' ? (
+                  <div class="grid" style="margin-top:.4rem">
+                    <Field label="Treatment events"><input type="number" value={s.txEvents} onInput={(e) => updateStudy(s.id, { txEvents: val(e) })} /></Field>
+                    <Field label="Treatment total"><input type="number" value={s.txTotal} onInput={(e) => updateStudy(s.id, { txTotal: val(e) })} /></Field>
+                    <Field label="Control events"><input type="number" value={s.ctrlEvents} onInput={(e) => updateStudy(s.id, { ctrlEvents: val(e) })} /></Field>
+                    <Field label="Control total"><input type="number" value={s.ctrlTotal} onInput={(e) => updateStudy(s.id, { ctrlTotal: val(e) })} /></Field>
+                  </div>
+                ) : (
+                  <div class="grid" style="margin-top:.4rem">
+                    <Field label="Measure">
+                      <select value={s.measure} onChange={(e) => updateStudy(s.id, { measure: val(e) as EffectMeasure })}>
+                        <option value="RR">RR</option><option value="OR">OR</option><option value="HR">HR</option>
+                      </select>
+                    </Field>
+                    <Field label="Point estimate"><input type="number" step="any" value={s.point} onInput={(e) => updateStudy(s.id, { point: val(e) })} /></Field>
+                    <Field label="CI low"><input type="number" step="any" value={s.ciLow} onInput={(e) => updateStudy(s.id, { ciLow: val(e) })} /></Field>
+                    <Field label="CI high"><input type="number" step="any" value={s.ciHigh} onInput={(e) => updateStudy(s.id, { ciHigh: val(e) })} /></Field>
+                    <Field label="Control risk (for NNT)"><input type="number" step="any" value={s.ctrlRisk} onInput={(e) => updateStudy(s.id, { ctrlRisk: val(e) })} placeholder="0.05" /></Field>
+                  </div>
+                )}
+              </>
             )}
 
             <label class="row" style="text-transform:none;margin-top:.6rem">
@@ -473,7 +595,16 @@ export default function DataEntryApp() {
               </Field>
             </div>
 
-            {eff ? (
+            {isCont ? (
+              cont ? (
+                <div class="computed">
+                  <span><span class="k">{cont.measure}</span> <span class="v">{fmtNum(cont.estimate)}</span></span>
+                  <span><span class="k">95% CI</span> <span class="v">{fmtNum(cont.ciLow)} to {fmtNum(cont.ciHigh)}</span></span>
+                </div>
+              ) : (
+                <div class="computed"><span class="k">Enter valid numbers to compute the {cmeasure}.</span></div>
+              )
+            ) : eff ? (
               <div class="computed">
                 <span><span class="k">RR</span> <span class="v">{fmtRR(eff.rr)}</span></span>
                 <span><span class="k">95% CI</span> <span class="v">{fmtCI(eff.ciLow, eff.ciHigh)}</span></span>
@@ -498,7 +629,7 @@ export default function DataEntryApp() {
       {/* ---------------- live pooled preview ---------------- */}
       <div class="card" style="margin-top:1.5rem">
         <h3>Live preview—primary outcome (random-effects pool)</h3>
-        {preview ? (
+        {preview && 'pooled' in preview ? (
           <div class="computed">
             <span><span class="k">Pooled RR</span> <span class="v">{fmtRR(preview.pooled.rr)}</span></span>
             <span><span class="k">95% CI</span> <span class="v">{fmtCI(preview.pooled.ciLow, preview.pooled.ciHigh)}</span></span>
@@ -507,6 +638,14 @@ export default function DataEntryApp() {
             <span><span class="k">Patients</span> <span class="v">{preview.pooled.totalPatients.toLocaleString()}</span></span>
             <span><span class="k">I²</span> <span class="v">{fmtPct(preview.pooled.i2)}</span></span>
             <span><span class="k">NNT</span> <span class="v">{fmtNN(preview.pooled.nnt)}</span></span>
+          </div>
+        ) : preview && 'cont' in preview ? (
+          <div class="computed">
+            <span><span class="k">Pooled {preview.cont.measure}</span> <span class="v">{fmtNum(preview.cont.estimate)}</span></span>
+            <span><span class="k">95% CI</span> <span class="v">{fmtNum(preview.cont.ciLow)} to {fmtNum(preview.cont.ciHigh)}</span></span>
+            <span><span class="k">Studies</span> <span class="v">{preview.cont.k}</span></span>
+            <span><span class="k">Patients</span> <span class="v">{preview.cont.totalPatients.toLocaleString()}</span></span>
+            <span><span class="k">I²</span> <span class="v">{fmtPct(preview.cont.i2)}</span></span>
           </div>
         ) : (
           <p class="muted">Add at least one poolable study on the primary outcome to see the pooled estimate.</p>

@@ -22,14 +22,11 @@ const W = LABEL_W + PLOT_W + STAT_W;
 const plotted = rows.length + (p ? 1 : 0);
 const H = PAD_TOP + plotted * ROW_H + AXIS_H;
 
-// Linear axis symmetric around 0 (no effect). Scale to the pooled studies so a
-// single excluded outlier (e.g. artifactual SDs) doesn't squash the axis;
-// out-of-range markers are clamped to the edge.
-const scaleRows = rows.filter((r) => !r.excludeFromPooled && r.cont);
-const vals = (scaleRows.length ? scaleRows : rows)
+// Linear axis symmetric around 0 (no effect), scaled to all the data.
+const vals = rows
   .flatMap((r) => (r.cont ? [r.cont.ciLow, r.cont.ciHigh] : []))
   .concat(p ? [p.ciLow, p.ciHigh] : []);
-const dom = Math.max(0.5, ...vals.map((v) => Math.abs(v))) * 1.15;
+const dom = Math.max(0.5, ...vals.map((v) => Math.abs(v))) * 1.1;
 const plotX0 = LABEL_W;
 const plotX1 = LABEL_W + PLOT_W;
 function x(v: number): number {
