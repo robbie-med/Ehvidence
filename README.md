@@ -52,15 +52,16 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 
 <!-- TOPICS-COVERAGE:START -->
 
-**Topics covered:** 13
-**Articles covered:** 47
-**Total patients analyzed:** 243,706
+**Topics covered:** 14
+**Articles covered:** 50
+**Total patients analyzed:** 243,925
 
 | Topic | Articles | Patients | Category |
 | --- | ---: | ---: | --- |
 | Beta-carotene for skin cancer prevention | 1 | 1,805 | Skin cancer prevention |
 | Celecoxib for skin cancer prevention | 1 | 240 | Skin cancer prevention |
 | CoQ10 in Chronic Heart Failure (Q-SYMBIO) | 1 | 420 | Cardiology |
+| Fluoroquinolones and QTc prolongation | 3 | 219 | Cardiac safety |
 | Nicotinamide for skin cancer prevention | 1 | 386 | Skin cancer prevention |
 | Omega-3 (fish oil) for cardiovascular events | 7 | 93,805 | Cardiovascular |
 | Oral / subcutaneous vs intravenous opioids | 5 | 33,973 | Opioid stewardship |

@@ -11,6 +11,21 @@
 /** 97.5th percentile of the standard normal—the z multiplier for a 95% CI. */
 export const Z_95 = 1.959964;
 
+/** 95th percentile of the standard normal—the z multiplier for a 90% CI. */
+export const Z_90 = 1.644854;
+
+/**
+ * Confidence level a reported CI was published at. Thorough QT (TQT) studies
+ * conventionally report 90% CIs; most other effect sizes use 95%. The level
+ * only affects how a standard error is recovered from a reported CI width.
+ */
+export type CiLevel = 90 | 95;
+
+/** z multiplier for the half-width of a CI at the given confidence level. */
+export function zForLevel(level: CiLevel | undefined): number {
+  return level === 90 ? Z_90 : Z_95;
+}
+
 export type EffectMeasure = 'RR' | 'OR' | 'HR';
 
 /** Raw 2x2 contingency data as authored in a study record. */
@@ -31,6 +46,8 @@ export interface PrecomputedEffect {
   ciHigh: number;
   /** Baseline (control) risk, if reported—enables an NNT back-calculation. */
   ctrlRisk?: number;
+  /** Confidence level the reported CI was published at (default 95). */
+  ciLevel?: CiLevel;
 }
 
 export type StudyData = TwoByTwo | PrecomputedEffect;
@@ -162,8 +179,9 @@ function effectFrom2x2(d: TwoByTwo): EffectResult {
 function effectFromPrecomputed(d: PrecomputedEffect): EffectResult {
   const rr = d.point;
   const logEffect = Math.log(rr);
-  // Recover SE from the reported CI width on the log scale.
-  const seLog = (Math.log(d.ciHigh) - Math.log(d.ciLow)) / (2 * Z_95);
+  // Recover SE from the reported CI width on the log scale, honoring the level
+  // the CI was published at (90% for TQT-style reports, 95% otherwise).
+  const seLog = (Math.log(d.ciHigh) - Math.log(d.ciLow)) / (2 * zForLevel(d.ciLevel));
   const improvementPct = (1 - rr) * 100;
 
   let arr: number | null = null;
@@ -349,6 +367,8 @@ export interface ContinuousEffectData {
   ciHigh: number;
   /** Total participants analyzed, if known. */
   n?: number;
+  /** Confidence level the reported CI was published at (default 95). */
+  ciLevel?: CiLevel;
 }
 
 export type ContinuousStudyData = ContinuousData | ContinuousEffectData;
@@ -392,12 +412,15 @@ export function computeContinuous(
   measure: ContinuousMeasure,
 ): ContinuousResult {
   if (data.kind === 'continuousEffect') {
-    const se = (data.ciHigh - data.ciLow) / (2 * Z_95);
+    // Recover the SE from the reported CI at the level it was published at,
+    // then re-express the displayed CI at 95% so every study and the pooled
+    // diamond share one confidence level on the forest plot.
+    const se = (data.ciHigh - data.ciLow) / (2 * zForLevel(data.ciLevel));
     return {
       measure: data.measure,
       estimate: data.point,
-      ciLow: data.ciLow,
-      ciHigh: data.ciHigh,
+      ciLow: data.point - Z_95 * se,
+      ciHigh: data.point + Z_95 * se,
       se,
     };
   }

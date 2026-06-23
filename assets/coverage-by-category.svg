@@ -9,22 +9,25 @@
 <rect width="100%" height="100%" fill="transparent" rx="12" ry="12"/>
 <text x="40" y="32" class="title">Article totals by topic category</text>
 <line x1="220" y1="28" x2="220" y2="288" class="axis"/>
-  <text x="40" y="59.166666666666664" class="label">Cardiovascular</text>
-  <rect x="220" y="40" width="500" height="28.333333333333332" class="bar" rx="6" ry="6"/>
-  <text x="730" y="59.166666666666664" class="value">18</text>
-  <text x="40" y="101.5" class="label">Pediatric gastroenterology</text>
-  <rect x="220" y="82.33333333333333" width="278" height="28.333333333333332" class="bar" rx="6" ry="6"/>
-  <text x="508" y="101.5" class="value">10</text>
-  <text x="40" y="143.83333333333331" class="label">Skin cancer prevention</text>
-  <rect x="220" y="124.66666666666666" width="222" height="28.333333333333332" class="bar" rx="6" ry="6"/>
-  <text x="452" y="143.83333333333331" class="value">8</text>
-  <text x="40" y="186.16666666666666" class="label">Opioid stewardship</text>
-  <rect x="220" y="167" width="139" height="28.333333333333332" class="bar" rx="6" ry="6"/>
-  <text x="369" y="186.16666666666666" class="value">5</text>
-  <text x="40" y="228.49999999999997" class="label">Neonatal</text>
-  <rect x="220" y="209.33333333333331" width="139" height="28.333333333333332" class="bar" rx="6" ry="6"/>
-  <text x="369" y="228.49999999999997" class="value">5</text>
-  <text x="40" y="270.8333333333333" class="label">Cardiology</text>
-  <rect x="220" y="251.66666666666663" width="28" height="28.333333333333332" class="bar" rx="6" ry="6"/>
-  <text x="258" y="270.8333333333333" class="value">1</text>
+  <text x="40" y="56.14285714285714" class="label">Cardiovascular</text>
+  <rect x="220" y="40" width="500" height="22.285714285714285" class="bar" rx="6" ry="6"/>
+  <text x="730" y="56.14285714285714" class="value">18</text>
+  <text x="40" y="92.42857142857142" class="label">Pediatric gastroenterology</text>
+  <rect x="220" y="76.28571428571428" width="278" height="22.285714285714285" class="bar" rx="6" ry="6"/>
+  <text x="508" y="92.42857142857142" class="value">10</text>
+  <text x="40" y="128.71428571428572" class="label">Skin cancer prevention</text>
+  <rect x="220" y="112.57142857142857" width="222" height="22.285714285714285" class="bar" rx="6" ry="6"/>
+  <text x="452" y="128.71428571428572" class="value">8</text>
+  <text x="40" y="165" class="label">Opioid stewardship</text>
+  <rect x="220" y="148.85714285714286" width="139" height="22.285714285714285" class="bar" rx="6" ry="6"/>
+  <text x="369" y="165" class="value">5</text>
+  <text x="40" y="201.28571428571428" class="label">Neonatal</text>
+  <rect x="220" y="185.14285714285714" width="139" height="22.285714285714285" class="bar" rx="6" ry="6"/>
+  <text x="369" y="201.28571428571428" class="value">5</text>
+  <text x="40" y="237.57142857142856" class="label">Cardiac safety</text>
+  <rect x="220" y="221.42857142857142" width="83" height="22.285714285714285" class="bar" rx="6" ry="6"/>
+  <text x="313" y="237.57142857142856" class="value">3</text>
+  <text x="40" y="273.8571428571429" class="label">Cardiology</text>
+  <rect x="220" y="257.7142857142857" width="28" height="22.285714285714285" class="bar" rx="6" ry="6"/>
+  <text x="258" y="273.8571428571429" class="value">1</text>
 </svg>

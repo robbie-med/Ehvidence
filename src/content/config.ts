@@ -25,6 +25,8 @@ const precomputedEffect = z.object({
   // control event rate per person—used to derive an NNT. May exceed 1 for
   // rate outcomes (e.g. mean lesions per person).
   ctrlRisk: z.number().min(0).optional(),
+  // Confidence level the reported CI was published at (default 95).
+  ciLevel: z.union([z.literal(90), z.literal(95)]).optional(),
 });
 
 const continuous = z.object({
@@ -44,6 +46,9 @@ const continuousEffect = z.object({
   ciLow: z.number(),
   ciHigh: z.number(),
   n: z.number().int().positive().optional(),
+  // Confidence level the reported CI was published at (default 95). TQT
+  // studies conventionally report 90% CIs.
+  ciLevel: z.union([z.literal(90), z.literal(95)]).optional(),
 });
 
 const study = z.object({

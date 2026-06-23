@@ -181,6 +181,32 @@ describe('computeContinuous', () => {
     expect(r.estimate).toBeCloseTo(-0.992, 2);
     expect(r.se).toBeCloseTo(0.2105, 3);
   });
+
+  it('recovers SE from a 90% CI (TQT convention) and re-expresses it at 95%', () => {
+    // Täubel 2020 levofloxacin: ∆∆QTcF 9.40 ms, 90% CI 8.21–10.59.
+    const r = computeContinuous(
+      { kind: 'continuousEffect', measure: 'MD', point: 9.4, ciLow: 8.21, ciHigh: 10.59, ciLevel: 90 },
+      'MD',
+    );
+    expect(r.estimate).toBeCloseTo(9.4, 5);
+    // SE = (10.59 - 8.21) / (2 * 1.644854) = 0.7235
+    expect(r.se).toBeCloseTo(0.7235, 3);
+    // Displayed CI is widened to 95%: 9.40 ± 1.959964 * 0.7235.
+    expect(r.ciLow).toBeCloseTo(7.982, 2);
+    expect(r.ciHigh).toBeCloseTo(10.818, 2);
+  });
+
+  it('defaults to 95% when no ciLevel is given', () => {
+    const r = computeContinuous(
+      { kind: 'continuousEffect', measure: 'MD', point: 7.12, ciLow: 5.16, ciHigh: 9.09 },
+      'MD',
+    );
+    // SE = (9.09 - 5.16) / (2 * 1.959964) = 1.0026; the CI is re-expressed
+    // symmetrically at 95% (7.12 ± 1.959964 * 1.0026).
+    expect(r.se).toBeCloseTo(1.0026, 3);
+    expect(r.ciLow).toBeCloseTo(5.155, 2);
+    expect(r.ciHigh).toBeCloseTo(9.085, 2);
+  });
 });
 
 describe('poolContinuous', () => {
