@@ -37,6 +37,9 @@
   <rect x="116" y="28" width="12" height="12" fill="transparent" class="cell"/>
   <rect x="116" y="44" width="12" height="12" fill="transparent" class="cell"/>
   <rect x="116" y="60" width="12" height="12" fill="rgba(198, 228, 139, 0.65)" class="cell"/>
+  <rect x="116" y="76" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="116" y="92" width="12" height="12" fill="transparent" class="cell"/>
+  <rect x="116" y="108" width="12" height="12" fill="rgba(198, 228, 139, 0.65)" class="cell"/>
   <text x="20" y="53" class="label" text-anchor="start">Mon</text>
   <text x="20" y="85" class="label" text-anchor="start">Wed</text>
   <text x="20" y="117" class="label" text-anchor="start">Fri</text>
