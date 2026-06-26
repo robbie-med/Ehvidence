@@ -52,9 +52,9 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 
 <!-- TOPICS-COVERAGE:START -->
 
-**Topics covered:** 15
-**Articles covered:** 74
-**Total patients analyzed:** 249,919
+**Topics covered:** 16
+**Articles covered:** 75
+**Total patients analyzed:** 268,645
 
 | Topic | Articles | Patients | Category |
 | --- | ---: | ---: | --- |
@@ -67,6 +67,7 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 | Omega-3 (fish oil) for cardiovascular events | 7 | 93,805 | Cardiovascular |
 | Oral / subcutaneous vs intravenous opioids | 5 | 33,973 | Opioid stewardship |
 | Oral retinol for skin cancer prevention | 1 | 2,297 | Skin cancer prevention |
+| Psychiatric morbidity in gender-referred adolescents (Finland register study) | 1 | 18,726 | Adolescent psychiatry |
 | S. boulardii for pediatric acute diarrhea (China) | 10 | 1,062 | Pediatric gastroenterology |
 | Statins for primary prevention | 7 | 61,844 | Cardiovascular |
 | Statins for secondary prevention | 4 | 38,153 | Cardiovascular |

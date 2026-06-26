@@ -33,4 +33,7 @@
   <text x="40" y="293" class="label">Cardiology</text>
   <rect x="220" y="278" width="21" height="20" class="bar" rx="6" ry="6"/>
   <text x="251" y="293" class="value">1</text>
+  <text x="40" y="327" class="label">Adolescent psychiatry</text>
+  <rect x="220" y="312" width="21" height="20" class="bar" rx="6" ry="6"/>
+  <text x="251" y="327" class="value">1</text>
 </svg>

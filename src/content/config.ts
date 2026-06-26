@@ -91,6 +91,10 @@ const outcome = z.object({
   kind: z.enum(['binary', 'continuous']).optional(),
   // For continuous outcomes: mean difference (same units) or standardized.
   measure: z.enum(['MD', 'SMD']).optional(),
+  // Optional authored status override for this outcome (otherwise derived from
+  // the pooled estimate). Useful for single large studies where the automatic
+  // k<3 "limited" rule does not reflect the evidence.
+  status: z.enum(['favorable', 'harmful', 'limited', 'neutral']).optional(),
   // Links this outcome to a controlled standard outcome so it can be compared
   // across interventions. See src/lib/standardOutcomes.ts.
   standardOutcomeId: z.string().optional(),

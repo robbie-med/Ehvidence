@@ -54,6 +54,8 @@ export interface RawOutcome {
   standardOutcomeId?: string;
   kind?: 'binary' | 'continuous';
   measure?: ContinuousMeasure;
+  /** Authored status override (otherwise derived from the pooled estimate). */
+  status?: EvidenceStatus;
 }
 
 export interface RawTopic {
@@ -170,7 +172,7 @@ function computeOutcome(raw: RawTopic, outcome: RawOutcome): ComputedOutcome {
     }));
     studies.sort((a, b) => b.year - a.year);
     const contPooled = pooledResult?.pooled ?? null;
-    const status = deriveStatusContinuous(contPooled, outcome.direction);
+    const status = outcome.status ?? deriveStatusContinuous(contPooled, outcome.direction);
     return { outcome, kind: 'continuous', measure, studies, pooled: null, contPooled, status, totalPatients };
   }
 
@@ -187,7 +189,7 @@ function computeOutcome(raw: RawTopic, outcome: RawOutcome): ComputedOutcome {
     weightPct: weightByIndex.get(i) ?? 0,
   }));
   studies.sort((a, b) => b.year - a.year);
-  const status = deriveStatus(pooled, outcome.direction);
+  const status = outcome.status ?? deriveStatus(pooled, outcome.direction);
   return { outcome, kind: 'binary', measure, studies, pooled, contPooled: null, status, totalPatients };
 }
 
