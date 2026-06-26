@@ -6,38 +6,2448 @@
   "comparator": "Standard care (no amnioinfusion)",
   "category": "Obstetrics & neonatal",
   "evidenceClass": "efficacy",
-  "summary": "Across 23 randomized trials, prophylactic intrapartum amnioinfusion for meconium-stained amniotic fluid roughly halved the odds of meconium aspiration syndrome (MAS). The effect is heterogeneous: the largest, best-monitored trial (Fraser 2005) found no benefit, while smaller trials in limited-surveillance settings found large reductions.",
-  "description": "A meta-analysis (Davis 2023, AJOG) of 24 RCTs (5994 participants) of prophylactic transcervical amnioinfusion in labor complicated by moderate-to-thick MSAF. The primary outcome was MAS. Each contributing trial's odds ratio is entered from the review's Figure 2 and pooled live; the review excluded Sadovsky 1989 from the MAS analysis, so 23 trials contribute here.",
-  "interpretation": "The pooled odds ratio is driven down by many small trials and pulled up by Fraser 2005 (986 vs 989, OR 1.41), the only large multinational trial with continuous monitoring and standardized care—hence the substantial heterogeneity (I² ≈ 56%). Benefit was larger in settings with limited peripartum surveillance and in developing countries (subgroup ORs 0.20 and lower), and smaller where continuous monitoring was standard. The review also reported reductions in meconium below the cords, low Apgar, neonatal acidosis, cesarean delivery, and NICU admission, but not postpartum endometritis (see methodology). Absolute MAS rates in the review were 3.7% with amnioinfusion vs 9.5% without.",
-  "methodologyNotes": "Primary outcome only (MAS) is encoded here, because this is the one outcome the review reports at the per-trial level (Figure 2); the secondary outcomes appear only as review-level pooled estimates (Table 3) with no per-study breakdown in the article, so they cannot be re-pooled from constituents and are described in prose rather than entered as a single pooled 'study'. Each trial is entered as its published odds ratio with 95% CI and pooled live by random-effects (DerSimonian–Laird) on the log-odds scale—nothing is hardcoded; our pooled OR reproduces the review's 0.33 (95% CI 0.21–0.51). Sadovsky 1989 is omitted because the review excluded it from the MAS forest. The review's per-trial CIs are log-symmetric Wald intervals (lower = point²/upper for every study), so the two trials whose lower bound prints as 0.00—Macri 1992 and Choudhary 2010—are entered with the implied lower bounds 0.0052 and 0.0057 rather than an unusable zero; Macri's value is corroborated by its raw counts (MAS 0/85 amnioinfusion vs 5/85 control). The review's Figure 2 labels three trials differently from its reference list: 'Gupta 2016' is Prachi et al 2016, 'Rathore 2002' is Rathor et al 2002, and the figure years for Choudhary (2009) and Elsersy (2016) differ from the published years (2010, 2017); citations and years here follow the published references. Odds ratios are pooled as published; because MAS is uncommon (~3–9%) the odds ratio approximates the risk ratio.",
+  "summary": "Across 23 randomized trials (5994 participants), prophylactic intrapartum amnioinfusion for meconium-stained amniotic fluid roughly halved meconium aspiration syndrome (MAS) and also reduced meconium below the cords, low Apgar scores, neonatal acidosis, cesarean delivery, and NICU admission; postpartum endometritis was unchanged. The benefit is concentrated in high-risk, limited-surveillance settings.",
+  "description": "A meta-analysis (Davis 2023, AJOG) of 24 RCTs of prophylactic transcervical amnioinfusion in labor complicated by moderate-to-thick MSAF. The primary outcome (MAS) is entered here as each trial’s raw per-arm event counts (Supplemental Figure 4) and pooled live; the seven secondary outcomes are entered as the review’s per-trial odds ratios (Supplemental Figures 5–11). The review excluded Sadovsky 1989 from the MAS analysis, so 23 trials contribute to MAS.",
+  "interpretation": "The pooled MAS effect is statistically robust but its absolute size does not travel. Pooled control MAS risk here is ~9.5% and treated ~3.7% (absolute reduction ~5.8 points), which works out to a number-needed-to-treat of roughly 17. But that is an NNT for an enriched, high-risk group—women already in labor with moderate-to-thick MSAF—not for all laboring patients, all MSAF, post-term pregnancy, or induction. MSAF complicates about 1 in 7 pregnancies while MAS occurs in up to ~5% of MSAF infants, so the ~10% pooled control risk is itself high: it reflects trials from 1989–2017 with heterogeneous MAS definitions, variable monitoring and neonatal care, differing meconium thresholds, substantial between-study heterogeneity (I² 56%), and acknowledged publication bias (Egger P=.02). In a selected population with a baseline MAS risk near 10% this meta-analysis estimates NNT ≈17 (GRADE: “6 fewer per 100,” implied range ~14–25); that baseline is not portable to contemporary routine obstetrics, so “NNT 17” should not be repeated as a general clinical number. The review’s own 95% prediction interval for MAS was 0.07–1.55—in a plausible future setting the true effect could range from large benefit to none or harm. Benefit was larger with limited peripartum surveillance and in developing-country settings, while the large, well-monitored Fraser 2005 trial found no MAS benefit (OR 1.41), which drives the heterogeneity.",
+  "methodologyNotes": "MAS is entered as raw per-arm event counts (Supplemental Figure 4) so the engine computes the risk ratio, pooled control risk, and NNT directly from the data—nothing hardcoded; our pooled control rate (292/3078) and treated rate (109/2916) match the review, and the review’s pooled odds ratio was 0.33 (95% CI 0.21–0.51). Because MAS is uncommon the risk ratio approximates that odds ratio. The seven secondary outcomes are entered as the review’s published per-trial odds ratios (Supplemental Figures 5–11) and pooled live by random-effects (DerSimonian–Laird) on the log-odds scale. Sadovsky 1989 is omitted from MAS and from Apgar (the review marked it excluded there); Yellayi is omitted from Apgar for the same reason; each secondary outcome includes exactly the trials the review plotted. The review’s per-trial CIs are log-symmetric Wald intervals (lower = point²/upper), so where a lower bound prints as 0.00 it is entered as that implied bound rather than an unusable zero. The review’s forest plots label three trials differently from its reference list (‘Gupta 2016’ is Prachi et al, ‘Rathore 2002’ is Rathor et al, and figure years for Choudhary and Elsersy differ from the published 2010 and 2017); citations and years here follow the published references. The review reported significant small-study/publication-bias signals for MAS, meconium below the cords, cesarean delivery, and neonatal acidosis.",
+  "status": "favorable",
   "primaryOutcomeId": "mas",
   "lastUpdated": "2026-06-26",
   "outcomes": [
-    { "id": "mas", "label": "Meconium aspiration syndrome", "direction": "lowerIsBetter", "description": "Neonatal meconium aspiration syndrome as defined in each trial (definitions varied—clinical, CXR-based, or oxygen/ventilation criteria)." }
+    {
+      "id": "mas",
+      "label": "Meconium aspiration syndrome",
+      "direction": "lowerIsBetter",
+      "description": "Neonatal meconium aspiration syndrome as defined in each trial (clinical, CXR-based, or oxygen/ventilation criteria varied). Entered as raw per-arm event counts from the review’s Supplemental Figure 4."
+    },
+    {
+      "id": "meconium-below-cords",
+      "label": "Meconium below the cords",
+      "direction": "lowerIsBetter",
+      "description": "Meconium visualized below the vocal cords at birth."
+    },
+    {
+      "id": "apgar-low",
+      "label": "Apgar <7 at 5 minutes",
+      "direction": "lowerIsBetter",
+      "description": "5-minute Apgar score below 7."
+    },
+    {
+      "id": "neonatal-acidosis",
+      "label": "Neonatal acidosis (cord pH <7.2)",
+      "direction": "lowerIsBetter",
+      "description": "Umbilical cord arterial pH below 7.2."
+    },
+    {
+      "id": "cesarean-delivery",
+      "label": "Cesarean delivery",
+      "direction": "lowerIsBetter",
+      "description": "Delivery by cesarean section (any indication)."
+    },
+    {
+      "id": "cesarean-fetal-distress",
+      "label": "Cesarean delivery for fetal distress",
+      "direction": "lowerIsBetter",
+      "description": "Cesarean section performed for nonreassuring fetal heart tracing / fetal distress."
+    },
+    {
+      "id": "nicu-admission",
+      "label": "NICU admission",
+      "direction": "lowerIsBetter",
+      "description": "Admission to the neonatal intensive care unit."
+    },
+    {
+      "id": "postpartum-endometritis",
+      "label": "Postpartum endometritis",
+      "direction": "lowerIsBetter",
+      "description": "Maternal postpartum endometritis (the one outcome not significantly reduced)."
+    }
   ],
   "studies": [
-    { "id": "adam-1989-mas", "author": "Adam", "year": 1989, "citation": "Adam K, Cano L, Moise KJ. The effect of intrapartum amnioinfusion on the outcome of the fetus with heavy meconium stained amniotic fluid. Proceedings of 9th Annual Meeting of the Society of Perinatal Obstetricians; 1989; New Orleans, LA. 1989:438.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "Single infusion of 1000 mL", "population": "United States; thick meconium only", "n": 35, "notes": "Modified Jadad 5.", "data": { "kind": "effect", "measure": "OR", "point": 0.22, "ciLow": 0.02, "ciHigh": 2.19 } },
-    { "id": "bhosale-2015-mas", "author": "Bhosale", "year": 2015, "citation": "Bhosale R, Patil S, Patil Y, Kshirsagar N. Randomised clinical trial of amnioinfusion and caesarean section in cases of thick meconium stained amniotic fluid and neonatal outcome. Int J Recent Trends Sci Technol 2015;13:511-5.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "Normal saline", "population": "India; thick meconium only", "n": 126, "notes": "Modified Jadad 2.", "data": { "kind": "effect", "measure": "OR", "point": 0.14, "ciLow": 0.04, "ciHigh": 0.49 } },
-    { "id": "choudhary-2010-mas", "author": "Choudhary", "year": 2010, "citation": "Choudhary D, Bano I, Ali SM. Does amnioinfusion reduce caesarean section rate in meconium-stained amniotic fluid? Arch Gynecol Obstet 2010;282:17-22.", "doi": "10.1007/s00404-009-1196-8", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 500 mL over 30 min, then 2 mL/min", "population": "India", "endpointDefinition": "CXR and clinical course consistent with MAS.", "n": 292, "notes": "Modified Jadad 6. Lower CI prints as 0.00; entered as the implied log-symmetric bound 0.0057 (=0.04²/0.28). Figure 2 labels this trial '2009'.", "data": { "kind": "effect", "measure": "OR", "point": 0.04, "ciLow": 0.0057, "ciHigh": 0.28 } },
-    { "id": "cialone-1994-mas", "author": "Cialone", "year": 1994, "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h", "population": "United States", "endpointDefinition": "MAS categories (subclinical, mild, or medium) based on O2 requirement and duration.", "n": 105, "notes": "Modified Jadad 7.", "data": { "kind": "effect", "measure": "OR", "point": 0.14, "ciLow": 0.02, "ciHigh": 1.13 } },
-    { "id": "elsersy-2017-mas", "author": "Elsersy", "year": 2017, "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min", "population": "Egypt", "endpointDefinition": "RDS within a few hours of birth with compatible CXR finding.", "n": 360, "notes": "Modified Jadad 5. Figure 2 labels this trial '2016'.", "data": { "kind": "effect", "measure": "OR", "point": 0.40, "ciLow": 0.19, "ciHigh": 0.87 } },
-    { "id": "eriksen-1994-mas", "author": "Eriksen", "year": 1994, "citation": "Eriksen NL, Hostetter M, Parisi VM. Prophylactic amnioinfusion in pregnancies complicated by thick meconium. Am J Obstet Gynecol 1994;171:1026-30.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 800 mL over >1 h, then 180 mL/h", "population": "United States; thick meconium only", "n": 124, "notes": "Modified Jadad 7.", "data": { "kind": "effect", "measure": "OR", "point": 0.18, "ciLow": 0.01, "ciHigh": 3.73 } },
-    { "id": "fonseca-2017-mas", "author": "Fonseca", "year": 2017, "citation": "Fonseca A, Dwivedi A. A randomised single blind control study to assess the effect of intrapartum amnioinfusion on maternal caesarean section rate and fetal outcome in a tertiary care centre. Int J Reprod Contracept Obstet Gynecol 2017;6:4347-50.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 500 mL over 30 min", "population": "India", "n": 160, "notes": "Modified Jadad 4.", "data": { "kind": "effect", "measure": "OR", "point": 0.41, "ciLow": 0.10, "ciHigh": 1.63 } },
-    { "id": "fraser-2005-mas", "author": "Fraser", "year": 2005, "citation": "Fraser WD, Hofmeyr J, Lede R, et al. Amnioinfusion for the prevention of the meconium aspiration syndrome. N Engl J Med 2005;353:909-17.", "doi": "10.1056/NEJMoa050223", "design": "DB-RCT", "outcomeId": "mas", "doseRegimen": "800 mL saline at 20 mL/min over 40 min", "population": "13 countries; thick meconium only", "endpointDefinition": "MAS adjudicated by a panel of 3 blinded neonatologists.", "n": 1975, "notes": "Modified Jadad 7. Largest trial; continuous monitoring and standardized care.", "data": { "kind": "effect", "measure": "OR", "point": 1.41, "ciLow": 0.88, "ciHigh": 2.26 } },
-    { "id": "gavali-2017-mas", "author": "Gavali", "year": 2017, "citation": "Gavali, Shinde S, Aher G, Mhaske S. Study of role of intrapartum transcervical amnioinfusion in meconium stained amniotic fluid. Indian J Basic Appl Med Res 2017;6:389-97.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 250 mL over 20-30 min, then 10-20 mL/min up to 600 mL", "population": "India", "n": 160, "notes": "Modified Jadad 4.", "data": { "kind": "effect", "measure": "OR", "point": 0.27, "ciLow": 0.08, "ciHigh": 0.87 } },
-    { "id": "prachi-2016-mas", "author": "Prachi", "year": 2016, "citation": "Prachi, Reena P, Priya BK, Swati T, Ruchi S, Sarita M. Study of perinatal outcome of amnio infusion during labor in meconium stained amniotic fluid. Scholars J Appl Sci Med 2016;4:2048-51.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "600 mL sterile saline over 30 min, then fluid until liquor cleared (max 1 L)", "population": "India", "n": 70, "notes": "Modified Jadad 3. Labeled 'Gupta 2016' in the review's Figure 2.", "data": { "kind": "effect", "measure": "OR", "point": 0.23, "ciLow": 0.06, "ciHigh": 0.94 } },
-    { "id": "hofmeyr-1998-mas", "author": "Hofmeyr", "year": 1998, "citation": "Hofmeyr GJ, Gülmezoglu AM, Buchmann E, et al. The collaborative randomised amnioinfusion for meconium project (CRAMP): 1. South Africa. Br J Obstet Gynaecol 1998;105:304-8.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 800 mL at 15 mL/min, then 3 mL/min maintenance", "population": "South Africa", "endpointDefinition": "Diagnosed clinically by a blinded pediatrician.", "n": 325, "notes": "Modified Jadad 7.", "data": { "kind": "effect", "measure": "OR", "point": 0.66, "ciLow": 0.18, "ciHigh": 2.39 } },
-    { "id": "ilagan-1992-mas", "author": "Ilagan", "year": 1992, "citation": "Ilagan MKN, Kazzi GS, Liang K, Womack S, Bronsteen R. Transcervical amnioinfusion for prevention of meconium aspiration. Pediatr Res 1992;31.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "500 mL of NS", "population": "United States; thick meconium only", "n": 78, "notes": "Modified Jadad 3.", "data": { "kind": "effect", "measure": "OR", "point": 0.77, "ciLow": 0.16, "ciHigh": 3.70 } },
-    { "id": "macri-1992-mas", "author": "Macri", "year": 1992, "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm", "population": "United States; thick meconium and oligohydramnios", "n": 170, "notes": "Modified Jadad 7. Raw MAS counts 0/85 (amnioinfusion) vs 5/85 (control); lower CI prints as 0.00, entered as the implied bound 0.0052 (=0.09²/1.57).", "data": { "kind": "effect", "measure": "OR", "point": 0.09, "ciLow": 0.0052, "ciHigh": 1.57 } },
-    { "id": "mahomed-1998-mas", "author": "Mahomed", "year": 1998, "citation": "Mahomed K, Mulambo T, Woelk G, Hofmeyr GJ, Gülmezoglu AM. The collaborative randomised amnioinfusion for meconium project (CRAMP): 2. Zimbabwe. Br J Obstet Gynaecol 1998;105:309-13.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 30 drops/min", "population": "Zimbabwe", "n": 652, "notes": "Modified Jadad 7.", "data": { "kind": "effect", "measure": "OR", "point": 0.22, "ciLow": 0.11, "ciHigh": 0.44 } },
-    { "id": "moodley-1998-mas", "author": "Moodley", "year": 1998, "citation": "Moodley J, Matchaba P, Payne AJ. Intrapartum amnioinfusion for meconium-stained liquor in developing countries. Trop Doct 1998;28:31-4.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "0.9% NS 10-15 mL/min", "population": "South Africa", "n": 60, "notes": "Modified Jadad 4.", "data": { "kind": "effect", "measure": "OR", "point": 0.22, "ciLow": 0.02, "ciHigh": 2.14 } },
-    { "id": "puertas-2001-mas", "author": "Puertas", "year": 2001, "citation": "Puertas A, Paz Carrillo M, Moltó L, Alvarez M, Sedeño S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h", "population": "Spain", "n": 206, "notes": "Modified Jadad 6.", "data": { "kind": "effect", "measure": "OR", "point": 0.74, "ciLow": 0.16, "ciHigh": 3.40 } },
-    { "id": "rathor-2002-mas", "author": "Rathor", "year": 2002, "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min", "population": "India", "endpointDefinition": "RDS within a few hours of birth with compatible CXR finding.", "n": 200, "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's Figure 2.", "data": { "kind": "effect", "measure": "OR", "point": 0.33, "ciLow": 0.01, "ciHigh": 8.20 } },
-    { "id": "sood-2004-mas", "author": "Sood", "year": 2004, "citation": "Sood M, Charulata, Dimple, Aggarwal N, Faridi MM. Amnioinfusion in thick meconium. Indian J Pediatr 2004;71:677-81.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "1 L saline over 30-45 min", "population": "India; thick meconium only", "endpointDefinition": "Diagnosed by CXR.", "n": 196, "notes": "Modified Jadad 6.", "data": { "kind": "effect", "measure": "OR", "point": 0.27, "ciLow": 0.10, "ciHigh": 0.70 } },
-    { "id": "spong-1994-mas", "author": "Spong", "year": 1994, "citation": "Spong CY, Ogundipe OA, Ross MG. Prophylactic amnioinfusion for meconium-stained amniotic fluid. Am J Obstet Gynecol 1994;171:931-5.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "600 mL bolus, then 3 mL/min", "population": "United States", "endpointDefinition": "Meconium below the cords with RDS requiring oxygen or ventilation and no evidence of sepsis.", "n": 93, "notes": "Modified Jadad 5.", "data": { "kind": "effect", "measure": "OR", "point": 3.67, "ciLow": 0.37, "ciHigh": 36.71 } },
-    { "id": "thakkar-2012-mas", "author": "Thakkar", "year": 2012, "citation": "Thakkar P, Aiyer S. Effect of amnioinfusion on outcome of neonates born with meconium stained amniotic fluid. Natl J Integr Res Med 2012;3.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "NS/LR at 100 mL/min until liquor cleared (up to 1000 mL)", "population": "India; thick meconium only", "n": 227, "notes": "Modified Jadad 5.", "data": { "kind": "effect", "measure": "OR", "point": 0.24, "ciLow": 0.08, "ciHigh": 0.71 } },
-    { "id": "vachhani-2015-mas", "author": "Vachhani", "year": 2015, "citation": "Vachhani N, Shah J, Goel G, Mehta M, Desai A, Dalal M. Intrapartum amnioinfusion in meconium stained amniotic fluid—a randomized control study in a tertiary care hospital. Natl J Community Med 2015;6:442-4.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "500 mL NS, then 180-200 mL/h", "population": "India", "n": 200, "notes": "Modified Jadad 4.", "data": { "kind": "effect", "measure": "OR", "point": 0.30, "ciLow": 0.10, "ciHigh": 0.86 } },
-    { "id": "wenstrom-1989-mas", "author": "Wenstrom", "year": 1989, "citation": "Wenstrom KD, Parsons MT. The prevention of meconium aspiration in labor using amnioinfusion. Obstet Gynecol 1989;73:647-51.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "1 L NS over 20-40 min, repeated every 6 h", "population": "United States; thick meconium only", "endpointDefinition": "Diagnosed by CXR.", "n": 80, "notes": "Modified Jadad 7.", "data": { "kind": "effect", "measure": "OR", "point": 0.16, "ciLow": 0.01, "ciHigh": 3.25 } },
-    { "id": "yellayi-2017-mas", "author": "Yellayi", "year": 2017, "citation": "Yellayi ASS, Aruna S, Devi DH. Role of amnioinfusion in prevention of meconium aspiration syndrome. Natl J Clin Sci 2017;5:272-7.", "design": "RCT", "outcomeId": "mas", "doseRegimen": "600 mL NS over 1 h, then 180 mL/h", "population": "India", "endpointDefinition": "Diagnosed by CXR.", "n": 60, "notes": "Modified Jadad 6.", "data": { "kind": "effect", "measure": "OR", "point": 0.22, "ciLow": 0.02, "ciHigh": 2.14 } }
+    {
+      "id": "adam-mas",
+      "outcomeId": "mas",
+      "author": "Adam",
+      "year": 1989,
+      "citation": "Adam K, Cano L, Moise KJ. The effect of intrapartum amnioinfusion on the outcome of the fetus with heavy meconium stained amniotic fluid. Proceedings of 9th Annual Meeting of the Society of Perinatal Obstetricians; 1989; New Orleans, LA. 1989:438.",
+      "design": "RCT",
+      "doseRegimen": "Single infusion of 1000 mL",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 5.",
+      "n": 35,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 17,
+        "ctrlEvents": 4,
+        "ctrlTotal": 18
+      }
+    },
+    {
+      "id": "bhosale-mas",
+      "outcomeId": "mas",
+      "author": "Bhosale",
+      "year": 2015,
+      "citation": "Bhosale R, Patil S, Patil Y, Kshirsagar N. Randomised clinical trial of amnioinfusion and caesarean section in cases of thick meconium stained amniotic fluid and neonatal outcome. Int J Recent Trends Sci Technol 2015;13:511-5.",
+      "design": "RCT",
+      "doseRegimen": "Normal saline",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 2.",
+      "n": 126,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 3,
+        "txTotal": 63,
+        "ctrlEvents": 17,
+        "ctrlTotal": 63
+      }
+    },
+    {
+      "id": "choudhary-mas",
+      "outcomeId": "mas",
+      "author": "Choudhary",
+      "year": 2010,
+      "citation": "Choudhary D, Bano I, Ali SM. Does amnioinfusion reduce caesarean section rate in meconium-stained amniotic fluid? Arch Gynecol Obstet 2010;282:17-22.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 2 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 6. Figure labels this trial '2009'.",
+      "n": 292,
+      "endpointDefinition": "CXR and clinical course consistent with MAS.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 146,
+        "ctrlEvents": 23,
+        "ctrlTotal": 146
+      }
+    },
+    {
+      "id": "cialone-mas",
+      "outcomeId": "mas",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "endpointDefinition": "MAS categories (subclinical, mild, or medium) based on O2 requirement and duration.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 47,
+        "ctrlEvents": 8,
+        "ctrlTotal": 58
+      }
+    },
+    {
+      "id": "elsersy-mas",
+      "outcomeId": "mas",
+      "author": "Elsersy",
+      "year": 2017,
+      "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min",
+      "population": "Egypt",
+      "notes": "Modified Jadad 5. Figure labels this trial '2016'.",
+      "n": 360,
+      "endpointDefinition": "RDS within a few hours of birth with compatible CXR finding.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 10,
+        "txTotal": 180,
+        "ctrlEvents": 23,
+        "ctrlTotal": 180
+      }
+    },
+    {
+      "id": "eriksen-mas",
+      "outcomeId": "mas",
+      "author": "Eriksen",
+      "year": 1994,
+      "citation": "Eriksen NL, Hostetter M, Parisi VM. Prophylactic amnioinfusion in pregnancies complicated by thick meconium. Am J Obstet Gynecol 1994;171:1026-30.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL over >1 h, then 180 mL/h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 124,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 0,
+        "txTotal": 65,
+        "ctrlEvents": 2,
+        "ctrlTotal": 59
+      }
+    },
+    {
+      "id": "fonseca-mas",
+      "outcomeId": "mas",
+      "author": "Fonseca",
+      "year": 2017,
+      "citation": "Fonseca A, Dwivedi A. A randomised single blind control study to assess the effect of intrapartum amnioinfusion on maternal caesarean section rate and fetal outcome in a tertiary care centre. Int J Reprod Contracept Obstet Gynecol 2017;6:4347-50.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 3,
+        "txTotal": 80,
+        "ctrlEvents": 7,
+        "ctrlTotal": 80
+      }
+    },
+    {
+      "id": "fraser-mas",
+      "outcomeId": "mas",
+      "author": "Fraser",
+      "year": 2005,
+      "citation": "Fraser WD, Hofmeyr J, Lede R, et al. Amnioinfusion for the prevention of the meconium aspiration syndrome. N Engl J Med 2005;353:909-17.",
+      "design": "DB-RCT",
+      "doseRegimen": "800 mL saline at 20 mL/min over 40 min",
+      "population": "13 countries; thick meconium only",
+      "notes": "Modified Jadad 7. Largest trial; continuous monitoring and standardized care.",
+      "n": 1975,
+      "endpointDefinition": "MAS adjudicated by a panel of 3 blinded neonatologists.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 43,
+        "txTotal": 986,
+        "ctrlEvents": 31,
+        "ctrlTotal": 989
+      }
+    },
+    {
+      "id": "gavali-mas",
+      "outcomeId": "mas",
+      "author": "Gavali",
+      "year": 2017,
+      "citation": "Gavali, Shinde S, Aher G, Mhaske S. Study of role of intrapartum transcervical amnioinfusion in meconium stained amniotic fluid. Indian J Basic Appl Med Res 2017;6:389-97.",
+      "design": "RCT",
+      "doseRegimen": "NS 250 mL over 20-30 min, then 10-20 mL/min up to 600 mL",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 4,
+        "txTotal": 80,
+        "ctrlEvents": 13,
+        "ctrlTotal": 80
+      }
+    },
+    {
+      "id": "prachi-mas",
+      "outcomeId": "mas",
+      "author": "Prachi",
+      "year": 2016,
+      "citation": "Prachi, Reena P, Priya BK, Swati T, Ruchi S, Sarita M. Study of perinatal outcome of amnio infusion during labor in meconium stained amniotic fluid. Scholars J Appl Sci Med 2016;4:2048-51.",
+      "design": "RCT",
+      "doseRegimen": "600 mL sterile saline over 30 min, then fluid until liquor cleared (max 1 L)",
+      "population": "India",
+      "notes": "Modified Jadad 3. Labeled 'Gupta 2016' in the review's forest plots.",
+      "n": 70,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 3,
+        "txTotal": 35,
+        "ctrlEvents": 10,
+        "ctrlTotal": 35
+      }
+    },
+    {
+      "id": "hofmeyr-mas",
+      "outcomeId": "mas",
+      "author": "Hofmeyr",
+      "year": 1998,
+      "citation": "Hofmeyr GJ, Gulmezoglu AM, Buchmann E, et al. The collaborative randomised amnioinfusion for meconium project (CRAMP): 1. South Africa. Br J Obstet Gynaecol 1998;105:304-8.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL at 15 mL/min, then 3 mL/min maintenance",
+      "population": "South Africa",
+      "notes": "Modified Jadad 7.",
+      "n": 325,
+      "endpointDefinition": "Diagnosed clinically by a blinded pediatrician.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 4,
+        "txTotal": 162,
+        "ctrlEvents": 6,
+        "ctrlTotal": 163
+      }
+    },
+    {
+      "id": "ilagan-mas",
+      "outcomeId": "mas",
+      "author": "Ilagan",
+      "year": 1992,
+      "citation": "Ilagan MKN, Kazzi GS, Liang K, Womack S, Bronsteen R. Transcervical amnioinfusion for prevention of meconium aspiration. Pediatr Res 1992;31.",
+      "design": "RCT",
+      "doseRegimen": "500 mL of NS",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 3.",
+      "n": 78,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 3,
+        "txTotal": 38,
+        "ctrlEvents": 4,
+        "ctrlTotal": 40
+      }
+    },
+    {
+      "id": "macri-mas",
+      "outcomeId": "mas",
+      "author": "Macri",
+      "year": 1992,
+      "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.",
+      "design": "RCT",
+      "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 170,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 0,
+        "txTotal": 85,
+        "ctrlEvents": 5,
+        "ctrlTotal": 85
+      }
+    },
+    {
+      "id": "mahomed-mas",
+      "outcomeId": "mas",
+      "author": "Mahomed",
+      "year": 1998,
+      "citation": "Mahomed K, Mulambo T, Woelk G, Hofmeyr GJ, Gulmezoglu AM. The collaborative randomised amnioinfusion for meconium project (CRAMP): 2. Zimbabwe. Br J Obstet Gynaecol 1998;105:309-13.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 30 drops/min",
+      "population": "Zimbabwe",
+      "notes": "Modified Jadad 7.",
+      "n": 652,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 10,
+        "txTotal": 323,
+        "ctrlEvents": 42,
+        "ctrlTotal": 329
+      }
+    },
+    {
+      "id": "moodley-mas",
+      "outcomeId": "mas",
+      "author": "Moodley",
+      "year": 1998,
+      "citation": "Moodley J, Matchaba P, Payne AJ. Intrapartum amnioinfusion for meconium-stained liquor in developing countries. Trop Doct 1998;28:31-4.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 10-15 mL/min",
+      "population": "South Africa",
+      "notes": "Modified Jadad 4.",
+      "n": 60,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 30,
+        "ctrlEvents": 4,
+        "ctrlTotal": 30
+      }
+    },
+    {
+      "id": "puertas-mas",
+      "outcomeId": "mas",
+      "author": "Puertas",
+      "year": 2001,
+      "citation": "Puertas A, Paz Carrillo M, Molto L, Alvarez M, Sedeno S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h",
+      "population": "Spain",
+      "notes": "Modified Jadad 6.",
+      "n": 206,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 3,
+        "txTotal": 103,
+        "ctrlEvents": 4,
+        "ctrlTotal": 103
+      }
+    },
+    {
+      "id": "rathor-mas",
+      "outcomeId": "mas",
+      "author": "Rathor",
+      "year": 2002,
+      "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's forest plots.",
+      "n": 200,
+      "endpointDefinition": "RDS within a few hours of birth with compatible CXR finding.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 0,
+        "txTotal": 100,
+        "ctrlEvents": 1,
+        "ctrlTotal": 100
+      }
+    },
+    {
+      "id": "sood-mas",
+      "outcomeId": "mas",
+      "author": "Sood",
+      "year": 2004,
+      "citation": "Sood M, Charulata, Dimple, Aggarwal N, Faridi MM. Amnioinfusion in thick meconium. Indian J Pediatr 2004;71:677-81.",
+      "design": "RCT",
+      "doseRegimen": "1 L saline over 30-45 min",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 6.",
+      "n": 196,
+      "endpointDefinition": "Diagnosed by CXR.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 6,
+        "txTotal": 96,
+        "ctrlEvents": 20,
+        "ctrlTotal": 100
+      }
+    },
+    {
+      "id": "spong-mas",
+      "outcomeId": "mas",
+      "author": "Spong",
+      "year": 1994,
+      "citation": "Spong CY, Ogundipe OA, Ross MG. Prophylactic amnioinfusion for meconium-stained amniotic fluid. Am J Obstet Gynecol 1994;171:931-5.",
+      "design": "RCT",
+      "doseRegimen": "600 mL bolus, then 3 mL/min",
+      "population": "United States",
+      "notes": "Modified Jadad 5. Labeled 'Spong (2004)' in some forest plots (published 1994).",
+      "n": 93,
+      "endpointDefinition": "Meconium below the cords with RDS requiring oxygen or ventilation and no evidence of sepsis.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 3,
+        "txTotal": 43,
+        "ctrlEvents": 1,
+        "ctrlTotal": 50
+      }
+    },
+    {
+      "id": "thakkar-mas",
+      "outcomeId": "mas",
+      "author": "Thakkar",
+      "year": 2012,
+      "citation": "Thakkar P, Aiyer S. Effect of amnioinfusion on outcome of neonates born with meconium stained amniotic fluid. Natl J Integr Res Med 2012;3.",
+      "design": "RCT",
+      "doseRegimen": "NS/LR at 100 mL/min until liquor cleared (up to 1000 mL)",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 5.",
+      "n": 227,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 4,
+        "txTotal": 52,
+        "ctrlEvents": 45,
+        "ctrlTotal": 175
+      }
+    },
+    {
+      "id": "vachhani-mas",
+      "outcomeId": "mas",
+      "author": "Vachhani",
+      "year": 2015,
+      "citation": "Vachhani N, Shah J, Goel G, Mehta M, Desai A, Dalal M. Intrapartum amnioinfusion in meconium stained amniotic fluid - a randomized control study in a tertiary care hospital. Natl J Community Med 2015;6:442-4.",
+      "design": "RCT",
+      "doseRegimen": "500 mL NS, then 180-200 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 200,
+      "data": {
+        "kind": "2x2",
+        "txEvents": 5,
+        "txTotal": 100,
+        "ctrlEvents": 15,
+        "ctrlTotal": 100
+      }
+    },
+    {
+      "id": "wenstrom-mas",
+      "outcomeId": "mas",
+      "author": "Wenstrom",
+      "year": 1989,
+      "citation": "Wenstrom KD, Parsons MT. The prevention of meconium aspiration in labor using amnioinfusion. Obstet Gynecol 1989;73:647-51.",
+      "design": "RCT",
+      "doseRegimen": "1 L NS over 20-40 min, repeated every 6 h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 80,
+      "endpointDefinition": "Diagnosed by CXR.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 0,
+        "txTotal": 36,
+        "ctrlEvents": 3,
+        "ctrlTotal": 44
+      }
+    },
+    {
+      "id": "yellayi-mas",
+      "outcomeId": "mas",
+      "author": "Yellayi",
+      "year": 2017,
+      "citation": "Yellayi ASS, Aruna S, Devi DH. Role of amnioinfusion in prevention of meconium aspiration syndrome. Natl J Clin Sci 2017;5:272-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL NS over 1 h, then 180 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 6.",
+      "n": 60,
+      "endpointDefinition": "Diagnosed by CXR.",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 30,
+        "ctrlEvents": 4,
+        "ctrlTotal": 30
+      }
+    },
+    {
+      "id": "adam-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Adam",
+      "year": 1989,
+      "citation": "Adam K, Cano L, Moise KJ. The effect of intrapartum amnioinfusion on the outcome of the fetus with heavy meconium stained amniotic fluid. Proceedings of 9th Annual Meeting of the Society of Perinatal Obstetricians; 1989; New Orleans, LA. 1989:438.",
+      "design": "RCT",
+      "doseRegimen": "Single infusion of 1000 mL",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 5.",
+      "n": 35,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.48,
+        "ciLow": 0.11,
+        "ciHigh": 2.1
+      }
+    },
+    {
+      "id": "bhosale-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Bhosale",
+      "year": 2015,
+      "citation": "Bhosale R, Patil S, Patil Y, Kshirsagar N. Randomised clinical trial of amnioinfusion and caesarean section in cases of thick meconium stained amniotic fluid and neonatal outcome. Int J Recent Trends Sci Technol 2015;13:511-5.",
+      "design": "RCT",
+      "doseRegimen": "Normal saline",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 2.",
+      "n": 126,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.09,
+        "ciLow": 0.03,
+        "ciHigh": 0.33
+      }
+    },
+    {
+      "id": "cialone-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.03,
+        "ciLow": 0.01,
+        "ciHigh": 0.15
+      }
+    },
+    {
+      "id": "elsersy-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Elsersy",
+      "year": 2017,
+      "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min",
+      "population": "Egypt",
+      "notes": "Modified Jadad 5. Figure labels this trial '2016'.",
+      "n": 360,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.3,
+        "ciLow": 0.17,
+        "ciHigh": 0.55
+      }
+    },
+    {
+      "id": "eriksen-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Eriksen",
+      "year": 1994,
+      "citation": "Eriksen NL, Hostetter M, Parisi VM. Prophylactic amnioinfusion in pregnancies complicated by thick meconium. Am J Obstet Gynecol 1994;171:1026-30.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL over >1 h, then 180 mL/h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 124,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.1,
+        "ciLow": 0.01,
+        "ciHigh": 0.82
+      }
+    },
+    {
+      "id": "fraser-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Fraser",
+      "year": 2005,
+      "citation": "Fraser WD, Hofmeyr J, Lede R, et al. Amnioinfusion for the prevention of the meconium aspiration syndrome. N Engl J Med 2005;353:909-17.",
+      "design": "DB-RCT",
+      "doseRegimen": "800 mL saline at 20 mL/min over 40 min",
+      "population": "13 countries; thick meconium only",
+      "notes": "Modified Jadad 7. Largest trial; continuous monitoring and standardized care.",
+      "n": 1975,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.76,
+        "ciLow": 0.53,
+        "ciHigh": 1.1
+      }
+    },
+    {
+      "id": "gavali-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Gavali",
+      "year": 2017,
+      "citation": "Gavali, Shinde S, Aher G, Mhaske S. Study of role of intrapartum transcervical amnioinfusion in meconium stained amniotic fluid. Indian J Basic Appl Med Res 2017;6:389-97.",
+      "design": "RCT",
+      "doseRegimen": "NS 250 mL over 20-30 min, then 10-20 mL/min up to 600 mL",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.31,
+        "ciLow": 0.12,
+        "ciHigh": 0.78
+      }
+    },
+    {
+      "id": "prachi-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Prachi",
+      "year": 2016,
+      "citation": "Prachi, Reena P, Priya BK, Swati T, Ruchi S, Sarita M. Study of perinatal outcome of amnio infusion during labor in meconium stained amniotic fluid. Scholars J Appl Sci Med 2016;4:2048-51.",
+      "design": "RCT",
+      "doseRegimen": "600 mL sterile saline over 30 min, then fluid until liquor cleared (max 1 L)",
+      "population": "India",
+      "notes": "Modified Jadad 3. Labeled 'Gupta 2016' in the review's forest plots.",
+      "n": 70,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.3,
+        "ciLow": 0.1,
+        "ciHigh": 0.86
+      }
+    },
+    {
+      "id": "hofmeyr-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Hofmeyr",
+      "year": 1998,
+      "citation": "Hofmeyr GJ, Gulmezoglu AM, Buchmann E, et al. The collaborative randomised amnioinfusion for meconium project (CRAMP): 1. South Africa. Br J Obstet Gynaecol 1998;105:304-8.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL at 15 mL/min, then 3 mL/min maintenance",
+      "population": "South Africa",
+      "notes": "Modified Jadad 7.",
+      "n": 325,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.5,
+        "ciLow": 0.18,
+        "ciHigh": 1.37
+      }
+    },
+    {
+      "id": "ilagan-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Ilagan",
+      "year": 1992,
+      "citation": "Ilagan MKN, Kazzi GS, Liang K, Womack S, Bronsteen R. Transcervical amnioinfusion for prevention of meconium aspiration. Pediatr Res 1992;31.",
+      "design": "RCT",
+      "doseRegimen": "500 mL of NS",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 3.",
+      "n": 78,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.19,
+        "ciLow": 0.06,
+        "ciHigh": 0.55
+      }
+    },
+    {
+      "id": "macri-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Macri",
+      "year": 1992,
+      "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.",
+      "design": "RCT",
+      "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 170,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.08,
+        "ciLow": 0.03,
+        "ciHigh": 0.23
+      }
+    },
+    {
+      "id": "puertas-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Puertas",
+      "year": 2001,
+      "citation": "Puertas A, Paz Carrillo M, Molto L, Alvarez M, Sedeno S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h",
+      "population": "Spain",
+      "notes": "Modified Jadad 6.",
+      "n": 206,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.29,
+        "ciLow": 0.14,
+        "ciHigh": 0.62
+      }
+    },
+    {
+      "id": "rathor-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Rathor",
+      "year": 2002,
+      "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's forest plots.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.35,
+        "ciLow": 0.16,
+        "ciHigh": 0.78
+      }
+    },
+    {
+      "id": "sood-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Sood",
+      "year": 2004,
+      "citation": "Sood M, Charulata, Dimple, Aggarwal N, Faridi MM. Amnioinfusion in thick meconium. Indian J Pediatr 2004;71:677-81.",
+      "design": "RCT",
+      "doseRegimen": "1 L saline over 30-45 min",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 6.",
+      "n": 196,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.22,
+        "ciLow": 0.11,
+        "ciHigh": 0.42
+      }
+    },
+    {
+      "id": "spong-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Spong",
+      "year": 1994,
+      "citation": "Spong CY, Ogundipe OA, Ross MG. Prophylactic amnioinfusion for meconium-stained amniotic fluid. Am J Obstet Gynecol 1994;171:931-5.",
+      "design": "RCT",
+      "doseRegimen": "600 mL bolus, then 3 mL/min",
+      "population": "United States",
+      "notes": "Modified Jadad 5. Labeled 'Spong (2004)' in some forest plots (published 1994).",
+      "n": 93,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.58,
+        "ciLow": 0.26,
+        "ciHigh": 9.67
+      }
+    },
+    {
+      "id": "wenstrom-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Wenstrom",
+      "year": 1989,
+      "citation": "Wenstrom KD, Parsons MT. The prevention of meconium aspiration in labor using amnioinfusion. Obstet Gynecol 1989;73:647-51.",
+      "design": "RCT",
+      "doseRegimen": "1 L NS over 20-40 min, repeated every 6 h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 80,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.1,
+        "ciLow": 0.02,
+        "ciHigh": 0.49
+      }
+    },
+    {
+      "id": "yellayi-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Yellayi",
+      "year": 2017,
+      "citation": "Yellayi ASS, Aruna S, Devi DH. Role of amnioinfusion in prevention of meconium aspiration syndrome. Natl J Clin Sci 2017;5:272-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL NS over 1 h, then 180 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 6.",
+      "n": 60,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.27,
+        "ciLow": 0.07,
+        "ciHigh": 0.96
+      }
+    },
+    {
+      "id": "sadovsky-meconium-below-cords",
+      "outcomeId": "meconium-below-cords",
+      "author": "Sadovsky",
+      "year": 1989,
+      "citation": "Sadovsky Y, Amon E, Bade ME, Petrie RH. Prophylactic amnioinfusion during labor complicated by meconium: a preliminary report. Am J Obstet Gynecol 1989;161:613-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL over 1 h, then 180 mL/h continuously",
+      "population": "United States",
+      "notes": "Modified Jadad 6. Lower CI prints as 0.00; entered as the implied log-symmetric bound 0.0031 (=point^2/upper).",
+      "n": 40,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.06,
+        "ciLow": 0.0031,
+        "ciHigh": 1.17
+      }
+    },
+    {
+      "id": "bhosale-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Bhosale",
+      "year": 2015,
+      "citation": "Bhosale R, Patil S, Patil Y, Kshirsagar N. Randomised clinical trial of amnioinfusion and caesarean section in cases of thick meconium stained amniotic fluid and neonatal outcome. Int J Recent Trends Sci Technol 2015;13:511-5.",
+      "design": "RCT",
+      "doseRegimen": "Normal saline",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 2.",
+      "n": 126,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.48,
+        "ciLow": 0.09,
+        "ciHigh": 2.74
+      }
+    },
+    {
+      "id": "choudhary-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Choudhary",
+      "year": 2010,
+      "citation": "Choudhary D, Bano I, Ali SM. Does amnioinfusion reduce caesarean section rate in meconium-stained amniotic fluid? Arch Gynecol Obstet 2010;282:17-22.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 2 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 6. Figure labels this trial '2009'.",
+      "n": 292,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.08,
+        "ciLow": 0.01,
+        "ciHigh": 0.6
+      }
+    },
+    {
+      "id": "cialone-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.32,
+        "ciLow": 0.6,
+        "ciHigh": 2.89
+      }
+    },
+    {
+      "id": "elsersy-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Elsersy",
+      "year": 2017,
+      "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min",
+      "population": "Egypt",
+      "notes": "Modified Jadad 5. Figure labels this trial '2016'.",
+      "n": 360,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.42,
+        "ciLow": 0.18,
+        "ciHigh": 0.99
+      }
+    },
+    {
+      "id": "fonseca-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Fonseca",
+      "year": 2017,
+      "citation": "Fonseca A, Dwivedi A. A randomised single blind control study to assess the effect of intrapartum amnioinfusion on maternal caesarean section rate and fetal outcome in a tertiary care centre. Int J Reprod Contracept Obstet Gynecol 2017;6:4347-50.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.21,
+        "ciLow": 0.07,
+        "ciHigh": 0.66
+      }
+    },
+    {
+      "id": "fraser-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Fraser",
+      "year": 2005,
+      "citation": "Fraser WD, Hofmeyr J, Lede R, et al. Amnioinfusion for the prevention of the meconium aspiration syndrome. N Engl J Med 2005;353:909-17.",
+      "design": "DB-RCT",
+      "doseRegimen": "800 mL saline at 20 mL/min over 40 min",
+      "population": "13 countries; thick meconium only",
+      "notes": "Modified Jadad 7. Largest trial; continuous monitoring and standardized care.",
+      "n": 1975,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.9,
+        "ciLow": 0.52,
+        "ciHigh": 1.53
+      }
+    },
+    {
+      "id": "prachi-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Prachi",
+      "year": 2016,
+      "citation": "Prachi, Reena P, Priya BK, Swati T, Ruchi S, Sarita M. Study of perinatal outcome of amnio infusion during labor in meconium stained amniotic fluid. Scholars J Appl Sci Med 2016;4:2048-51.",
+      "design": "RCT",
+      "doseRegimen": "600 mL sterile saline over 30 min, then fluid until liquor cleared (max 1 L)",
+      "population": "India",
+      "notes": "Modified Jadad 3. Labeled 'Gupta 2016' in the review's forest plots.",
+      "n": 70,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.18,
+        "ciLow": 0.02,
+        "ciHigh": 1.6
+      }
+    },
+    {
+      "id": "hofmeyr-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Hofmeyr",
+      "year": 1998,
+      "citation": "Hofmeyr GJ, Gulmezoglu AM, Buchmann E, et al. The collaborative randomised amnioinfusion for meconium project (CRAMP): 1. South Africa. Br J Obstet Gynaecol 1998;105:304-8.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL at 15 mL/min, then 3 mL/min maintenance",
+      "population": "South Africa",
+      "notes": "Modified Jadad 7.",
+      "n": 325,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.51,
+        "ciLow": 0.42,
+        "ciHigh": 5.45
+      }
+    },
+    {
+      "id": "ilagan-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Ilagan",
+      "year": 1992,
+      "citation": "Ilagan MKN, Kazzi GS, Liang K, Womack S, Bronsteen R. Transcervical amnioinfusion for prevention of meconium aspiration. Pediatr Res 1992;31.",
+      "design": "RCT",
+      "doseRegimen": "500 mL of NS",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 3.",
+      "n": 78,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.24,
+        "ciLow": 0.03,
+        "ciHigh": 2.28
+      }
+    },
+    {
+      "id": "macri-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Macri",
+      "year": 1992,
+      "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.",
+      "design": "RCT",
+      "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7. Lower CI prints as 0.00; entered as the implied log-symmetric bound 0.0027 (=point^2/upper).",
+      "n": 170,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.05,
+        "ciLow": 0.0027,
+        "ciHigh": 0.94
+      }
+    },
+    {
+      "id": "mahomed-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Mahomed",
+      "year": 1998,
+      "citation": "Mahomed K, Mulambo T, Woelk G, Hofmeyr GJ, Gulmezoglu AM. The collaborative randomised amnioinfusion for meconium project (CRAMP): 2. Zimbabwe. Br J Obstet Gynaecol 1998;105:309-13.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 30 drops/min",
+      "population": "Zimbabwe",
+      "notes": "Modified Jadad 7.",
+      "n": 652,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.33,
+        "ciLow": 0.15,
+        "ciHigh": 0.71
+      }
+    },
+    {
+      "id": "puertas-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Puertas",
+      "year": 2001,
+      "citation": "Puertas A, Paz Carrillo M, Molto L, Alvarez M, Sedeno S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h",
+      "population": "Spain",
+      "notes": "Modified Jadad 6.",
+      "n": 206,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.33,
+        "ciLow": 0.01,
+        "ciHigh": 8.2
+      }
+    },
+    {
+      "id": "rathor-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Rathor",
+      "year": 2002,
+      "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's forest plots.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.49,
+        "ciLow": 0.04,
+        "ciHigh": 5.55
+      }
+    },
+    {
+      "id": "sood-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Sood",
+      "year": 2004,
+      "citation": "Sood M, Charulata, Dimple, Aggarwal N, Faridi MM. Amnioinfusion in thick meconium. Indian J Pediatr 2004;71:677-81.",
+      "design": "RCT",
+      "doseRegimen": "1 L saline over 30-45 min",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 6.",
+      "n": 196,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.24,
+        "ciLow": 0.05,
+        "ciHigh": 1.18
+      }
+    },
+    {
+      "id": "vachhani-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Vachhani",
+      "year": 2015,
+      "citation": "Vachhani N, Shah J, Goel G, Mehta M, Desai A, Dalal M. Intrapartum amnioinfusion in meconium stained amniotic fluid - a randomized control study in a tertiary care hospital. Natl J Community Med 2015;6:442-4.",
+      "design": "RCT",
+      "doseRegimen": "500 mL NS, then 180-200 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.35,
+        "ciLow": 0.12,
+        "ciHigh": 1.03
+      }
+    },
+    {
+      "id": "wenstrom-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Wenstrom",
+      "year": 1989,
+      "citation": "Wenstrom KD, Parsons MT. The prevention of meconium aspiration in labor using amnioinfusion. Obstet Gynecol 1989;73:647-51.",
+      "design": "RCT",
+      "doseRegimen": "1 L NS over 20-40 min, repeated every 6 h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 80,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.6,
+        "ciLow": 0.05,
+        "ciHigh": 6.9
+      }
+    },
+    {
+      "id": "sadovsky-apgar-low",
+      "outcomeId": "apgar-low",
+      "author": "Sadovsky",
+      "year": 1989,
+      "citation": "Sadovsky Y, Amon E, Bade ME, Petrie RH. Prophylactic amnioinfusion during labor complicated by meconium: a preliminary report. Am J Obstet Gynecol 1989;161:613-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL over 1 h, then 180 mL/h continuously",
+      "population": "United States",
+      "notes": "Modified Jadad 6.",
+      "n": 40,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.11,
+        "ciLow": 0.06,
+        "ciHigh": 19.09
+      }
+    },
+    {
+      "id": "cialone-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.31,
+        "ciLow": 0.09,
+        "ciHigh": 1.04
+      }
+    },
+    {
+      "id": "fraser-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Fraser",
+      "year": 2005,
+      "citation": "Fraser WD, Hofmeyr J, Lede R, et al. Amnioinfusion for the prevention of the meconium aspiration syndrome. N Engl J Med 2005;353:909-17.",
+      "design": "DB-RCT",
+      "doseRegimen": "800 mL saline at 20 mL/min over 40 min",
+      "population": "13 countries; thick meconium only",
+      "notes": "Modified Jadad 7. Largest trial; continuous monitoring and standardized care.",
+      "n": 1975,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.13,
+        "ciLow": 0.78,
+        "ciHigh": 1.65
+      }
+    },
+    {
+      "id": "hofmeyr-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Hofmeyr",
+      "year": 1998,
+      "citation": "Hofmeyr GJ, Gulmezoglu AM, Buchmann E, et al. The collaborative randomised amnioinfusion for meconium project (CRAMP): 1. South Africa. Br J Obstet Gynaecol 1998;105:304-8.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL at 15 mL/min, then 3 mL/min maintenance",
+      "population": "South Africa",
+      "notes": "Modified Jadad 7.",
+      "n": 325,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.98,
+        "ciLow": 0.48,
+        "ciHigh": 1.99
+      }
+    },
+    {
+      "id": "macri-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Macri",
+      "year": 1992,
+      "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.",
+      "design": "RCT",
+      "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 170,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.16,
+        "ciLow": 0.06,
+        "ciHigh": 0.38
+      }
+    },
+    {
+      "id": "puertas-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Puertas",
+      "year": 2001,
+      "citation": "Puertas A, Paz Carrillo M, Molto L, Alvarez M, Sedeno S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h",
+      "population": "Spain",
+      "notes": "Modified Jadad 6.",
+      "n": 206,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.49,
+        "ciLow": 0.25,
+        "ciHigh": 0.95
+      }
+    },
+    {
+      "id": "spong-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Spong",
+      "year": 1994,
+      "citation": "Spong CY, Ogundipe OA, Ross MG. Prophylactic amnioinfusion for meconium-stained amniotic fluid. Am J Obstet Gynecol 1994;171:931-5.",
+      "design": "RCT",
+      "doseRegimen": "600 mL bolus, then 3 mL/min",
+      "population": "United States",
+      "notes": "Modified Jadad 5. Labeled 'Spong (2004)' in some forest plots (published 1994).",
+      "n": 93,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.74,
+        "ciLow": 0.28,
+        "ciHigh": 1.92
+      }
+    },
+    {
+      "id": "yellayi-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Yellayi",
+      "year": 2017,
+      "citation": "Yellayi ASS, Aruna S, Devi DH. Role of amnioinfusion in prevention of meconium aspiration syndrome. Natl J Clin Sci 2017;5:272-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL NS over 1 h, then 180 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 6.",
+      "n": 60,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.4,
+        "ciLow": 0.12,
+        "ciHigh": 1.31
+      }
+    },
+    {
+      "id": "sadovsky-neonatal-acidosis",
+      "outcomeId": "neonatal-acidosis",
+      "author": "Sadovsky",
+      "year": 1989,
+      "citation": "Sadovsky Y, Amon E, Bade ME, Petrie RH. Prophylactic amnioinfusion during labor complicated by meconium: a preliminary report. Am J Obstet Gynecol 1989;161:613-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL over 1 h, then 180 mL/h continuously",
+      "population": "United States",
+      "notes": "Modified Jadad 6.",
+      "n": 40,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.3,
+        "ciLow": 0.07,
+        "ciHigh": 1.39
+      }
+    },
+    {
+      "id": "choudhary-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Choudhary",
+      "year": 2010,
+      "citation": "Choudhary D, Bano I, Ali SM. Does amnioinfusion reduce caesarean section rate in meconium-stained amniotic fluid? Arch Gynecol Obstet 2010;282:17-22.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 2 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 6. Figure labels this trial '2009'.",
+      "n": 292,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.24,
+        "ciLow": 0.15,
+        "ciHigh": 0.39
+      }
+    },
+    {
+      "id": "cialone-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.81,
+        "ciLow": 0.73,
+        "ciHigh": 4.49
+      }
+    },
+    {
+      "id": "elsersy-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Elsersy",
+      "year": 2017,
+      "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min",
+      "population": "Egypt",
+      "notes": "Modified Jadad 5. Figure labels this trial '2016'.",
+      "n": 360,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.76,
+        "ciLow": 0.5,
+        "ciHigh": 1.16
+      }
+    },
+    {
+      "id": "eriksen-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Eriksen",
+      "year": 1994,
+      "citation": "Eriksen NL, Hostetter M, Parisi VM. Prophylactic amnioinfusion in pregnancies complicated by thick meconium. Am J Obstet Gynecol 1994;171:1026-30.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL over >1 h, then 180 mL/h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 124,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.05,
+        "ciLow": 0.46,
+        "ciHigh": 2.39
+      }
+    },
+    {
+      "id": "fonseca-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Fonseca",
+      "year": 2017,
+      "citation": "Fonseca A, Dwivedi A. A randomised single blind control study to assess the effect of intrapartum amnioinfusion on maternal caesarean section rate and fetal outcome in a tertiary care centre. Int J Reprod Contracept Obstet Gynecol 2017;6:4347-50.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.56,
+        "ciLow": 0.29,
+        "ciHigh": 1.06
+      }
+    },
+    {
+      "id": "fraser-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Fraser",
+      "year": 2005,
+      "citation": "Fraser WD, Hofmeyr J, Lede R, et al. Amnioinfusion for the prevention of the meconium aspiration syndrome. N Engl J Med 2005;353:909-17.",
+      "design": "DB-RCT",
+      "doseRegimen": "800 mL saline at 20 mL/min over 40 min",
+      "population": "13 countries; thick meconium only",
+      "notes": "Modified Jadad 7. Largest trial; continuous monitoring and standardized care.",
+      "n": 1975,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.14,
+        "ciLow": 0.94,
+        "ciHigh": 1.38
+      }
+    },
+    {
+      "id": "gavali-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Gavali",
+      "year": 2017,
+      "citation": "Gavali, Shinde S, Aher G, Mhaske S. Study of role of intrapartum transcervical amnioinfusion in meconium stained amniotic fluid. Indian J Basic Appl Med Res 2017;6:389-97.",
+      "design": "RCT",
+      "doseRegimen": "NS 250 mL over 20-30 min, then 10-20 mL/min up to 600 mL",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.43,
+        "ciLow": 0.21,
+        "ciHigh": 0.86
+      }
+    },
+    {
+      "id": "hofmeyr-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Hofmeyr",
+      "year": 1998,
+      "citation": "Hofmeyr GJ, Gulmezoglu AM, Buchmann E, et al. The collaborative randomised amnioinfusion for meconium project (CRAMP): 1. South Africa. Br J Obstet Gynaecol 1998;105:304-8.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL at 15 mL/min, then 3 mL/min maintenance",
+      "population": "South Africa",
+      "notes": "Modified Jadad 7.",
+      "n": 325,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.97,
+        "ciLow": 0.62,
+        "ciHigh": 1.5
+      }
+    },
+    {
+      "id": "ilagan-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Ilagan",
+      "year": 1992,
+      "citation": "Ilagan MKN, Kazzi GS, Liang K, Womack S, Bronsteen R. Transcervical amnioinfusion for prevention of meconium aspiration. Pediatr Res 1992;31.",
+      "design": "RCT",
+      "doseRegimen": "500 mL of NS",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 3.",
+      "n": 78,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.21,
+        "ciLow": 0.07,
+        "ciHigh": 0.6
+      }
+    },
+    {
+      "id": "macri-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Macri",
+      "year": 1992,
+      "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.",
+      "design": "RCT",
+      "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 170,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.43,
+        "ciLow": 0.2,
+        "ciHigh": 0.92
+      }
+    },
+    {
+      "id": "mahomed-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Mahomed",
+      "year": 1998,
+      "citation": "Mahomed K, Mulambo T, Woelk G, Hofmeyr GJ, Gulmezoglu AM. The collaborative randomised amnioinfusion for meconium project (CRAMP): 2. Zimbabwe. Br J Obstet Gynaecol 1998;105:309-13.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 30 drops/min",
+      "population": "Zimbabwe",
+      "notes": "Modified Jadad 7.",
+      "n": 652,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.82,
+        "ciLow": 0.49,
+        "ciHigh": 1.37
+      }
+    },
+    {
+      "id": "moodley-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Moodley",
+      "year": 1998,
+      "citation": "Moodley J, Matchaba P, Payne AJ. Intrapartum amnioinfusion for meconium-stained liquor in developing countries. Trop Doct 1998;28:31-4.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 10-15 mL/min",
+      "population": "South Africa",
+      "notes": "Modified Jadad 4.",
+      "n": 60,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.76,
+        "ciLow": 0.27,
+        "ciHigh": 2.12
+      }
+    },
+    {
+      "id": "puertas-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Puertas",
+      "year": 2001,
+      "citation": "Puertas A, Paz Carrillo M, Molto L, Alvarez M, Sedeno S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h",
+      "population": "Spain",
+      "notes": "Modified Jadad 6.",
+      "n": 206,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.43,
+        "ciLow": 0.2,
+        "ciHigh": 0.92
+      }
+    },
+    {
+      "id": "rathor-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Rathor",
+      "year": 2002,
+      "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's forest plots.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.47,
+        "ciLow": 0.25,
+        "ciHigh": 0.89
+      }
+    },
+    {
+      "id": "sood-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Sood",
+      "year": 2004,
+      "citation": "Sood M, Charulata, Dimple, Aggarwal N, Faridi MM. Amnioinfusion in thick meconium. Indian J Pediatr 2004;71:677-81.",
+      "design": "RCT",
+      "doseRegimen": "1 L saline over 30-45 min",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 6.",
+      "n": 196,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.2,
+        "ciLow": 0.1,
+        "ciHigh": 0.41
+      }
+    },
+    {
+      "id": "spong-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Spong",
+      "year": 1994,
+      "citation": "Spong CY, Ogundipe OA, Ross MG. Prophylactic amnioinfusion for meconium-stained amniotic fluid. Am J Obstet Gynecol 1994;171:931-5.",
+      "design": "RCT",
+      "doseRegimen": "600 mL bolus, then 3 mL/min",
+      "population": "United States",
+      "notes": "Modified Jadad 5. Labeled 'Spong (2004)' in some forest plots (published 1994).",
+      "n": 93,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.92,
+        "ciLow": 0.34,
+        "ciHigh": 2.49
+      }
+    },
+    {
+      "id": "thakkar-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Thakkar",
+      "year": 2012,
+      "citation": "Thakkar P, Aiyer S. Effect of amnioinfusion on outcome of neonates born with meconium stained amniotic fluid. Natl J Integr Res Med 2012;3.",
+      "design": "RCT",
+      "doseRegimen": "NS/LR at 100 mL/min until liquor cleared (up to 1000 mL)",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 5.",
+      "n": 227,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.84,
+        "ciLow": 0.45,
+        "ciHigh": 1.56
+      }
+    },
+    {
+      "id": "vachhani-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Vachhani",
+      "year": 2015,
+      "citation": "Vachhani N, Shah J, Goel G, Mehta M, Desai A, Dalal M. Intrapartum amnioinfusion in meconium stained amniotic fluid - a randomized control study in a tertiary care hospital. Natl J Community Med 2015;6:442-4.",
+      "design": "RCT",
+      "doseRegimen": "500 mL NS, then 180-200 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.45,
+        "ciLow": 0.25,
+        "ciHigh": 0.8
+      }
+    },
+    {
+      "id": "wenstrom-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Wenstrom",
+      "year": 1989,
+      "citation": "Wenstrom KD, Parsons MT. The prevention of meconium aspiration in labor using amnioinfusion. Obstet Gynecol 1989;73:647-51.",
+      "design": "RCT",
+      "doseRegimen": "1 L NS over 20-40 min, repeated every 6 h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 80,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.39,
+        "ciLow": 0.13,
+        "ciHigh": 1.13
+      }
+    },
+    {
+      "id": "yellayi-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Yellayi",
+      "year": 2017,
+      "citation": "Yellayi ASS, Aruna S, Devi DH. Role of amnioinfusion in prevention of meconium aspiration syndrome. Natl J Clin Sci 2017;5:272-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL NS over 1 h, then 180 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 6.",
+      "n": 60,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.84,
+        "ciLow": 0.26,
+        "ciHigh": 2.7
+      }
+    },
+    {
+      "id": "sadovsky-cesarean-delivery",
+      "outcomeId": "cesarean-delivery",
+      "author": "Sadovsky",
+      "year": 1989,
+      "citation": "Sadovsky Y, Amon E, Bade ME, Petrie RH. Prophylactic amnioinfusion during labor complicated by meconium: a preliminary report. Am J Obstet Gynecol 1989;161:613-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL over 1 h, then 180 mL/h continuously",
+      "population": "United States",
+      "notes": "Modified Jadad 6.",
+      "n": 40,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.71,
+        "ciLow": 0.18,
+        "ciHigh": 2.8
+      }
+    },
+    {
+      "id": "choudhary-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Choudhary",
+      "year": 2010,
+      "citation": "Choudhary D, Bano I, Ali SM. Does amnioinfusion reduce caesarean section rate in meconium-stained amniotic fluid? Arch Gynecol Obstet 2010;282:17-22.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 2 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 6. Figure labels this trial '2009'.",
+      "n": 292,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.16,
+        "ciLow": 0.1,
+        "ciHigh": 0.28
+      }
+    },
+    {
+      "id": "cialone-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.23,
+        "ciLow": 0.03,
+        "ciHigh": 2.04
+      }
+    },
+    {
+      "id": "elsersy-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Elsersy",
+      "year": 2017,
+      "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min",
+      "population": "Egypt",
+      "notes": "Modified Jadad 5. Figure labels this trial '2016'.",
+      "n": 360,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.5,
+        "ciLow": 0.32,
+        "ciHigh": 0.78
+      }
+    },
+    {
+      "id": "eriksen-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Eriksen",
+      "year": 1994,
+      "citation": "Eriksen NL, Hostetter M, Parisi VM. Prophylactic amnioinfusion in pregnancies complicated by thick meconium. Am J Obstet Gynecol 1994;171:1026-30.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL over >1 h, then 180 mL/h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 124,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.9,
+        "ciLow": 0.29,
+        "ciHigh": 2.73
+      }
+    },
+    {
+      "id": "fraser-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Fraser",
+      "year": 2005,
+      "citation": "Fraser WD, Hofmeyr J, Lede R, et al. Amnioinfusion for the prevention of the meconium aspiration syndrome. N Engl J Med 2005;353:909-17.",
+      "design": "DB-RCT",
+      "doseRegimen": "800 mL saline at 20 mL/min over 40 min",
+      "population": "13 countries; thick meconium only",
+      "notes": "Modified Jadad 7. Largest trial; continuous monitoring and standardized care.",
+      "n": 1975,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.2,
+        "ciLow": 0.92,
+        "ciHigh": 1.56
+      }
+    },
+    {
+      "id": "macri-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Macri",
+      "year": 1992,
+      "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.",
+      "design": "RCT",
+      "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 170,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.1,
+        "ciLow": 0.02,
+        "ciHigh": 0.43
+      }
+    },
+    {
+      "id": "mahomed-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Mahomed",
+      "year": 1998,
+      "citation": "Mahomed K, Mulambo T, Woelk G, Hofmeyr GJ, Gulmezoglu AM. The collaborative randomised amnioinfusion for meconium project (CRAMP): 2. Zimbabwe. Br J Obstet Gynaecol 1998;105:309-13.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 30 drops/min",
+      "population": "Zimbabwe",
+      "notes": "Modified Jadad 7.",
+      "n": 652,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.6,
+        "ciLow": 0.23,
+        "ciHigh": 1.54
+      }
+    },
+    {
+      "id": "moodley-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Moodley",
+      "year": 1998,
+      "citation": "Moodley J, Matchaba P, Payne AJ. Intrapartum amnioinfusion for meconium-stained liquor in developing countries. Trop Doct 1998;28:31-4.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 10-15 mL/min",
+      "population": "South Africa",
+      "notes": "Modified Jadad 4.",
+      "n": 60,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.37,
+        "ciLow": 0.08,
+        "ciHigh": 1.58
+      }
+    },
+    {
+      "id": "puertas-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Puertas",
+      "year": 2001,
+      "citation": "Puertas A, Paz Carrillo M, Molto L, Alvarez M, Sedeno S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h",
+      "population": "Spain",
+      "notes": "Modified Jadad 6.",
+      "n": 206,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.21,
+        "ciLow": 0.06,
+        "ciHigh": 0.75
+      }
+    },
+    {
+      "id": "rathor-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Rathor",
+      "year": 2002,
+      "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's forest plots.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.39,
+        "ciLow": 0.18,
+        "ciHigh": 0.82
+      }
+    },
+    {
+      "id": "sadovsky-cesarean-fetal-distress",
+      "outcomeId": "cesarean-fetal-distress",
+      "author": "Sadovsky",
+      "year": 1989,
+      "citation": "Sadovsky Y, Amon E, Bade ME, Petrie RH. Prophylactic amnioinfusion during labor complicated by meconium: a preliminary report. Am J Obstet Gynecol 1989;161:613-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL over 1 h, then 180 mL/h continuously",
+      "population": "United States",
+      "notes": "Modified Jadad 6.",
+      "n": 40,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.2,
+        "ciLow": 0.01,
+        "ciHigh": 4.44
+      }
+    },
+    {
+      "id": "bhosale-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Bhosale",
+      "year": 2015,
+      "citation": "Bhosale R, Patil S, Patil Y, Kshirsagar N. Randomised clinical trial of amnioinfusion and caesarean section in cases of thick meconium stained amniotic fluid and neonatal outcome. Int J Recent Trends Sci Technol 2015;13:511-5.",
+      "design": "RCT",
+      "doseRegimen": "Normal saline",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 2.",
+      "n": 126,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.1,
+        "ciLow": 0.04,
+        "ciHigh": 0.27
+      }
+    },
+    {
+      "id": "cialone-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.4,
+        "ciLow": 0.12,
+        "ciHigh": 1.34
+      }
+    },
+    {
+      "id": "elsersy-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Elsersy",
+      "year": 2017,
+      "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min",
+      "population": "Egypt",
+      "notes": "Modified Jadad 5. Figure labels this trial '2016'.",
+      "n": 360,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.52,
+        "ciLow": 0.28,
+        "ciHigh": 0.98
+      }
+    },
+    {
+      "id": "fonseca-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Fonseca",
+      "year": 2017,
+      "citation": "Fonseca A, Dwivedi A. A randomised single blind control study to assess the effect of intrapartum amnioinfusion on maternal caesarean section rate and fetal outcome in a tertiary care centre. Int J Reprod Contracept Obstet Gynecol 2017;6:4347-50.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.37,
+        "ciLow": 0.11,
+        "ciHigh": 1.23
+      }
+    },
+    {
+      "id": "gavali-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Gavali",
+      "year": 2017,
+      "citation": "Gavali, Shinde S, Aher G, Mhaske S. Study of role of intrapartum transcervical amnioinfusion in meconium stained amniotic fluid. Indian J Basic Appl Med Res 2017;6:389-97.",
+      "design": "RCT",
+      "doseRegimen": "NS 250 mL over 20-30 min, then 10-20 mL/min up to 600 mL",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.19,
+        "ciLow": 0.02,
+        "ciHigh": 1.66
+      }
+    },
+    {
+      "id": "prachi-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Prachi",
+      "year": 2016,
+      "citation": "Prachi, Reena P, Priya BK, Swati T, Ruchi S, Sarita M. Study of perinatal outcome of amnio infusion during labor in meconium stained amniotic fluid. Scholars J Appl Sci Med 2016;4:2048-51.",
+      "design": "RCT",
+      "doseRegimen": "600 mL sterile saline over 30 min, then fluid until liquor cleared (max 1 L)",
+      "population": "India",
+      "notes": "Modified Jadad 3. Labeled 'Gupta 2016' in the review's forest plots.",
+      "n": 70,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.26,
+        "ciLow": 0.09,
+        "ciHigh": 0.71
+      }
+    },
+    {
+      "id": "hofmeyr-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Hofmeyr",
+      "year": 1998,
+      "citation": "Hofmeyr GJ, Gulmezoglu AM, Buchmann E, et al. The collaborative randomised amnioinfusion for meconium project (CRAMP): 1. South Africa. Br J Obstet Gynaecol 1998;105:304-8.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL at 15 mL/min, then 3 mL/min maintenance",
+      "population": "South Africa",
+      "notes": "Modified Jadad 7.",
+      "n": 325,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.74,
+        "ciLow": 0.16,
+        "ciHigh": 3.36
+      }
+    },
+    {
+      "id": "mahomed-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Mahomed",
+      "year": 1998,
+      "citation": "Mahomed K, Mulambo T, Woelk G, Hofmeyr GJ, Gulmezoglu AM. The collaborative randomised amnioinfusion for meconium project (CRAMP): 2. Zimbabwe. Br J Obstet Gynaecol 1998;105:309-13.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 30 drops/min",
+      "population": "Zimbabwe",
+      "notes": "Modified Jadad 7.",
+      "n": 652,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.49,
+        "ciLow": 0.33,
+        "ciHigh": 0.75
+      }
+    },
+    {
+      "id": "rathor-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Rathor",
+      "year": 2002,
+      "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's forest plots.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.25,
+        "ciLow": 0.07,
+        "ciHigh": 0.93
+      }
+    },
+    {
+      "id": "spong-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Spong",
+      "year": 1994,
+      "citation": "Spong CY, Ogundipe OA, Ross MG. Prophylactic amnioinfusion for meconium-stained amniotic fluid. Am J Obstet Gynecol 1994;171:931-5.",
+      "design": "RCT",
+      "doseRegimen": "600 mL bolus, then 3 mL/min",
+      "population": "United States",
+      "notes": "Modified Jadad 5. Labeled 'Spong (2004)' in some forest plots (published 1994).",
+      "n": 93,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.03,
+        "ciLow": 0.74,
+        "ciHigh": 5.57
+      }
+    },
+    {
+      "id": "thakkar-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Thakkar",
+      "year": 2012,
+      "citation": "Thakkar P, Aiyer S. Effect of amnioinfusion on outcome of neonates born with meconium stained amniotic fluid. Natl J Integr Res Med 2012;3.",
+      "design": "RCT",
+      "doseRegimen": "NS/LR at 100 mL/min until liquor cleared (up to 1000 mL)",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 5.",
+      "n": 227,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.15,
+        "ciLow": 0.06,
+        "ciHigh": 0.34
+      }
+    },
+    {
+      "id": "vachhani-nicu-admission",
+      "outcomeId": "nicu-admission",
+      "author": "Vachhani",
+      "year": 2015,
+      "citation": "Vachhani N, Shah J, Goel G, Mehta M, Desai A, Dalal M. Intrapartum amnioinfusion in meconium stained amniotic fluid - a randomized control study in a tertiary care hospital. Natl J Community Med 2015;6:442-4.",
+      "design": "RCT",
+      "doseRegimen": "500 mL NS, then 180-200 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.46,
+        "ciLow": 0.21,
+        "ciHigh": 1.02
+      }
+    },
+    {
+      "id": "choudhary-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Choudhary",
+      "year": 2010,
+      "citation": "Choudhary D, Bano I, Ali SM. Does amnioinfusion reduce caesarean section rate in meconium-stained amniotic fluid? Arch Gynecol Obstet 2010;282:17-22.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 2 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 6. Figure labels this trial '2009'.",
+      "n": 292,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.49,
+        "ciLow": 0.14,
+        "ciHigh": 1.65
+      }
+    },
+    {
+      "id": "cialone-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Cialone",
+      "year": 1994,
+      "citation": "Cialone PR, Sherer DM, Ryan RM, Sinkin RA, Abramovici JS. Amnioinfusion during labor complicated by particulate meconium stained amniotic fluid decreases neonatal morbidity. Am J Obstet Gynecol 1994;170:842-9.",
+      "design": "RCT",
+      "doseRegimen": "NS 600 mL over >1 h, then 150 mL/h",
+      "population": "United States",
+      "notes": "Modified Jadad 7.",
+      "n": 105,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.29,
+        "ciLow": 0.03,
+        "ciHigh": 2.72
+      }
+    },
+    {
+      "id": "elsersy-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Elsersy",
+      "year": 2017,
+      "citation": "Elsersy M. Utility of amnioinfusion in deliveries complicated by meconium stained liquor: a randomized controlled trial. Int J Reprod Contracept Obstet Gynecol 2017;6:65-71.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 300 mL at 3 mL/min",
+      "population": "Egypt",
+      "notes": "Modified Jadad 5. Figure labels this trial '2016'.",
+      "n": 360,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.13,
+        "ciLow": 0.43,
+        "ciHigh": 3.0
+      }
+    },
+    {
+      "id": "eriksen-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Eriksen",
+      "year": 1994,
+      "citation": "Eriksen NL, Hostetter M, Parisi VM. Prophylactic amnioinfusion in pregnancies complicated by thick meconium. Am J Obstet Gynecol 1994;171:1026-30.",
+      "design": "RCT",
+      "doseRegimen": "NS 800 mL over >1 h, then 180 mL/h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 124,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.43,
+        "ciLow": 0.1,
+        "ciHigh": 1.79
+      }
+    },
+    {
+      "id": "gavali-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Gavali",
+      "year": 2017,
+      "citation": "Gavali, Shinde S, Aher G, Mhaske S. Study of role of intrapartum transcervical amnioinfusion in meconium stained amniotic fluid. Indian J Basic Appl Med Res 2017;6:389-97.",
+      "design": "RCT",
+      "doseRegimen": "NS 250 mL over 20-30 min, then 10-20 mL/min up to 600 mL",
+      "population": "India",
+      "notes": "Modified Jadad 4.",
+      "n": 160,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.69,
+        "ciLow": 0.3,
+        "ciHigh": 1.61
+      }
+    },
+    {
+      "id": "ilagan-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Ilagan",
+      "year": 1992,
+      "citation": "Ilagan MKN, Kazzi GS, Liang K, Womack S, Bronsteen R. Transcervical amnioinfusion for prevention of meconium aspiration. Pediatr Res 1992;31.",
+      "design": "RCT",
+      "doseRegimen": "500 mL of NS",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 3.",
+      "n": 78,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.31,
+        "ciLow": 0.36,
+        "ciHigh": 4.72
+      }
+    },
+    {
+      "id": "macri-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Macri",
+      "year": 1992,
+      "citation": "Macri CJ, Schrimmer DB, Leung A, Greenspoon JS, Paul RH. Prophylactic amnioinfusion improves outcome of pregnancy complicated by thick meconium and oligohydramnios. Am J Obstet Gynecol 1992;167:117-21.",
+      "design": "RCT",
+      "doseRegimen": "Warmed saline 500 mL, then 250-500 mL to keep AFI >10 cm",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 170,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.88,
+        "ciLow": 0.32,
+        "ciHigh": 2.39
+      }
+    },
+    {
+      "id": "mahomed-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Mahomed",
+      "year": 1998,
+      "citation": "Mahomed K, Mulambo T, Woelk G, Hofmeyr GJ, Gulmezoglu AM. The collaborative randomised amnioinfusion for meconium project (CRAMP): 2. Zimbabwe. Br J Obstet Gynaecol 1998;105:309-13.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 30 drops/min",
+      "population": "Zimbabwe",
+      "notes": "Modified Jadad 7.",
+      "n": 652,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.1,
+        "ciLow": 0.19,
+        "ciHigh": 23.28
+      }
+    },
+    {
+      "id": "puertas-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Puertas",
+      "year": 2001,
+      "citation": "Puertas A, Paz Carrillo M, Molto L, Alvarez M, Sedeno S, Miranda JA. Meconium-stained amniotic fluid in labor: a randomized trial of prophylactic amnioinfusion. Eur J Obstet Gynecol Reprod Biol 2001;99:33-7.",
+      "design": "RCT",
+      "doseRegimen": "0.9% NS 600 mL in first hour, then 180 mL/h",
+      "population": "Spain",
+      "notes": "Modified Jadad 6.",
+      "n": 206,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 4.12,
+        "ciLow": 0.45,
+        "ciHigh": 37.52
+      }
+    },
+    {
+      "id": "rathor-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Rathor",
+      "year": 2002,
+      "citation": "Rathor AM, Singh R, Ramji S, Tripathi R. Randomised trial of amnioinfusion during labour with meconium stained amniotic fluid. BJOG 2002;109:17-20.",
+      "design": "RCT",
+      "doseRegimen": "NS 500 mL over 30 min, then 500 mL at 3 mL/min",
+      "population": "India",
+      "notes": "Modified Jadad 5. Labeled 'Rathore 2002' in the review's forest plots.",
+      "n": 200,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.47,
+        "ciLow": 0.17,
+        "ciHigh": 1.3
+      }
+    },
+    {
+      "id": "spong-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Spong",
+      "year": 1994,
+      "citation": "Spong CY, Ogundipe OA, Ross MG. Prophylactic amnioinfusion for meconium-stained amniotic fluid. Am J Obstet Gynecol 1994;171:931-5.",
+      "design": "RCT",
+      "doseRegimen": "600 mL bolus, then 3 mL/min",
+      "population": "United States",
+      "notes": "Modified Jadad 5. Labeled 'Spong (2004)' in some forest plots (published 1994).",
+      "n": 93,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.13,
+        "ciLow": 0.38,
+        "ciHigh": 11.91
+      }
+    },
+    {
+      "id": "thakkar-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Thakkar",
+      "year": 2012,
+      "citation": "Thakkar P, Aiyer S. Effect of amnioinfusion on outcome of neonates born with meconium stained amniotic fluid. Natl J Integr Res Med 2012;3.",
+      "design": "RCT",
+      "doseRegimen": "NS/LR at 100 mL/min until liquor cleared (up to 1000 mL)",
+      "population": "India; thick meconium only",
+      "notes": "Modified Jadad 5.",
+      "n": 227,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 1.11,
+        "ciLow": 0.04,
+        "ciHigh": 27.6
+      }
+    },
+    {
+      "id": "wenstrom-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Wenstrom",
+      "year": 1989,
+      "citation": "Wenstrom KD, Parsons MT. The prevention of meconium aspiration in labor using amnioinfusion. Obstet Gynecol 1989;73:647-51.",
+      "design": "RCT",
+      "doseRegimen": "1 L NS over 20-40 min, repeated every 6 h",
+      "population": "United States; thick meconium only",
+      "notes": "Modified Jadad 7.",
+      "n": 80,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.8,
+        "ciLow": 0.13,
+        "ciHigh": 5.09
+      }
+    },
+    {
+      "id": "yellayi-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Yellayi",
+      "year": 2017,
+      "citation": "Yellayi ASS, Aruna S, Devi DH. Role of amnioinfusion in prevention of meconium aspiration syndrome. Natl J Clin Sci 2017;5:272-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL NS over 1 h, then 180 mL/h",
+      "population": "India",
+      "notes": "Modified Jadad 6.",
+      "n": 60,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 0.8,
+        "ciLow": 0.22,
+        "ciHigh": 2.97
+      }
+    },
+    {
+      "id": "sadovsky-postpartum-endometritis",
+      "outcomeId": "postpartum-endometritis",
+      "author": "Sadovsky",
+      "year": 1989,
+      "citation": "Sadovsky Y, Amon E, Bade ME, Petrie RH. Prophylactic amnioinfusion during labor complicated by meconium: a preliminary report. Am J Obstet Gynecol 1989;161:613-7.",
+      "design": "RCT",
+      "doseRegimen": "600 mL over 1 h, then 180 mL/h continuously",
+      "population": "United States",
+      "notes": "Modified Jadad 6.",
+      "n": 40,
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.35,
+        "ciLow": 0.2,
+        "ciHigh": 28.27
+      }
+    }
   ]
 }

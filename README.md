@@ -53,12 +53,12 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 <!-- TOPICS-COVERAGE:START -->
 
 **Topics covered:** 15
-**Articles covered:** 73
-**Total patients analyzed:** 249,879
+**Articles covered:** 74
+**Total patients analyzed:** 249,919
 
 | Topic | Articles | Patients | Category |
 | --- | ---: | ---: | --- |
-| Amnioinfusion for meconium-stained amniotic fluid | 23 | 5,954 | Obstetrics & neonatal |
+| Amnioinfusion for meconium-stained amniotic fluid | 24 | 5,994 | Obstetrics & neonatal |
 | Beta-carotene for skin cancer prevention | 1 | 1,805 | Skin cancer prevention |
 | Celecoxib for skin cancer prevention | 1 | 240 | Skin cancer prevention |
 | CoQ10 in Chronic Heart Failure (Q-SYMBIO) | 1 | 420 | Cardiology |

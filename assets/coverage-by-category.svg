@@ -11,26 +11,26 @@
 <line x1="220" y1="28" x2="220" y2="288" class="axis"/>
   <text x="40" y="55" class="label">Obstetrics &amp; neonatal</text>
   <rect x="220" y="40" width="500" height="20" class="bar" rx="6" ry="6"/>
-  <text x="730" y="55" class="value">23</text>
+  <text x="730" y="55" class="value">24</text>
   <text x="40" y="89" class="label">Cardiovascular</text>
-  <rect x="220" y="74" width="391" height="20" class="bar" rx="6" ry="6"/>
-  <text x="621" y="89" class="value">18</text>
+  <rect x="220" y="74" width="375" height="20" class="bar" rx="6" ry="6"/>
+  <text x="605" y="89" class="value">18</text>
   <text x="40" y="123" class="label">Pediatric gastroenterology</text>
-  <rect x="220" y="108" width="217" height="20" class="bar" rx="6" ry="6"/>
-  <text x="447" y="123" class="value">10</text>
+  <rect x="220" y="108" width="208" height="20" class="bar" rx="6" ry="6"/>
+  <text x="438" y="123" class="value">10</text>
   <text x="40" y="157" class="label">Skin cancer prevention</text>
-  <rect x="220" y="142" width="174" height="20" class="bar" rx="6" ry="6"/>
-  <text x="404" y="157" class="value">8</text>
+  <rect x="220" y="142" width="167" height="20" class="bar" rx="6" ry="6"/>
+  <text x="397" y="157" class="value">8</text>
   <text x="40" y="191" class="label">Opioid stewardship</text>
-  <rect x="220" y="176" width="109" height="20" class="bar" rx="6" ry="6"/>
-  <text x="339" y="191" class="value">5</text>
+  <rect x="220" y="176" width="104" height="20" class="bar" rx="6" ry="6"/>
+  <text x="334" y="191" class="value">5</text>
   <text x="40" y="225" class="label">Neonatal</text>
-  <rect x="220" y="210" width="109" height="20" class="bar" rx="6" ry="6"/>
-  <text x="339" y="225" class="value">5</text>
+  <rect x="220" y="210" width="104" height="20" class="bar" rx="6" ry="6"/>
+  <text x="334" y="225" class="value">5</text>
   <text x="40" y="259" class="label">Cardiac safety</text>
-  <rect x="220" y="244" width="65" height="20" class="bar" rx="6" ry="6"/>
-  <text x="295" y="259" class="value">3</text>
+  <rect x="220" y="244" width="63" height="20" class="bar" rx="6" ry="6"/>
+  <text x="293" y="259" class="value">3</text>
   <text x="40" y="293" class="label">Cardiology</text>
-  <rect x="220" y="278" width="22" height="20" class="bar" rx="6" ry="6"/>
-  <text x="252" y="293" class="value">1</text>
+  <rect x="220" y="278" width="21" height="20" class="bar" rx="6" ry="6"/>
+  <text x="251" y="293" class="value">1</text>
 </svg>
