@@ -1,0 +1,705 @@
+{
+  "slug": "vitamin-d-preeclampsia",
+  "name": "Vitamin D supplementation for preeclampsia",
+  "condition": "Pregnancy — preeclampsia and preterm delivery",
+  "intervention": "Prenatal vitamin D supplementation",
+  "comparator": "Placebo or low-dose vitamin D (subgroup separated)",
+  "category": "Obstetrics & neonatal",
+  "evidenceClass": "efficacy",
+  "summary": "Across 14 randomised trials of preeclampsia and 13 of preterm labor, prenatal vitamin D supplementation was associated with a significant reduction in each (pooled RR ~0.55 and ~0.70 in the source review). Effects on low birth weight and 5-minute Apgar did not reach significance. Benefit was more pronounced against placebo than against low-dose vitamin D controls.",
+  "description": "A meta-analysis (Moghib 2024, BMC Pregnancy and Childbirth) of 33 RCTs of prenatal vitamin D supplementation. Each outcome's constituent trials are entered from the review's forest plots (Figures 3, 4, 6, 7) — raw per-arm event counts for the binary outcomes, per-arm mean±SD for the continuous 5-minute Apgar score — and pooled live. Not every trial contributed to every outcome; only trials the review actually plotted for a given outcome are encoded there.",
+  "interpretation": "The review's pooled effect for preeclampsia is large (RR 0.55), but that number rests on 14 trials of heterogeneous design (open-label to double-blind), heterogeneous doses (400 IU/day to a single 200,000 IU dose), and heterogeneous populations (general pregnancy to women with prior preeclampsia). The authors noted significant publication-bias signals. Subgroup analysis (baked into the encoded trials via the 'vs placebo' / 'vs low-dose vitamin D' subgroup notes) mattered: benefit was much clearer versus placebo than versus a low-dose active control, which is consistent with a threshold effect at correcting deficiency rather than a dose-response of supplementation itself. The preterm-labor result is dominated by Roth 2018 (Bangladesh, 1300 women), the largest trial, which found the opposite direction (RR ~1.5) — the pooled reduction depends heavily on the smaller, deficiency-focused trials. Low birth weight and 5-minute Apgar did not reach significance. As with any single-review estimate: absolute benefit depends on baseline preeclampsia risk in the population, and the ~45% relative reduction here should not be assumed to travel to well-nourished, vitamin-D-replete populations.",
+  "methodologyNotes": "All outcomes are computed live from each trial's raw data (2×2 counts or per-arm mean±SD) — nothing hardcoded. The review's pooled random-effects estimates should reproduce here within rounding (preeclampsia ≈0.55, preterm labor ≈0.70, low birth weight ≈0.65, Apgar MD ≈0.20). Trials are entered only for the outcomes the review actually plotted for them (Figures 3, 4, 6, 7); the 25-hydroxyvitamin D outcome (Figure 5) is not encoded because it is a biomarker rather than a clinical outcome. Rostami 2018 contributes two rows to preeclampsia and preterm labor (moderate- and severe-deficiency strata; the review's Figures 3 and 4 label them * and **) — these are two independent subgroups of one trial, not double-counted, and are entered separately as the review did. The subgroup structure (intervention vs placebo, intervention vs low-dose vitamin D) is captured in each study's `notes` rather than as separate outcomes, because the review's headline pool combines them. The review reported significant publication bias (Egger test).",
+  "primaryOutcomeId": "preeclampsia",
+  "lastUpdated": "2026-06-26",
+  "outcomes": [
+    {
+      "id": "preeclampsia",
+      "label": "Preeclampsia (incidence)",
+      "direction": "lowerIsBetter",
+      "description": "Incident preeclampsia during pregnancy (per each trial's diagnostic criteria)."
+    },
+    {
+      "id": "preterm-labor",
+      "label": "Preterm labor",
+      "direction": "lowerIsBetter",
+      "description": "Delivery before 37 weeks of gestation."
+    },
+    {
+      "id": "low-birth-weight",
+      "label": "Low birth weight",
+      "direction": "lowerIsBetter",
+      "description": "Birth weight below the trial's low-birth-weight threshold (typically <2500 g)."
+    },
+    {
+      "id": "apgar-5min",
+      "label": "Apgar score at 5 minutes",
+      "direction": "higherIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Apgar score at 5 minutes (higher is better)."
+    }
+  ],
+  "studies": [
+    {
+      "id": "ali2019-preec",
+      "author": "Ali",
+      "year": 2019,
+      "citation": "Ali AM, Alobaid A, Malhis TN, Khattab AF. Effect of vitamin D3 supplementation in pregnancy on risk of pre-eclampsia — randomized controlled trial. Clin Nutr. 2019;38(2):557-563.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Saudi Arabia",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 83,
+        "ctrlEvents": 6,
+        "ctrlTotal": 81
+      },
+      "notes": "Subgroup: intervention vs low-dose vitamin D."
+    },
+    {
+      "id": "ku2024-preec",
+      "author": "Ku",
+      "year": 2024,
+      "citation": "Ku CW, Lee AJW, Oh B, Lim CHF, Chang TY, Yap F, et al. The effect of vitamin D supplementation in pregnant women with overweight and obesity: a randomised controlled trial. Nutrients. 2023;16(1).",
+      "design": "RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Singapore",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 4,
+        "txTotal": 111,
+        "ctrlEvents": 7,
+        "ctrlTotal": 116
+      },
+      "notes": "Subgroup: intervention vs low-dose vitamin D."
+    },
+    {
+      "id": "mirzakhani2016-preec",
+      "author": "Mirzakhani",
+      "year": 2016,
+      "citation": "Mirzakhani H, Litonjua AA, McElrath TF, O'Connor G, Lee-Parritz A, Iverson R, et al. Early pregnancy vitamin D status and risk of preeclampsia. J Clin Invest. 2016;126(12):4702-4715.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "USA",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 33,
+        "txTotal": 408,
+        "ctrlEvents": 34,
+        "ctrlTotal": 408
+      },
+      "notes": "Subgroup: intervention vs low-dose vitamin D."
+    },
+    {
+      "id": "asemi2015-preec",
+      "author": "Asemi",
+      "year": 2015,
+      "citation": "Asemi Z, Esmaillzadeh A. The effect of multi mineral-vitamin D supplementation on pregnancy outcomes in pregnant women at risk for pre-eclampsia. Int J Prev Med. 2015;6:62.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 23,
+        "ctrlEvents": 1,
+        "ctrlTotal": 23
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "azami2017-preec",
+      "author": "Azami",
+      "year": 2017,
+      "citation": "Azami M, Azadi T, Farhang S, Rahmati S, Pourtaghi K. The effects of multi mineral-vitamin D and vitamins (C+E) supplementation in the prevention of preeclampsia: an RCT. Int J Reprod Biomed. 2017;15(5):273-278.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 4,
+        "txTotal": 30,
+        "ctrlEvents": 11,
+        "ctrlTotal": 30
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "ashraf2023-preec",
+      "author": "Ashraf",
+      "year": 2023,
+      "citation": "Ashraf S. The effects of vitamin D supplement on prevention of preeclampsia in pregnant women. Isra Med J. 2023;15(1):11-14.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Pakistan",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 23,
+        "txTotal": 125,
+        "ctrlEvents": 31,
+        "ctrlTotal": 125
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "hossain2014-preec",
+      "author": "Hossain",
+      "year": 2014,
+      "citation": "Hossain N, Kanani FH, Ramzan S, Kausar R, Ayaz S, Khanani R, et al. Obstetric and neonatal outcomes of maternal vitamin D supplementation: results of an open-label, randomized controlled trial of antenatal vitamin D supplementation in Pakistani women. J Clin Endocrinol Metab. 2014;99(7):2448-2455.",
+      "design": "RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Pakistan",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 10,
+        "txTotal": 86,
+        "ctrlEvents": 6,
+        "ctrlTotal": 89
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "kabuyanga2024-preec",
+      "author": "Kabuyanga",
+      "year": 2024,
+      "citation": "Kabuyanga RK, Tugirimana PL, Sifa B, Balezi M, Dikete ME, Mitangala PN, et al. Effect of early vitamin D supplementation on the incidence of preeclampsia in primigravid women: a randomised clinical trial in Eastern Democratic Republic of the Congo. BMC Pregnancy Childbirth. 2024;24(1):107.",
+      "design": "RCT",
+      "outcomeId": "preeclampsia",
+      "population": "DR Congo",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 12,
+        "txTotal": 583,
+        "ctrlEvents": 33,
+        "ctrlTotal": 576
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "karamali2015-preec",
+      "author": "Karamali",
+      "year": 2015,
+      "citation": "Karamali M, Beihaghi E, Mohammadi AA, Asemi Z. Effects of high-dose vitamin D supplementation on metabolic status and pregnancy outcomes in pregnant women at risk for pre-eclampsia. Horm Metab Res. 2015;47(12):867-872.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 1,
+        "txTotal": 30,
+        "ctrlEvents": 3,
+        "ctrlTotal": 30
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "memon2022-preec",
+      "author": "Memon",
+      "year": 2022,
+      "citation": "Memon HA, Rafique M, Khalid S, Perveen R, Imtiaz R, Naqvi N. Role of vitamin D for the prevention of pre-eclampsia in pregnant women: a randomized controlled trial. PJMHS. 2022;16(1):1086-1088.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Pakistan",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 3,
+        "txTotal": 45,
+        "ctrlEvents": 11,
+        "ctrlTotal": 45
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "naghshineh2016-preec",
+      "author": "Naghshineh",
+      "year": 2016,
+      "citation": "Naghshineh E, Sheikhaliyan S. Effect of vitamin D supplementation in the reduce risk of preeclampsia in nulliparous women. Adv Biomed Res. 2016;5:7.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 2,
+        "txTotal": 68,
+        "ctrlEvents": 7,
+        "ctrlTotal": 70
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "rostami2018a-preec",
+      "author": "Rostami",
+      "year": 2018,
+      "citation": "Rostami M, Tehrani FR, Simbar M, Bidhendi Yarandi R, Minooee S, Hollis BW, et al. Effectiveness of prenatal vitamin D deficiency screening and treatment program: a stratified randomized field trial. J Clin Endocrinol Metab. 2018;103(8):2936-2948.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 29,
+        "txTotal": 394,
+        "ctrlEvents": 54,
+        "ctrlTotal": 415
+      },
+      "notes": "Subgroup: intervention vs placebo. Moderate vitamin D deficiency stratum (Rostami 2018*)."
+    },
+    {
+      "id": "rostami2018b-preec",
+      "author": "Rostami",
+      "year": 2018,
+      "citation": "Rostami M, Tehrani FR, Simbar M, Bidhendi Yarandi R, Minooee S, Hollis BW, et al. Effectiveness of prenatal vitamin D deficiency screening and treatment program: a stratified randomized field trial. J Clin Endocrinol Metab. 2018;103(8):2936-2948.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 35,
+        "txTotal": 394,
+        "ctrlEvents": 75,
+        "ctrlTotal": 340
+      },
+      "notes": "Subgroup: intervention vs placebo. Severe vitamin D deficiency stratum (Rostami 2018**)."
+    },
+    {
+      "id": "sablok2015-preec",
+      "author": "Sablok",
+      "year": 2015,
+      "citation": "Sablok A, Batra A, Thariani K, Batra A, Bharti R, Aggarwal AR, et al. Supplementation of vitamin D in pregnancy and its correlation with feto-maternal outcome. Clin Endocrinol (Oxf). 2015;83(4):536-541.",
+      "design": "RCT",
+      "outcomeId": "preeclampsia",
+      "population": "India",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 12,
+        "txTotal": 108,
+        "ctrlEvents": 12,
+        "ctrlTotal": 57
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "sasan2017-preec",
+      "author": "Sasan",
+      "year": 2017,
+      "citation": "Behjat Sasan S, Zandvakili F, Soufizadeh N, Baybordi E. The effects of vitamin D supplement on prevention of recurrence of preeclampsia in pregnant women with a history of preeclampsia. Obstet Gynecol Int. 2017;2017:8249264.",
+      "design": "DB-RCT",
+      "outcomeId": "preeclampsia",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 11,
+        "txTotal": 70,
+        "ctrlEvents": 22,
+        "ctrlTotal": 72
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "moon2022-preterm",
+      "author": "Moon",
+      "year": 2022,
+      "citation": "Moon RJ, D'Angelo S, Crozier SR, Curtis EM, Fernandes M, Kermack AJ, et al. Does antenatal cholecalciferol supplementation affect the mode or timing of delivery? Post hoc analyses of the MAVIDOS randomized controlled trial. J Public Health (Oxf). 2023;45(3):738-747.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "United Kingdom",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 27,
+        "txTotal": 479,
+        "ctrlEvents": 22,
+        "ctrlTotal": 486
+      },
+      "notes": "Subgroup: intervention vs low-dose vitamin D."
+    },
+    {
+      "id": "ku2024-preterm",
+      "author": "Ku",
+      "year": 2024,
+      "citation": "Ku CW, Lee AJW, Oh B, Lim CHF, Chang TY, Yap F, et al. The effect of vitamin D supplementation in pregnant women with overweight and obesity: a randomised controlled trial. Nutrients. 2023;16(1).",
+      "design": "RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Singapore",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 8,
+        "txTotal": 111,
+        "ctrlEvents": 5,
+        "ctrlTotal": 116
+      },
+      "notes": "Subgroup: intervention vs low-dose vitamin D."
+    },
+    {
+      "id": "ali2019-preterm",
+      "author": "Ali",
+      "year": 2019,
+      "citation": "Ali AM, Alobaid A, Malhis TN, Khattab AF. Effect of vitamin D3 supplementation in pregnancy on risk of pre-eclampsia — randomized controlled trial. Clin Nutr. 2019;38(2):557-563.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Saudi Arabia",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 13,
+        "txTotal": 83,
+        "ctrlEvents": 13,
+        "ctrlTotal": 81
+      },
+      "notes": "Subgroup: intervention vs low-dose vitamin D."
+    },
+    {
+      "id": "singh2015-preterm",
+      "author": "Singh",
+      "year": 2015,
+      "citation": "Singh D, Hariharan D, Bhaumik D. Role of vitamin D in reducing the risk of preterm labour. Int J Reprod Contracept Obstet Gynecol. 2015.",
+      "design": "RCT",
+      "outcomeId": "preterm-labor",
+      "population": "India",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 6,
+        "txTotal": 50,
+        "ctrlEvents": 15,
+        "ctrlTotal": 50
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "sasan2017-preterm",
+      "author": "Sasan",
+      "year": 2017,
+      "citation": "Behjat Sasan S, Zandvakili F, Soufizadeh N, Baybordi E. The effects of vitamin D supplement on prevention of recurrence of preeclampsia in pregnant women with a history of preeclampsia. Obstet Gynecol Int. 2017;2017:8249264.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 0,
+        "txTotal": 70,
+        "ctrlEvents": 2,
+        "ctrlTotal": 72
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "roth2018-preterm",
+      "author": "Roth",
+      "year": 2018,
+      "citation": "Roth DE, Morris SK, Zlotkin S, Gernand AD, Ahmed T, Shanta SS, et al. Vitamin D supplementation in pregnancy and lactation and infant growth. N Engl J Med. 2018;379(6):535-546.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Bangladesh",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 100,
+        "txTotal": 1039,
+        "ctrlEvents": 24,
+        "ctrlTotal": 259
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "rostami2018b-preterm",
+      "author": "Rostami",
+      "year": 2018,
+      "citation": "Rostami M, Tehrani FR, Simbar M, Bidhendi Yarandi R, Minooee S, Hollis BW, et al. Effectiveness of prenatal vitamin D deficiency screening and treatment program: a stratified randomized field trial. J Clin Endocrinol Metab. 2018;103(8):2936-2948.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 33,
+        "txTotal": 394,
+        "ctrlEvents": 71,
+        "ctrlTotal": 340
+      },
+      "notes": "Subgroup: intervention vs placebo. Severe vitamin D deficiency stratum (Rostami 2018**)."
+    },
+    {
+      "id": "rostami2018a-preterm",
+      "author": "Rostami",
+      "year": 2018,
+      "citation": "Rostami M, Tehrani FR, Simbar M, Bidhendi Yarandi R, Minooee S, Hollis BW, et al. Effectiveness of prenatal vitamin D deficiency screening and treatment program: a stratified randomized field trial. J Clin Endocrinol Metab. 2018;103(8):2936-2948.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 29,
+        "txTotal": 394,
+        "ctrlEvents": 40,
+        "ctrlTotal": 415
+      },
+      "notes": "Subgroup: intervention vs placebo. Moderate vitamin D deficiency stratum (Rostami 2018*)."
+    },
+    {
+      "id": "naghshineh2016-preterm",
+      "author": "Naghshineh",
+      "year": 2016,
+      "citation": "Naghshineh E, Sheikhaliyan S. Effect of vitamin D supplementation in the reduce risk of preeclampsia in nulliparous women. Adv Biomed Res. 2016;5:7.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 4,
+        "txTotal": 68,
+        "ctrlEvents": 17,
+        "ctrlTotal": 70
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "karamali2015-preterm",
+      "author": "Karamali",
+      "year": 2015,
+      "citation": "Karamali M, Beihaghi E, Mohammadi AA, Asemi Z. Effects of high-dose vitamin D supplementation on metabolic status and pregnancy outcomes in pregnant women at risk for pre-eclampsia. Horm Metab Res. 2015;47(12):867-872.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 0,
+        "txTotal": 30,
+        "ctrlEvents": 1,
+        "ctrlTotal": 30
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "kabuyanga2024-preterm",
+      "author": "Kabuyanga",
+      "year": 2024,
+      "citation": "Kabuyanga RK, Tugirimana PL, Sifa B, Balezi M, Dikete ME, Mitangala PN, et al. Effect of early vitamin D supplementation on the incidence of preeclampsia in primigravid women: a randomised clinical trial in Eastern Democratic Republic of the Congo. BMC Pregnancy Childbirth. 2024;24(1):107.",
+      "design": "RCT",
+      "outcomeId": "preterm-labor",
+      "population": "DR Congo",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 28,
+        "txTotal": 583,
+        "ctrlEvents": 55,
+        "ctrlTotal": 576
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "hossain2014-preterm",
+      "author": "Hossain",
+      "year": 2014,
+      "citation": "Hossain N, Kanani FH, Ramzan S, Kausar R, Ayaz S, Khanani R, et al. Obstetric and neonatal outcomes of maternal vitamin D supplementation: results of an open-label, randomized controlled trial of antenatal vitamin D supplementation in Pakistani women. J Clin Endocrinol Metab. 2014;99(7):2448-2455.",
+      "design": "RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Pakistan",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 12,
+        "txTotal": 86,
+        "ctrlEvents": 10,
+        "ctrlTotal": 89
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "charandabi2015-preterm",
+      "author": "Mohammad-Alizadeh-Charandabi",
+      "year": 2015,
+      "citation": "Mohammad-Alizadeh-Charandabi S, Mirghafourvand M, Mansouri A, Najafi M, Khodabande F. The effect of Vitamin D and calcium plus vitamin D during pregnancy on pregnancy and birth outcomes: a randomized controlled trial. J Caring Sci. 2015;4(1):35-44.",
+      "design": "DB-RCT",
+      "outcomeId": "preterm-labor",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 2,
+        "txTotal": 42,
+        "ctrlEvents": 4,
+        "ctrlTotal": 42
+      },
+      "notes": "Subgroup: intervention vs placebo."
+    },
+    {
+      "id": "ali2019-lbw",
+      "author": "Ali",
+      "year": 2019,
+      "citation": "Ali AM, Alobaid A, Malhis TN, Khattab AF. Effect of vitamin D3 supplementation in pregnancy on risk of pre-eclampsia — randomized controlled trial. Clin Nutr. 2019;38(2):557-563.",
+      "design": "DB-RCT",
+      "outcomeId": "low-birth-weight",
+      "population": "Saudi Arabia",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 8,
+        "txTotal": 83,
+        "ctrlEvents": 18,
+        "ctrlTotal": 81
+      }
+    },
+    {
+      "id": "kabuyanga2024-lbw",
+      "author": "Kabuyanga",
+      "year": 2024,
+      "citation": "Kabuyanga RK, Tugirimana PL, Sifa B, Balezi M, Dikete ME, Mitangala PN, et al. Effect of early vitamin D supplementation on the incidence of preeclampsia in primigravid women: a randomised clinical trial in Eastern Democratic Republic of the Congo. BMC Pregnancy Childbirth. 2024;24(1):107.",
+      "design": "RCT",
+      "outcomeId": "low-birth-weight",
+      "population": "DR Congo",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 26,
+        "txTotal": 583,
+        "ctrlEvents": 60,
+        "ctrlTotal": 576
+      }
+    },
+    {
+      "id": "karamali2015-lbw",
+      "author": "Karamali",
+      "year": 2015,
+      "citation": "Karamali M, Beihaghi E, Mohammadi AA, Asemi Z. Effects of high-dose vitamin D supplementation on metabolic status and pregnancy outcomes in pregnant women at risk for pre-eclampsia. Horm Metab Res. 2015;47(12):867-872.",
+      "design": "DB-RCT",
+      "outcomeId": "low-birth-weight",
+      "population": "Iran",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 0,
+        "txTotal": 30,
+        "ctrlEvents": 2,
+        "ctrlTotal": 30
+      }
+    },
+    {
+      "id": "khan2016-lbw",
+      "author": "Khan",
+      "year": 2016,
+      "citation": "Khan F, Ahmad T, Hussain R, Zia-ul-Haq M. A randomized controlled trial of oral vitamin D supplementation in pregnancy to improve maternal periodontal health and birth weight.",
+      "design": "DB-RCT",
+      "outcomeId": "low-birth-weight",
+      "population": "Pakistan",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 7,
+        "txTotal": 27,
+        "ctrlEvents": 11,
+        "ctrlTotal": 35
+      }
+    },
+    {
+      "id": "ku2024-lbw",
+      "author": "Ku",
+      "year": 2024,
+      "citation": "Ku CW, Lee AJW, Oh B, Lim CHF, Chang TY, Yap F, et al. The effect of vitamin D supplementation in pregnant women with overweight and obesity: a randomised controlled trial. Nutrients. 2023;16(1).",
+      "design": "RCT",
+      "outcomeId": "low-birth-weight",
+      "population": "Singapore",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 11,
+        "txTotal": 111,
+        "ctrlEvents": 13,
+        "ctrlTotal": 116
+      }
+    },
+    {
+      "id": "roth2018-lbw",
+      "author": "Roth",
+      "year": 2018,
+      "citation": "Roth DE, Morris SK, Zlotkin S, Gernand AD, Ahmed T, Shanta SS, et al. Vitamin D supplementation in pregnancy and lactation and infant growth. N Engl J Med. 2018;379(6):535-546.",
+      "design": "DB-RCT",
+      "outcomeId": "low-birth-weight",
+      "population": "Bangladesh",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 188,
+        "txTotal": 1039,
+        "ctrlEvents": 42,
+        "ctrlTotal": 259
+      }
+    },
+    {
+      "id": "sablok2015-lbw",
+      "author": "Sablok",
+      "year": 2015,
+      "citation": "Sablok A, Batra A, Thariani K, Batra A, Bharti R, Aggarwal AR, et al. Supplementation of vitamin D in pregnancy and its correlation with feto-maternal outcome. Clin Endocrinol (Oxf). 2015;83(4):536-541.",
+      "design": "RCT",
+      "outcomeId": "low-birth-weight",
+      "population": "India",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 9,
+        "txTotal": 108,
+        "ctrlEvents": 11,
+        "ctrlTotal": 57
+      }
+    },
+    {
+      "id": "hossain2014-apgar",
+      "author": "Hossain",
+      "year": 2014,
+      "citation": "Hossain N, Kanani FH, Ramzan S, Kausar R, Ayaz S, Khanani R, et al. Obstetric and neonatal outcomes of maternal vitamin D supplementation: results of an open-label, randomized controlled trial of antenatal vitamin D supplementation in Pakistani women. J Clin Endocrinol Metab. 2014;99(7):2448-2455.",
+      "design": "RCT",
+      "outcomeId": "apgar-5min",
+      "population": "Pakistan",
+      "data": {
+        "kind": "continuous",
+        "txMean": 8.53,
+        "txSd": 0.68,
+        "txN": 86,
+        "ctrlMean": 8.33,
+        "ctrlSd": 0.81,
+        "ctrlN": 89
+      }
+    },
+    {
+      "id": "kabuyanga2024-apgar",
+      "author": "Kabuyanga",
+      "year": 2024,
+      "citation": "Kabuyanga RK, Tugirimana PL, Sifa B, Balezi M, Dikete ME, Mitangala PN, et al. Effect of early vitamin D supplementation on the incidence of preeclampsia in primigravid women: a randomised clinical trial in Eastern Democratic Republic of the Congo. BMC Pregnancy Childbirth. 2024;24(1):107.",
+      "design": "RCT",
+      "outcomeId": "apgar-5min",
+      "population": "DR Congo",
+      "data": {
+        "kind": "continuous",
+        "txMean": 9.4,
+        "txSd": 1.2,
+        "txN": 583,
+        "ctrlMean": 9.2,
+        "ctrlSd": 1.5,
+        "ctrlN": 576
+      }
+    },
+    {
+      "id": "karamali2015-apgar",
+      "author": "Karamali",
+      "year": 2015,
+      "citation": "Karamali M, Beihaghi E, Mohammadi AA, Asemi Z. Effects of high-dose vitamin D supplementation on metabolic status and pregnancy outcomes in pregnant women at risk for pre-eclampsia. Horm Metab Res. 2015;47(12):867-872.",
+      "design": "DB-RCT",
+      "outcomeId": "apgar-5min",
+      "population": "Iran",
+      "data": {
+        "kind": "continuous",
+        "txMean": 9.9,
+        "txSd": 0.3,
+        "txN": 30,
+        "ctrlMean": 9.9,
+        "ctrlSd": 0.2,
+        "ctrlN": 30
+      }
+    },
+    {
+      "id": "singh2015-apgar",
+      "author": "Singh",
+      "year": 2015,
+      "citation": "Singh D, Hariharan D, Bhaumik D. Role of vitamin D in reducing the risk of preterm labour. Int J Reprod Contracept Obstet Gynecol. 2015.",
+      "design": "RCT",
+      "outcomeId": "apgar-5min",
+      "population": "India",
+      "data": {
+        "kind": "continuous",
+        "txMean": 9.44,
+        "txSd": 1.1,
+        "txN": 50,
+        "ctrlMean": 8.58,
+        "ctrlSd": 1.75,
+        "ctrlN": 50
+      }
+    }
+  ]
+}
