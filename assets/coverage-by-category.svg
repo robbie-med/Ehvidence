@@ -11,22 +11,22 @@
 <line x1="220" y1="28" x2="220" y2="288" class="axis"/>
   <text x="40" y="55" class="label">Obstetrics &amp; neonatal</text>
   <rect x="220" y="40" width="500" height="20" class="bar" rx="6" ry="6"/>
-  <text x="730" y="55" class="value">53</text>
+  <text x="730" y="55" class="value">54</text>
   <text x="40" y="89" class="label">Cardiovascular</text>
-  <rect x="220" y="74" width="170" height="20" class="bar" rx="6" ry="6"/>
-  <text x="400" y="89" class="value">18</text>
+  <rect x="220" y="74" width="167" height="20" class="bar" rx="6" ry="6"/>
+  <text x="397" y="89" class="value">18</text>
   <text x="40" y="123" class="label">Pediatric gastroenterology</text>
-  <rect x="220" y="108" width="94" height="20" class="bar" rx="6" ry="6"/>
-  <text x="324" y="123" class="value">10</text>
+  <rect x="220" y="108" width="93" height="20" class="bar" rx="6" ry="6"/>
+  <text x="323" y="123" class="value">10</text>
   <text x="40" y="157" class="label">Skin cancer prevention</text>
-  <rect x="220" y="142" width="75" height="20" class="bar" rx="6" ry="6"/>
-  <text x="305" y="157" class="value">8</text>
+  <rect x="220" y="142" width="74" height="20" class="bar" rx="6" ry="6"/>
+  <text x="304" y="157" class="value">8</text>
   <text x="40" y="191" class="label">Opioid stewardship</text>
-  <rect x="220" y="176" width="47" height="20" class="bar" rx="6" ry="6"/>
-  <text x="277" y="191" class="value">5</text>
+  <rect x="220" y="176" width="46" height="20" class="bar" rx="6" ry="6"/>
+  <text x="276" y="191" class="value">5</text>
   <text x="40" y="225" class="label">Neonatal</text>
-  <rect x="220" y="210" width="47" height="20" class="bar" rx="6" ry="6"/>
-  <text x="277" y="225" class="value">5</text>
+  <rect x="220" y="210" width="46" height="20" class="bar" rx="6" ry="6"/>
+  <text x="276" y="225" class="value">5</text>
   <text x="40" y="259" class="label">Cardiac safety</text>
   <rect x="220" y="244" width="28" height="20" class="bar" rx="6" ry="6"/>
   <text x="258" y="259" class="value">3</text>

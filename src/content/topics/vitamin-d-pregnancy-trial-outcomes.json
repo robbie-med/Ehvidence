@@ -1,0 +1,21 @@
+{
+  "slug": "vitamin-d-pregnancy-trial-outcomes",
+  "name": "Vitamin D in pregnancy: individual-trial outcomes",
+  "condition": "Pregnancy (vitamin D supplementation)",
+  "intervention": "Prenatal vitamin D supplementation",
+  "comparator": "Placebo / no-supplement control",
+  "category": "Obstetrics & neonatal",
+  "evidenceClass": "efficacy",
+  "summary": "A home for vitamin-D-in-pregnancy RCTs whose reported endpoints were not pooled in the Moghib 2024 preeclampsia meta-analysis. Each is shown as a stand-alone, single-trial result, computed live from the trial's own per-arm data — not meta-analyzed.",
+  "description": "Four trials in the Moghib 2024 review measured endpoints the review never pooled (birth weight, placental weight, gestational diabetes, blood pressure, parathyroid status). Rather than force them into the preeclampsia topic, they live here as individual trial results. Only trials with verifiable per-arm data are encoded; the rest are named in the methodology with the specific reason they cannot yet be computed.",
+  "interpretation": "These are single trials, not pooled evidence — read each as one study, not a body of evidence. Sunarno 2023 (Indonesia, 3-arm) found that a 1000 IU/day vitamin D arm had a mean birth weight about 311 g higher than the no-supplement control; this is a small single trial and the sun-exposure arm is not shown here.",
+  "methodologyNotes": "Encoded live from raw per-arm data. Sunarno 2023 reported birth weight as mean ± SD per arm, so it is entered directly (vitamin D vs control; the sun-exposure arm is omitted). Three further trials from the review are NOT yet encoded because their data cannot be reproduced faithfully: Shahgheibi 2016 reports gestational diabetes only as percentages (11.4% of 46 vs 34.8% of 44) with no integer event counts, so an exact 2×2 cannot be recovered; Yu 2009 reports 25-hydroxyvitamin D as median (IQR), which would require a median-to-mean conversion (imputation) to pool; and Kaur 1991 (Nutrition Research) reports birth/placental weight as 'significantly higher' with no accessible per-arm figures. None of these are entered rather than guess at numbers.",
+  "primaryOutcomeId": "birth-weight-cont",
+  "lastUpdated": "2026-06-26",
+  "outcomes": [
+    { "id": "birth-weight-cont", "label": "Birth weight, grams (single trial)", "direction": "higherIsBetter", "kind": "continuous", "measure": "MD", "status": "favorable", "description": "Mean birth weight (g), vitamin D arm vs control, from a single trial (Sunarno 2023). Not meta-analyzed." }
+  ],
+  "studies": [
+    { "id": "sunarno2023-bw", "author": "Sunarno", "year": 2023, "citation": "Sunarno RD, Kartasurya MI, Suwondo A, Rahfiludin MZ. Vitamin D supplementation and sun exposure maintain blood pressures of pregnant women and increase birth weight in a randomized controlled trial. Iran J Public Health. 2023;52(10):2148-2156.", "doi": "10.18502/ijph.v52i10.13853", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10612544/", "design": "RCT", "outcomeId": "birth-weight-cont", "population": "Indonesia; 3-arm trial (sun exposure / vitamin D 1000 IU/day / control), 36 per arm", "endpointDefinition": "Neonatal birth weight (g). Vitamin D supplementation arm vs the no-supplement control arm.", "n": 72, "notes": "Single-trial result; the separate sun-exposure arm (3,091 ± 362.5 g) is not encoded.", "data": { "kind": "continuous", "txMean": 3172, "txSd": 181.78, "txN": 36, "ctrlMean": 2861, "ctrlSd": 207.97, "ctrlN": 36 } }
+  ]
+}
