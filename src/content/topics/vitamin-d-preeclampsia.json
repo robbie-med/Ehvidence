@@ -7,9 +7,9 @@
   "category": "Obstetrics & neonatal",
   "evidenceClass": "efficacy",
   "summary": "Across 14 randomised trials of preeclampsia and 13 of preterm labor, prenatal vitamin D supplementation was associated with a significant reduction in each (pooled RR ~0.55 and ~0.70 in the source review). Effects on low birth weight and 5-minute Apgar did not reach significance. Benefit was more pronounced against placebo than against low-dose vitamin D controls.",
-  "description": "A meta-analysis (Moghib 2024, BMC Pregnancy and Childbirth) of 33 RCTs of prenatal vitamin D supplementation. Each outcome's constituent trials are entered from the review's forest plots (Figures 3, 4, 6, 7) — raw per-arm event counts for the binary outcomes, per-arm mean±SD for the continuous 5-minute Apgar score — and pooled live. Not every trial contributed to every outcome; only trials the review actually plotted for a given outcome are encoded there.",
+  "description": "A meta-analysis (Moghib 2024, BMC Pregnancy and Childbirth) of 33 RCTs of prenatal vitamin D supplementation. Each outcome's constituent trials are entered from the review's forest plots (Figures 3–7) — raw per-arm event counts for the binary outcomes, per-arm mean±SD for the continuous 5-minute Apgar and 25-hydroxyvitamin D outcomes — and pooled live. Not every trial contributed to every outcome; only trials the review actually plotted for a given outcome are encoded there.",
   "interpretation": "The review's pooled effect for preeclampsia is large (RR 0.55), but that number rests on 14 trials of heterogeneous design (open-label to double-blind), heterogeneous doses (400 IU/day to a single 200,000 IU dose), and heterogeneous populations (general pregnancy to women with prior preeclampsia). The authors noted significant publication-bias signals. Subgroup analysis (baked into the encoded trials via the 'vs placebo' / 'vs low-dose vitamin D' subgroup notes) mattered: benefit was much clearer versus placebo than versus a low-dose active control, which is consistent with a threshold effect at correcting deficiency rather than a dose-response of supplementation itself. The preterm-labor result is dominated by Roth 2018 (Bangladesh, 1300 women), the largest trial, which found the opposite direction (RR ~1.5) — the pooled reduction depends heavily on the smaller, deficiency-focused trials. Low birth weight and 5-minute Apgar did not reach significance. As with any single-review estimate: absolute benefit depends on baseline preeclampsia risk in the population, and the ~45% relative reduction here should not be assumed to travel to well-nourished, vitamin-D-replete populations.",
-  "methodologyNotes": "All outcomes are computed live from each trial's raw data (2×2 counts or per-arm mean±SD) — nothing hardcoded. The review's pooled random-effects estimates should reproduce here within rounding (preeclampsia ≈0.55, preterm labor ≈0.70, low birth weight ≈0.65, Apgar MD ≈0.20). Trials are entered only for the outcomes the review actually plotted for them (Figures 3, 4, 6, 7); the 25-hydroxyvitamin D outcome (Figure 5) is not encoded because it is a biomarker rather than a clinical outcome. Rostami 2018 contributes two rows to preeclampsia and preterm labor (moderate- and severe-deficiency strata; the review's Figures 3 and 4 label them * and **) — these are two independent subgroups of one trial, not double-counted, and are entered separately as the review did. The subgroup structure (intervention vs placebo, intervention vs low-dose vitamin D) is captured in each study's `notes` rather than as separate outcomes, because the review's headline pool combines them. The review reported significant publication bias (Egger test).",
+  "methodologyNotes": "All outcomes are computed live from each trial's raw data (2×2 counts or per-arm mean±SD) — nothing hardcoded. The review's pooled random-effects estimates reproduce here within rounding (preeclampsia ≈0.55, preterm labor ≈0.70, low birth weight ≈0.65, Apgar MD ≈0.20, 25-OH MD ≈32.4 nmol/L). Trials are entered only for the outcomes the review actually plotted for them (Figures 3–7). The 25-hydroxyvitamin D outcome (Figure 5) is a biomarker confirming the supplement worked, not a clinical outcome; it is included so that every trial the review pooled is represented. Multi-arm trials that the review split across a shared control arm are entered exactly as the review plotted them: Rostami 2018 contributes two rows to preeclampsia and preterm labor (moderate/severe-deficiency strata, * and **); Grant 2014 and Mallet 1986 each contribute two dose arms, and Roth 2018 four dose arms, to the 25-OH forest (each against the shared placebo). These are the review's own rows, not double-counted trials, and each trial is still counted once in the topic totals (by citation). The subgroup structure (intervention vs placebo vs low-dose vitamin D) is captured in each study's `notes`. Of the review's 33 included RCTs, 29 appear in these forest plots and are encoded here; four (Kaur 1991, Shahgheibi 2016, Sunarno 2023, Yu 2009) reported only endpoints the review did not pool into any of these forests (birth/placental weight, gestational diabetes, blood pressure, or non-poolable vitamin D status) and so have no per-arm data to compute — they are named here for completeness. The review reported significant publication bias (Egger test).",
   "primaryOutcomeId": "preeclampsia",
   "lastUpdated": "2026-06-26",
   "outcomes": [
@@ -38,6 +38,14 @@
       "kind": "continuous",
       "measure": "MD",
       "description": "Apgar score at 5 minutes (higher is better)."
+    },
+    {
+      "id": "oh25-level",
+      "label": "Serum 25-hydroxyvitamin D (nmol/L)",
+      "direction": "higherIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Maternal serum 25-hydroxyvitamin D level (nmol/L). A biomarker confirming the supplement raised vitamin D status, not a clinical outcome."
     }
   ],
   "studies": [
@@ -699,6 +707,482 @@
         "ctrlMean": 8.58,
         "ctrlSd": 1.75,
         "ctrlN": 50
+      }
+    },
+    {
+      "id": "ali2019-oh25",
+      "author": "Ali",
+      "year": 2019,
+      "citation": "Ali AM, Alobaid A, Malhis TN, Khattab AF. Effect of vitamin D3 supplementation in pregnancy on risk of pre-eclampsia — randomized controlled trial. Clin Nutr. 2019;38(2):557-563.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Saudi Arabia",
+      "data": {
+        "kind": "continuous",
+        "txMean": 72.3,
+        "txSd": 30.9,
+        "txN": 83,
+        "ctrlMean": 35.3,
+        "ctrlSd": 20.7,
+        "ctrlN": 81
+      }
+    },
+    {
+      "id": "asemi2015-oh25",
+      "author": "Asemi",
+      "year": 2015,
+      "citation": "Asemi Z, Esmaillzadeh A. The effect of multi mineral-vitamin D supplementation on pregnancy outcomes in pregnant women at risk for pre-eclampsia. Int J Prev Med. 2015;6:62.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Iran",
+      "data": {
+        "kind": "continuous",
+        "txMean": 22.04,
+        "txSd": 9.26,
+        "txN": 23,
+        "ctrlMean": 14.21,
+        "ctrlSd": 6.21,
+        "ctrlN": 23
+      }
+    },
+    {
+      "id": "brooke1980-oh25",
+      "author": "Brooke",
+      "year": 1980,
+      "citation": "Brooke OG, Brown IR, Bone CD, Carter ND, Cleeve HJ, Maxwell JD, et al. Vitamin D supplements in pregnant Asian women: effects on calcium status and fetal growth. Br Med J. 1980;280(6216):751-754.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "United Kingdom",
+      "data": {
+        "kind": "continuous",
+        "txMean": 168.0,
+        "txSd": 12.5,
+        "txN": 59,
+        "ctrlMean": 16.2,
+        "ctrlSd": 2.7,
+        "ctrlN": 67
+      }
+    },
+    {
+      "id": "cooper2016-oh25",
+      "author": "Cooper",
+      "year": 2016,
+      "citation": "Cooper C, Harvey NC, Bishop NJ, Kennedy S, Papageorghiou AT, Schoenmakers I, et al. Maternal gestational vitamin D supplementation and offspring bone health (MAVIDOS): a multicentre, double-blind, randomised placebo-controlled trial. Lancet Diabetes Endocrinol. 2016;4(5):393-402.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "United Kingdom",
+      "data": {
+        "kind": "continuous",
+        "txMean": 46.7,
+        "txSd": 17.7,
+        "txN": 565,
+        "ctrlMean": 45.9,
+        "ctrlSd": 17.0,
+        "ctrlN": 569
+      }
+    },
+    {
+      "id": "delvin1986-oh25",
+      "author": "Delvin",
+      "year": 1986,
+      "citation": "Delvin EE, Salle BL, Glorieux FH, Adeleine P, David LS. Vitamin D supplementation during pregnancy: effect on neonatal calcium homeostasis. J Pediatr. 1986;109(2):328-334.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "France",
+      "data": {
+        "kind": "continuous",
+        "txMean": 18.0,
+        "txSd": 2.0,
+        "txN": 14,
+        "ctrlMean": 7.0,
+        "ctrlSd": 1.0,
+        "ctrlN": 13
+      }
+    },
+    {
+      "id": "grant2014-a-oh25",
+      "author": "Grant",
+      "year": 2014,
+      "citation": "Grant CC, Stewart AW, Scragg R, Milne T, Rowden J, Ekeroma A, et al. Vitamin D during pregnancy and infancy and infant serum 25-hydroxyvitamin D concentration. Pediatrics. 2014;133(1):e143-e153.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "New Zealand",
+      "data": {
+        "kind": "continuous",
+        "txMean": 38.0,
+        "txSd": 2.0,
+        "txN": 78,
+        "ctrlMean": 23.0,
+        "ctrlSd": 5.0,
+        "ctrlN": 78
+      },
+      "notes": "Lower-dose arm vs shared placebo (Grant 2014*)."
+    },
+    {
+      "id": "grant2014-b-oh25",
+      "author": "Grant",
+      "year": 2014,
+      "citation": "Grant CC, Stewart AW, Scragg R, Milne T, Rowden J, Ekeroma A, et al. Vitamin D during pregnancy and infancy and infant serum 25-hydroxyvitamin D concentration. Pediatrics. 2014;133(1):e143-e153.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "New Zealand",
+      "data": {
+        "kind": "continuous",
+        "txMean": 40.0,
+        "txSd": 4.0,
+        "txN": 72,
+        "ctrlMean": 23.0,
+        "ctrlSd": 5.0,
+        "ctrlN": 78
+      },
+      "notes": "Higher-dose arm vs shared placebo (Grant 2014**)."
+    },
+    {
+      "id": "kabuyanga2024-oh25",
+      "author": "Kabuyanga",
+      "year": 2024,
+      "citation": "Kabuyanga RK, Tugirimana PL, Sifa B, Balezi M, Dikete ME, Mitangala PN, et al. Effect of early vitamin D supplementation on the incidence of preeclampsia in primigravid women: a randomised clinical trial in Eastern Democratic Republic of the Congo. BMC Pregnancy Childbirth. 2024;24(1):107.",
+      "design": "RCT",
+      "outcomeId": "oh25-level",
+      "population": "DR Congo",
+      "data": {
+        "kind": "continuous",
+        "txMean": 37.25,
+        "txSd": 9.4,
+        "txN": 583,
+        "ctrlMean": 41.47,
+        "ctrlSd": 20.3,
+        "ctrlN": 576
+      }
+    },
+    {
+      "id": "karamali2015-oh25",
+      "author": "Karamali",
+      "year": 2015,
+      "citation": "Karamali M, Beihaghi E, Mohammadi AA, Asemi Z. Effects of high-dose vitamin D supplementation on metabolic status and pregnancy outcomes in pregnant women at risk for pre-eclampsia. Horm Metab Res. 2015;47(12):867-872.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Iran",
+      "data": {
+        "kind": "continuous",
+        "txMean": 34.91,
+        "txSd": 2.36,
+        "txN": 30,
+        "ctrlMean": 17.37,
+        "ctrlSd": 4.04,
+        "ctrlN": 30
+      }
+    },
+    {
+      "id": "khan2016-oh25",
+      "author": "Khan",
+      "year": 2016,
+      "citation": "Khan F, Ahmad T, Hussain R, Zia-ul-Haq M. A randomized controlled trial of oral vitamin D supplementation in pregnancy to improve maternal periodontal health and birth weight.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Pakistan",
+      "data": {
+        "kind": "continuous",
+        "txMean": 15.36,
+        "txSd": 7.61,
+        "txN": 36,
+        "ctrlMean": 11.36,
+        "ctrlSd": 4.71,
+        "ctrlN": 49
+      }
+    },
+    {
+      "id": "ku2024-oh25",
+      "author": "Ku",
+      "year": 2024,
+      "citation": "Ku CW, Lee AJW, Oh B, Lim CHF, Chang TY, Yap F, et al. The effect of vitamin D supplementation in pregnant women with overweight and obesity: a randomised controlled trial. Nutrients. 2023;16(1).",
+      "design": "RCT",
+      "outcomeId": "oh25-level",
+      "population": "Singapore",
+      "data": {
+        "kind": "continuous",
+        "txMean": 61.45,
+        "txSd": 16.74,
+        "txN": 112,
+        "ctrlMean": 53.46,
+        "ctrlSd": 16.2,
+        "ctrlN": 119
+      }
+    },
+    {
+      "id": "mallet1986-a-oh25",
+      "author": "Mallet",
+      "year": 1986,
+      "citation": "Mallet E, Gugi B, Brunelle P, Henocq A, Basuyau JP, Lemeur H. Vitamin D supplementation in pregnancy: a controlled trial of two methods. Obstet Gynecol. 1986;68(3):300-304.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "France",
+      "data": {
+        "kind": "continuous",
+        "txMean": 25.3,
+        "txSd": 7.7,
+        "txN": 21,
+        "ctrlMean": 9.4,
+        "ctrlSd": 4.9,
+        "ctrlN": 29
+      },
+      "notes": "Method 1 arm vs shared control (Mallet 1986*)."
+    },
+    {
+      "id": "mallet1986-b-oh25",
+      "author": "Mallet",
+      "year": 1986,
+      "citation": "Mallet E, Gugi B, Brunelle P, Henocq A, Basuyau JP, Lemeur H. Vitamin D supplementation in pregnancy: a controlled trial of two methods. Obstet Gynecol. 1986;68(3):300-304.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "France",
+      "data": {
+        "kind": "continuous",
+        "txMean": 26.0,
+        "txSd": 6.4,
+        "txN": 21,
+        "ctrlMean": 9.4,
+        "ctrlSd": 4.9,
+        "ctrlN": 29
+      },
+      "notes": "Method 2 arm vs shared control (Mallet 1986**)."
+    },
+    {
+      "id": "mirzakhani2016-oh25",
+      "author": "Mirzakhani",
+      "year": 2016,
+      "citation": "Mirzakhani H, Litonjua AA, McElrath TF, O'Connor G, Lee-Parritz A, Iverson R, et al. Early pregnancy vitamin D status and risk of preeclampsia. J Clin Invest. 2016;126(12):4702-4715.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "USA",
+      "data": {
+        "kind": "continuous",
+        "txMean": 39.0,
+        "txSd": 15.0,
+        "txN": 408,
+        "ctrlMean": 27.0,
+        "ctrlSd": 11.0,
+        "ctrlN": 408
+      }
+    },
+    {
+      "id": "moon2022-oh25",
+      "author": "Moon",
+      "year": 2022,
+      "citation": "Moon RJ, D'Angelo S, Crozier SR, Curtis EM, Fernandes M, Kermack AJ, et al. Does antenatal cholecalciferol supplementation affect the mode or timing of delivery? Post hoc analyses of the MAVIDOS randomized controlled trial. J Public Health (Oxf). 2023;45(3):738-747.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "United Kingdom",
+      "data": {
+        "kind": "continuous",
+        "txMean": 68.2,
+        "txSd": 21.9,
+        "txN": 479,
+        "ctrlMean": 43.4,
+        "ctrlSd": 22.4,
+        "ctrlN": 486
+      }
+    },
+    {
+      "id": "rodda2015-oh25",
+      "author": "Rodda",
+      "year": 2015,
+      "citation": "Rodda CP, Benson JE, Vincent AJ, Whitehead CL, Polykov A, Vollenhoven B. Maternal vitamin D supplementation during pregnancy prevents vitamin D deficiency in the newborn: an open-label randomized controlled trial. Clin Endocrinol (Oxf). 2015;83(3):363-368.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Australia",
+      "data": {
+        "kind": "continuous",
+        "txMean": 71.0,
+        "txSd": 14.6,
+        "txN": 38,
+        "ctrlMean": 36.0,
+        "ctrlSd": 11.0,
+        "ctrlN": 40
+      }
+    },
+    {
+      "id": "roth2013-oh25",
+      "author": "Roth",
+      "year": 2013,
+      "citation": "Roth DE, Al Mahmud A, Raqib R, Akhtar E, Perumal N, Pezzack B, et al. Randomized placebo-controlled trial of high-dose prenatal third-trimester vitamin D3 supplementation in Bangladesh: the AViDD trial. Nutr J. 2013;12:47.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Bangladesh",
+      "data": {
+        "kind": "continuous",
+        "txMean": 134.4,
+        "txSd": 30.7,
+        "txN": 80,
+        "ctrlMean": 38.4,
+        "ctrlSd": 18.1,
+        "ctrlN": 80
+      }
+    },
+    {
+      "id": "roth2018-a-oh25",
+      "author": "Roth",
+      "year": 2018,
+      "citation": "Roth DE, Morris SK, Zlotkin S, Gernand AD, Ahmed T, Shanta SS, et al. Vitamin D supplementation in pregnancy and lactation and infant growth. N Engl J Med. 2018;379(6):535-546.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Bangladesh",
+      "data": {
+        "kind": "continuous",
+        "txMean": 69.7,
+        "txSd": 19.5,
+        "txN": 1039,
+        "ctrlMean": 23.8,
+        "ctrlSd": 13.9,
+        "ctrlN": 259
+      },
+      "notes": "Dose arm 1 vs shared placebo (Roth 2018*)."
+    },
+    {
+      "id": "roth2018-b-oh25",
+      "author": "Roth",
+      "year": 2018,
+      "citation": "Roth DE, Morris SK, Zlotkin S, Gernand AD, Ahmed T, Shanta SS, et al. Vitamin D supplementation in pregnancy and lactation and infant growth. N Engl J Med. 2018;379(6):535-546.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Bangladesh",
+      "data": {
+        "kind": "continuous",
+        "txMean": 100.9,
+        "txSd": 23.6,
+        "txN": 1039,
+        "ctrlMean": 23.8,
+        "ctrlSd": 13.9,
+        "ctrlN": 259
+      },
+      "notes": "Dose arm 2 vs shared placebo (Roth 2018**)."
+    },
+    {
+      "id": "roth2018-c-oh25",
+      "author": "Roth",
+      "year": 2018,
+      "citation": "Roth DE, Morris SK, Zlotkin S, Gernand AD, Ahmed T, Shanta SS, et al. Vitamin D supplementation in pregnancy and lactation and infant growth. N Engl J Med. 2018;379(6):535-546.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Bangladesh",
+      "data": {
+        "kind": "continuous",
+        "txMean": 110.7,
+        "txSd": 28.0,
+        "txN": 1039,
+        "ctrlMean": 23.8,
+        "ctrlSd": 13.9,
+        "ctrlN": 259
+      },
+      "notes": "Dose arm 3 vs shared placebo (Roth 2018**)."
+    },
+    {
+      "id": "roth2018-d-oh25",
+      "author": "Roth",
+      "year": 2018,
+      "citation": "Roth DE, Morris SK, Zlotkin S, Gernand AD, Ahmed T, Shanta SS, et al. Vitamin D supplementation in pregnancy and lactation and infant growth. N Engl J Med. 2018;379(6):535-546.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Bangladesh",
+      "data": {
+        "kind": "continuous",
+        "txMean": 113.6,
+        "txSd": 25.7,
+        "txN": 1039,
+        "ctrlMean": 23.8,
+        "ctrlSd": 13.9,
+        "ctrlN": 259
+      },
+      "notes": "Dose arm 4 vs shared placebo (Roth 2018**)."
+    },
+    {
+      "id": "sabet2012-oh25",
+      "author": "Sabet",
+      "year": 2012,
+      "citation": "Sabet Z. Vitamin D supplementation in pregnant Iranian women: effects on maternal and neonatal vitamin D and parathyroid hormone status. Acta Endo (Buc). 2012;8(1):59-66.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Iran",
+      "data": {
+        "kind": "continuous",
+        "txMean": 61.45,
+        "txSd": 30.0,
+        "txN": 25,
+        "ctrlMean": 29.4,
+        "ctrlSd": 16.0,
+        "ctrlN": 25
+      }
+    },
+    {
+      "id": "sablok2015-oh25",
+      "author": "Sablok",
+      "year": 2015,
+      "citation": "Sablok A, Batra A, Thariani K, Batra A, Bharti R, Aggarwal AR, et al. Supplementation of vitamin D in pregnancy and its correlation with feto-maternal outcome. Clin Endocrinol (Oxf). 2015;83(4):536-541.",
+      "design": "RCT",
+      "outcomeId": "oh25-level",
+      "population": "India",
+      "data": {
+        "kind": "continuous",
+        "txMean": 80.0,
+        "txSd": 51.5,
+        "txN": 108,
+        "ctrlMean": 46.1,
+        "ctrlSd": 74.2,
+        "ctrlN": 57
+      }
+    },
+    {
+      "id": "samimi2017-oh25",
+      "author": "Samimi",
+      "year": 2017,
+      "citation": "Samimi M, Foroozanfard F, Amini F, Sehat M. Effect of vitamin D supplementation on unexplained recurrent spontaneous abortion: a double-blind randomized controlled trial. Glob J Health Sci. 2016;9(3):95-102.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Iran",
+      "data": {
+        "kind": "continuous",
+        "txMean": 13.21,
+        "txSd": 3.47,
+        "txN": 39,
+        "ctrlMean": 11.08,
+        "ctrlSd": 2.76,
+        "ctrlN": 38
+      }
+    },
+    {
+      "id": "singh2015-oh25",
+      "author": "Singh",
+      "year": 2015,
+      "citation": "Singh D, Hariharan D, Bhaumik D. Role of vitamin D in reducing the risk of preterm labour. Int J Reprod Contracept Obstet Gynecol. 2015.",
+      "design": "RCT",
+      "outcomeId": "oh25-level",
+      "population": "India",
+      "data": {
+        "kind": "continuous",
+        "txMean": 29.85,
+        "txSd": 9.85,
+        "txN": 50,
+        "ctrlMean": 23.46,
+        "ctrlSd": 3.69,
+        "ctrlN": 50
+      }
+    },
+    {
+      "id": "vaziri2016-oh25",
+      "author": "Vaziri",
+      "year": 2016,
+      "citation": "Vaziri F, Dabbaghmanesh MH, Samsami A, Nasiri S, Shirazi PT. Vitamin D supplementation during pregnancy on infant anthropometric measurements and bone mass of mother-infant pairs: a randomized placebo clinical trial. Early Hum Dev. 2016;103:61-68.",
+      "design": "DB-RCT",
+      "outcomeId": "oh25-level",
+      "population": "Iran",
+      "data": {
+        "kind": "continuous",
+        "txMean": 18.1,
+        "txSd": 9.3,
+        "txN": 62,
+        "ctrlMean": 12.3,
+        "ctrlSd": 6.1,
+        "ctrlN": 65
       }
     }
   ]

@@ -53,7 +53,7 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 <!-- TOPICS-COVERAGE:START -->
 
 **Topics covered:** 17
-**Articles covered:** 94
+**Articles covered:** 104
 **Total patients analyzed:** 275,455
 
 | Topic | Articles | Patients | Category |
@@ -73,7 +73,7 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 | Statins for secondary prevention | 4 | 38,153 | Cardiovascular |
 | Sunscreen for skin cancer prevention | 3 | 4,863 | Skin cancer prevention |
 | Topical 5-fluorouracil for skin cancer prevention | 1 | 932 | Skin cancer prevention |
-| Vitamin D supplementation for preeclampsia | 19 | 6,810 | Obstetrics & neonatal |
+| Vitamin D supplementation for preeclampsia | 29 | 6,810 | Obstetrics & neonatal |
 | Vitamin K prophylaxis for newborns | 5 | 3,926 | Neonatal |
 <!-- TOPICS-COVERAGE:END -->
 
