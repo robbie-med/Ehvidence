@@ -52,9 +52,9 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 
 <!-- TOPICS-COVERAGE:START -->
 
-**Topics covered:** 18
-**Articles covered:** 105
-**Total patients analyzed:** 275,527
+**Topics covered:** 19
+**Articles covered:** 111
+**Total patients analyzed:** 277,656
 
 | Topic | Articles | Patients | Category |
 | --- | ---: | ---: | --- |
@@ -64,6 +64,7 @@ Automatically generated from `src/content/topics/*.json` and refreshed daily by 
 | CoQ10 in Chronic Heart Failure (Q-SYMBIO) | 1 | 420 | Cardiology |
 | Fluoroquinolones and QTc prolongation | 3 | 219 | Cardiac safety |
 | Nicotinamide for skin cancer prevention | 1 | 386 | Skin cancer prevention |
+| NT-proBNP–guided therapy for heart failure (mortality) | 6 | 2,129 | Cardiology |
 | Omega-3 (fish oil) for cardiovascular events | 7 | 93,805 | Cardiovascular |
 | Oral / subcutaneous vs intravenous opioids | 5 | 33,973 | Opioid stewardship |
 | Oral retinol for skin cancer prevention | 1 | 2,297 | Skin cancer prevention |
