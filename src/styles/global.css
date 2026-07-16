@@ -221,6 +221,33 @@ tbody tr:hover { background: var(--bg-soft); }
 .topic-tags a:hover { color: var(--link); }
 .cat-head { margin-top: 1.5rem; font-weight: 700; color: var(--ink-soft); font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; }
 
+/* ---- decision view: ledger, NMA ---- */
+.decision-link { font-size: .8rem; font-weight: 500; margin-left: .5rem; }
+.ledger, .league { border-collapse: collapse; font-size: .85rem; }
+.ledger th, .ledger td, .league th, .league td { border: 1px solid var(--line); padding: .35rem .5rem; text-align: center; }
+.ledger-int { text-align: left; white-space: nowrap; }
+.ledger-cell.favorable { background: color-mix(in srgb, var(--favor) 18%, transparent); }
+.ledger-cell.harmful { background: color-mix(in srgb, var(--against) 18%, transparent); }
+.ledger-cell.limited { background: color-mix(in srgb, var(--limited) 22%, transparent); }
+.ledger-cell.neutral { background: transparent; }
+.ledger-cell.empty { color: var(--ink-soft); }
+.league-diag { background: #f1f5f9; font-weight: 600; }
+.league-cell.favor { background: color-mix(in srgb, var(--favor) 16%, transparent); }
+.league-cell.against { background: color-mix(in srgb, var(--against) 16%, transparent); }
+.league-cell.neutral { background: transparent; }
+.league-row { text-align: left; white-space: nowrap; }
+.nma-block { margin: 1.5rem 0; }
+.nma-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; align-items: start; }
+.pscore { list-style: none; padding: 0; margin: .3rem 0; }
+.pscore li { display: grid; grid-template-columns: 1fr 120px 32px; align-items: center; gap: .5rem; margin: .25rem 0; }
+.pscore-bar { background: var(--line); border-radius: 999px; height: 10px; overflow: hidden; }
+.pscore-bar span { display: block; height: 100%; background: var(--favor); }
+.pscore-val { text-align: right; font-variant-numeric: tabular-nums; }
+.netgraph .net-edge { stroke: var(--line-strong); opacity: .5; }
+.netgraph .net-node { fill: var(--neutral, #64748b); }
+.netgraph .net-node.ref { fill: var(--ink-soft); }
+.netgraph .net-label { font-size: 10px; fill: var(--ink); }
+
 /* ---- living evidence ---- */
 .living { margin: 1.5rem 0; }
 .currency { display: flex; flex-wrap: wrap; gap: .4rem; margin: .4rem 0 .8rem; }

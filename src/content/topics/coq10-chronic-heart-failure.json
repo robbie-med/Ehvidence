@@ -71,7 +71,13 @@
       "population": "Adults with moderate to severe chronic HF (NYHA class III-IV), mean EF ~31%, on stable standard therapy",
       "endpointDefinition": "Cardiovascular death within the 106-week study period.",
       "notes": "Paper reported HR 0.51 (95% CI 0.28-0.92, p=0.026). Computed RR from the 2x2 is ~0.57.",
-      "data": { "kind": "2x2", "txEvents": 18, "txTotal": 202, "ctrlEvents": 34, "ctrlTotal": 218 }
+      "data": {
+        "kind": "2x2",
+        "txEvents": 18,
+        "txTotal": 202,
+        "ctrlEvents": 34,
+        "ctrlTotal": 218
+      }
     },
     {
       "id": "study-allcause",
@@ -86,7 +92,13 @@
       "population": "Adults with moderate to severe chronic HF (NYHA class III-IV), mean EF ~31%, on stable standard therapy",
       "endpointDefinition": "Death from any cause within the 106-week study period.",
       "notes": "Paper reported HR 0.51 (95% CI 0.30-0.89, p=0.018). Computed RR from the 2x2 is ~0.58.",
-      "data": { "kind": "2x2", "txEvents": 21, "txTotal": 202, "ctrlEvents": 39, "ctrlTotal": 218 }
+      "data": {
+        "kind": "2x2",
+        "txEvents": 21,
+        "txTotal": 202,
+        "ctrlEvents": 39,
+        "ctrlTotal": 218
+      }
     },
     {
       "id": "study-hfhosp",
@@ -101,7 +113,15 @@
       "population": "Adults with moderate to severe chronic HF (NYHA class III-IV), mean EF ~31%, on stable standard therapy",
       "endpointDefinition": "Hospitalization for worsening heart failure (counted as a MACE first event) within 106 weeks.",
       "notes": "Paper reported HR 0.51 (95% CI 0.27-0.95, p=0.033). Computed RR from the 2x2 is ~0.59.",
-      "data": { "kind": "2x2", "txEvents": 17, "txTotal": 202, "ctrlEvents": 31, "ctrlTotal": 218 }
+      "data": {
+        "kind": "2x2",
+        "txEvents": 17,
+        "txTotal": 202,
+        "ctrlEvents": 31,
+        "ctrlTotal": 218
+      }
     }
-  ]
+  ],
+  "treatmentNode": "CoQ10",
+  "comparatorNode": "Control"
 }

@@ -14,27 +14,59 @@
   "primaryOutcomeId": "scc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "scc", "label": "Squamous-cell carcinoma (needing surgery)", "direction": "lowerIsBetter", "standardOutcomeId": "scc-incidence" },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "bcc-incidence" }
+    {
+      "id": "scc",
+      "label": "Squamous-cell carcinoma (needing surgery)",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "scc-incidence"
+    },
+    {
+      "id": "bcc",
+      "label": "Basal-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "bcc-incidence"
+    }
   ],
   "studies": [
     {
       "id": "vakcc-scc",
-      "author": "VAKCC (Weinstock)", "year": 2018,
+      "author": "VAKCC (Weinstock)",
+      "year": 2018,
       "citation": "Weinstock MA, Thwin SS, Siegel JA, et al. Chemoprevention of basal and squamous cell carcinoma with a single course of fluorouracil, 5%, cream (VAKCC). JAMA Dermatol. 2018;154:167-174.",
       "doi": "10.1001/jamadermatol.2017.3631",
-      "design": "DB-RCT", "outcomeId": "scc", "doseRegimen": "5-FU 5% single course", "population": "High-risk veterans; 1-yr window",
-      "data": { "kind": "2x2", "txEvents": 5, "txTotal": 468, "ctrlEvents": 20, "ctrlTotal": 464 },
+      "design": "DB-RCT",
+      "outcomeId": "scc",
+      "doseRegimen": "5-FU 5% single course",
+      "population": "High-risk veterans; 1-yr window",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 5,
+        "txTotal": 468,
+        "ctrlEvents": 20,
+        "ctrlTotal": 464
+      },
       "notes": "Squamous-cell carcinoma requiring surgery, first year (~75% reduction). Effect faded after year 1."
     },
     {
       "id": "vakcc-bcc",
-      "author": "VAKCC (Weinstock)", "year": 2018,
+      "author": "VAKCC (Weinstock)",
+      "year": 2018,
       "citation": "Weinstock MA, Thwin SS, Siegel JA, et al. Chemoprevention of basal and squamous cell carcinoma with a single course of fluorouracil, 5%, cream (VAKCC). JAMA Dermatol. 2018;154:167-174.",
       "doi": "10.1001/jamadermatol.2017.3631",
-      "design": "DB-RCT", "outcomeId": "bcc", "doseRegimen": "5-FU 5% single course", "population": "High-risk veterans; first year",
-      "data": { "kind": "2x2", "txEvents": 45, "txTotal": 468, "ctrlEvents": 50, "ctrlTotal": 464 },
+      "design": "DB-RCT",
+      "outcomeId": "bcc",
+      "doseRegimen": "5-FU 5% single course",
+      "population": "High-risk veterans; first year",
+      "data": {
+        "kind": "2x2",
+        "txEvents": 45,
+        "txTotal": 468,
+        "ctrlEvents": 50,
+        "ctrlTotal": 464
+      },
       "notes": "Basal-cell carcinoma, first year; not significant."
     }
-  ]
+  ],
+  "treatmentNode": "Topical 5-FU",
+  "comparatorNode": "Control"
 }

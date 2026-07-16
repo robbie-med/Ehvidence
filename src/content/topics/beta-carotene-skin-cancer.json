@@ -14,18 +14,35 @@
   "primaryOutcomeId": "nmsc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter", "standardOutcomeId": "nmsc-incidence" }
+    {
+      "id": "nmsc",
+      "label": "Nonmelanoma skin cancer",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "nmsc-incidence"
+    }
   ],
   "studies": [
     {
       "id": "greenberg-nmsc",
-      "author": "Greenberg", "year": 1990,
+      "author": "Greenberg",
+      "year": 1990,
       "citation": "Greenberg ER, Baron JA, Stukel TA, et al. A clinical trial of beta carotene to prevent basal-cell and squamous-cell cancers of the skin (Skin Cancer Prevention Study). N Engl J Med. 1990;323:789-795.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/2202901/",
-      "design": "DB-RCT", "outcomeId": "nmsc", "doseRegimen": "Beta-carotene 50 mg/day", "population": "Prior NMSC; 5 yr",
+      "design": "DB-RCT",
+      "outcomeId": "nmsc",
+      "doseRegimen": "Beta-carotene 50 mg/day",
+      "population": "Prior NMSC; 5 yr",
       "n": 1805,
-      "data": { "kind": "effect", "measure": "RR", "point": 1.05, "ciLow": 0.91, "ciHigh": 1.22 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 1.05,
+        "ciLow": 0.91,
+        "ciHigh": 1.22
+      },
       "notes": "First new nonmelanoma skin cancer; no effect."
     }
-  ]
+  ],
+  "treatmentNode": "Beta-carotene",
+  "comparatorNode": "Control"
 }

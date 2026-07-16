@@ -1,0 +1,52 @@
+---
+import type { NMAResult } from '../lib/nma';
+import { fmtRR, fmtCI } from '../lib/format';
+
+interface Props {
+  nma: NMAResult;
+  direction: 'lowerIsBetter' | 'higherIsBetter';
+}
+const { nma, direction } = Astro.props;
+
+// Order rows/columns by rank (best first) for a readable league table.
+const order = nma.pScores.map((p) => p.node);
+const rank = new Map(order.map((n, i) => [n, i]));
+
+function cellClass(a: string, b: string): string {
+  const pair = nma.league.find((p) => p.a === a && p.b === b);
+  if (!pair) return 'neutral';
+  const better = direction === 'lowerIsBetter' ? pair.ciHigh < 1 : pair.ciLow > 1;
+  const worse = direction === 'lowerIsBetter' ? pair.ciLow > 1 : pair.ciHigh < 1;
+  if (better) return 'favor';
+  if (worse) return 'against';
+  return 'neutral';
+}
+function cellText(a: string, b: string): string {
+  const pair = nma.league.find((p) => p.a === a && p.b === b);
+  if (!pair) return '';
+  return `${fmtRR(pair.effect)} ${fmtCI(pair.ciLow, pair.ciHigh)}`;
+}
+---
+<div class="table-scroll">
+  <table class="league">
+    <thead>
+      <tr>
+        <th></th>
+        {order.map((n) => <th>{n}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {order.map((rowN) => (
+        <tr>
+          <th class="league-row">{rowN}</th>
+          {order.map((colN) => (
+            rowN === colN
+              ? <td class="league-diag">{rowN}</td>
+              : <td class={`league-cell ${cellClass(rowN, colN)}`}>{cellText(rowN, colN)}</td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<p class="small">Each cell is the effect of the <strong>row</strong> treatment versus the <strong>column</strong> treatment (RR, 95% CI). Green favors the row, red favors the column. Rows are ordered best-first by P-score.</p>

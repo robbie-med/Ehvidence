@@ -1,0 +1,58 @@
+---
+import type { Contrast } from '../lib/nma';
+
+interface Props {
+  nodes: string[];
+  contrasts: Contrast[];
+  reference: string;
+}
+const { nodes, contrasts, reference } = Astro.props;
+
+const W = 380;
+const H = 300;
+const cx = W / 2;
+const cy = H / 2;
+const R = Math.min(W, H) / 2 - 60;
+
+const degree = new Map<string, number>();
+for (const c of contrasts) {
+  degree.set(c.t, (degree.get(c.t) ?? 0) + 1);
+  degree.set(c.c, (degree.get(c.c) ?? 0) + 1);
+}
+const maxDeg = Math.max(1, ...[...degree.values()]);
+
+// Place the reference in the centre; others on a circle.
+const others = nodes.filter((n) => n !== reference);
+const pos = new Map<string, { x: number; y: number }>();
+pos.set(reference, { x: cx, y: cy });
+others.forEach((n, i) => {
+  const a = (2 * Math.PI * i) / others.length - Math.PI / 2;
+  pos.set(n, { x: cx + R * Math.cos(a), y: cy + R * Math.sin(a) });
+});
+
+const maxV = Math.max(...contrasts.map((c) => 1 / c.v));
+const edges = contrasts.map((c) => {
+  const p1 = pos.get(c.t)!;
+  const p2 = pos.get(c.c)!;
+  return { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, w: 1 + 4 * ((1 / c.v) / maxV) };
+});
+const dots = nodes.map((n) => {
+  const p = pos.get(n)!;
+  const r = 6 + 8 * ((degree.get(n) ?? 1) / maxDeg);
+  return { n, x: p.x, y: p.y, r, ref: n === reference };
+});
+---
+<div class="table-scroll">
+<svg class="netgraph" viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label="Evidence network">
+  {edges.map((e) => (
+    <line class="net-edge" x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} stroke-width={e.w} />
+  ))}
+  {dots.map((d) => (
+    <g>
+      <circle class={`net-node ${d.ref ? 'ref' : ''}`} cx={d.x} cy={d.y} r={d.r} />
+      <text class="net-label" x={d.x} y={d.y - d.r - 4} text-anchor="middle">{d.n}</text>
+    </g>
+  ))}
+</svg>
+</div>
+<p class="small">Nodes are treatments (sized by how many comparisons touch them); edges are direct comparisons (thicker = more precise). Active-vs-active effects are estimated indirectly through the shared comparator.</p>

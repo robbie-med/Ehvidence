@@ -14,40 +14,90 @@
   "primaryOutcomeId": "nmsc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "nmsc", "label": "Nonmelanoma skin cancer", "direction": "lowerIsBetter", "standardOutcomeId": "nmsc-incidence" },
-    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "scc-incidence" },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "bcc-incidence" }
+    {
+      "id": "nmsc",
+      "label": "Nonmelanoma skin cancer",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "nmsc-incidence"
+    },
+    {
+      "id": "scc",
+      "label": "Squamous-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "scc-incidence"
+    },
+    {
+      "id": "bcc",
+      "label": "Basal-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "bcc-incidence"
+    }
   ],
   "studies": [
     {
       "id": "elmets-nmsc",
-      "author": "Elmets", "year": 2010,
+      "author": "Elmets",
+      "year": 2010,
       "citation": "Elmets CA, Viner JL, Pentland AP, et al. Chemoprevention of nonmelanoma skin cancer with celecoxib: a randomized, double-blind, placebo-controlled trial. J Natl Cancer Inst. 2010;102:1835-1844.",
       "doi": "10.1093/jnci/djq442",
-      "design": "DB-RCT", "outcomeId": "nmsc", "doseRegimen": "Celecoxib 200 mg BID", "population": "High-risk (actinic keratoses); 11 mo",
+      "design": "DB-RCT",
+      "outcomeId": "nmsc",
+      "doseRegimen": "Celecoxib 200 mg BID",
+      "population": "High-risk (actinic keratoses); 11 mo",
       "n": 240,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.43, "ciLow": 0.24, "ciHigh": 0.75, "ctrlRisk": 0.35 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.43,
+        "ciLow": 0.24,
+        "ciHigh": 0.75,
+        "ctrlRisk": 0.35
+      },
       "notes": "Nonmelanoma skin cancer rate ratio (P=0.003)."
     },
     {
       "id": "elmets-scc",
-      "author": "Elmets", "year": 2010,
+      "author": "Elmets",
+      "year": 2010,
       "citation": "Elmets CA, Viner JL, Pentland AP, et al. Chemoprevention of nonmelanoma skin cancer with celecoxib: a randomized, double-blind, placebo-controlled trial. J Natl Cancer Inst. 2010;102:1835-1844.",
       "doi": "10.1093/jnci/djq442",
-      "design": "DB-RCT", "outcomeId": "scc", "doseRegimen": "Celecoxib 200 mg BID", "population": "High-risk; 11 mo",
+      "design": "DB-RCT",
+      "outcomeId": "scc",
+      "doseRegimen": "Celecoxib 200 mg BID",
+      "population": "High-risk; 11 mo",
       "n": 240,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.42, "ciLow": 0.19, "ciHigh": 0.92, "ctrlRisk": 0.19 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.42,
+        "ciLow": 0.19,
+        "ciHigh": 0.92,
+        "ctrlRisk": 0.19
+      },
       "notes": "Squamous-cell carcinoma (P=0.03)."
     },
     {
       "id": "elmets-bcc",
-      "author": "Elmets", "year": 2010,
+      "author": "Elmets",
+      "year": 2010,
       "citation": "Elmets CA, Viner JL, Pentland AP, et al. Chemoprevention of nonmelanoma skin cancer with celecoxib: a randomized, double-blind, placebo-controlled trial. J Natl Cancer Inst. 2010;102:1835-1844.",
       "doi": "10.1093/jnci/djq442",
-      "design": "DB-RCT", "outcomeId": "bcc", "doseRegimen": "Celecoxib 200 mg BID", "population": "High-risk; 11 mo",
+      "design": "DB-RCT",
+      "outcomeId": "bcc",
+      "doseRegimen": "Celecoxib 200 mg BID",
+      "population": "High-risk; 11 mo",
       "n": 240,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.44, "ciLow": 0.19, "ciHigh": 0.99, "ctrlRisk": 0.16 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.44,
+        "ciLow": 0.19,
+        "ciHigh": 0.99,
+        "ctrlRisk": 0.16
+      },
       "notes": "Basal-cell carcinoma (P=0.049)."
     }
-  ]
+  ],
+  "treatmentNode": "Celecoxib",
+  "comparatorNode": "Control"
 }

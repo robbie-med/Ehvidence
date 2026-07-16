@@ -14,29 +14,61 @@
   "primaryOutcomeId": "scc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "scc-incidence" },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "bcc-incidence" }
+    {
+      "id": "scc",
+      "label": "Squamous-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "scc-incidence"
+    },
+    {
+      "id": "bcc",
+      "label": "Basal-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "bcc-incidence"
+    }
   ],
   "studies": [
     {
       "id": "skicap-scc",
-      "author": "SKICAP-AK (Moon)", "year": 1997,
+      "author": "SKICAP-AK (Moon)",
+      "year": 1997,
       "citation": "Moon TE, Levine N, Cartmel B, et al. Effect of retinol in preventing squamous cell skin cancer in moderate-risk subjects (SKICAP-AK). Cancer Epidemiol Biomarkers Prev. 1997;6:949-956.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/9367069/",
-      "design": "RCT", "outcomeId": "scc", "doseRegimen": "Retinol 25,000 IU/day", "population": "Moderate-risk (many AKs); 3.8 yr",
+      "design": "RCT",
+      "outcomeId": "scc",
+      "doseRegimen": "Retinol 25,000 IU/day",
+      "population": "Moderate-risk (many AKs); 3.8 yr",
       "n": 2297,
-      "data": { "kind": "effect", "measure": "HR", "point": 0.74, "ciLow": 0.56, "ciHigh": 0.99 },
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 0.74,
+        "ciLow": 0.56,
+        "ciHigh": 0.99
+      },
       "notes": "First new squamous-cell carcinoma."
     },
     {
       "id": "skicap-bcc",
-      "author": "SKICAP-AK (Moon)", "year": 1997,
+      "author": "SKICAP-AK (Moon)",
+      "year": 1997,
       "citation": "Moon TE, Levine N, Cartmel B, et al. Effect of retinol in preventing squamous cell skin cancer in moderate-risk subjects (SKICAP-AK). Cancer Epidemiol Biomarkers Prev. 1997;6:949-956.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/9367069/",
-      "design": "RCT", "outcomeId": "bcc", "doseRegimen": "Retinol 25,000 IU/day", "population": "Moderate-risk (many AKs); 3.8 yr",
+      "design": "RCT",
+      "outcomeId": "bcc",
+      "doseRegimen": "Retinol 25,000 IU/day",
+      "population": "Moderate-risk (many AKs); 3.8 yr",
       "n": 2297,
-      "data": { "kind": "effect", "measure": "HR", "point": 1.06, "ciLow": 0.86, "ciHigh": 1.32 },
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.06,
+        "ciLow": 0.86,
+        "ciHigh": 1.32
+      },
       "notes": "First new basal-cell carcinoma; no effect."
     }
-  ]
+  ],
+  "treatmentNode": "Oral retinol",
+  "comparatorNode": "Control"
 }

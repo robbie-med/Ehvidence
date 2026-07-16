@@ -8,57 +8,114 @@
   "evidenceClass": "efficacy",
   "summary": "In the randomized Nambour trial, regular daily sunscreen reduced squamous-cell carcinoma and, on long-term follow-up, invasive melanoma, but did not significantly reduce basal-cell carcinoma. Benefits are in a general-population setting, so the absolute reductions are modest.",
   "description": "The Nambour Skin Cancer Prevention Trial randomized 1,621 general-population adults in Queensland, Australia to daily application of SPF 15+ sunscreen versus discretionary use (factorially crossed with beta-carotene). Outcomes were tracked over the 4.5-year trial and in long-term follow-up.",
-  "interpretation": "The clearest randomized benefit is for squamous-cell carcinoma; basal-cell was null. Long-term follow-up found fewer melanomas (significant for invasive). This was a general-population trial, so absolute benefit is modest (large NNT)—unlike chemoprevention in high-risk patients."
-,
+  "interpretation": "The clearest randomized benefit is for squamous-cell carcinoma; basal-cell was null. Long-term follow-up found fewer melanomas (significant for invasive). This was a general-population trial, so absolute benefit is modest (large NNT)—unlike chemoprevention in high-risk patients.",
   "methodologyNotes": "Published tumor rate ratios and hazard ratios with 95% CIs. The 8-year squamous-cell follow-up (same cohort) is shown for context and excluded from pooling. No control risk is encoded, so NNT is not shown.",
   "status": "favorable",
   "primaryOutcomeId": "scc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "scc-incidence" },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "standardOutcomeId": "bcc-incidence" },
-    { "id": "melanoma", "label": "Melanoma", "direction": "lowerIsBetter", "standardOutcomeId": "melanoma-incidence" }
+    {
+      "id": "scc",
+      "label": "Squamous-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "scc-incidence"
+    },
+    {
+      "id": "bcc",
+      "label": "Basal-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "bcc-incidence"
+    },
+    {
+      "id": "melanoma",
+      "label": "Melanoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "melanoma-incidence"
+    }
   ],
   "studies": [
     {
       "id": "nambour-scc",
-      "author": "Nambour (Green)", "year": 1999,
+      "author": "Nambour (Green)",
+      "year": 1999,
       "citation": "Green A, Williams G, Neale R, et al. Daily sunscreen application and betacarotene supplementation in prevention of basal-cell and squamous-cell carcinomas of the skin (Nambour). Lancet. 1999;354:723-729.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/10475183/",
-      "design": "RCT", "outcomeId": "scc", "doseRegimen": "Daily SPF 15+", "population": "General adults, Australia; 4.5 yr",
+      "design": "RCT",
+      "outcomeId": "scc",
+      "doseRegimen": "Daily SPF 15+",
+      "population": "General adults, Australia; 4.5 yr",
       "n": 1621,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.61, "ciLow": 0.46, "ciHigh": 0.81 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.61,
+        "ciLow": 0.46,
+        "ciHigh": 0.81
+      },
       "notes": "Squamous-cell carcinoma tumor rate ratio over the trial period."
     },
     {
       "id": "vanderpols-scc",
-      "author": "Nambour follow-up (van der Pols)", "year": 2006,
+      "author": "Nambour follow-up (van der Pols)",
+      "year": 2006,
       "citation": "van der Pols JC, Williams GM, Pandeya N, et al. Prolonged prevention of squamous cell carcinoma of the skin by regular sunscreen use. Cancer Epidemiol Biomarkers Prev. 2006;15:2546-2548.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/17132769/",
-      "design": "RCT", "outcomeId": "scc", "doseRegimen": "Daily SPF 15+", "population": "Same cohort; 8 yr",
-      "n": 1621, "excludeFromPooled": true,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.62, "ciLow": 0.38, "ciHigh": 0.99 },
+      "design": "RCT",
+      "outcomeId": "scc",
+      "doseRegimen": "Daily SPF 15+",
+      "population": "Same cohort; 8 yr",
+      "n": 1621,
+      "excludeFromPooled": true,
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.62,
+        "ciLow": 0.38,
+        "ciHigh": 0.99
+      },
       "notes": "8-year follow-up of the same cohort (sustained effect); excluded from pooling to avoid double-counting."
     },
     {
       "id": "nambour-bcc",
-      "author": "Nambour (Green)", "year": 1999,
+      "author": "Nambour (Green)",
+      "year": 1999,
       "citation": "Green A, Williams G, Neale R, et al. Daily sunscreen application and betacarotene supplementation in prevention of basal-cell and squamous-cell carcinomas of the skin (Nambour). Lancet. 1999;354:723-729.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/10475183/",
-      "design": "RCT", "outcomeId": "bcc", "doseRegimen": "Daily SPF 15+", "population": "General adults, Australia; 4.5 yr",
+      "design": "RCT",
+      "outcomeId": "bcc",
+      "doseRegimen": "Daily SPF 15+",
+      "population": "General adults, Australia; 4.5 yr",
       "n": 1621,
-      "data": { "kind": "effect", "measure": "RR", "point": 1.05, "ciLow": 0.82, "ciHigh": 1.34 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 1.05,
+        "ciLow": 0.82,
+        "ciHigh": 1.34
+      },
       "notes": "Basal-cell carcinoma tumor rate ratio; no significant effect."
     },
     {
       "id": "nambour-melanoma",
-      "author": "Nambour follow-up (Green)", "year": 2011,
+      "author": "Nambour follow-up (Green)",
+      "year": 2011,
       "citation": "Green AC, Williams GM, Logan V, Strutton GM. Reduced melanoma after regular sunscreen use: randomized trial follow-up. J Clin Oncol. 2011;29:257-263.",
       "doi": "10.1200/JCO.2010.28.7078",
-      "design": "RCT", "outcomeId": "melanoma", "doseRegimen": "Daily SPF 15+", "population": "Same cohort; ~14 yr total",
+      "design": "RCT",
+      "outcomeId": "melanoma",
+      "doseRegimen": "Daily SPF 15+",
+      "population": "Same cohort; ~14 yr total",
       "n": 1621,
-      "data": { "kind": "effect", "measure": "HR", "point": 0.50, "ciLow": 0.24, "ciHigh": 1.02 },
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 0.5,
+        "ciLow": 0.24,
+        "ciHigh": 1.02
+      },
       "notes": "All melanoma (borderline, P=0.051). Invasive melanoma was significantly reduced: HR 0.27 (95% CI 0.08-0.97)."
     }
-  ]
+  ],
+  "treatmentNode": "Sunscreen",
+  "comparatorNode": "Control"
 }

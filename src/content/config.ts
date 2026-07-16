@@ -124,6 +124,10 @@ const topics = defineCollection({
     comparator: z.string(),
     category: z.string(),
     evidenceClass: z.enum(['efficacy', 'implementation', 'observational']).optional(),
+    // Network meta-analysis nodes: this topic is one edge (treatment vs
+    // comparator). Topics that share a comparator node form a connected network.
+    treatmentNode: z.string().optional(),
+    comparatorNode: z.string().optional(),
     summary: z.string(),
     description: z.string().optional(),
     interpretation: z.string().optional(),

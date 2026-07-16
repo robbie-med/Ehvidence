@@ -8,50 +8,99 @@
   "evidenceClass": "efficacy",
   "summary": "In patients with a history of nonmelanoma skin cancer, oral nicotinamide (vitamin B3) for 12 months reduced new nonmelanoma skin cancers by about 23%, with similar reductions in basal- and squamous-cell carcinomas and in actinic keratoses. It is inexpensive, over-the-counter, and well tolerated, but the benefit fades once it is stopped.",
   "description": "Nicotinamide (vitamin B3) aids DNA repair and reduces UV immunosuppression. The phase 3 ONTRAC trial randomized 386 high-risk patients (≥2 prior nonmelanoma skin cancers) to nicotinamide 500 mg twice daily or placebo for 12 months. The effect was not maintained after stopping and is not established in average-risk people.",
-  "interpretation": "Outcomes are lesion rate ratios, so NNTs are per skin cancer prevented over 12 months—strikingly low here because high-risk patients get many lesions, and not transferable to average-risk people. The benefit disappears within months of stopping. Evidence is a single phase 3 trial; the basal-cell result was not significant and squamous-cell was borderline."
-,
+  "interpretation": "Outcomes are lesion rate ratios, so NNTs are per skin cancer prevented over 12 months—strikingly low here because high-risk patients get many lesions, and not transferable to average-risk people. The benefit disappears within months of stopping. Evidence is a single phase 3 trial; the basal-cell result was not significant and squamous-cell was borderline.",
   "methodologyNotes": "Rate ratios from ONTRAC's reported relative differences, converted to risk ratios; the control lesion rate is the NNT baseline. Actinic keratoses also fell (13% at 12 months) but lacked a reported CI, so are not encoded. Single trial (n=386).",
   "status": "favorable",
   "primaryOutcomeId": "nmsc",
   "lastUpdated": "2026-05-29",
   "outcomes": [
-    { "id": "nmsc", "label": "New nonmelanoma skin cancers", "direction": "lowerIsBetter", "description": "New basal-cell plus squamous-cell carcinomas (primary endpoint).", "standardOutcomeId": "nmsc-incidence" },
-    { "id": "bcc", "label": "Basal-cell carcinoma", "direction": "lowerIsBetter", "description": "New basal-cell carcinomas.", "standardOutcomeId": "bcc-incidence" },
-    { "id": "scc", "label": "Squamous-cell carcinoma", "direction": "lowerIsBetter", "description": "New squamous-cell carcinomas.", "standardOutcomeId": "scc-incidence" }
+    {
+      "id": "nmsc",
+      "label": "New nonmelanoma skin cancers",
+      "direction": "lowerIsBetter",
+      "description": "New basal-cell plus squamous-cell carcinomas (primary endpoint).",
+      "standardOutcomeId": "nmsc-incidence"
+    },
+    {
+      "id": "bcc",
+      "label": "Basal-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "description": "New basal-cell carcinomas.",
+      "standardOutcomeId": "bcc-incidence"
+    },
+    {
+      "id": "scc",
+      "label": "Squamous-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "description": "New squamous-cell carcinomas.",
+      "standardOutcomeId": "scc-incidence"
+    }
   ],
   "studies": [
     {
       "id": "ontrac-nmsc",
-      "author": "ONTRAC (Chen)", "year": 2015,
+      "author": "ONTRAC (Chen)",
+      "year": 2015,
       "citation": "Chen AC, Martin AJ, Choy B, et al. A Phase 3 Randomized Trial of Nicotinamide for Skin-Cancer Chemoprevention (ONTRAC). N Engl J Med. 2015;373(17):1618-1626.",
       "doi": "10.1056/NEJMoa1506197",
-      "design": "DB-RCT", "outcomeId": "nmsc",
-      "doseRegimen": "Nicotinamide 500 mg twice daily", "population": "≥2 prior NMSC in 5 yr; 12 mo",
+      "design": "DB-RCT",
+      "outcomeId": "nmsc",
+      "doseRegimen": "Nicotinamide 500 mg twice daily",
+      "population": "≥2 prior NMSC in 5 yr; 12 mo",
       "n": 386,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.77, "ciLow": 0.62, "ciHigh": 0.96, "ctrlRisk": 2.4 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.77,
+        "ciLow": 0.62,
+        "ciHigh": 0.96,
+        "ctrlRisk": 2.4
+      },
       "notes": "New nonmelanoma skin cancers (primary). Rate ratio from 23% lower (95% CI 4-38), P=0.02. Control rate 2.4 lesions/person/12 mo; NNT is per cancer prevented over 12 months."
     },
     {
       "id": "ontrac-bcc",
-      "author": "ONTRAC (Chen)", "year": 2015,
+      "author": "ONTRAC (Chen)",
+      "year": 2015,
       "citation": "Chen AC, Martin AJ, Choy B, et al. A Phase 3 Randomized Trial of Nicotinamide for Skin-Cancer Chemoprevention (ONTRAC). N Engl J Med. 2015;373(17):1618-1626.",
       "doi": "10.1056/NEJMoa1506197",
-      "design": "DB-RCT", "outcomeId": "bcc",
-      "doseRegimen": "Nicotinamide 500 mg twice daily", "population": "≥2 prior NMSC in 5 yr; 12 mo",
+      "design": "DB-RCT",
+      "outcomeId": "bcc",
+      "doseRegimen": "Nicotinamide 500 mg twice daily",
+      "population": "≥2 prior NMSC in 5 yr; 12 mo",
       "n": 386,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.80, "ciLow": 0.61, "ciHigh": 1.06, "ctrlRisk": 1.7 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.8,
+        "ciLow": 0.61,
+        "ciHigh": 1.06,
+        "ctrlRisk": 1.7
+      },
       "notes": "Basal-cell carcinoma. Rate ratio from 20% lower (95% CI -6 to 39), P=0.12 (not significant). Reduction was mainly in superficial BCCs."
     },
     {
       "id": "ontrac-scc",
-      "author": "ONTRAC (Chen)", "year": 2015,
+      "author": "ONTRAC (Chen)",
+      "year": 2015,
       "citation": "Chen AC, Martin AJ, Choy B, et al. A Phase 3 Randomized Trial of Nicotinamide for Skin-Cancer Chemoprevention (ONTRAC). N Engl J Med. 2015;373(17):1618-1626.",
       "doi": "10.1056/NEJMoa1506197",
-      "design": "DB-RCT", "outcomeId": "scc",
-      "doseRegimen": "Nicotinamide 500 mg twice daily", "population": "≥2 prior NMSC in 5 yr; 12 mo",
+      "design": "DB-RCT",
+      "outcomeId": "scc",
+      "doseRegimen": "Nicotinamide 500 mg twice daily",
+      "population": "≥2 prior NMSC in 5 yr; 12 mo",
       "n": 386,
-      "data": { "kind": "effect", "measure": "RR", "point": 0.70, "ciLow": 0.49, "ciHigh": 1.00, "ctrlRisk": 0.7 },
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.7,
+        "ciLow": 0.49,
+        "ciHigh": 1.0,
+        "ctrlRisk": 0.7
+      },
       "notes": "Squamous-cell carcinoma. Rate ratio from 30% lower (95% CI 0 to 51), P=0.05 (borderline)."
     }
-  ]
+  ],
+  "treatmentNode": "Nicotinamide",
+  "comparatorNode": "Control"
 }

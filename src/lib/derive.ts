@@ -76,6 +76,8 @@ export interface RawTopic {
   comparator: string;
   category: string;
   evidenceClass?: 'efficacy' | 'implementation' | 'observational';
+  treatmentNode?: string;
+  comparatorNode?: string;
   summary: string;
   description?: string;
   interpretation?: string;

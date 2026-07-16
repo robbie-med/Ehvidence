@@ -13,14 +13,130 @@
   "primaryOutcomeId": "all-cause-mortality",
   "lastUpdated": "2026-06-26",
   "outcomes": [
-    { "id": "all-cause-mortality", "label": "All-cause mortality", "direction": "lowerIsBetter", "standardOutcomeId": "all-cause-mortality", "description": "Death from any cause during trial follow-up (median 9–23 months across trials)." }
+    {
+      "id": "all-cause-mortality",
+      "label": "All-cause mortality",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "all-cause-mortality",
+      "description": "Death from any cause during trial follow-up (median 9–23 months across trials)."
+    }
   ],
   "studies": [
-    { "id": "christchurch-2000", "author": "Troughton", "year": 2000, "citation": "Troughton RW, Frampton CM, Yandle TG, Espiner EA, Nicholls MG, Richards AM. Treatment of heart failure guided by plasma aminoterminal brain natriuretic peptide (N-BNP) concentrations. Lancet. 2000;355(9210):1126-1130.", "doi": "10.1016/S0140-6736(00)02060-2", "design": "RCT", "outcomeId": "all-cause-mortality", "population": "New Zealand; Christchurch pilot, HFrEF", "n": 69, "notes": "Small pilot; very wide CI and near-zero pooled weight (0.83%).", "data": { "kind": "effect", "measure": "RR", "point": 0.16, "ciLow": 0.02, "ciHigh": 1.20 } },
-    { "id": "time-chf-2009", "author": "TIME-CHF", "year": 2009, "citation": "Pfisterer M, Buser P, Rickli H, et al. BNP-guided vs symptom-guided heart failure therapy: the Trial of Intensified vs Standard Medical Therapy in Elderly Patients With Congestive Heart Failure (TIME-CHF) randomized trial. JAMA. 2009;301(4):383-392.", "doi": "10.1001/jama.2009.2", "design": "RCT", "outcomeId": "all-cause-mortality", "population": "Switzerland/Germany; elderly HFrEF, LVEF ≤45%", "n": 499, "notes": "Second-largest weight (25.6%).", "data": { "kind": "effect", "measure": "RR", "point": 0.72, "ciLow": 0.50, "ciHigh": 1.04 } },
-    { "id": "vienna-2010", "author": "Berger", "year": 2010, "citation": "Berger R, Moertl D, Peter S, et al. N-terminal pro-B-type natriuretic peptide-guided, intensive patient management in addition to multidisciplinary care in chronic heart failure: a 3-arm, prospective, randomized pilot study. J Am Coll Cardiol. 2010;55(7):645-653.", "doi": "10.1016/j.jacc.2009.08.078", "design": "RCT", "outcomeId": "all-cause-mortality", "population": "Austria (Vienna); HFrEF (NT-proBNP-guided vs control arms of a 3-arm pilot)", "n": 70, "notes": "Labeled 'Vienna 2010' in the letter's Figure 1.", "data": { "kind": "effect", "measure": "RR", "point": 0.99, "ciLow": 0.58, "ciHigh": 1.71 } },
-    { "id": "prima-2010", "author": "PRIMA", "year": 2010, "citation": "Eurlings LW, van Pol PE, Kok WE, et al. Management of chronic heart failure guided by individual N-terminal pro-B-type natriuretic peptide targets: results of the PRIMA (Can PRo-brain-natriuretic peptide guided therapy of chronic heart failure IMprove heart fAilure morbidity and mortality?) study. J Am Coll Cardiol. 2010;56(25):2090-2100.", "doi": "10.1016/j.jacc.2010.07.030", "design": "RCT", "outcomeId": "all-cause-mortality", "population": "Netherlands; HFrEF", "n": 345, "notes": "Third-largest weight (20.5%).", "data": { "kind": "effect", "measure": "RR", "point": 0.75, "ciLow": 0.50, "ciHigh": 1.13 } },
-    { "id": "signal-hf-2010", "author": "SIGNAL-HF", "year": 2010, "citation": "Persson H, Erntell H, Eriksson B, Johansson G, Swedberg K, Dahlström U. Improved pharmacological therapy of chronic heart failure in primary care: a randomized Study of NT-proBNP Guided Management of Heart Failure — SIGNAL-HF. Eur J Heart Fail. 2010;12(12):1300-1308.", "doi": "10.1093/eurjhf/hfq169", "design": "RCT", "outcomeId": "all-cause-mortality", "population": "Sweden; primary-care HFrEF", "n": 252, "notes": "Wide CI; small pooled weight (3.3%).", "data": { "kind": "effect", "measure": "RR", "point": 0.98, "ciLow": 0.36, "ciHigh": 2.72 } },
-    { "id": "guide-it-2017", "author": "GUIDE-IT", "year": 2017, "citation": "Felker GM, Anstrom KJ, Adams KF, et al. Effect of natriuretic peptide-guided therapy on hospitalization or cardiovascular mortality in high-risk patients with heart failure and reduced ejection fraction: a randomized clinical trial (GUIDE-IT). JAMA. 2017;318(8):713-720.", "doi": "10.1001/jama.2017.10565", "design": "RCT", "outcomeId": "all-cause-mortality", "population": "USA/Canada; high-risk HFrEF", "n": 894, "notes": "Largest and most recent trial (38.0% weight); individually neutral, stopped for futility.", "data": { "kind": "effect", "measure": "RR", "point": 0.86, "ciLow": 0.64, "ciHigh": 1.16 } }
-  ]
+    {
+      "id": "christchurch-2000",
+      "author": "Troughton",
+      "year": 2000,
+      "citation": "Troughton RW, Frampton CM, Yandle TG, Espiner EA, Nicholls MG, Richards AM. Treatment of heart failure guided by plasma aminoterminal brain natriuretic peptide (N-BNP) concentrations. Lancet. 2000;355(9210):1126-1130.",
+      "doi": "10.1016/S0140-6736(00)02060-2",
+      "design": "RCT",
+      "outcomeId": "all-cause-mortality",
+      "population": "New Zealand; Christchurch pilot, HFrEF",
+      "n": 69,
+      "notes": "Small pilot; very wide CI and near-zero pooled weight (0.83%).",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.16,
+        "ciLow": 0.02,
+        "ciHigh": 1.2
+      }
+    },
+    {
+      "id": "time-chf-2009",
+      "author": "TIME-CHF",
+      "year": 2009,
+      "citation": "Pfisterer M, Buser P, Rickli H, et al. BNP-guided vs symptom-guided heart failure therapy: the Trial of Intensified vs Standard Medical Therapy in Elderly Patients With Congestive Heart Failure (TIME-CHF) randomized trial. JAMA. 2009;301(4):383-392.",
+      "doi": "10.1001/jama.2009.2",
+      "design": "RCT",
+      "outcomeId": "all-cause-mortality",
+      "population": "Switzerland/Germany; elderly HFrEF, LVEF ≤45%",
+      "n": 499,
+      "notes": "Second-largest weight (25.6%).",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.72,
+        "ciLow": 0.5,
+        "ciHigh": 1.04
+      }
+    },
+    {
+      "id": "vienna-2010",
+      "author": "Berger",
+      "year": 2010,
+      "citation": "Berger R, Moertl D, Peter S, et al. N-terminal pro-B-type natriuretic peptide-guided, intensive patient management in addition to multidisciplinary care in chronic heart failure: a 3-arm, prospective, randomized pilot study. J Am Coll Cardiol. 2010;55(7):645-653.",
+      "doi": "10.1016/j.jacc.2009.08.078",
+      "design": "RCT",
+      "outcomeId": "all-cause-mortality",
+      "population": "Austria (Vienna); HFrEF (NT-proBNP-guided vs control arms of a 3-arm pilot)",
+      "n": 70,
+      "notes": "Labeled 'Vienna 2010' in the letter's Figure 1.",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.99,
+        "ciLow": 0.58,
+        "ciHigh": 1.71
+      }
+    },
+    {
+      "id": "prima-2010",
+      "author": "PRIMA",
+      "year": 2010,
+      "citation": "Eurlings LW, van Pol PE, Kok WE, et al. Management of chronic heart failure guided by individual N-terminal pro-B-type natriuretic peptide targets: results of the PRIMA (Can PRo-brain-natriuretic peptide guided therapy of chronic heart failure IMprove heart fAilure morbidity and mortality?) study. J Am Coll Cardiol. 2010;56(25):2090-2100.",
+      "doi": "10.1016/j.jacc.2010.07.030",
+      "design": "RCT",
+      "outcomeId": "all-cause-mortality",
+      "population": "Netherlands; HFrEF",
+      "n": 345,
+      "notes": "Third-largest weight (20.5%).",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.75,
+        "ciLow": 0.5,
+        "ciHigh": 1.13
+      }
+    },
+    {
+      "id": "signal-hf-2010",
+      "author": "SIGNAL-HF",
+      "year": 2010,
+      "citation": "Persson H, Erntell H, Eriksson B, Johansson G, Swedberg K, Dahlström U. Improved pharmacological therapy of chronic heart failure in primary care: a randomized Study of NT-proBNP Guided Management of Heart Failure — SIGNAL-HF. Eur J Heart Fail. 2010;12(12):1300-1308.",
+      "doi": "10.1093/eurjhf/hfq169",
+      "design": "RCT",
+      "outcomeId": "all-cause-mortality",
+      "population": "Sweden; primary-care HFrEF",
+      "n": 252,
+      "notes": "Wide CI; small pooled weight (3.3%).",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.98,
+        "ciLow": 0.36,
+        "ciHigh": 2.72
+      }
+    },
+    {
+      "id": "guide-it-2017",
+      "author": "GUIDE-IT",
+      "year": 2017,
+      "citation": "Felker GM, Anstrom KJ, Adams KF, et al. Effect of natriuretic peptide-guided therapy on hospitalization or cardiovascular mortality in high-risk patients with heart failure and reduced ejection fraction: a randomized clinical trial (GUIDE-IT). JAMA. 2017;318(8):713-720.",
+      "doi": "10.1001/jama.2017.10565",
+      "design": "RCT",
+      "outcomeId": "all-cause-mortality",
+      "population": "USA/Canada; high-risk HFrEF",
+      "n": 894,
+      "notes": "Largest and most recent trial (38.0% weight); individually neutral, stopped for futility.",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 0.86,
+        "ciLow": 0.64,
+        "ciHigh": 1.16
+      }
+    }
+  ],
+  "treatmentNode": "NT-proBNP guidance",
+  "comparatorNode": "Control"
 }

@@ -26,7 +26,7 @@ const byProblem = PROBLEMS.map((p) => ({
 
   {byProblem.map((g) => (
     <section>
-      <h2>{g.problem.label}</h2>
+      <h2>{g.problem.label} <a class="decision-link" href={`${base}/decision/${g.problem.id}`}>ranking &amp; benefit–harm ledger →</a></h2>
       {g.problem.description && <p class="small muted">{g.problem.description}</p>}
       <div class="table-scroll">
         <table>

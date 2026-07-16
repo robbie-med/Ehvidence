@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NetworkGraph from '../../components/NetworkGraph.astro';
+import LeagueTable from '../../components/LeagueTable.astro';
+import { deriveTopic, type RawTopic } from '../../lib/derive';
+import { buildLedger, problemNetworks } from '../../lib/compare';
+import { PROBLEMS, problem as getProblem } from '../../lib/standardOutcomes';
+import { fmtRR, fmtCI } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('topics');
+  const topics = entries.map((e) => deriveTopic(e.data as RawTopic));
+  return PROBLEMS.map((p) => ({
+    params: { problem: p.id },
+    props: { topics, problemId: p.id },
+  }));
+}
+
+const { topics, problemId } = Astro.props;
+const problem = getProblem(problemId)!;
+const ledger = buildLedger(topics, problemId);
+const networks = problemNetworks(topics, problemId);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function cellClass(status: string): string {
+  return status;
+}
+function pctRank(p: number): number {
+  return Math.round(p * 100);
+}
+---
+<BaseLayout title={`${problem.label}—decision view—Ehvidence`} description={`Comparative effectiveness and benefit–harm ledger for ${problem.label.toLowerCase()}.`}>
+  <p class="muted"><a href={`${base}/compare`}>← Compare</a></p>
+  <h1>{problem.label}: decision view</h1>
+  {problem.description && <p>{problem.description}</p>}
+  <div class="callout">
+    <div class="callout-title">Read with care</div>
+    <p class="small">Network meta-analysis assumes the interventions are exchangeable—studied in similar populations against a comparable control. Here the shared comparator node is a simplification (placebos, vehicle creams and usual care are treated as one "Control"), and populations differ. Treat the ranking as a hypothesis-ordering aid, not a definitive head-to-head.</p>
+  </div>
+
+  <h2>Benefit–harm ledger</h2>
+  <p class="small">One row per intervention, one column per outcome—each cell is that intervention's own pooled effect (never pooled across interventions). Green favors the intervention, red disfavors it.</p>
+  <div class="table-scroll">
+    <table class="ledger">
+      <thead>
+        <tr>
+          <th>Intervention</th>
+          {ledger.outcomes.map((o) => <th>{o.label}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {ledger.rows.map((row) => (
+          <tr>
+            <th class="ledger-int"><a href={`${base}/topics/${row.slug}`}>{row.intervention}</a></th>
+            {ledger.outcomes.map((o) => {
+              const cell = row.cells[o.id];
+              return cell
+                ? <td class={`ledger-cell ${cellClass(cell.status)}`}>{fmtRR(cell.rr)}<br /><span class="small">{fmtCI(cell.ciLow, cell.ciHigh)}</span></td>
+                : <td class="ledger-cell empty">—</td>;
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {networks.length > 0 && <h2>Comparative ranking (network meta-analysis)</h2>}
+  {networks.map((net) => (
+    <section class="nma-block">
+      <h3>{net.outcome.label}</h3>
+      {net.outcome.caveat && <p class="small">{net.outcome.caveat}</p>}
+      <div class="nma-grid">
+        <div>
+          <h4>Ranking (P-score)</h4>
+          <ol class="pscore">
+            {net.nma.pScores.map((s) => (
+              <li>
+                <span>{s.node}</span>
+                <span class="pscore-bar"><span style={`width:${pctRank(s.pScore)}%`}></span></span>
+                <span class="pscore-val">{pctRank(s.pScore)}</span>
+              </li>
+            ))}
+          </ol>
+          <p class="small">P-score is the mean probability a treatment is better than a randomly chosen competitor (higher = better). {net.nma.tau2 > 0.0001 ? `Network heterogeneity τ² = ${net.nma.tau2.toFixed(3)}.` : 'No network heterogeneity detected.'}</p>
+        </div>
+        <div>
+          <h4>Evidence network</h4>
+          <NetworkGraph nodes={net.nma.nodes} contrasts={net.contrasts} reference={net.nma.reference} />
+        </div>
+      </div>
+      <h4>League table</h4>
+      <LeagueTable nma={net.nma} direction={net.outcome.direction} />
+    </section>
+  ))}
+</BaseLayout>
