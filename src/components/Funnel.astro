@@ -1,0 +1,56 @@
+---
+import type { PoolDiagnostics } from '../lib/stats';
+
+interface Props {
+  diagnostics: PoolDiagnostics;
+  ratio?: boolean;
+}
+const { diagnostics: d } = Astro.props;
+const ratio = d.ratioScale;
+const pts = d.perStudy.filter((s) => s.se > 0);
+
+const W = 320;
+const H = 200;
+const M = { top: 14, right: 14, bottom: 34, left: 40 };
+const innerW = W - M.left - M.right;
+const innerH = H - M.top - M.bottom;
+
+// x = effect (log scale for ratios), centered on the fixed-effect estimate.
+const center = d.fixed.logEst;
+const xs = pts.map((s) => s.y);
+const maxDev = Math.max(0.2, ...xs.map((x) => Math.abs(x - center))) * 1.15;
+const seMax = Math.max(...pts.map((s) => s.se)) * 1.1 || 1;
+
+const xScale = (v: number) => M.left + ((v - center + maxDev) / (2 * maxDev)) * innerW;
+const yScale = (se: number) => M.top + (se / seMax) * innerH; // SE 0 at top
+
+const z = 1.959964;
+// Pseudo-95% CI funnel: at SE s, bounds are center ± z·s.
+const apexX = xScale(center);
+const leftBase = xScale(center - z * seMax);
+const rightBase = xScale(center + z * seMax);
+const baseY = yScale(seMax);
+
+function tickVal(offset: number): string {
+  const v = center + offset;
+  return ratio ? Math.exp(v).toFixed(2) : v.toFixed(1);
+}
+const xticks = [-maxDev * 0.66, 0, maxDev * 0.66];
+---
+<div class="table-scroll">
+<svg class="funnel" viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label="Funnel plot">
+  <polygon class="funnel-cone" points={`${apexX},${M.top} ${rightBase},${baseY} ${leftBase},${baseY}`} />
+  <line class="funnel-center" x1={apexX} y1={M.top} x2={apexX} y2={baseY} />
+  {pts.map((s) => (
+    <circle class="funnel-pt" cx={xScale(s.y)} cy={yScale(s.se)} r={3} />
+  ))}
+  <line class="axis" x1={M.left} y1={M.top} x2={M.left} y2={baseY} />
+  <line class="axis" x1={M.left} y1={baseY} x2={W - M.right} y2={baseY} />
+  {xticks.map((o) => (
+    <text class="ticklabel" x={xScale(center + o)} y={baseY + 14} text-anchor="middle">{tickVal(o)}</text>
+  ))}
+  <text class="ticklabel" x={M.left - 6} y={M.top + 6} text-anchor="end">0</text>
+  <text class="ticklabel" x={M.left - 6} y={baseY} text-anchor="end">SE</text>
+  <text class="ticklabel" x={M.left + innerW / 2} y={H - 4} text-anchor="middle">{ratio ? 'effect (log scale)' : 'effect'}</text>
+</svg>
+</div>

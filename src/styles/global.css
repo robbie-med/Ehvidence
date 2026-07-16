@@ -221,6 +221,30 @@ tbody tr:hover { background: var(--bg-soft); }
 .topic-tags a:hover { color: var(--link); }
 .cat-head { margin-top: 1.5rem; font-weight: 700; color: var(--ink-soft); font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; }
 
+/* ---- methods auditor ---- */
+.audit { margin: 1rem 0; border: 1px solid var(--line); border-radius: 8px; padding: .5rem .8rem; background: var(--surface, #fafafa); }
+.audit > summary { cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: .5rem; }
+.audit-rollup { display: inline-flex; gap: .3rem; }
+.audit .pill { font-size: .72rem; padding: .05rem .4rem; border-radius: 999px; font-weight: 600; }
+.audit .pill.flag { background: var(--against); color: #fff; }
+.audit .pill.warn { background: #e6a100; color: #fff; }
+.audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .5rem; margin: .6rem 0; }
+.audit-row { display: flex; gap: .5rem; align-items: flex-start; padding: .4rem .5rem; border-radius: 6px; background: #fff; border: 1px solid var(--line); }
+.audit-dot { flex: none; width: 18px; height: 18px; border-radius: 50%; color: #fff; font-size: .72rem; font-weight: 700; display: grid; place-items: center; }
+.audit-dot.ok { background: var(--favor); }
+.audit-dot.warn { background: #e6a100; }
+.audit-dot.flag { background: var(--against); }
+.audit-dot.info { background: var(--neutral, #64748b); }
+.audit-head { display: flex; justify-content: space-between; gap: .5rem; align-items: baseline; }
+.audit-val { font-variant-numeric: tabular-nums; color: var(--ink-soft); font-size: .82rem; }
+.audit-detail { font-size: .82rem; color: var(--ink-soft); margin-top: .1rem; }
+.audit-funnel { margin-top: .5rem; }
+.funnel .funnel-cone { fill: var(--line); opacity: .35; }
+.funnel .funnel-center { stroke: var(--line-strong); stroke-dasharray: 3 3; }
+.funnel .funnel-pt { fill: var(--neutral, #475569); opacity: .85; }
+.funnel .axis { stroke: var(--line-strong); stroke-width: 1; }
+.funnel .ticklabel { font-size: 9px; fill: var(--ink-soft); }
+
 /* ---- scatter ---- */
 .scatter text { font-family: var(--font); }
 .scatter .dot.favorable { fill: var(--favor); }

@@ -7,6 +7,7 @@ import StudyTable from './StudyTable.astro';
 import ContinuousSummary from './ContinuousSummary.astro';
 import ContinuousForest from './ContinuousForest.astro';
 import ContinuousTable from './ContinuousTable.astro';
+import CredibilityPanel from './CredibilityPanel.astro';
 
 interface Props {
   topic: ComputedTopic;
@@ -45,6 +46,7 @@ const meta = evidenceMeta(topic.raw.evidenceClass);
         <ContinuousForest outcome={o} favorLabel={favorLabel} againstLabel={againstLabel} />
         <h3>Study results—{o.outcome.label}</h3>
         <ContinuousTable outcome={o} />
+        <CredibilityPanel outcome={o} />
       </>
     ) : (
       <>
@@ -53,6 +55,7 @@ const meta = evidenceMeta(topic.raw.evidenceClass);
         <ForestPlot outcome={o} favorLabel={favorLabel} againstLabel={againstLabel} />
         <h3>Study results—{o.outcome.label}</h3>
         <StudyTable outcome={o} showNnt={meta.showNnt} />
+        <CredibilityPanel outcome={o} />
       </>
     )}
   </section>

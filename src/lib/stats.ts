@@ -110,6 +110,56 @@ export interface WeightedEffect {
   weightPct: number;
 }
 
+/**
+ * Per-study diagnostics on the analysis scale (log scale for ratio effects,
+ * linear for continuous), aligned to the pool's input order. Degenerate studies
+ * carry zero weights.
+ */
+export interface StudyDiag {
+  /** Effect on the analysis scale (log ratio, or the raw mean difference). */
+  y: number;
+  /** Variance of `y`. */
+  v: number;
+  /** Standard error of `y` (sqrt v). */
+  se: number;
+  /** Fixed-effect (inverse-variance) weight as a fraction of the total. */
+  wFixedPct: number;
+  /** Random-effects weight as a fraction of the total. */
+  wRandomPct: number;
+}
+
+/** A pooled estimate expressed on both the natural and analysis scales. */
+export interface ScaleEstimate {
+  /** Natural-scale estimate (RR/OR/HR, or the mean difference). */
+  est: number;
+  /** Analysis-scale estimate (log ratio, or the mean difference). */
+  logEst: number;
+  /** Standard error on the analysis scale. */
+  se: number;
+  ciLow: number;
+  ciHigh: number;
+}
+
+/**
+ * Full pooling diagnostics: everything the auditor, cumulative, TSA and NMA
+ * features need but the summary `PooledResult` hides—per-study weights, the
+ * fixed-effect estimate alongside the random one, and the heterogeneity terms.
+ */
+export interface PoolDiagnostics {
+  /** Per-study rows aligned to the pool's input order. */
+  perStudy: StudyDiag[];
+  fixed: ScaleEstimate;
+  random: ScaleEstimate;
+  q: number;
+  df: number;
+  tau2: number;
+  i2: number;
+  /** H statistic = sqrt(Q/df). */
+  h: number;
+  /** True when effects are ratios (analysis scale is the log); false for MD/SMD. */
+  ratioScale: boolean;
+}
+
 function isTwoByTwo(d: StudyData): d is TwoByTwo {
   return d.kind === '2x2';
 }
@@ -218,6 +268,7 @@ function effectFromPrecomputed(d: PrecomputedEffect): EffectResult {
 export function poolRandomEffects(items: StudyData[]): {
   pooled: PooledResult;
   weighted: WeightedEffect[];
+  diagnostics: PoolDiagnostics;
 } | null {
   if (items.length === 0) return null;
 
@@ -280,6 +331,19 @@ export function poolRandomEffects(items: StudyData[]): {
     else if (arr < 0) nnh = Math.ceil(1 / -arr);
   }
 
+  const seFixed = Math.sqrt(1 / sumW);
+  const perStudy: StudyDiag[] = effects.map((e) => {
+    const v = e.seLog * e.seLog;
+    const usable = Number.isFinite(e.logEffect) && Number.isFinite(v) && v > 0;
+    return {
+      y: e.logEffect,
+      v,
+      se: e.seLog,
+      wFixedPct: usable ? (1 / v) / sumW : 0,
+      wRandomPct: usable ? (1 / (v + tau2)) / sumWr : 0,
+    };
+  });
+
   return {
     pooled: {
       k: valid.length,
@@ -296,6 +360,23 @@ export function poolRandomEffects(items: StudyData[]): {
       totalEvents,
     },
     weighted,
+    diagnostics: {
+      perStudy,
+      fixed: {
+        est: Math.exp(yFixed),
+        logEst: yFixed,
+        se: seFixed,
+        ciLow: Math.exp(yFixed - Z_95 * seFixed),
+        ciHigh: Math.exp(yFixed + Z_95 * seFixed),
+      },
+      random: { est: rr, logEst: yRandom, se: seRandom, ciLow, ciHigh },
+      q,
+      df,
+      tau2,
+      i2,
+      h: df > 0 ? Math.sqrt(q / df) : 1,
+      ratioScale: true,
+    },
   };
 }
 
@@ -334,6 +415,63 @@ function aggregateControlRisk(items: StudyData[]): {
     pooledCtrlRisk = reportedRisks.reduce((a, b) => a + b, 0) / reportedRisks.length;
   }
   return { pooledCtrlRisk, totalPatients, totalEvents };
+}
+
+/**
+ * Sample-size-weighted pooled control (comparator-arm) risk for an outcome, or
+ * the mean of reported control risks for precomputed-effect topics. Null when no
+ * baseline risk can be recovered. This is the default baseline for the
+ * absolute-risk translator.
+ */
+export function poolControlRisk(items: StudyData[]): number | null {
+  return aggregateControlRisk(items).pooledCtrlRisk;
+}
+
+/** A baseline-specific absolute-effect translation of a relative effect. */
+export interface AbsoluteEffect {
+  /** Absolute risk difference at the given baseline (benefit is positive). */
+  arr: number;
+  /** Number needed to treat/harm (rounded up), and which one it is. */
+  nn: number;
+  kind: 'NNT' | 'NNH';
+  /** ARR confidence bounds from propagating the effect CI onto the baseline. */
+  arrLow: number;
+  arrHigh: number;
+  /** Per-1000 treated: expected events in each arm and the difference. */
+  per1000: { tx: number; ctrl: number; delta: number };
+}
+
+/**
+ * Translate a relative effect (RR/OR/HR treated as a risk ratio) at a chosen
+ * baseline (comparator-arm) risk into an absolute risk difference and NNT/NNH.
+ * `direction` only affects the NNT/NNH labelling, not the arithmetic.
+ */
+export function absoluteRisk(
+  baseline: number,
+  effect: { point: number; ciLow: number; ciHigh: number },
+  direction: 'lowerIsBetter' | 'higherIsBetter',
+): AbsoluteEffect {
+  const b = Math.min(1, Math.max(0, baseline));
+  const txRisk = b * effect.point;
+  const arr = b - txRisk; // control − treatment; > 0 means treatment lowers risk
+  // Propagate the effect CI onto the baseline (wider effect → wider ARR).
+  const arrA = b - b * effect.ciLow;
+  const arrB = b - b * effect.ciHigh;
+  const arrLow = Math.min(arrA, arrB);
+  const arrHigh = Math.max(arrA, arrB);
+  // A reduction in the event is a benefit for "lower is better"; for a
+  // higher-is-better success count, an increase in the event is the benefit.
+  const benefit = direction === 'lowerIsBetter' ? arr : -arr;
+  const kind: 'NNT' | 'NNH' = benefit >= 0 ? 'NNT' : 'NNH';
+  const nn = Math.abs(arr) > 0 ? Math.ceil(1 / Math.abs(arr)) : Infinity;
+  return {
+    arr,
+    nn,
+    kind,
+    arrLow,
+    arrHigh,
+    per1000: { tx: txRisk * 1000, ctrl: b * 1000, delta: (b - txRisk) * 1000 },
+  };
 }
 
 function sum(xs: number[]): number {
@@ -447,7 +585,7 @@ export function computeContinuous(
 export function poolContinuous(
   items: ContinuousStudyData[],
   measure: ContinuousMeasure,
-): { pooled: PooledContinuous; weighted: WeightedContinuous[] } | null {
+): { pooled: PooledContinuous; weighted: WeightedContinuous[]; diagnostics: PoolDiagnostics } | null {
   if (items.length === 0) return null;
   const results = items.map((d) => computeContinuous(d, measure));
   const valid = results.filter((r) => Number.isFinite(r.estimate) && Number.isFinite(r.se) && r.se > 0);
@@ -486,6 +624,19 @@ export function poolContinuous(
     else if (typeof d.n === 'number') totalPatients += d.n;
   }
 
+  const seFixed = Math.sqrt(1 / sumW);
+  const perStudy: StudyDiag[] = results.map((r) => {
+    const v = r.se * r.se;
+    const usable = Number.isFinite(r.estimate) && Number.isFinite(v) && v > 0;
+    return {
+      y: r.estimate,
+      v,
+      se: r.se,
+      wFixedPct: usable ? (1 / v) / sumW : 0,
+      wRandomPct: usable ? (1 / (v + tau2)) / sumWr : 0,
+    };
+  });
+
   return {
     pooled: {
       k: valid.length,
@@ -500,6 +651,23 @@ export function poolContinuous(
       totalPatients,
     },
     weighted,
+    diagnostics: {
+      perStudy,
+      fixed: {
+        est: yFixed,
+        logEst: yFixed,
+        se: seFixed,
+        ciLow: yFixed - Z_95 * seFixed,
+        ciHigh: yFixed + Z_95 * seFixed,
+      },
+      random: { est: estimate, logEst: estimate, se: seRE, ciLow: estimate - Z_95 * seRE, ciHigh: estimate + Z_95 * seRE },
+      q,
+      df,
+      tau2,
+      i2,
+      h: df > 0 ? Math.sqrt(q / df) : 1,
+      ratioScale: false,
+    },
   };
 }
 

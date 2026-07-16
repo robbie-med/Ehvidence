@@ -7,6 +7,7 @@
 import {
   computeEffect,
   poolRandomEffects,
+  poolControlRisk,
   deriveStatus,
   computeContinuous,
   poolContinuous,
@@ -18,6 +19,7 @@ import {
   type ContinuousMeasure,
   type PooledResult,
   type PooledContinuous,
+  type PoolDiagnostics,
   type EvidenceStatus,
 } from './stats';
 
@@ -56,6 +58,14 @@ export interface RawOutcome {
   measure?: ContinuousMeasure;
   /** Authored status override (otherwise derived from the pooled estimate). */
   status?: EvidenceStatus;
+  /** Baseline-risk model for the absolute-risk translator (binary outcomes). */
+  baselineRisk?: {
+    default: number;
+    min?: number;
+    max?: number;
+    unit?: string;
+    presets?: { label: string; value: number }[];
+  };
 }
 
 export interface RawTopic {
@@ -96,6 +106,10 @@ export interface ComputedOutcome {
   pooled: PooledResult | null;
   /** Pooled continuous estimate (continuous outcomes). */
   contPooled: PooledContinuous | null;
+  /** Full pooling diagnostics (per-study weights, fixed estimate, heterogeneity). */
+  diagnostics: PoolDiagnostics | null;
+  /** Default baseline (comparator-arm) risk for the absolute-risk translator. */
+  baselineRisk: number | null;
   status: EvidenceStatus;
   /** Participants analyzed across this outcome's studies. */
   totalPatients: number;
@@ -173,7 +187,7 @@ function computeOutcome(raw: RawTopic, outcome: RawOutcome): ComputedOutcome {
     studies.sort((a, b) => b.year - a.year);
     const contPooled = pooledResult?.pooled ?? null;
     const status = outcome.status ?? deriveStatusContinuous(contPooled, outcome.direction);
-    return { outcome, kind: 'continuous', measure, studies, pooled: null, contPooled, status, totalPatients };
+    return { outcome, kind: 'continuous', measure, studies, pooled: null, contPooled, diagnostics: pooledResult?.diagnostics ?? null, baselineRisk: null, status, totalPatients };
   }
 
   const pooledResult = poolRandomEffects(poolable.map((s) => s.data as StudyData));
@@ -190,7 +204,10 @@ function computeOutcome(raw: RawTopic, outcome: RawOutcome): ComputedOutcome {
   }));
   studies.sort((a, b) => b.year - a.year);
   const status = outcome.status ?? deriveStatus(pooled, outcome.direction);
-  return { outcome, kind: 'binary', measure, studies, pooled, contPooled: null, status, totalPatients };
+  const baselineRisk =
+    outcome.baselineRisk?.default ??
+    poolControlRisk(poolable.map((s) => s.data as StudyData));
+  return { outcome, kind: 'binary', measure, studies, pooled, contPooled: null, diagnostics: pooledResult?.diagnostics ?? null, baselineRisk, status, totalPatients };
 }
 
 /** Flatten a topic's studies into recent-publication entries, newest first. */

@@ -95,6 +95,20 @@ const outcome = z.object({
   // the pooled estimate). Useful for single large studies where the automatic
   // k<3 "limited" rule does not reflect the evidence.
   status: z.enum(['favorable', 'harmful', 'limited', 'neutral']).optional(),
+  // Baseline (comparator-arm) risk model for the absolute-risk translator.
+  // Defaults to the pooled control-arm risk when omitted; authored when the
+  // control arm is not representative of the population of interest.
+  baselineRisk: z
+    .object({
+      default: z.number().min(0).max(1),
+      min: z.number().min(0).max(1).optional(),
+      max: z.number().min(0).max(1).optional(),
+      unit: z.string().optional(),
+      presets: z
+        .array(z.object({ label: z.string(), value: z.number().min(0).max(1) }))
+        .optional(),
+    })
+    .optional(),
   // Links this outcome to a controlled standard outcome so it can be compared
   // across interventions. See src/lib/standardOutcomes.ts.
   standardOutcomeId: z.string().optional(),

@@ -1,0 +1,46 @@
+---
+import type { ComputedOutcome } from '../lib/derive';
+import { auditOutcome } from '../lib/audit';
+import Funnel from './Funnel.astro';
+
+interface Props {
+  outcome: ComputedOutcome;
+}
+const { outcome } = Astro.props;
+const checks = auditOutcome(outcome);
+const showFunnel = outcome.diagnostics && outcome.diagnostics.perStudy.filter((s) => s.se > 0).length >= 3;
+const icon: Record<string, string> = { ok: '✓', warn: '!', flag: '✕', info: 'i' };
+---
+{checks.length > 0 && (
+  <details class="audit">
+    <summary>
+      Methods audit
+      <span class="audit-rollup">
+        {checks.filter((c) => c.level === 'flag').length > 0 && (
+          <span class="pill flag">{checks.filter((c) => c.level === 'flag').length} flag</span>
+        )}
+        {checks.filter((c) => c.level === 'warn').length > 0 && (
+          <span class="pill warn">{checks.filter((c) => c.level === 'warn').length} caution</span>
+        )}
+      </span>
+    </summary>
+    <p class="small">Uniform credibility checks computed from the raw data—not taken from the source paper.</p>
+    <div class="audit-grid">
+      {checks.map((c) => (
+        <div class={`audit-row ${c.level}`}>
+          <span class={`audit-dot ${c.level}`}>{icon[c.level]}</span>
+          <div>
+            <div class="audit-head"><strong>{c.label}</strong>{c.value && <span class="audit-val">{c.value}</span>}</div>
+            <div class="audit-detail">{c.detail}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+    {showFunnel && (
+      <div class="audit-funnel">
+        <div class="small"><strong>Funnel plot</strong> — asymmetry hints at small-study effects / publication bias.</div>
+        <Funnel diagnostics={outcome.diagnostics!} />
+      </div>
+    )}
+  </details>
+)}
