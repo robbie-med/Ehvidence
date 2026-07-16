@@ -1,0 +1,62 @@
+---
+import type { TSAResult } from '../lib/living';
+
+interface Props {
+  tsa: TSAResult;
+}
+const { tsa } = Astro.props;
+
+const W = 460;
+const H = 260;
+const M = { top: 18, right: 18, bottom: 40, left: 44 };
+const innerW = W - M.left - M.right;
+const innerH = H - M.top - M.bottom;
+
+// x = information fraction (patients / RIS), clamped to [0, 1.2].
+const xMax = Math.max(1.05, ...tsa.points.map((p) => p.infoFrac)) * 1.02;
+const zMax = Math.max(4, ...tsa.points.map((p) => Math.min(8, Math.abs(p.z))), ...tsa.points.filter((p) => p.infoFrac > 0.05).map((p) => Math.min(8, p.boundary)));
+const xS = (t: number) => M.left + (t / xMax) * innerW;
+const yS = (z: number) => M.top + innerH / 2 - (z / zMax) * (innerH / 2);
+
+// Conventional significance line at z = 1.96.
+const zConv = 1.959964;
+// Sampled monitoring boundary curve.
+const bpts: string[] = [];
+const bptsNeg: string[] = [];
+for (let i = 1; i <= 60; i++) {
+  const t = (i / 60) * xMax;
+  const b = t > 0 ? Math.min(8, zConv / Math.sqrt(Math.min(1, t))) : 8;
+  bpts.push(`${xS(t)},${yS(b)}`);
+  bptsNeg.push(`${xS(t)},${yS(-b)}`);
+}
+const zpoints = tsa.points.filter((p) => p.infoFrac > 0);
+const zCurve = zpoints.map((p) => `${xS(p.infoFrac)},${yS(Math.max(-8, Math.min(8, p.z)))}`);
+const risX = xS(1);
+const showRis = xMax >= 1;
+function clampZ(z: number): number {
+  return Math.max(-8, Math.min(8, z));
+}
+---
+<div class="table-scroll">
+<svg class="tsa" viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label="Trial sequential analysis">
+  <line class="axis" x1={M.left} y1={yS(0)} x2={W - M.right} y2={yS(0)} />
+  <line class="axis" x1={M.left} y1={M.top} x2={M.left} y2={H - M.bottom} />
+  <!-- conventional significance -->
+  <line class="tsa-conv" x1={M.left} y1={yS(zConv)} x2={W - M.right} y2={yS(zConv)} />
+  <line class="tsa-conv" x1={M.left} y1={yS(-zConv)} x2={W - M.right} y2={yS(-zConv)} />
+  <!-- RIS line -->
+  {showRis && <line class="tsa-ris" x1={risX} y1={M.top} x2={risX} y2={H - M.bottom} />}
+  {showRis && <text class="ticklabel" x={risX} y={M.top - 4} text-anchor="middle">RIS</text>}
+  <!-- OBF monitoring boundaries -->
+  <polyline class="tsa-boundary" points={bpts.join(' ')} fill="none" />
+  <polyline class="tsa-boundary" points={bptsNeg.join(' ')} fill="none" />
+  <!-- cumulative z-curve -->
+  <polyline class="tsa-z" points={zCurve.join(' ')} fill="none" />
+  {zpoints.map((p) => (
+    <circle class="tsa-zpt" cx={xS(p.infoFrac)} cy={yS(clampZ(p.z))} r={2.5} />
+  ))}
+  <text class="ticklabel" x={M.left - 6} y={yS(zConv) + 3} text-anchor="end">1.96</text>
+  <text class="ticklabel" x={M.left - 6} y={yS(0) + 3} text-anchor="end">Z 0</text>
+  <text class="ticklabel" x={M.left + innerW / 2} y={H - 6} text-anchor="middle">information fraction (patients / required size)</text>
+</svg>
+</div>

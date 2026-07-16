@@ -1,0 +1,88 @@
+---
+import type { ComputedTopic } from '../lib/derive';
+import { studyPatients } from '../lib/derive';
+import { cumulativeMeta, trialSequential, flipTrial, type YearedStudy } from '../lib/living';
+import type { StudyData } from '../lib/stats';
+import CumulativeForest from './CumulativeForest.astro';
+import TrialSequential from './TrialSequential.astro';
+
+interface Props {
+  topic: ComputedTopic;
+}
+const { topic } = Astro.props;
+const primary = topic.primary;
+
+// Living evidence is defined for binary (ratio) outcomes with year-stamped trials.
+const poolable = primary.kind === 'binary'
+  ? primary.studies.filter((s) => !s.excludeFromPooled)
+  : [];
+const yeared: YearedStudy[] = poolable.map((s) => ({
+  data: s.data as StudyData,
+  year: s.year,
+  patients: studyPatients(s),
+}));
+const distinctYears = new Set(yeared.map((y) => y.year)).size;
+const show = yeared.length >= 3 && distinctYears >= 2;
+
+const cumulative = show ? cumulativeMeta(yeared) : [];
+const tsa = show ? trialSequential(yeared) : null;
+const flip = show ? flipTrial(yeared.map((y) => y.data)) : null;
+
+const newest = yeared.length ? Math.max(...yeared.map((y) => y.year)) : null;
+const oldest = yeared.length ? Math.min(...yeared.map((y) => y.year)) : null;
+const updatedYear = Number((topic.raw.lastUpdated || '').slice(0, 4)) || null;
+const ageYears = newest && updatedYear ? updatedYear - newest : null;
+const fmtN = (n: number) => n.toLocaleString();
+const showTsaChart = !!tsa && tsa.points.length >= 2;
+const ageClass = ageYears != null && ageYears >= 8 ? 'warn' : 'info';
+const ageText = ageYears == null ? '' : ageYears <= 0 ? 'this year' : `${ageYears} yr${ageYears === 1 ? '' : 's'} old`;
+const risText = tsa ? fmtN(Math.round(tsa.risPatients)) : '';
+const targetPct = tsa ? Math.round(tsa.targetRRR * 100) : 0;
+const powerPct = tsa ? Math.round(tsa.power * 100) : 0;
+const d2Pct = tsa ? Math.round(tsa.d2 * 100) : 0;
+const reachedPct = tsa ? Math.round(Math.min(1, tsa.reached) * 100) : 0;
+---
+{show && (
+  <section class="living">
+    <h2>Living evidence</h2>
+    <div class="currency">
+      {newest && oldest && <span class="pill info">{yeared.length} trials · {oldest}–{newest}</span>}
+      {ageYears != null && (
+        <span class={`pill ${ageClass}`}>newest trial {ageText}</span>
+      )}
+      {tsa && (
+        <span class={`pill ${tsa.crossedBenefit ? 'ok' : 'warn'}`}>
+          {tsa.crossedBenefit
+            ? 'crossed the monitoring boundary (firm)'
+            : `${reachedPct}% of the required information size`}
+        </span>
+      )}
+    </div>
+
+    {flip && (
+      <p class="flip">
+        <strong>Robustness:</strong> a single future null trial of about <strong>{fmtN(flip.patients)}</strong> participants
+        would move the pooled estimate back across the no-effect line.
+      </p>
+    )}
+
+    <div class="living-charts">
+      <div>
+        <h3>Cumulative meta-analysis</h3>
+        <CumulativeForest points={cumulative} />
+      </div>
+      {showTsaChart && tsa && (
+        <div>
+          <h3>Trial sequential analysis</h3>
+          <p class="small">
+            O'Brien–Fleming alpha-spending boundaries for a {targetPct}% relative risk reduction
+            (α {tsa.alpha}, power {powerPct}%, diversity D² {d2Pct}%).
+            The blue z-curve crossing the boundary means the benefit is firm despite repeated testing;
+            not reaching the required information size (RIS ≈ {risText} patients) means the evidence is still underpowered.
+          </p>
+          <TrialSequential tsa={tsa} />
+        </div>
+      )}
+    </div>
+  </section>
+)}

@@ -1,0 +1,64 @@
+---
+import type { CumulativePoint } from '../lib/living';
+import { fmtRR, fmtCI } from '../lib/format';
+
+interface Props {
+  points: CumulativePoint[];
+}
+const { points } = Astro.props;
+
+const LABEL_W = 150;
+const PLOT_W = 300;
+const STAT_W = 150;
+const ROW_H = 20;
+const PAD_TOP = 22;
+const AXIS_H = 34;
+const W = LABEL_W + PLOT_W + STAT_W;
+const H = PAD_TOP + points.length * ROW_H + AXIS_H;
+
+const ticks = [0.25, 0.5, 1, 2, 4];
+const lo = Math.log(0.1);
+const hi = Math.log(4.5);
+const plotX0 = LABEL_W;
+function x(rr: number): number {
+  const c = Math.min(Math.max(Math.log(rr), lo), hi);
+  return plotX0 + ((c - lo) / (hi - lo)) * PLOT_W;
+}
+const refX = x(1);
+function cls(p: CumulativePoint): string {
+  if (p.ciHigh < 1) return 'favor';
+  if (p.ciLow > 1) return 'against';
+  return 'neutral';
+}
+---
+<div class="table-scroll">
+<svg class="forest" viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label="Cumulative meta-analysis by year">
+  <line class="refline" x1={refX} y1={PAD_TOP - 6} x2={refX} y2={PAD_TOP + points.length * ROW_H + 4} />
+  {points.map((p, i) => {
+    const cy = PAD_TOP + i * ROW_H + ROW_H / 2;
+    return (
+      <g>
+        <text class="study-label" x={6} y={cy + 3}>{p.year} · {p.k} stud{p.k === 1 ? 'y' : 'ies'}</text>
+        <line class="whisker" x1={x(p.ciLow)} y1={cy} x2={x(p.ciHigh)} y2={cy} />
+        <rect class={`study-marker ${cls(p)}`} x={x(p.rr) - 3} y={cy - 3} width={6} height={6} />
+        <text class="study-stat" x={LABEL_W + PLOT_W + 8} y={cy + 3}>{fmtRR(p.rr)} {fmtCI(p.ciLow, p.ciHigh)}</text>
+      </g>
+    );
+  })}
+  {(() => {
+    const ay = PAD_TOP + points.length * ROW_H + 8;
+    return (
+      <g>
+        <line class="axis" x1={plotX0} y1={ay} x2={plotX0 + PLOT_W} y2={ay} />
+        {ticks.map((t) => (
+          <g>
+            <line class="tick" x1={x(t)} y1={ay} x2={x(t)} y2={ay + 4} />
+            <text class="ticklabel" x={x(t)} y={ay + 14} text-anchor="middle">{t}</text>
+          </g>
+        ))}
+      </g>
+    );
+  })()}
+</svg>
+</div>
+<p class="small">Each row re-pools every trial published up to that year—how the evidence base moved as data accrued.</p>

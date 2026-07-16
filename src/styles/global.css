@@ -221,6 +221,24 @@ tbody tr:hover { background: var(--bg-soft); }
 .topic-tags a:hover { color: var(--link); }
 .cat-head { margin-top: 1.5rem; font-weight: 700; color: var(--ink-soft); font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; }
 
+/* ---- living evidence ---- */
+.living { margin: 1.5rem 0; }
+.currency { display: flex; flex-wrap: wrap; gap: .4rem; margin: .4rem 0 .8rem; }
+.pill { font-size: .74rem; padding: .1rem .5rem; border-radius: 999px; font-weight: 600; display: inline-flex; align-items: center; }
+.pill.ok { background: var(--favor); color: #fff; }
+.pill.warn { background: #e6a100; color: #fff; }
+.pill.info { background: var(--neutral, #64748b); color: #fff; }
+.pill.flag { background: var(--against); color: #fff; }
+.living .flip { background: #fafafa; border-left: 3px solid var(--line-strong); padding: .5rem .8rem; border-radius: 4px; }
+.living-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.2rem; align-items: start; }
+.tsa .axis { stroke: var(--line-strong); stroke-width: 1; }
+.tsa .tsa-conv { stroke: var(--line); stroke-dasharray: 4 3; }
+.tsa .tsa-ris { stroke: var(--against); stroke-dasharray: 3 3; opacity: .6; }
+.tsa .tsa-boundary { stroke: #e6a100; stroke-width: 1.5; }
+.tsa .tsa-z { stroke: #2563eb; stroke-width: 1.75; }
+.tsa .tsa-zpt { fill: #2563eb; }
+.tsa .ticklabel { font-size: 9px; fill: var(--ink-soft); }
+
 /* ---- absolute-risk translator ---- */
 .ar { border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; margin: .5rem 0 1rem; }
 .ar-label { display: block; margin-bottom: .3rem; }

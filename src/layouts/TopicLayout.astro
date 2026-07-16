@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import OutcomeTabs from '../components/OutcomeTabs.astro';
+import LivingEvidence from '../components/LivingEvidence.astro';
 import RecentStudies from '../components/RecentStudies.astro';
 import { recentStudies, type ComputedTopic } from '../lib/derive';
 import { statusLabel } from '../lib/format';
@@ -38,6 +39,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   )}
 
   <OutcomeTabs topic={topic} />
+
+  <LivingEvidence topic={topic} />
 
   {raw.description && (
     <>
