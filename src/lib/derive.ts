@@ -83,6 +83,14 @@ export interface RawTopic {
   status?: EvidenceStatus;
   primaryOutcomeId: string;
   lastUpdated: string;
+  searchTerms?: string[];
+  pendingTrials?: {
+    name: string;
+    registryId?: string;
+    expectedN?: number;
+    expectedReadout?: string;
+    url?: string;
+  }[];
   outcomes: RawOutcome[];
   studies: RawStudy[];
 }

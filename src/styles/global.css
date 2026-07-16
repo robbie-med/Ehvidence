@@ -230,6 +230,9 @@ tbody tr:hover { background: var(--bg-soft); }
 .pill.info { background: var(--neutral, #64748b); color: #fff; }
 .pill.flag { background: var(--against); color: #fff; }
 .living .flip { background: #fafafa; border-left: 3px solid var(--line-strong); padding: .5rem .8rem; border-radius: 4px; }
+.watchlist { margin-top: 1rem; }
+.watchlist ul { margin: .3rem 0; padding-left: 1.1rem; }
+.watchlist li { margin: .2rem 0; }
 .living-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.2rem; align-items: start; }
 .tsa .axis { stroke: var(--line-strong); stroke-width: 1; }
 .tsa .tsa-conv { stroke: var(--line); stroke-dasharray: 4 3; }

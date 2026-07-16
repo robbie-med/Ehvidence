@@ -131,6 +131,20 @@ const topics = defineCollection({
     status: z.enum(['favorable', 'harmful', 'limited', 'neutral']).optional(),
     primaryOutcomeId: z.string(),
     lastUpdated: z.string(),
+    // Search terms for the on-demand new-trial scanner (scripts/scan-new-trials.js).
+    searchTerms: z.array(z.string()).optional(),
+    // Registered trials not yet reported—shown as a "watch list" on the topic.
+    pendingTrials: z
+      .array(
+        z.object({
+          name: z.string(),
+          registryId: z.string().optional(),
+          expectedN: z.number().int().positive().optional(),
+          expectedReadout: z.string().optional(),
+          url: z.string().url().optional(),
+        }),
+      )
+      .optional(),
     outcomes: z.array(outcome).min(1),
     studies: z.array(study),
   }),
