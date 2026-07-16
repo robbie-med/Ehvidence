@@ -1,0 +1,35 @@
+---
+import type { ComputedOutcome } from '../lib/derive';
+import AbsoluteRisk from '../islands/AbsoluteRisk.tsx';
+
+interface Props {
+  outcome: ComputedOutcome;
+  showNnt: boolean;
+}
+const { outcome: o, showNnt } = Astro.props;
+const br = o.baselineRisk;
+const show =
+  showNnt && o.kind === 'binary' && !!o.pooled && br != null && br > 0 && br <= 1;
+const cfg = o.outcome.baselineRisk;
+const min = cfg?.min ?? 0;
+const max = cfg?.max ?? Math.min(1, Math.max(0.2, (br ?? 0) * 2.5));
+const presets = cfg?.presets ?? (br != null ? [{ label: 'trial average', value: br }] : []);
+---
+{show && o.pooled && br != null && (
+  <div class="ar-block">
+    <h3>Absolute benefit at your baseline risk</h3>
+    <p class="small">Relative effect (RR) travels across populations; absolute benefit does not—it depends on baseline risk. Set the baseline for your patient or population.</p>
+    <AbsoluteRisk
+      client:visible
+      rr={o.pooled.rr}
+      ciLow={o.pooled.ciLow}
+      ciHigh={o.pooled.ciHigh}
+      direction={o.outcome.direction}
+      baseline={br}
+      min={min}
+      max={max}
+      presets={presets}
+      outcomeLabel={o.outcome.label}
+    />
+  </div>
+)}

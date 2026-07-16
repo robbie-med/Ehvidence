@@ -230,14 +230,18 @@ export function auditOutcome(o: ComputedOutcome): AuditCheck[] {
         .map((s) => s.weightPct);
       const fi = metaFragility(raw2x2, weights);
       if (fi !== null) {
-        const totalEvents = o.pooled.totalEvents || 0;
-        const fq = totalEvents > 0 ? fi / totalEvents : 0;
+        const totalPatients = o.pooled.totalPatients || 0;
+        const fq = totalPatients > 0 ? fi / totalPatients : 0;
+        const level: AuditLevel = fi <= 5 ? 'flag' : fi <= 15 ? 'warn' : 'ok';
         checks.push({
           id: 'fragility',
           label: 'Fragility',
           value: `${fi} event${fi === 1 ? '' : 's'}`,
-          level: fi <= 5 ? 'flag' : fi <= 15 ? 'warn' : 'ok',
-          detail: `Adding just ${fi} more event${fi === 1 ? '' : 's'} to the treatment arm would make the pooled result non-significant (fragility quotient ${(fq * 100).toFixed(1)}% of all events).`,
+          level,
+          detail:
+            level === 'ok'
+              ? `Robust: ${fi} more treatment-arm events (${(fq * 100).toFixed(1)}% of the sample) would be needed before the pooled result lost significance.`
+              : `Fragile: adding just ${fi} more treatment-arm event${fi === 1 ? '' : 's'} (${(fq * 100).toFixed(1)}% of the sample) would make the pooled result non-significant.`,
         });
       }
     }
