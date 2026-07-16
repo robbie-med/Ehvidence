@@ -1,0 +1,452 @@
+{
+  "slug": "natriuretic-peptides-hfpef-prognosis",
+  "name": "BNP / NT-proBNP as prognostic markers in HFpEF",
+  "condition": "Heart failure with preserved ejection fraction (HFpEF)",
+  "intervention": "Elevated natriuretic peptide (BNP or NT-proBNP)",
+  "comparator": "Lower natriuretic peptide",
+  "category": "Cardiology",
+  "evidenceClass": "observational",
+  "summary": "A prognostic (not treatment) meta-analysis: across cohort studies of HFpEF patients, higher BNP and NT-proBNP were each associated with significantly higher risk of adverse events, cardiovascular events, and death. This measures how well the biomarker predicts risk — it is not a comparison of any therapy.",
+  "description": "A systematic review and meta-analysis (Ammar et al 2025, Heart Failure Reviews) of cohort studies reporting BNP or NT-proBNP as prognostic biomarkers in HFpEF. Each study's adjusted hazard ratio (higher vs lower natriuretic peptide) is taken from the review's forest plots (Figures 3, 5, 7, 9, 11) and pooled live. Only the review's main (non-sensitivity) analyses are encoded.",
+  "interpretation": "These are prognostic associations, not treatment effects: a hazard ratio above 1 means patients with higher natriuretic peptide had more events, which identifies higher-risk patients — it does not mean the biomarker or any drug causes harm, and nothing here says lowering the peptide changes outcomes. All five pooled estimates confirm the biomarker as a significant risk predictor; only the magnitude differs from the review (see methodology). The associations come from cohort data with differing peptide cut-offs, so they are subject to confounding.",
+  "methodologyNotes": "Each study is entered as its published adjusted hazard ratio and 95% CI from the review's forest plots (Figures 3, 5, 7, 9, 11) and pooled live by random-effects (DerSimonian–Laird) on the log-hazard scale — nothing hardcoded. Our pooled estimates are HIGHER than the review's published figures: BNP→adverse events 1.51 vs the review's 1.20; BNP→cardiovascular events 1.30 vs 1.14; BNP→mortality 1.75 vs 1.44; NT-proBNP→adverse events 1.66 vs 1.63; NT-proBNP→mortality 1.75 vs 1.65. The difference is a model choice: the review pooled fixed-effect (inverse-variance), which lets a single very precise study dominate (Matsubara 2014 carried ~87–90% of the weight in the BNP pools; Myhre 2022 in the NT-proBNP pools). But the studies are in fact heterogeneous — e.g., Akiyama's HR 1.68 (1.30–2.19) and Matsubara's 1.12 (1.07–1.16) have non-overlapping CIs — so the review's reported I²=0% is an under-estimate (the true I² is high). This site uses random-effects consistently for every topic, which recognises that heterogeneity, down-weights the one dominant study, and yields a higher pooled hazard. Direction and statistical significance are unchanged; only the magnitude moves. Only the main analyses are encoded; the review's sensitivity analyses (Figures 4, 6, 10) and within-study cut-off forests (Figures 2 and 8) are not. The forests report hazard ratios but not per-study arm sizes, so no patient count is shown (the review included 22 studies overall; 13 appear in these pooled forests). The Cureus 2025 companion review on epicardial fat and natriuretic peptides is a narrative synthesis with no pooled data and is not represented as a topic.",
+  "primaryOutcomeId": "bnp-adverse-events",
+  "lastUpdated": "2026-06-26",
+  "outcomes": [
+    {
+      "id": "bnp-adverse-events",
+      "label": "BNP → all adverse events",
+      "direction": "lowerIsBetter",
+      "description": "Hazard of any adverse event (hospitalization, cardiovascular events, thromboembolism, or death) for higher vs lower BNP in HFpEF (Figure 3)."
+    },
+    {
+      "id": "bnp-cv-events",
+      "label": "BNP → cardiovascular events",
+      "direction": "lowerIsBetter",
+      "description": "Hazard of cardiovascular events for higher vs lower BNP in HFpEF (Figure 5)."
+    },
+    {
+      "id": "bnp-mortality",
+      "label": "BNP → mortality",
+      "direction": "lowerIsBetter",
+      "description": "Hazard of death for higher vs lower BNP in HFpEF (Figure 7)."
+    },
+    {
+      "id": "ntprobnp-adverse-events",
+      "label": "NT-proBNP → all adverse events",
+      "direction": "lowerIsBetter",
+      "description": "Hazard of any adverse event for higher vs lower NT-proBNP in HFpEF (Figure 9)."
+    },
+    {
+      "id": "ntprobnp-mortality",
+      "label": "NT-proBNP → mortality",
+      "direction": "lowerIsBetter",
+      "description": "Hazard of death for higher vs lower NT-proBNP in HFpEF (Figure 11)."
+    }
+  ],
+  "studies": [
+    {
+      "id": "akiyama2012-bnp-adverse-events",
+      "author": "Akiyama",
+      "year": 2012,
+      "citation": "Akiyama E, Sugiyama S, Matsuzawa Y, et al. Incremental prognostic significance of peripheral endothelial dysfunction in patients with heart failure with normal left ventricular ejection fraction. J Am Coll Cardiol. 2012;60(18):1778-1786.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.68,
+        "ciLow": 1.3,
+        "ciHigh": 2.19
+      }
+    },
+    {
+      "id": "beltrami2016-bnp-adverse-events",
+      "author": "Beltrami",
+      "year": 2016,
+      "citation": "Beltrami M, Ruocco G, Dastidar AG, et al. Additional value of Galectin-3 to BNP in acute heart failure patients with preserved ejection fraction. Clin Chim Acta. 2016;457:99-105.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Italy",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 2.31,
+        "ciLow": 0.65,
+        "ciHigh": 8.17
+      }
+    },
+    {
+      "id": "izumiya2014-bnp-adverse-events",
+      "author": "Izumiya",
+      "year": 2014,
+      "citation": "Izumiya Y, Hanatani S, Kimura Y, et al. Growth differentiation factor-15 is a useful prognostic marker in patients with heart failure with preserved ejection fraction. Can J Cardiol. 2014;30(3):338-344.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 3.37,
+        "ciLow": 1.73,
+        "ciHigh": 6.55
+      }
+    },
+    {
+      "id": "kitada2018-bnp-adverse-events",
+      "author": "Kitada",
+      "year": 2018,
+      "citation": "Kitada S, Kikuchi S, Tsujino T, et al. The prognostic value of brain natriuretic peptide in patients with heart failure and left ventricular ejection fraction higher than 60%: a sub-analysis of the J-MELODIC study. ESC Heart Fail. 2018;5(1):36-45.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 4.63,
+        "ciLow": 2.15,
+        "ciHigh": 9.96
+      }
+    },
+    {
+      "id": "kimura2016-bnp-adverse-events",
+      "author": "Kimura",
+      "year": 2016,
+      "citation": "Kimura Y, Izumiya Y, Hanatani S, et al. High serum levels of thrombospondin-2 correlate with poor prognosis of patients with heart failure with preserved ejection fraction. Heart Vessels. 2016;31(1):52-59.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.97,
+        "ciLow": 1.26,
+        "ciHigh": 3.09
+      }
+    },
+    {
+      "id": "matsubara2014-bnp-adverse-events",
+      "author": "Matsubara",
+      "year": 2014,
+      "citation": "Matsubara J, Sugiyama S, Nozaki T, et al. Incremental prognostic significance of the elevated levels of pentraxin 3 in patients with heart failure with normal left ventricular ejection fraction. J Am Heart Assoc. 2014;3(4):e000928.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.12,
+        "ciLow": 1.07,
+        "ciHigh": 1.16
+      },
+      "notes": "Dominant weight in the BNP pools (very tight CI)."
+    },
+    {
+      "id": "nakada2016-bnp-adverse-events",
+      "author": "Nakada",
+      "year": 2016,
+      "citation": "Nakada Y, Kawakami R, Matsui M, et al. Sex differences in clinical characteristics and long-term outcome in acute decompensated heart failure patients with preserved and reduced ejection fraction. Am J Physiol Heart Circ Physiol. 2016;310(7):H813-H820.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.3,
+        "ciLow": 1.12,
+        "ciHigh": 1.48
+      }
+    },
+    {
+      "id": "ohtani2012-bnp-adverse-events",
+      "author": "Ohtani",
+      "year": 2012,
+      "citation": "Ohtani T, Mohammed SF, Yamamoto K, et al. Diastolic stiffness as assessed by diastolic wall strain is associated with adverse remodelling and poor outcomes in heart failure with preserved ejection fraction. Eur Heart J. 2012;33(14):1742-1749.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; Japan/USA",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.5,
+        "ciLow": 1.27,
+        "ciHigh": 1.78
+      }
+    },
+    {
+      "id": "schelbert2017-bnp-adverse-events",
+      "author": "Schelbert",
+      "year": 2017,
+      "citation": "Schelbert EB, Fridman Y, Wong TC, et al. Temporal Relation Between Myocardial Fibrosis and Heart Failure With Preserved Ejection Fraction: Association With Baseline Disease Severity and Subsequent Outcome. JAMA Cardiol. 2017;2(9):995-1006.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; USA",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 0.87,
+        "ciLow": 0.55,
+        "ciHigh": 1.36
+      }
+    },
+    {
+      "id": "stavrakis2013-bnp-adverse-events",
+      "author": "Stavrakis",
+      "year": 2013,
+      "citation": "Stavrakis S, Pakala A, Thomas J, Chaudhry MA, Thadani U. Obesity, brain natriuretic peptide levels and mortality in patients hospitalized with heart failure and preserved left ventricular systolic function. Am J Med Sci. 2013;345(3):211-217.",
+      "design": "cohort",
+      "outcomeId": "bnp-adverse-events",
+      "population": "HFpEF; USA",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.39,
+        "ciLow": 1.11,
+        "ciHigh": 1.74
+      }
+    },
+    {
+      "id": "akiyama2012-bnp-cv-events",
+      "author": "Akiyama",
+      "year": 2012,
+      "citation": "Akiyama E, Sugiyama S, Matsuzawa Y, et al. Incremental prognostic significance of peripheral endothelial dysfunction in patients with heart failure with normal left ventricular ejection fraction. J Am Coll Cardiol. 2012;60(18):1778-1786.",
+      "design": "cohort",
+      "outcomeId": "bnp-cv-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.68,
+        "ciLow": 1.3,
+        "ciHigh": 2.19
+      }
+    },
+    {
+      "id": "matsubara2014-bnp-cv-events",
+      "author": "Matsubara",
+      "year": 2014,
+      "citation": "Matsubara J, Sugiyama S, Nozaki T, et al. Incremental prognostic significance of the elevated levels of pentraxin 3 in patients with heart failure with normal left ventricular ejection fraction. J Am Heart Assoc. 2014;3(4):e000928.",
+      "design": "cohort",
+      "outcomeId": "bnp-cv-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.12,
+        "ciLow": 1.07,
+        "ciHigh": 1.16
+      },
+      "notes": "Dominant weight in the BNP pools (very tight CI)."
+    },
+    {
+      "id": "nakada2016-bnp-cv-events",
+      "author": "Nakada",
+      "year": 2016,
+      "citation": "Nakada Y, Kawakami R, Matsui M, et al. Sex differences in clinical characteristics and long-term outcome in acute decompensated heart failure patients with preserved and reduced ejection fraction. Am J Physiol Heart Circ Physiol. 2016;310(7):H813-H820.",
+      "design": "cohort",
+      "outcomeId": "bnp-cv-events",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.3,
+        "ciLow": 1.12,
+        "ciHigh": 1.48
+      }
+    },
+    {
+      "id": "beltrami2016-bnp-mortality",
+      "author": "Beltrami",
+      "year": 2016,
+      "citation": "Beltrami M, Ruocco G, Dastidar AG, et al. Additional value of Galectin-3 to BNP in acute heart failure patients with preserved ejection fraction. Clin Chim Acta. 2016;457:99-105.",
+      "design": "cohort",
+      "outcomeId": "bnp-mortality",
+      "population": "HFpEF; Italy",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 2.31,
+        "ciLow": 0.65,
+        "ciHigh": 8.17
+      }
+    },
+    {
+      "id": "izumiya2014-bnp-mortality",
+      "author": "Izumiya",
+      "year": 2014,
+      "citation": "Izumiya Y, Hanatani S, Kimura Y, et al. Growth differentiation factor-15 is a useful prognostic marker in patients with heart failure with preserved ejection fraction. Can J Cardiol. 2014;30(3):338-344.",
+      "design": "cohort",
+      "outcomeId": "bnp-mortality",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 3.37,
+        "ciLow": 1.73,
+        "ciHigh": 6.55
+      }
+    },
+    {
+      "id": "kitada2018-bnp-mortality",
+      "author": "Kitada",
+      "year": 2018,
+      "citation": "Kitada S, Kikuchi S, Tsujino T, et al. The prognostic value of brain natriuretic peptide in patients with heart failure and left ventricular ejection fraction higher than 60%: a sub-analysis of the J-MELODIC study. ESC Heart Fail. 2018;5(1):36-45.",
+      "design": "cohort",
+      "outcomeId": "bnp-mortality",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 4.63,
+        "ciLow": 2.15,
+        "ciHigh": 9.96
+      }
+    },
+    {
+      "id": "kimura2016-bnp-mortality",
+      "author": "Kimura",
+      "year": 2016,
+      "citation": "Kimura Y, Izumiya Y, Hanatani S, et al. High serum levels of thrombospondin-2 correlate with poor prognosis of patients with heart failure with preserved ejection fraction. Heart Vessels. 2016;31(1):52-59.",
+      "design": "cohort",
+      "outcomeId": "bnp-mortality",
+      "population": "HFpEF; Japan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.97,
+        "ciLow": 1.26,
+        "ciHigh": 3.09
+      }
+    },
+    {
+      "id": "ohtani2012-bnp-mortality",
+      "author": "Ohtani",
+      "year": 2012,
+      "citation": "Ohtani T, Mohammed SF, Yamamoto K, et al. Diastolic stiffness as assessed by diastolic wall strain is associated with adverse remodelling and poor outcomes in heart failure with preserved ejection fraction. Eur Heart J. 2012;33(14):1742-1749.",
+      "design": "cohort",
+      "outcomeId": "bnp-mortality",
+      "population": "HFpEF; Japan/USA",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.5,
+        "ciLow": 1.27,
+        "ciHigh": 1.78
+      }
+    },
+    {
+      "id": "schelbert2017-bnp-mortality",
+      "author": "Schelbert",
+      "year": 2017,
+      "citation": "Schelbert EB, Fridman Y, Wong TC, et al. Temporal Relation Between Myocardial Fibrosis and Heart Failure With Preserved Ejection Fraction: Association With Baseline Disease Severity and Subsequent Outcome. JAMA Cardiol. 2017;2(9):995-1006.",
+      "design": "cohort",
+      "outcomeId": "bnp-mortality",
+      "population": "HFpEF; USA",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 0.87,
+        "ciLow": 0.55,
+        "ciHigh": 1.36
+      }
+    },
+    {
+      "id": "stavrakis2013-bnp-mortality",
+      "author": "Stavrakis",
+      "year": 2013,
+      "citation": "Stavrakis S, Pakala A, Thomas J, Chaudhry MA, Thadani U. Obesity, brain natriuretic peptide levels and mortality in patients hospitalized with heart failure and preserved left ventricular systolic function. Am J Med Sci. 2013;345(3):211-217.",
+      "design": "cohort",
+      "outcomeId": "bnp-mortality",
+      "population": "HFpEF; USA",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.39,
+        "ciLow": 1.11,
+        "ciHigh": 1.74
+      }
+    },
+    {
+      "id": "myhre2022-ntprobnp-adverse-events",
+      "author": "Myhre",
+      "year": 2022,
+      "citation": "Myhre PL, Vaduganathan M, Claggett BL, et al. Influence of NT-proBNP on Efficacy of Dapagliflozin in Heart Failure With Mildly Reduced or Preserved Ejection Fraction. JACC Heart Fail. 2022;10(12):902-913.",
+      "design": "cohort",
+      "outcomeId": "ntprobnp-adverse-events",
+      "population": "HFpEF; International (DELIVER)",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.53,
+        "ciLow": 1.45,
+        "ciHigh": 1.61
+      }
+    },
+    {
+      "id": "chen2023-ntprobnp-adverse-events",
+      "author": "Chen",
+      "year": 2023,
+      "citation": "Chen YY, Toh HS, Liao CT, et al. Clinical characteristics and outcomes of patients hospitalized with heart failure with preserved ejection fraction and low NT-proBNP levels. Medicine (Baltimore). 2023;102(47):e36351.",
+      "design": "cohort",
+      "outcomeId": "ntprobnp-adverse-events",
+      "population": "HFpEF; Taiwan",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 2.36,
+        "ciLow": 1.24,
+        "ciHigh": 4.49
+      },
+      "notes": "Labeled 'Yu-Yi 2023' in the review's Figure 9."
+    },
+    {
+      "id": "anand2011-ntprobnp-adverse-events",
+      "author": "Anand",
+      "year": 2011,
+      "citation": "Anand IS, Rector TS, Cleland JG, et al. Prognostic value of baseline plasma amino-terminal pro-brain natriuretic peptide and its interactions with irbesartan treatment effects in patients with heart failure and preserved ejection fraction: findings from the I-PRESERVE trial. Circ Heart Fail. 2011;4(5):569-577.",
+      "design": "cohort",
+      "outcomeId": "ntprobnp-adverse-events",
+      "population": "HFpEF; International (I-PRESERVE)",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.79,
+        "ciLow": 1.56,
+        "ciHigh": 2.1
+      }
+    },
+    {
+      "id": "myhre2022-ntprobnp-mortality",
+      "author": "Myhre",
+      "year": 2022,
+      "citation": "Myhre PL, Vaduganathan M, Claggett BL, et al. Influence of NT-proBNP on Efficacy of Dapagliflozin in Heart Failure With Mildly Reduced or Preserved Ejection Fraction. JACC Heart Fail. 2022;10(12):902-913.",
+      "design": "cohort",
+      "outcomeId": "ntprobnp-mortality",
+      "population": "HFpEF; International (DELIVER)",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 1.55,
+        "ciLow": 1.43,
+        "ciHigh": 1.67
+      }
+    },
+    {
+      "id": "anand2011-ntprobnp-mortality",
+      "author": "Anand",
+      "year": 2011,
+      "citation": "Anand IS, Rector TS, Cleland JG, et al. Prognostic value of baseline plasma amino-terminal pro-brain natriuretic peptide and its interactions with irbesartan treatment effects in patients with heart failure and preserved ejection fraction: findings from the I-PRESERVE trial. Circ Heart Fail. 2011;4(5):569-577.",
+      "design": "cohort",
+      "outcomeId": "ntprobnp-mortality",
+      "population": "HFpEF; International (I-PRESERVE)",
+      "data": {
+        "kind": "effect",
+        "measure": "HR",
+        "point": 2.04,
+        "ciLow": 1.68,
+        "ciHigh": 2.47
+      }
+    }
+  ]
+}

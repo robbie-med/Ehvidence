@@ -12,18 +12,18 @@
   <text x="40" y="55" class="label">Obstetrics &amp; neonatal</text>
   <rect x="220" y="40" width="500" height="20" class="bar" rx="6" ry="6"/>
   <text x="730" y="55" class="value">54</text>
-  <text x="40" y="89" class="label">Cardiovascular</text>
-  <rect x="220" y="74" width="167" height="20" class="bar" rx="6" ry="6"/>
-  <text x="397" y="89" class="value">18</text>
-  <text x="40" y="123" class="label">Pediatric gastroenterology</text>
-  <rect x="220" y="108" width="93" height="20" class="bar" rx="6" ry="6"/>
-  <text x="323" y="123" class="value">10</text>
-  <text x="40" y="157" class="label">Skin cancer prevention</text>
-  <rect x="220" y="142" width="74" height="20" class="bar" rx="6" ry="6"/>
-  <text x="304" y="157" class="value">8</text>
-  <text x="40" y="191" class="label">Cardiology</text>
-  <rect x="220" y="176" width="65" height="20" class="bar" rx="6" ry="6"/>
-  <text x="295" y="191" class="value">7</text>
+  <text x="40" y="89" class="label">Cardiology</text>
+  <rect x="220" y="74" width="185" height="20" class="bar" rx="6" ry="6"/>
+  <text x="415" y="89" class="value">20</text>
+  <text x="40" y="123" class="label">Cardiovascular</text>
+  <rect x="220" y="108" width="167" height="20" class="bar" rx="6" ry="6"/>
+  <text x="397" y="123" class="value">18</text>
+  <text x="40" y="157" class="label">Pediatric gastroenterology</text>
+  <rect x="220" y="142" width="93" height="20" class="bar" rx="6" ry="6"/>
+  <text x="323" y="157" class="value">10</text>
+  <text x="40" y="191" class="label">Skin cancer prevention</text>
+  <rect x="220" y="176" width="74" height="20" class="bar" rx="6" ry="6"/>
+  <text x="304" y="191" class="value">8</text>
   <text x="40" y="225" class="label">Opioid stewardship</text>
   <rect x="220" y="210" width="46" height="20" class="bar" rx="6" ry="6"/>
   <text x="276" y="225" class="value">5</text>
