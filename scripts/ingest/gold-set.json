@@ -1,0 +1,35 @@
+{
+  "_comment": "Calibration gold set: topics verified by hand, used to measure how faithfully DeepSeek can re-extract each paper. `slug` maps to src/content/topics/<slug>.json (the known-good answer). Provide the source per entry: `pmid` (open-access, auto-fetched from Europe PMC), or `file` (a local path to the PDF/XML you supply for paywalled papers). Drop paywalled PDFs at scripts/ingest/sources/<slug>.pdf.",
+  "entries": [
+    {
+      "slug": "amnioinfusion-meconium",
+      "type": "meta-2x2 + reported-OR; forest images + supplemental tables",
+      "source": { "pmid": "37164492", "file": "scripts/ingest/sources/amnioinfusion-meconium.pdf" },
+      "note": "AJOG 2023; paywalled — supply the PDF. Hardest type: per-trial counts live in supplemental forest images."
+    },
+    {
+      "slug": "vitamin-d-preeclampsia",
+      "type": "meta mixed 2x2 / continuous(MD) / continuousEffect; multi-arm shared control",
+      "source": { "pmid": "39516736", "file": "scripts/ingest/sources/vitamin-d-preeclampsia.pdf" },
+      "note": "BMC Pregnancy Childbirth 2024; open access — should fetch from Europe PMC."
+    },
+    {
+      "slug": "ntprobnp-guided-therapy-hf",
+      "type": "meta reported-RR from a research-letter forest plot",
+      "source": { "pmid": "29471944", "file": "scripts/ingest/sources/ntprobnp-guided-therapy-hf.pdf" },
+      "note": "JACC letter 2018; paywalled — supply the PDF."
+    },
+    {
+      "slug": "natriuretic-peptides-hfpef-prognosis",
+      "type": "meta reported-HR, observational/prognostic; multiple forest plots",
+      "source": { "pmid": "39073739", "file": "scripts/ingest/sources/natriuretic-peptides-hfpef-prognosis.pdf" },
+      "note": "Heart Fail Rev 2025 (NIH author manuscript in PMC)."
+    },
+    {
+      "slug": "s-boulardii-pediatric-diarrhea",
+      "type": "meta 2x2 (success counts, higher-is-better) + continuous(SMD)",
+      "source": { "file": "scripts/ingest/sources/s-boulardii-pediatric-diarrhea.pdf" },
+      "note": "McFarland & Li 2025 review — supply the PDF."
+    }
+  ]
+}
