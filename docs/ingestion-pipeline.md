@@ -101,6 +101,72 @@ manually on amnioinfusion, vitamin D, Bajaj, etc. It becomes an automated CI ste
   cents of triage per 100 candidates, and single-digit dollars per *extracted*
   meta-analysis — so a steady 2–5/week is a few dollars a week, capped by budget.
 
+## Worker split: DeepSeek does the work, Claude keeps it honest
+
+Use a cheap model (**DeepSeek**, ~20–40× cheaper than a frontier model) as the
+stage-4 extractor, and a frontier model (**Claude**) only as a *calibrator and
+auditor*, not as a per-paper checker. The trick is that three layers already gate
+every paper for free, so Claude's expensive judgement is spent sparingly.
+
+### The three QC layers (cheap → expensive)
+
+1. **Deterministic gates — run on 100% of papers, $0.** Zod schema, `npm run build`,
+   `npm run test`, and the **reproduction check** (engine pooled vs the paper's
+   reported pooled, per outcome). This alone catches most extraction errors — a
+   mis-read count, a flipped CI, a dropped trial usually breaks reproduction. Fail →
+   never reaches a human or Claude; bounce back to DeepSeek (one retry) or the reject
+   pile.
+2. **Structural self-checks — $0.** Direction sanity (does `higherIsBetter` match the
+   prose?), study-count vs the paper's stated N, citation plausibility (DOI resolves),
+   auditor run attached. Cheap heuristics that flag "reproduction-correct but wrong".
+3. **Claude semantic audit — paid, sampled.** Claude reads the *source* + DeepSeek's
+   JSON and judges what arithmetic can't: right primary outcome? nothing the source
+   included was excluded? framing faithful (success counts vs complements)? prose not
+   fabricated? standardOutcome/nodes sane? Returns a verdict + severity + (if easy) a
+   corrected JSON.
+
+### When Claude runs
+
+- **Calibration (once, up front).** We already have a **gold set for free**: the
+  topics verified by hand this session (amnioinfusion, vitamin D, Bajaj/NT-proBNP,
+  Ammar, s-boulardii, statins, …) span every hard type — 2×2, continuous MD/SMD,
+  reported HR, observational, forest-plot-as-image, percentages-only, fixed-vs-random.
+  Run DeepSeek on those same papers and **diff against the committed JSON**; Claude
+  only adjudicates the diffs. This yields a baseline accuracy *per paper type* and
+  exposes DeepSeek's systematic weaknesses, which we bake into its prompt
+  (AGENTS.md + type-specific hints) or use to route hard types elsewhere.
+- **Every-50 spot check.** A manifest counter tracks gate-passed papers; each time it
+  hits 50, Claude audits a small **stratified** random sample (e.g. 2–3 spanning the
+  types seen in that batch). Record accuracy into a rolling, per-type metric.
+- **Targeted, always.** Claude also audits any single paper that trips a smell test —
+  a borderline reproduction diff, a low DeepSeek self-confidence, an auditor red flag,
+  or a paper type currently below its accuracy threshold.
+
+### Adaptive routing
+
+- Keep a rolling accuracy per paper type. If a type drops below, say, 90%, **escalate
+  it** — route that type to always-Claude-review (or a human) until it recovers, while
+  DeepSeek keeps handling the types it's reliable on (typically OA-XML with clean
+  tables).
+- **Canary regression check:** periodically re-run one gold paper through DeepSeek and
+  diff to its known-good JSON — cheaply detects model drift or a prompt regression.
+- Every Claude-caught error class becomes either a new deterministic check or a line
+  in DeepSeek's prompt, so the free layers get smarter over time and Claude is needed
+  less.
+
+### Setup specifics
+
+- **DeepSeek** exposes an OpenAI-compatible API (base URL `https://api.deepseek.com`,
+  models `deepseek-chat` for extraction, `deepseek-reasoner` for the gnarly ones).
+  Key in `DEEPSEEK_API_KEY`; request JSON output; system prompt = `AGENTS.md`.
+- **Claude** via the Anthropic API for the audit calls (or Claude Code for the
+  calibration diffs). Confirm both providers' current pricing/models before wiring
+  budgets.
+- **Cost shape:** DeepSeek = pennies/paper × all papers; deterministic gates = free;
+  Claude = one calibration batch (~10–15 papers) + ~2% of ongoing volume. Claude is a
+  rounding error against DeepSeek's already-tiny bill, yet it's what lets you trust an
+  unattended cheap extractor.
+
 ## Two ways to build the worker
 
 - **(a) Plain API script** (`scripts/ingest/`): Node orchestrator + Anthropic API
