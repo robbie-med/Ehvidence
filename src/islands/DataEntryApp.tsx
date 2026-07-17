@@ -76,6 +76,9 @@ interface TopicForm {
   comparator: string;
   category: string;
   evidenceClass: 'efficacy' | 'implementation' | 'observational';
+  treatmentNode: string;
+  comparatorNode: string;
+  searchTerms: string;
   summary: string;
   description: string;
   interpretation: string;
@@ -124,7 +127,8 @@ function initialTopic(): TopicForm {
   const oid = uid('outcome');
   return {
     slug: '', name: '', condition: '', intervention: '', comparator: '',
-    category: '', evidenceClass: 'efficacy', summary: '', description: '', interpretation: '', methodologyNotes: '',
+    category: '', evidenceClass: 'efficacy', treatmentNode: '', comparatorNode: '', searchTerms: '',
+    summary: '', description: '', interpretation: '', methodologyNotes: '',
     primaryOutcomeId: oid, lastUpdated: today(),
     outcomes: [{ id: oid, label: 'Primary outcome', direction: 'lowerIsBetter', standardOutcomeId: '', kind: 'binary', measure: 'SMD' }],
     studies: [],
@@ -235,6 +239,10 @@ function buildExport(t: TopicForm): unknown {
     evidenceClass: t.evidenceClass,
     summary: t.summary,
   };
+  if (t.treatmentNode.trim()) out.treatmentNode = t.treatmentNode.trim();
+  if (t.comparatorNode.trim()) out.comparatorNode = t.comparatorNode.trim();
+  const terms = t.searchTerms.split('\n').map((s) => s.trim()).filter(Boolean);
+  if (terms.length) out.searchTerms = terms;
   if (t.description.trim()) out.description = t.description.trim();
   if (t.interpretation.trim()) out.interpretation = t.interpretation.trim();
   if (t.methodologyNotes.trim()) out.methodologyNotes = t.methodologyNotes.trim();
@@ -297,7 +305,10 @@ function fromImport(raw: any): TopicForm {
   return {
     slug: raw.slug ?? '', name: raw.name ?? '', condition: raw.condition ?? '',
     intervention: raw.intervention ?? '', comparator: raw.comparator ?? '',
-    category: raw.category ?? '', evidenceClass: raw.evidenceClass ?? 'efficacy', summary: raw.summary ?? '',
+    category: raw.category ?? '', evidenceClass: raw.evidenceClass ?? 'efficacy',
+    treatmentNode: raw.treatmentNode ?? '', comparatorNode: raw.comparatorNode ?? '',
+    searchTerms: Array.isArray(raw.searchTerms) ? raw.searchTerms.join('\n') : '',
+    summary: raw.summary ?? '',
     description: raw.description ?? '', interpretation: raw.interpretation ?? '',
     methodologyNotes: raw.methodologyNotes ?? '',
     primaryOutcomeId: raw.primaryOutcomeId ?? (raw.outcomes?.[0]?.id ?? ''),
@@ -431,6 +442,18 @@ export default function DataEntryApp() {
           <Field label="Intervention"><input value={topic.intervention} onInput={(e) => setField('intervention', val(e))} /></Field>
           <Field label="Comparator"><input value={topic.comparator} onInput={(e) => setField('comparator', val(e))} /></Field>
           <Field label="Last updated"><input value={topic.lastUpdated} onInput={(e) => setField('lastUpdated', val(e))} /></Field>
+          <Field label="Treatment node (optional)—short label for network meta-analysis, e.g. &quot;Celecoxib&quot;">
+            <input value={topic.treatmentNode} onInput={(e) => setField('treatmentNode', val(e))} placeholder="Celecoxib" />
+          </Field>
+          <Field label="Comparator node (optional)—shared across topics to link the network, e.g. &quot;Control&quot;">
+            <input value={topic.comparatorNode} onInput={(e) => setField('comparatorNode', val(e))} placeholder="Control" />
+          </Field>
+        </div>
+        <p class="small muted">Fill both node fields to include this intervention in the cross-intervention network meta-analysis and benefit–harm ledger. Topics that share the same comparator node (e.g. "Control") form one network. Leave blank to opt out—everything else still works.</p>
+        <div style="margin-top:.6rem">
+          <Field label="Search terms (optional)—one per line; used by the on-demand new-trial scanner to find papers published since this was updated">
+            <textarea rows={2} value={topic.searchTerms} onInput={(e) => setField('searchTerms', val(e))} placeholder={'amnioinfusion meconium stained amniotic fluid\ntranscervical amnioinfusion meconium aspiration'} />
+          </Field>
         </div>
         <div style="margin-top:.6rem">
           <Field label="Summary"><textarea rows={2} value={topic.summary} onInput={(e) => setField('summary', val(e))} /></Field>

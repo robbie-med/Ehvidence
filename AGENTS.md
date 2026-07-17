@@ -85,6 +85,9 @@ Never push a file that fails the build.
   "comparator": "...",                 // REQUIRED, what it is compared to
   "category": "Cardiovascular",        // REQUIRED, free-text grouping
   "evidenceClass": "efficacy",         // optional: efficacy | implementation | observational
+  "treatmentNode": "Celecoxib",        // optional, see §11 (network meta-analysis)
+  "comparatorNode": "Control",         // optional, see §11
+  "searchTerms": ["...", "..."],       // optional, see §12 (new-trial scanner)
   "summary": "One factual sentence.",  // REQUIRED, plain summary (no spin)
   "description": "...",                // optional, short background
   "interpretation": "...",             // optional, key caveats (terse)
@@ -93,6 +96,7 @@ Never push a file that fails the build.
                                        //   OMIT unless overriding the auto value (see §7)
   "primaryOutcomeId": "outcome-id",    // REQUIRED, must match an outcomes[].id
   "lastUpdated": "2026-06-06",         // REQUIRED, ISO date
+  "pendingTrials": [ /* see §12 */ ],   // optional, watch-list of unreported trials
   "outcomes": [ /* see §4 */ ],         // REQUIRED, >= 1
   "studies":  [ /* see §5 */ ]          // REQUIRED
 }
@@ -102,6 +106,14 @@ Never push a file that fails the build.
 - `efficacy` — RCT/clinical-outcome evidence; NNT shown.
 - `implementation` — quality-improvement / process-rate outcomes; NNT hidden.
 - `observational` — non-randomized comparative data.
+
+**Everything downstream is computed automatically** from the per-study data you
+enter — the methods auditor (fragility, E-value, Egger, leave-one-out,
+fixed-vs-random, dominance), the absolute-risk translator, and the living-evidence
+section (cumulative meta-analysis, trial-sequential analysis, currency). You do
+**not** enter any of those; they derive from `studies` + each study's `year`. The
+optional topic fields below are the *only* extra manual input, and only to unlock
+the cross-intervention features.
 
 ---
 
@@ -261,7 +273,44 @@ write none of those numbers.
 
 ---
 
-## 10. Self-check before committing
+## 11. `treatmentNode` / `comparatorNode` (network meta-analysis — optional)
+
+To include a topic in the cross-intervention **network meta-analysis** and
+**benefit–harm ledger** (`/decision/<problem>`), set two short node labels and make
+sure the relevant outcome has a `standardOutcomeId` (§8):
+
+- `treatmentNode`: this intervention's node label, e.g. `"Celecoxib"`, `"Sunscreen"`.
+- `comparatorNode`: the control node, e.g. `"Control"`. **Topics that share the same
+  comparator node form one connected network**, so use a consistent label (usually
+  `"Control"`) across topics you want compared.
+
+Rules:
+- Only meaningful when the intervention is genuinely **exchangeable** with the others
+  in that network (similar population, comparable control). If it is not, leave the
+  node fields blank — the topic still works fully; it just won't appear in the NMA.
+- Never invent effects for the network; it is built from each topic's own pooled RR.
+
+## 12. `searchTerms` / `pendingTrials` (currency — optional)
+
+- `searchTerms`: array of query strings for `scripts/scan-new-trials.js`, the manual
+  on-demand scanner that lists trials published since the topic was updated. Use the
+  same terms a librarian would (`["amnioinfusion meconium stained amniotic fluid", …]`).
+- `pendingTrials`: registered-but-unreported trials to show as a watch-list, each
+  `{ name, registryId?, expectedN?, expectedReadout?, url? }`. Only add trials you can
+  verify exist; do not fabricate.
+
+## 13. `baselineRisk` (absolute-risk translator — almost always omit)
+
+Each binary outcome's absolute-risk slider defaults its baseline to the **pooled
+control-arm risk**, computed automatically. Only add an outcome-level
+`baselineRisk: { default, min?, max?, presets? }` when the trial-average control risk
+is *not* representative of the population you want to show, or to offer named presets
+(e.g. general-population vs high-risk). For `effect`-kind (reported-RR/OR/HR) topics
+with no counts, add `ctrlRisk` on the study (§5-B) if you want the slider to appear.
+
+---
+
+## 14. Self-check before committing
 
 - [ ] Every number in `data` is copied verbatim from the source. No counts invented.
 - [ ] No pooled/derived value (RR, NNT, SMD, I², %) is hardcoded anywhere.
