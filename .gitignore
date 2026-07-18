@@ -9,5 +9,9 @@ npm-debug.log*
 # environment
 .env
 .env.production
+# ingestion pipeline local operational state (never committed)
+scripts/ingest/state/
+scripts/ingest/queue/
+scripts/ingest/sources/
 # macOS
 .DS_Store

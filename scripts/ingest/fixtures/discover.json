@@ -1,0 +1,57 @@
+{
+  "note": "Offline fixture for `discover.mjs --dry-run`: stands in for the enriched output of the free discovery APIs so ranking + dedupe can be exercised with no network and no cost. The vitamin-D entry intentionally collides with an existing topic to prove dedupe.",
+  "candidates": [
+    {
+      "pmid": "40000001",
+      "title": "Tranexamic acid for postpartum hemorrhage: an updated systematic review and meta-analysis",
+      "year": 2025,
+      "doi": "10.1000/tx-pph-2025",
+      "journal": "Lancet",
+      "terms": ["tranexamic acid postpartum hemorrhage"],
+      "citations": 180,
+      "rcr": 6.4,
+      "oa": true,
+      "pmcid": "PMC9000001",
+      "interventional": true
+    },
+    {
+      "pmid": "40000002",
+      "title": "SGLT2 inhibitors in heart failure with preserved ejection fraction: meta-analysis of randomized trials",
+      "year": 2024,
+      "doi": "10.1000/sglt2-hfpef-2024",
+      "journal": "NEJM",
+      "terms": ["SGLT2 inhibitors heart failure"],
+      "citations": 420,
+      "rcr": 9.1,
+      "oa": false,
+      "pmcid": null,
+      "interventional": true
+    },
+    {
+      "pmid": "40000003",
+      "title": "Corticosteroids for sepsis: a systematic review and meta-analysis of mortality",
+      "year": 2019,
+      "doi": "10.1000/steroid-sepsis-2019",
+      "journal": "JAMA",
+      "terms": ["corticosteroids sepsis mortality"],
+      "citations": 950,
+      "rcr": 4.2,
+      "oa": true,
+      "pmcid": "PMC9000003",
+      "interventional": true
+    },
+    {
+      "pmid": "40000004",
+      "title": "Vitamin D supplementation for preeclampsia: a systematic review and meta-analysis",
+      "year": 2023,
+      "doi": "10.1000/vitd-preeclampsia",
+      "journal": "AJOG",
+      "terms": ["vitamin D supplementation pregnancy outcomes"],
+      "citations": 88,
+      "rcr": 2.1,
+      "oa": true,
+      "pmcid": "PMC9000004",
+      "interventional": true
+    }
+  ]
+}

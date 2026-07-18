@@ -11,7 +11,13 @@
     "test:watch": "vitest",
     "generate-readme": "node scripts/generate-readme.js",
     "prebuild": "npm run generate-readme",
-    "predev": "npm run generate-readme"
+    "predev": "npm run generate-readme",
+    "ingest:discover": "node scripts/ingest/discover.mjs",
+    "ingest:validate": "tsx scripts/ingest/validate.mjs",
+    "ingest:repro": "tsx scripts/ingest/repro.mjs",
+    "ingest:extract": "tsx scripts/ingest/extract.mjs",
+    "ingest:run": "tsx scripts/ingest/run.mjs",
+    "bot": "node scripts/bot/bot.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^4.0.1",
@@ -20,6 +26,8 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "telegraf": "^4.16.3",
+    "tsx": "^4.19.2",
     "vitest": "^2.1.8"
   }
 }

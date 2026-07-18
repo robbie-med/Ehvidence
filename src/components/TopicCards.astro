@@ -1,0 +1,87 @@
+---
+import type { ComputedTopic } from '../lib/derive';
+import TopicCard from './TopicCard.astro';
+import { evidenceMeta } from '../lib/evidence';
+import {
+  fmtRR,
+  fmtCI,
+  fmtPct,
+  fmtInt,
+  fmtNN,
+  fmtNum,
+  statusLabel,
+  dispImprovement,
+  dispNnt,
+} from '../lib/format';
+
+interface Props {
+  topics: ComputedTopic[];
+}
+const { topics } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Build a plain view-model per card in the frontmatter (real JS) so the
+// template does no computation and hits no raw-operator parser pitfalls.
+function cardModel(t: ComputedTopic) {
+  const p = t.primary.pooled;
+  const cp = t.primary.contPooled;
+  const dir = t.primary.outcome.direction;
+  const showNnt = evidenceMeta(t.raw.evidenceClass).showNnt;
+  const effect = p
+    ? `RR ${fmtRR(p.rr)} [${fmtCI(p.ciLow, p.ciHigh)}]`
+    : cp
+      ? `${t.primary.measure} ${fmtNum(cp.estimate)}`
+      : '—';
+  return {
+    slug: t.raw.slug,
+    href: `${base}/topics/${t.raw.slug}`,
+    name: t.raw.name,
+    status: t.status,
+    statusLabel: statusLabel(t.status),
+    category: t.raw.category,
+    outcomeLabel: t.primary.outcome.label,
+    effect,
+    improvement: p ? fmtPct(dispImprovement(p.improvementPct, dir)) : '—',
+    nnt: showNnt && p ? fmtNN(dispNnt(p.nnt, p.nnh, dir)) : '—',
+    studies: String(t.studyCount),
+    patients: t.totalPatients > 0 ? fmtInt(t.totalPatients) : '—',
+    updated: t.raw.lastUpdated,
+    // Sort key: pooled improvement, worst-case fallback so unpooled sink.
+    sortKey: p?.improvementPct ?? -Infinity,
+  };
+}
+
+const models = topics.map(cardModel);
+const categories = [...new Set(models.map((m) => m.category))].sort((a, b) =>
+  a.localeCompare(b),
+);
+const groups = categories.map((category) => ({
+  category,
+  items: models
+    .filter((m) => m.category === category)
+    .sort((a, b) => b.sortKey - a.sortKey),
+}));
+---
+{groups.map((g) => (
+  <section class="cat-section">
+    <h3>{g.category}</h3>
+    <div class="card-grid">
+      {g.items.map((m) => (
+        <TopicCard
+          href={m.href}
+          name={m.name}
+          status={m.status}
+          statusLabel={m.statusLabel}
+          category={m.category}
+          outcomeLabel={m.outcomeLabel}
+          effect={m.effect}
+          improvement={m.improvement}
+          nnt={m.nnt}
+          studies={m.studies}
+          patients={m.patients}
+          updated={m.updated}
+        />
+      ))}
+    </div>
+  </section>
+))}

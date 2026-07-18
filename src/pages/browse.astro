@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RankingTable from '../components/RankingTable.astro';
+import TopicScatter from '../components/TopicScatter.astro';
+import RecentStudies from '../components/RecentStudies.astro';
+import { deriveTopic, type RawTopic, type RawStudy } from '../lib/derive';
+
+const entries = await getCollection('topics');
+const topics = entries.map((e) => deriveTopic(e.data as RawTopic));
+
+// Recent studies across all topics, newest first.
+const allStudies: RawStudy[] = topics.flatMap((t) => t.raw.studies);
+const recent = [...allStudies].sort((a, b) => b.year - a.year).slice(0, 8);
+---
+<BaseLayout
+  title="Browse all topics—Ehvidence"
+  description="Every clinical topic ranked by pooled effect, with an efficacy scatter and the most recent studies."
+>
+  <h1>Browse all topics</h1>
+
+  <h2>Efficacy across topics</h2>
+  <p class="small">
+    Each point is a topic, positioned by pooled improvement on its primary outcome (y) and total
+    patients analyzed (x). Color reflects evidence status. Click a point to open the topic.
+  </p>
+  <TopicScatter topics={topics} />
+
+  <h2>All topics</h2>
+  <RankingTable topics={topics} />
+
+  <h2>Recent studies</h2>
+  <RecentStudies studies={recent} />
+</BaseLayout>

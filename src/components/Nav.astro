@@ -1,7 +1,9 @@
 ---
+import SearchBox from '../islands/SearchBox.tsx';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const links = [
   { href: `${base}/`, label: 'Topics' },
+  { href: `${base}/browse`, label: 'Browse' },
   { href: `${base}/compare`, label: 'Compare' },
   { href: `${base}/methodology`, label: 'Methodology' },
   { href: `${base}/glossary`, label: 'Glossary' },
@@ -12,6 +14,7 @@ const links = [
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href={`${base}/`}>Eh<span>vidence</span></a>
+    <SearchBox client:idle base={base} variant="nav" />
     <nav class="nav">
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>

@@ -1,0 +1,38 @@
+---
+/**
+ * A single topic card for the home dashboard. All display values are
+ * precomputed by the caller (TopicCards.astro) and passed in as plain strings/
+ * numbers, so this template contains no comparisons or computation—keeping
+ * clear of the Astro JSX parser's raw-operator pitfall.
+ */
+interface Props {
+  href: string;
+  name: string;
+  status: string;
+  statusLabel: string;
+  category: string;
+  outcomeLabel: string;
+  effect: string;
+  improvement: string;
+  nnt: string;
+  studies: string;
+  patients: string;
+  updated: string;
+}
+const p = Astro.props as Props;
+---
+<a class={`topic-card ${p.status}`} href={p.href}>
+  <div class="tc-head">
+    <span class="tc-name">{p.name}</span>
+    <span class={`badge ${p.status}`}>{p.statusLabel}</span>
+  </div>
+  <div class="tc-outcome">{p.outcomeLabel}</div>
+  <div class="tc-metrics">
+    <span class="m">{p.effect}</span>
+    <span class="m">Δ <b>{p.improvement}</b></span>
+    <span class="m">NNT <b>{p.nnt}</b></span>
+    <span class="m"><b>{p.studies}</b> studies</span>
+    <span class="m"><b>{p.patients}</b> pts</span>
+  </div>
+  <div class="tc-foot">{p.category} · updated {p.updated}</div>
+</a>

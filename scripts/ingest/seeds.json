@@ -1,0 +1,13 @@
+{
+  "note": "Seed search terms for discovery. Broad clinical questions where pooled RCT evidence exists. Edit freely; the scheduler reads this each run.",
+  "terms": [
+    "vitamin D supplementation pregnancy outcomes",
+    "statins primary prevention cardiovascular",
+    "probiotics antibiotic-associated diarrhea",
+    "corticosteroids sepsis mortality",
+    "omega-3 fatty acids cardiovascular events",
+    "tranexamic acid postpartum hemorrhage",
+    "SGLT2 inhibitors heart failure",
+    "magnesium sulfate preeclampsia eclampsia"
+  ]
+}
