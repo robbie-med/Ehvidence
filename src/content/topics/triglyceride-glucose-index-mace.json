@@ -1,0 +1,116 @@
+{
+  "slug": "triglyceride-glucose-index-mace",
+  "name": "Triglyceride-glucose index as a predictor of major adverse cardiovascular events in patients with coronary revascularization",
+  "condition": "Patients with coronary revascularization",
+  "intervention": "High triglyceride-glucose index",
+  "comparator": "Low triglyceride-glucose index",
+  "category": "Cardiovascular",
+  "evidenceClass": "observational",
+  "summary": "A high triglyceride-glucose index is associated with an increased risk of major adverse cardiovascular events in patients undergoing coronary revascularization.",
+  "primaryOutcomeId": "mace",
+  "lastUpdated": "2026-06-06",
+  "outcomes": [
+    {
+      "id": "mace",
+      "label": "Major adverse cardiovascular events",
+      "direction": "lowerIsBetter"
+    },
+    {
+      "id": "all-cause-mortality",
+      "label": "All-cause mortality",
+      "direction": "lowerIsBetter"
+    },
+    {
+      "id": "non-fatal-stroke",
+      "label": "Non-fatal stroke",
+      "direction": "lowerIsBetter"
+    },
+    {
+      "id": "non-fatal-mi",
+      "label": "Non-fatal myocardial infarction",
+      "direction": "lowerIsBetter"
+    },
+    {
+      "id": "repeat-revascularization",
+      "label": "Repeat revascularization",
+      "direction": "lowerIsBetter"
+    }
+  ],
+  "studies": [
+    {
+      "id": "chen-2022-mace",
+      "author": "Chen",
+      "year": 2022,
+      "citation": "Chen et al. Diabetes Metab Syndr Obes 2022.",
+      "design": "retrospective",
+      "outcomeId": "mace",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 2,
+        "ciLow": 1.71,
+        "ciHigh": 2.35
+      }
+    },
+    {
+      "id": "chen-2022-all-cause-mortality",
+      "author": "Chen",
+      "year": 2022,
+      "citation": "Chen et al. Diabetes Metab Syndr Obes 2022.",
+      "design": "retrospective",
+      "outcomeId": "all-cause-mortality",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 1.57,
+        "ciLow": 1.27,
+        "ciHigh": 1.96
+      }
+    },
+    {
+      "id": "chen-2022-non-fatal-stroke",
+      "author": "Chen",
+      "year": 2022,
+      "citation": "Chen et al. Diabetes Metab Syndr Obes 2022.",
+      "design": "retrospective",
+      "outcomeId": "non-fatal-stroke",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 2.23,
+        "ciLow": 1.67,
+        "ciHigh": 2.97
+      }
+    },
+    {
+      "id": "chen-2022-non-fatal-mi",
+      "author": "Chen",
+      "year": 2022,
+      "citation": "Chen et al. Diabetes Metab Syndr Obes 2022.",
+      "design": "retrospective",
+      "outcomeId": "non-fatal-mi",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 1.88,
+        "ciLow": 1.24,
+        "ciHigh": 2.83
+      }
+    },
+    {
+      "id": "chen-2022-repeat-revascularization",
+      "author": "Chen",
+      "year": 2022,
+      "citation": "Chen et al. Diabetes Metab Syndr Obes 2022.",
+      "design": "retrospective",
+      "outcomeId": "repeat-revascularization",
+      "data": {
+        "kind": "effect",
+        "measure": "RR",
+        "point": 2.07,
+        "ciLow": 1.6,
+        "ciHigh": 2.68
+      }
+    }
+  ]
+}

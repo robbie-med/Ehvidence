@@ -1,0 +1,134 @@
+{
+  "slug": "vte-risk-factors-icu",
+  "name": "Risk factors for venous thromboembolism in ICU patients",
+  "condition": "Intensive care unit patients",
+  "intervention": "Presence of risk factor",
+  "comparator": "Absence of risk factor",
+  "category": "Hematology",
+  "evidenceClass": "observational",
+  "summary": "Several risk factors are associated with increased venous thromboembolism risk in ICU patients.",
+  "primaryOutcomeId": "vte-incidence",
+  "lastUpdated": "2026-06-06",
+  "outcomes": [
+    {
+      "id": "vte-incidence",
+      "label": "Venous thromboembolism incidence",
+      "direction": "higherIsBetter",
+      "kind": "binary"
+    }
+  ],
+  "studies": [
+    {
+      "id": "central-venous-catheter",
+      "author": "Yang et al.",
+      "year": 2026,
+      "citation": "Yang et al. Risk factors of venous thromboembolism in ICU patients: a systematic review and meta-analysis. Ann Med 2026.",
+      "design": "review",
+      "outcomeId": "vte-incidence",
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.67,
+        "ciLow": 1.67,
+        "ciHigh": 4.28
+      },
+      "notes": "Pooled from 5 studies; I²=28%"
+    },
+    {
+      "id": "mechanical-ventilation",
+      "author": "Yang et al.",
+      "year": 2026,
+      "citation": "Yang et al. Risk factors of venous thromboembolism in ICU patients: a systematic review and meta-analysis. Ann Med 2026.",
+      "design": "review",
+      "outcomeId": "vte-incidence",
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.08,
+        "ciLow": 1.46,
+        "ciHigh": 2.96
+      },
+      "notes": "Pooled from 5 studies; I²=0%"
+    },
+    {
+      "id": "age",
+      "author": "Yang et al.",
+      "year": 2026,
+      "citation": "Yang et al. Risk factors of venous thromboembolism in ICU patients: a systematic review and meta-analysis. Ann Med 2026.",
+      "design": "review",
+      "outcomeId": "vte-incidence",
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.06,
+        "ciLow": 1.28,
+        "ciHigh": 3.31
+      },
+      "notes": "Pooled from 7 studies; I²=86%"
+    },
+    {
+      "id": "icu-stay",
+      "author": "Yang et al.",
+      "year": 2026,
+      "citation": "Yang et al. Risk factors of venous thromboembolism in ICU patients: a systematic review and meta-analysis. Ann Med 2026.",
+      "design": "review",
+      "outcomeId": "vte-incidence",
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 4.24,
+        "ciLow": 1.43,
+        "ciHigh": 12.57
+      },
+      "notes": "Pooled from 3 studies; I²=98%"
+    },
+    {
+      "id": "malignancy",
+      "author": "Yang et al.",
+      "year": 2026,
+      "citation": "Yang et al. Risk factors of venous thromboembolism in ICU patients: a systematic review and meta-analysis. Ann Med 2026.",
+      "design": "review",
+      "outcomeId": "vte-incidence",
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.3,
+        "ciLow": 1.03,
+        "ciHigh": 5.12
+      },
+      "notes": "Pooled from 4 studies; I²=67%"
+    },
+    {
+      "id": "d-dimer",
+      "author": "Yang et al.",
+      "year": 2026,
+      "citation": "Yang et al. Risk factors of venous thromboembolism in ICU patients: a systematic review and meta-analysis. Ann Med 2026.",
+      "design": "review",
+      "outcomeId": "vte-incidence",
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.46,
+        "ciLow": 1.37,
+        "ciHigh": 4.4
+      },
+      "notes": "Pooled from 3 studies; I²=34%"
+    },
+    {
+      "id": "history-vte",
+      "author": "Yang et al.",
+      "year": 2026,
+      "citation": "Yang et al. Risk factors of venous thromboembolism in ICU patients: a systematic review and meta-analysis. Ann Med 2026.",
+      "design": "review",
+      "outcomeId": "vte-incidence",
+      "data": {
+        "kind": "effect",
+        "measure": "OR",
+        "point": 2.84,
+        "ciLow": 1.45,
+        "ciHigh": 5.55
+      },
+      "notes": "Pooled from 6 studies; I²=51%"
+    }
+  ]
+}
