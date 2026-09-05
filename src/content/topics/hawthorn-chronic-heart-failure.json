@@ -1,0 +1,258 @@
+{
+  "slug": "hawthorn-chronic-heart-failure",
+  "name": "Hawthorn extract for chronic heart failure",
+  "condition": "Chronic heart failure (NYHA II–III)",
+  "intervention": "Hawthorn (Crataegus) special extract (WS 1442 / LI 132)",
+  "comparator": "Placebo",
+  "category": "Cardiology",
+  "evidenceClass": "efficacy",
+  "summary": "Across the placebo-controlled trials pooled in a Cochrane review, hawthorn extract added to conventional treatment improved physiologic exercise capacity (maximal workload, exercise tolerance) and heart-failure symptoms, and lowered the pressure–heart rate product.",
+  "description": "Guo, Pittler & Ernst (Cochrane 2008, CD005312) reviewed double-blind, placebo-controlled RCTs of hawthorn extract as an adjunct in chronic heart failure. Ten trials provided data suitable for meta-analysis of physiologic and symptom outcomes; per-arm means and SDs are taken from the review's forest plots.",
+  "interpretation": "Benefits were seen on physiologic surrogates (maximal workload WMD ~5 W, exercise tolerance, pressure–heart rate product) and on symptom scores. Most trials were small, short, and predate modern guideline-directed heart-failure therapy, and no trial was powered for mortality or hospitalization, so these are surrogate endpoints rather than hard outcomes.",
+  "methodologyNotes": "Per-arm mean/SD/n for each outcome are transcribed from the Cochrane review's forest plots (Analyses 1.1–1.6); the engine recomputes each mean difference and the random-effects pool. Continuous outcomes are pooled as mean differences (same units within each outcome). Tauchert 2002 contributes a high-dose (HD) and a low-dose (LD) arm that share one placebo group, exactly as entered in the review. For the 6-minute walk test the review tabled the arms in control–treatment order (reported MD −8); entered here with the hawthorn and placebo arm values in their own columns, so the engine's mean difference carries the opposite sign for the same magnitude.",
+  "primaryOutcomeId": "max-workload",
+  "lastUpdated": "2026-09-05",
+  "outcomes": [
+    {
+      "id": "max-workload",
+      "label": "Maximal workload (Watt)",
+      "direction": "higherIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Peak workload on bicycle ergometry."
+    },
+    {
+      "id": "exercise-tolerance",
+      "label": "Exercise tolerance (Watt·min)",
+      "direction": "higherIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Total exercise work performed (Watt × minutes)."
+    },
+    {
+      "id": "pressure-hr-product",
+      "label": "Pressure–heart rate product",
+      "direction": "lowerIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Systolic blood pressure × heart rate, an index of myocardial oxygen consumption; a decrease is beneficial."
+    },
+    {
+      "id": "symptom-score",
+      "label": "Symptom score (von Zerssen)",
+      "direction": "lowerIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Self-rated complaint score (von Zerssen); a decrease reflects symptom improvement."
+    },
+    {
+      "id": "six-min-walk",
+      "label": "6-minute walk distance (m)",
+      "direction": "higherIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Distance walked in six minutes."
+    },
+    {
+      "id": "lvef",
+      "label": "Left ventricular ejection fraction (%)",
+      "direction": "higherIsBetter",
+      "kind": "continuous",
+      "measure": "MD",
+      "description": "Absolute change in LVEF (%)."
+    }
+  ],
+  "studies": [
+    {
+      "id": "bodigheimer-1994-workload",
+      "author": "Bödigheimer",
+      "year": 1994,
+      "citation": "Bödigheimer K, Chase D. Effectiveness of hawthorn extract at a dosage of 3 x 100 mg per day. Multicentre double-blind trial with 85 NYHA stage II heart failure patients. Münchener Medizinische Wochenschrift. 1994;136(Suppl 1):S7-S11.",
+      "design": "DB-RCT",
+      "outcomeId": "max-workload",
+      "doseRegimen": "Hawthorn extract 3 × 100 mg/day",
+      "population": "NYHA II chronic heart failure",
+      "data": { "kind": "continuous", "txMean": 15.7, "txSd": 35.8, "txN": 36, "ctrlMean": 8.8, "ctrlSd": 32, "ctrlN": 37 }
+    },
+    {
+      "id": "hanak-1983-workload",
+      "author": "Hanak",
+      "year": 1983,
+      "citation": "Hanak T, Brückel MH. Treatment of mild stable forms of angina pectoris with a standardized Crataegus extract. Therapiewoche. 1983;33:4331-3.",
+      "design": "DB-RCT",
+      "outcomeId": "max-workload",
+      "population": "Mild stable cardiac insufficiency",
+      "data": { "kind": "continuous", "txMean": 9.7, "txSd": 22.1, "txN": 29, "ctrlMean": -0.8, "ctrlSd": 25.4, "ctrlN": 29 }
+    },
+    {
+      "id": "tauchert-2002-hd-workload",
+      "author": "Tauchert (HD)",
+      "year": 2002,
+      "citation": "Tauchert M. Efficacy and safety of crataegus extract WS 1442 in comparison with placebo in patients with chronic stable New York Heart Association class-III heart failure. American Heart Journal. 2002;143:910-5.",
+      "doi": "10.1067/mhj.2002.121463",
+      "design": "DB-RCT",
+      "outcomeId": "max-workload",
+      "doseRegimen": "WS 1442 1800 mg/day (high dose)",
+      "population": "NYHA III heart failure",
+      "notes": "High-dose arm; shares the placebo group with the low-dose (LD) arm.",
+      "data": { "kind": "continuous", "txMean": 9.8, "txSd": 15.5, "txN": 69, "ctrlMean": 4.9, "ctrlSd": 15.6, "ctrlN": 35 }
+    },
+    {
+      "id": "tauchert-2002-ld-workload",
+      "author": "Tauchert (LD)",
+      "year": 2002,
+      "citation": "Tauchert M. Efficacy and safety of crataegus extract WS 1442 in comparison with placebo in patients with chronic stable New York Heart Association class-III heart failure. American Heart Journal. 2002;143:910-5.",
+      "doi": "10.1067/mhj.2002.121463",
+      "design": "DB-RCT",
+      "outcomeId": "max-workload",
+      "doseRegimen": "WS 1442 900 mg/day (low dose)",
+      "population": "NYHA III heart failure",
+      "notes": "Low-dose arm; shares the placebo group with the high-dose (HD) arm.",
+      "data": { "kind": "continuous", "txMean": 5.2, "txSd": 15.1, "txN": 70, "ctrlMean": 4.9, "ctrlSd": 15.6, "ctrlN": 35 }
+    },
+    {
+      "id": "zapfe-2001-workload",
+      "author": "Zapfe",
+      "year": 2001,
+      "citation": "Zapfe JG. Clinical efficacy of crataegus extract WS 1442 in congestive heart failure NYHA class II. Phytomedicine. 2001;8(4):262-6.",
+      "design": "DB-RCT",
+      "outcomeId": "max-workload",
+      "doseRegimen": "WS 1442",
+      "population": "NYHA II congestive heart failure",
+      "data": { "kind": "continuous", "txMean": 5.6, "txSd": 17.9, "txN": 20, "ctrlMean": -8.6, "ctrlSd": 21.3, "ctrlN": 20 }
+    },
+    {
+      "id": "hanak-1983-tolerance",
+      "author": "Hanak",
+      "year": 1983,
+      "citation": "Hanak T, Brückel MH. Treatment of mild stable forms of angina pectoris with a standardized Crataegus extract. Therapiewoche. 1983;33:4331-3.",
+      "design": "DB-RCT",
+      "outcomeId": "exercise-tolerance",
+      "population": "Mild stable cardiac insufficiency",
+      "data": { "kind": "continuous", "txMean": 100.1, "txSd": 180.2, "txN": 29, "ctrlMean": -1.5, "ctrlSd": 247.7, "ctrlN": 29 }
+    },
+    {
+      "id": "zapfe-2001-tolerance",
+      "author": "Zapfe",
+      "year": 2001,
+      "citation": "Zapfe JG. Clinical efficacy of crataegus extract WS 1442 in congestive heart failure NYHA class II. Phytomedicine. 2001;8(4):262-6.",
+      "design": "DB-RCT",
+      "outcomeId": "exercise-tolerance",
+      "doseRegimen": "WS 1442",
+      "population": "NYHA II congestive heart failure",
+      "data": { "kind": "continuous", "txMean": 66.2, "txSd": 202.8, "txN": 20, "ctrlMean": -96.2, "ctrlSd": 283, "ctrlN": 20 }
+    },
+    {
+      "id": "leuchtgens-1993-php",
+      "author": "Leuchtgens",
+      "year": 1993,
+      "citation": "Leuchtgens H. The Crataegus special extract WS 1442 in patients with cardiac insufficiency NYHA II. A placebo-controlled double-blind study. Fortschritte der Medizin. 1993;111(20-21):36-8.",
+      "design": "DB-RCT",
+      "outcomeId": "pressure-hr-product",
+      "doseRegimen": "WS 1442",
+      "population": "NYHA II cardiac insufficiency",
+      "data": { "kind": "continuous", "txMean": -9.9, "txSd": 14, "txN": 15, "ctrlMean": -1.5, "ctrlSd": 8.9, "ctrlN": 15 }
+    },
+    {
+      "id": "oconnolly-1987-php",
+      "author": "O'Connolly",
+      "year": 1987,
+      "citation": "O'Connolly M, Bernhoft G, Bartsch G. Treatment of cardiac symptoms in old patients with multiple pathology. Therapiewoche. 1987;37(38):3587-3600.",
+      "design": "DB-RCT",
+      "outcomeId": "pressure-hr-product",
+      "population": "Older patients with cardiac symptoms and multiple pathology",
+      "data": { "kind": "continuous", "txMean": -29.2, "txSd": 27.5, "txN": 31, "ctrlMean": 7.1, "ctrlSd": 30.8, "ctrlN": 31 }
+    },
+    {
+      "id": "oconolly-1986-php",
+      "author": "O'Conolly",
+      "year": 1986,
+      "citation": "O'Conolly M, Jansen W, Bernhöft G, Bartsch G. Treatment of decreasing cardiac performance using standardized crataegus extract in advanced age. Fortschritte der Medizin. 1986;104(42):805-8.",
+      "design": "DB-RCT",
+      "outcomeId": "pressure-hr-product",
+      "population": "Advanced-age patients with decreasing cardiac performance",
+      "data": { "kind": "continuous", "txMean": -22.4, "txSd": 22.7, "txN": 34, "ctrlMean": 8.2, "ctrlSd": 20.5, "ctrlN": 34 }
+    },
+    {
+      "id": "weikl-1996-php",
+      "author": "Weikl",
+      "year": 1996,
+      "citation": "Weikl A, Assmus KD, Neukum-Schmidt A, Schmitz J, Zapfe G, Noh HS, et al. Crataegus special extract WS 1442. Assessment of objective effectiveness in patients with heart failure NYHA II. Fortschritte der Medizin. 1996;114(24):291-6.",
+      "design": "DB-RCT",
+      "outcomeId": "pressure-hr-product",
+      "doseRegimen": "WS 1442",
+      "population": "NYHA II heart failure",
+      "data": { "kind": "continuous", "txMean": -5.6, "txSd": 23.5, "txN": 63, "ctrlMean": 4.2, "ctrlSd": 26.8, "ctrlN": 66 }
+    },
+    {
+      "id": "zapfe-2001-php",
+      "author": "Zapfe",
+      "year": 2001,
+      "citation": "Zapfe JG. Clinical efficacy of crataegus extract WS 1442 in congestive heart failure NYHA class II. Phytomedicine. 2001;8(4):262-6.",
+      "design": "DB-RCT",
+      "outcomeId": "pressure-hr-product",
+      "doseRegimen": "WS 1442",
+      "population": "NYHA II congestive heart failure",
+      "data": { "kind": "continuous", "txMean": -14.4, "txSd": 29.3, "txN": 20, "ctrlMean": -1.3, "ctrlSd": 29.1, "ctrlN": 20 }
+    },
+    {
+      "id": "leuchtgens-1993-symptom",
+      "author": "Leuchtgens",
+      "year": 1993,
+      "citation": "Leuchtgens H. The Crataegus special extract WS 1442 in patients with cardiac insufficiency NYHA II. A placebo-controlled double-blind study. Fortschritte der Medizin. 1993;111(20-21):36-8.",
+      "design": "DB-RCT",
+      "outcomeId": "symptom-score",
+      "doseRegimen": "WS 1442",
+      "population": "NYHA II cardiac insufficiency",
+      "data": { "kind": "continuous", "txMean": -12, "txSd": 8.1, "txN": 15, "ctrlMean": -4.7, "ctrlSd": 9.7, "ctrlN": 15 }
+    },
+    {
+      "id": "tauchert-2002-hd-symptom",
+      "author": "Tauchert (HD)",
+      "year": 2002,
+      "citation": "Tauchert M. Efficacy and safety of crataegus extract WS 1442 in comparison with placebo in patients with chronic stable New York Heart Association class-III heart failure. American Heart Journal. 2002;143:910-5.",
+      "doi": "10.1067/mhj.2002.121463",
+      "design": "DB-RCT",
+      "outcomeId": "symptom-score",
+      "doseRegimen": "WS 1442 1800 mg/day (high dose)",
+      "population": "NYHA III heart failure",
+      "notes": "High-dose arm; shares the placebo group with the low-dose (LD) arm.",
+      "data": { "kind": "continuous", "txMean": -11.3, "txSd": 13.7, "txN": 69, "ctrlMean": -6.3, "ctrlSd": 12.5, "ctrlN": 35 }
+    },
+    {
+      "id": "tauchert-2002-ld-symptom",
+      "author": "Tauchert (LD)",
+      "year": 2002,
+      "citation": "Tauchert M. Efficacy and safety of crataegus extract WS 1442 in comparison with placebo in patients with chronic stable New York Heart Association class-III heart failure. American Heart Journal. 2002;143:910-5.",
+      "doi": "10.1067/mhj.2002.121463",
+      "design": "DB-RCT",
+      "outcomeId": "symptom-score",
+      "doseRegimen": "WS 1442 900 mg/day (low dose)",
+      "population": "NYHA III heart failure",
+      "notes": "Low-dose arm; shares the placebo group with the high-dose (HD) arm.",
+      "data": { "kind": "continuous", "txMean": -11, "txSd": 13.7, "txN": 70, "ctrlMean": -6.3, "ctrlSd": 12.5, "ctrlN": 35 }
+    },
+    {
+      "id": "aaronson-2004-6mwt",
+      "author": "Aaronson",
+      "year": 2004,
+      "citation": "Aaronson K, in Liu P, Konstam MA, Force T. Highlights of the 2004 scientific sessions of the Heart Failure Society of America, Toronto, Canada, September 12-15, 2004 (HERB-CHF). Journal of the American College of Cardiology. 2005;45:617-25.",
+      "design": "RCT",
+      "outcomeId": "six-min-walk",
+      "population": "Symptomatic heart failure (HERB-CHF)",
+      "notes": "Reported in the Cochrane forest plot in control–treatment column order (tabled MD −8, 95% CI −34.49 to 18.49); hawthorn and placebo arm values are entered in their own columns here.",
+      "data": { "kind": "continuous", "txMean": 14, "txSd": 83.2, "txN": 57, "ctrlMean": 6, "ctrlSd": 57.5, "ctrlN": 54 }
+    },
+    {
+      "id": "eichstadt-2001-lvef",
+      "author": "Eichstädt",
+      "year": 2001,
+      "citation": "Eichstädt H, Störk T, Möckel M, et al. Effectiveness of and tolerance to Crataegus extract WS 1442 in patients with heart insufficiency and reduced left ventricular function. Perfusion. 2001;14:212-7.",
+      "design": "DB-RCT",
+      "outcomeId": "lvef",
+      "doseRegimen": "WS 1442",
+      "population": "Heart failure with reduced LV function",
+      "data": { "kind": "continuous", "txMean": 1.5, "txSd": 1.1, "txN": 20, "ctrlMean": -0.2, "ctrlSd": 1.5, "ctrlN": 20 }
+    }
+  ]
+}

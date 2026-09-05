@@ -1,0 +1,110 @@
+{
+  "slug": "hydrochlorothiazide-skin-cancer",
+  "name": "Hydrochlorothiazide and skin cancer risk",
+  "condition": "Adults on antihypertensive/diuretic therapy",
+  "intervention": "Hydrochlorothiazide (HCTZ)",
+  "comparator": "Non-use or other antihypertensives (ACE inhibitors)",
+  "category": "Skin cancer risk",
+  "evidenceClass": "observational",
+  "summary": "Pharmacoepidemiologic studies underpinning the IARC evaluation link hydrochlorothiazide use to an increased risk of keratinocyte carcinoma, with a strong dose-response for squamous-cell carcinoma and a smaller association with basal-cell carcinoma.",
+  "description": "The 2025 IARC Monograph summary (Cogliano et al., Lancet Oncology) classifies hydrochlorothiazide largely on the basis of pharmacoepidemiologic studies of photocarcinogenesis. This topic assembles the principal underlying studies: nationwide/population-based case-control studies from Denmark (Pedersen 2018) and Iceland (Adalsteinsson 2021) and a large US cohort in the FDA Sentinel system (Eworuke 2021).",
+  "interpretation": "The association is strongest and dose-dependent for squamous-cell carcinoma, particularly in the high-cumulative-dose Danish data; basal-cell carcinoma associations are small. The US cohort (comparing HCTZ with ACE inhibitors) found only modest excess risk overall, concentrated among lighter-skinned users. Exposure contrasts differ across studies (high cumulative dose vs any use) and none could adjust for sun exposure or skin type, so between-study heterogeneity is expected and confounding cannot be excluded.",
+  "methodologyNotes": "Each study's principal reported adjusted effect and 95% CI are copied verbatim; the exposure contrast is stated per study. Odds ratios (case-control) and hazard ratios (cohort) are entered as reported and treated by the engine as risk-ratio approximations (flagged). No baseline risk is entered (sources report incident rates or matched-set odds, not a directly transferable control risk), so absolute-risk translation is not shown.",
+  "primaryOutcomeId": "scc",
+  "lastUpdated": "2026-09-05",
+  "outcomes": [
+    {
+      "id": "scc",
+      "label": "Squamous-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "scc-incidence",
+      "description": "Incident cutaneous squamous-cell carcinoma."
+    },
+    {
+      "id": "bcc",
+      "label": "Basal-cell carcinoma",
+      "direction": "lowerIsBetter",
+      "standardOutcomeId": "bcc-incidence",
+      "description": "Incident basal-cell carcinoma."
+    }
+  ],
+  "studies": [
+    {
+      "id": "pedersen-2018-scc",
+      "author": "Pedersen",
+      "year": 2018,
+      "citation": "Pedersen SA, Gaist D, Schmidt SAJ, Hölmich LR, Friis S, Pottegård A. Hydrochlorothiazide use and risk of nonmelanoma skin cancer: A nationwide case-control study from Denmark. J Am Acad Dermatol. 2018;78(4):673-681.e9.",
+      "doi": "10.1016/j.jaad.2017.11.042",
+      "design": "case-control",
+      "outcomeId": "scc",
+      "population": "Danish Cancer Registry NMSC cases 2004–2012, matched 1:20 by age and sex",
+      "endpointDefinition": "SCC associated with high cumulative HCTZ use (≥50,000 mg).",
+      "notes": "High-use estimate (≥50,000 mg); clear dose-response (≥200,000 mg OR 7.38, 95% CI 6.32–8.60).",
+      "data": { "kind": "effect", "measure": "OR", "point": 3.98, "ciLow": 3.68, "ciHigh": 4.31 }
+    },
+    {
+      "id": "adalsteinsson-2021-scc",
+      "author": "Adalsteinsson",
+      "year": 2021,
+      "citation": "Adalsteinsson JA, Muzumdar S, Waldman R, et al. Association between hydrochlorothiazide and the risk of in situ and invasive squamous cell skin carcinoma and basal cell carcinoma: A population-based case-control study. J Am Acad Dermatol. 2021;84(3):669-675.",
+      "doi": "10.1016/j.jaad.2020.08.025",
+      "design": "case-control",
+      "outcomeId": "scc",
+      "population": "Iceland, 6,880 keratinocyte-carcinoma cases and 69,620 controls, 2003–2017",
+      "endpointDefinition": "Invasive SCC associated with cumulative HCTZ dose above 37,500 mg.",
+      "notes": "Invasive SCC, high cumulative dose (>37,500 mg). SCC in situ OR 1.24 (1.01–1.52).",
+      "data": { "kind": "effect", "measure": "OR", "point": 1.69, "ciLow": 1.04, "ciHigh": 2.74 }
+    },
+    {
+      "id": "eworuke-2021-scc",
+      "author": "Eworuke",
+      "year": 2021,
+      "citation": "Eworuke E, Haug N, Bradley M, et al. Risk of Nonmelanoma Skin Cancer in Association With Use of Hydrochlorothiazide-Containing Products in the United States. JNCI Cancer Spectr. 2021;5(2):pkab009.",
+      "doi": "10.1093/jncics/pkab009",
+      "design": "cohort",
+      "outcomeId": "scc",
+      "population": "US FDA Sentinel System, 5.2 million propensity-matched HCTZ vs ACE-inhibitor users",
+      "endpointDefinition": "SCC in HCTZ vs ACE-inhibitor users, overall population.",
+      "notes": "Comparator is ACE inhibitors (not non-use). Overall estimate; risk higher among Caucasians (HR 1.15, 1.12–1.17).",
+      "data": { "kind": "effect", "measure": "HR", "point": 1.04, "ciLow": 1.02, "ciHigh": 1.06 }
+    },
+    {
+      "id": "pedersen-2018-bcc",
+      "author": "Pedersen",
+      "year": 2018,
+      "citation": "Pedersen SA, Gaist D, Schmidt SAJ, Hölmich LR, Friis S, Pottegård A. Hydrochlorothiazide use and risk of nonmelanoma skin cancer: A nationwide case-control study from Denmark. J Am Acad Dermatol. 2018;78(4):673-681.e9.",
+      "doi": "10.1016/j.jaad.2017.11.042",
+      "design": "case-control",
+      "outcomeId": "bcc",
+      "population": "Danish Cancer Registry NMSC cases 2004–2012, matched 1:20 by age and sex",
+      "endpointDefinition": "BCC associated with high cumulative HCTZ use (≥50,000 mg).",
+      "notes": "High-use estimate (≥50,000 mg); dose-response (≥200,000 mg OR 1.54, 95% CI 1.38–1.71).",
+      "data": { "kind": "effect", "measure": "OR", "point": 1.29, "ciLow": 1.23, "ciHigh": 1.35 }
+    },
+    {
+      "id": "adalsteinsson-2021-bcc",
+      "author": "Adalsteinsson",
+      "year": 2021,
+      "citation": "Adalsteinsson JA, Muzumdar S, Waldman R, et al. Association between hydrochlorothiazide and the risk of in situ and invasive squamous cell skin carcinoma and basal cell carcinoma: A population-based case-control study. J Am Acad Dermatol. 2021;84(3):669-675.",
+      "doi": "10.1016/j.jaad.2020.08.025",
+      "design": "case-control",
+      "outcomeId": "bcc",
+      "population": "Iceland, 6,880 keratinocyte-carcinoma cases and 69,620 controls, 2003–2017",
+      "endpointDefinition": "BCC in HCTZ users.",
+      "data": { "kind": "effect", "measure": "OR", "point": 1.14, "ciLow": 1.02, "ciHigh": 1.29 }
+    },
+    {
+      "id": "eworuke-2021-bcc",
+      "author": "Eworuke",
+      "year": 2021,
+      "citation": "Eworuke E, Haug N, Bradley M, et al. Risk of Nonmelanoma Skin Cancer in Association With Use of Hydrochlorothiazide-Containing Products in the United States. JNCI Cancer Spectr. 2021;5(2):pkab009.",
+      "doi": "10.1093/jncics/pkab009",
+      "design": "cohort",
+      "outcomeId": "bcc",
+      "population": "US FDA Sentinel System, 5.2 million propensity-matched HCTZ vs ACE-inhibitor users",
+      "endpointDefinition": "BCC in HCTZ vs ACE-inhibitor users, overall population.",
+      "notes": "Comparator is ACE inhibitors (not non-use). Overall estimate; risk higher among Caucasians (HR 1.09, 1.07–1.11).",
+      "data": { "kind": "effect", "measure": "HR", "point": 0.99, "ciLow": 0.97, "ciHigh": 1.00 }
+    }
+  ]
+}

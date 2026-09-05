@@ -1,0 +1,79 @@
+{
+  "slug": "hawthorn-ws1442-cardiac-arrhythmias",
+  "name": "Hawthorn extract WS 1442 and cardiac arrhythmias",
+  "condition": "Outpatients (Germany, IQVIA Disease Analyzer)",
+  "intervention": "Hawthorn special extract WS 1442",
+  "comparator": "Magnesium/potassium supplementation (Tromcardin)",
+  "category": "Cardiology",
+  "evidenceClass": "observational",
+  "summary": "In a single retrospective German database cohort of 4,550 WS 1442 users matched to 4,550 magnesium/potassium users, WS 1442 prescription was associated with a lower five-year incidence of atrial fibrillation/flutter, tachycardia, and other cardiac arrhythmias.",
+  "description": "Wyss, Gündling & Kostev (Scientific Reports 2024) used the IQVIA Disease Analyzer database to compare 4,550 outpatients prescribed WS 1442 with 4,550 matched patients prescribed magnesium/potassium products (Tromcardin), followed for five years. Cox regression estimated adjusted hazard ratios for incident arrhythmias.",
+  "interpretation": "This is a single non-randomized database study, not a trial: the comparison is against magnesium/potassium rather than placebo, and confounding by indication and unmeasured differences between the groups cannot be excluded despite adjustment. The reported associations are protective and consistent across three arrhythmia endpoints, but hazard ratios from one observational cohort are hypothesis-generating.",
+  "methodologyNotes": "Adjusted hazard ratios (Cox regression) and 95% CIs are copied from the paper for each endpoint; the engine treats a hazard ratio as a risk-ratio approximation and flags it. Each study's ctrlRisk is the reported cumulative incidence in the magnesium/potassium group (atrial fibrillation/flutter 16.4%, tachycardia 9.4%, other arrhythmias 14.8%). Adjusted for obesity, diabetes, lipid disorders, hypertension, ischemic heart disease and other covariates per the paper.",
+  "primaryOutcomeId": "aff",
+  "lastUpdated": "2026-09-05",
+  "outcomes": [
+    {
+      "id": "aff",
+      "label": "Atrial fibrillation/flutter",
+      "direction": "lowerIsBetter",
+      "description": "Incident atrial fibrillation or flutter over five years."
+    },
+    {
+      "id": "tachycardia",
+      "label": "Tachycardia",
+      "direction": "lowerIsBetter",
+      "description": "Incident tachycardia over five years."
+    },
+    {
+      "id": "other-arrhythmias",
+      "label": "Other cardiac arrhythmias",
+      "direction": "lowerIsBetter",
+      "description": "Incident other cardiac arrhythmias over five years."
+    }
+  ],
+  "studies": [
+    {
+      "id": "wyss-2024-aff",
+      "author": "Wyss",
+      "year": 2024,
+      "citation": "Wyss C, Gündling PW, Kostev K. Real world effectiveness of Hawthorn special extract WS 1442 in a retrospective cohort study from Germany. Scientific Reports. 2024;14:22986.",
+      "doi": "10.1038/s41598-024-74325-4",
+      "design": "retrospective",
+      "outcomeId": "aff",
+      "doseRegimen": "Hawthorn special extract WS 1442 (prescription)",
+      "population": "4,550 WS 1442 users vs 4,550 matched magnesium/potassium users; 5-year follow-up",
+      "endpointDefinition": "Incident atrial fibrillation and flutter (cumulative incidence 10.8% vs 16.4%).",
+      "n": 9100,
+      "data": { "kind": "effect", "measure": "HR", "point": 0.71, "ciLow": 0.64, "ciHigh": 0.80, "ctrlRisk": 0.164 }
+    },
+    {
+      "id": "wyss-2024-tachycardia",
+      "author": "Wyss",
+      "year": 2024,
+      "citation": "Wyss C, Gündling PW, Kostev K. Real world effectiveness of Hawthorn special extract WS 1442 in a retrospective cohort study from Germany. Scientific Reports. 2024;14:22986.",
+      "doi": "10.1038/s41598-024-74325-4",
+      "design": "retrospective",
+      "outcomeId": "tachycardia",
+      "doseRegimen": "Hawthorn special extract WS 1442 (prescription)",
+      "population": "4,550 WS 1442 users vs 4,550 matched magnesium/potassium users; 5-year follow-up",
+      "endpointDefinition": "Incident tachycardia (cumulative incidence 8.3% vs 9.4%).",
+      "n": 9100,
+      "data": { "kind": "effect", "measure": "HR", "point": 0.83, "ciLow": 0.73, "ciHigh": 0.96, "ctrlRisk": 0.094 }
+    },
+    {
+      "id": "wyss-2024-other",
+      "author": "Wyss",
+      "year": 2024,
+      "citation": "Wyss C, Gündling PW, Kostev K. Real world effectiveness of Hawthorn special extract WS 1442 in a retrospective cohort study from Germany. Scientific Reports. 2024;14:22986.",
+      "doi": "10.1038/s41598-024-74325-4",
+      "design": "retrospective",
+      "outcomeId": "other-arrhythmias",
+      "doseRegimen": "Hawthorn special extract WS 1442 (prescription)",
+      "population": "4,550 WS 1442 users vs 4,550 matched magnesium/potassium users; 5-year follow-up",
+      "endpointDefinition": "Incident other cardiac arrhythmias (cumulative incidence 10.2% vs 14.8%).",
+      "n": 9100,
+      "data": { "kind": "effect", "measure": "HR", "point": 0.68, "ciLow": 0.60, "ciHigh": 0.77, "ctrlRisk": 0.148 }
+    }
+  ]
+}
